@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="store.mapper.GroupMapper">
+	<resultMap type="Group" id="groupMap">
+		
+	</resultMap>
+
+	<sql id="selectGroup">
+		SELECT 
+		FROM 
+	</sql>
+
+	<insert id="insertGroup" parameterType="Group">
+
+	</insert>
+
+	<update id="updateGroup" parameterType="Group">
+
+	</update>
+
+	<delete id="deleteGroup" parameterType="int">
+
+	</delete>
+	
+	<insert id="insertUserGroup" parameterType="Map">
+
+	</insert>
+
+	<delete id="deleteUserGroup" parameterType="Map">
+
+	</delete>
+		
+	<select id="selectAll" resultMap="groupMap">
+		<include refid="selectGroup" />
+	</select>
+
+	<select id="selectGroupByGroupId" parameterType="int" resultType="Group">
+		<include refid="selectGroup" />
+		
+	</select>
+
+	<select id="selectGroupsByUserId" parameterType="String" resultMap="groupMap">
+		<include refid="selectGroup" />
+		
+	</select>
+	
+	<select id="selectGroupsByConnChains" parameterType="String" resultMap="groupMap">
+		<include refid="selectGroup" />
+		
+	</select>
+	
+	<select id="selectGroupsByGroupName" parameterType="String" resultMap="groupMap">
+		<include refid="selectGroup" />
+		
+	</select>
+	
+	<select id="selectGroupsByLocal" parameterType="String" resultMap="groupMap">
+		<include refid="selectGroup" />
+		
+	</select>
+	
+</mapper>

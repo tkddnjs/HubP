@@ -1,0 +1,4 @@
+store\logic\FriendStoreLogicTest.class
+store\logic\UserStoreLogicTest.class
+store\logic\CooperStoreLogicTest.class
+store\logic\BucketlistStoreLogicTest.class

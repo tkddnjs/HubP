@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="store.mapper.FriendMapper">
+	<resultMap type="Friend" id="friendMap">
+		
+	</resultMap>
+
+	<sql id="selectFriend">
+	
+	</sql>
+
+	<insert id="insertFriend" parameterType="Friend">
+
+	</insert>
+
+	<delete id="deleteFriend" parameterType="String">
+
+	</delete>
+	
+	<select id="selectAll" resultMap="friendMap">
+		<include refid="selectFriend" />
+	</select>
+
+	<select id="selectFriendsByConnChains" parameterType="String" resultMap="friendMap">
+		<include refid="selectFriend" />
+		
+	</select>
+
+	<select id="selectFriendsByRelation" parameterType="String" resultMap="friendMap">
+		<include refid="selectFriend" />
+		
+	</select>
+	
+</mapper>

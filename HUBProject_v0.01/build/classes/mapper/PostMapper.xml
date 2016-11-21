@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="store.mapper.PostMapper">
+	<resultMap type="Post" id="postMap">
+		
+	</resultMap>
+
+	<sql id="selectPost">
+		SELECT 
+		FROM 
+	</sql>
+
+	<insert id="insertPost" parameterType="Post">
+
+	</insert>
+
+	<delete id="deletePost" parameterType="int">
+
+	</delete>
+	
+	<select id="selectAll" parameterType="String" resultMap="postMap">
+		<include refid="selectPost" />
+		
+	</select>
+
+	<select id="selectPostByFriendId" parameterType="Map" resultMap="postMap">
+		<include refid="selectPost" />
+		
+	</select>
+
+	<select id="selectSendPosts" parameterType="String" resultMap="postMap">
+		<include refid="selectPost" />
+		
+	</select>
+	
+	<select id="selectReceivePosts" parameterType="String" resultMap="postMap">
+		<include refid="selectPost" />
+		
+	</select>
+</mapper>
