@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="store.mapper.FriendMapper">
+	<resultMap type="Friend" id="friendMap">
+		<id property="userId" column="userId" />
+		<result property="friendId" column="friendId" />
+		<result property="relation" column="relation" />
+		<result property="confirm" column="confirm" typeHandler="BooleanToYnHandler"/>
+	</resultMap>
+
+	<sql id="selectFriend">
+		SELECT userId, friendId, relation, confirm
+		FROM friend_tb
+	</sql>
+
+	<insert id="insertFriend" parameterType="Friend">
+		INSERT INTO friend_tb(userId, friendId, relation, confirm) VALUES (#{userId}, #{friendId}, #{relation}, #{confirm,typeHandler=BooleanToYnHandler})
+	</insert>
+
+	<delete id="deleteFriend" parameterType="Friend">
+		DELETE friend_tb
+		WHERE
+		(userId=#{userId} AND friendId=#{friendId})
+		OR (userId=#{friendId} AND
+		friendId=#{userId})
+	</delete>
+
+	<update id="updateFriendConfirm" parameterType="Friend">
+		UPDATE friend_tb
+		SET confirm='Y'
+		WHERE (userId=#{userId} and friendId=#{friendId})
+		OR (userId=#{friendId} and friendId=#{userId})
+	</update>
+
+
+	<select id="selectAll" parameterType="Friend" resultMap="friendMap">
+		SELECT friendId as userId, userId as friendId, MOD(3-relation, 3) as relation, confirm
+		FROM friend_tb
+		WHERE friendId=#{userId} AND confirm='Y'
+	</select>
+	
+	<select id="selectRequestedFriends" resultMap="friendMap">
+		<include refid="selectFriend" />
+		WHERE userId=#{userId} AND confirm='N'
+	</select>
+
+	<select id="selectFriendsByConnChain" parameterType="Map"
+		resultMap="friendMap">
+		<include refid="selectFriend" />
+		WHERE userId=#{userId} AND confirm='Y'
+		AND friendId IN (
+			SELECT userId
+			FROM userConn_tb
+			WHERE connChain IN #{connChain}
+		)
+	</select>
+
+	<select id="selectFriendsByRelation" parameterType="Friend"
+		resultMap="friendMap">
+		<include refid="selectFriend" />
+		WHERE userId=#{userId} AND confirm='Y'
+		AND relation=#{relation}
+	</select>
+
+</mapper>
