@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>JSP</title>
+<title>모임방 상세</title>
 </head>
 <body>
 

@@ -43,22 +43,18 @@ h1 {
 		<%@ include file="/header/header.jspf"%>
 	</div>
 	<div class="input-append pull-right">
-		<a class="btn btn-xs btn-info btnPlay" href="Bucketlist/registerBucketlist.jsp"  ><h5>버킷추가</h5></a>
+		<a class="btn btn-xs btn-info btnPlay" href="Bucketlist/registerBucketlist.jsp"><h5>버킷추가</h5></a>
 	</div>
 
-
 	<div class="input-append pull-right">
-		<form action="searchGroup.do" method="post" class="form-inline">
-			<select class="ring" name="ring">
-				<option>연결고리</option>
-				<option>내가</option>
-				<option>너를</option>
-				<option>서로</option>
-				<option>업체</option>
-			</select> <input class="span2" type="text" name="search" value="#"
-				id="searchs" data-source="typeahead">
-			<button class="btn" type="button">검색</button>
-
+		<form action="group/list.do" method="get" class="form-inline">
+			<select class="ring" name="listOpt">
+				<option value=1>모임방이름</option>
+				<option value=2>연결고리</option>
+				<option value=3>지역</option>
+			</select>
+			<input class="span2" type="text" name="searchWord" value="#" id="searchs" data-source="typeahead">
+			<button class="btn" type="submit">검색</button>
 		</form>
 	</div>
 
@@ -84,9 +80,9 @@ h1 {
 			<tr>
 				<td class="ranking">1</td>
 				<td><a class="btn btn-xs btn-default btn-block"
-					href="searchGroup.do?groupId=${groupId }">미니공연 밴드원 함께하실분!!</a></td>
+					href="group/detail.do?groupId=${groupId }">미니공연 밴드원 함께하실분!!</a></td>
 				<td><a class="btn btn-xs btn-default btn-block"
-					href="searchFriend.do?userId=${userId }">IU</a></td>
+					href="follow/searchFriend.do?userId=${userId }">IU</a></td>
 				<td>2016.10.10</td>
 				<td>서울</td>
 				<td>#공연</td>
@@ -95,7 +91,7 @@ h1 {
 			<tr>
 				<td class="ranking">2</td>
 				<td><a class="btn btn-xs btn-default btn-block"
-					href="searchGroup.do?groupId=${groupId }">리듬체조강습</a></td>
+					href="group/detail.do?groupId=${groupId }">리듬체조강습</a></td>
 				<td><a class="btn btn-xs btn-default btn-block" href="#">SON</a></td>
 				<td>2016.10.10</td>
 				<td>경기</td>
@@ -117,7 +113,7 @@ h1 {
 				<td><a class="btn btn-xs btn-default btn-block" href="#">JAVA강의
 						개설</a></td>
 				<td><a class="btn btn-xs btn-default btn-block"
-					href="searchFriend.do?userId=${userId }">KOSTA</a></td>
+					href="#">KOSTA</a></td>
 				<td>2016.10.10</td>
 				<td>서울</td>
 				<td>#JAVA</td>
