@@ -97,11 +97,11 @@ public class CooperStoreLogic implements CooperStore {
 	}
 
 	@Override
-	public List<Cooper> selectCoopersByConnChains(List<String> connChains) {
+	public List<Cooper> selectCoopersByConnChain(String connChain) {
 		SqlSession session = factory.openSession();
 		try {
 			CooperMapper mapper = session.getMapper(CooperMapper.class);
-			return mapper.selectCoopersByConnChains(connChains);
+			return mapper.selectCoopersByConnChain(connChain);
 		} finally {
 			session.close();
 		}

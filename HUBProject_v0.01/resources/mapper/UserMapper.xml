@@ -44,15 +44,22 @@
 		where userId = #{userId}
 	</select>
 
-	<select id="selectUsersByConnChains" resultMap="userMap">
+<!-- <select id="selectUsersByConnChains" resultMap="userMap">
 		<include refid="selectUser" />
 		WHERE UserId IN (SELECT UserId
 						FROM userconn_tb
 						WHERE connChain IN <foreach item="connChain" separator="," collection="list" open="(" close=")">
 												#{connChain}
 											</foreach>)
+	</select>  -->
+		
+	<select id="selectUsersByConnChain" resultMap="userMap">
+		<include refid="selectUser" />
+		WHERE UserId IN (SELECT UserId
+						FROM userconn_tb
+						WHERE connChain IN #{connChain}
 	</select>
-	
+
 	<select id="selectConnChainsByUserId" parameterType="String" resultType="String">
 		SELECT connChain
 		FROM userconn_tb

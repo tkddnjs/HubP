@@ -14,7 +14,7 @@ public interface GroupStore {
 	List<Group> selectAll();
 	Group selectGroupByGroupId(int groupId);
 	List<Group> selectGroupsByUserId(String userId);
-	List<Group> selectGroupsByConnChains(List<String> ConnChains);
+	List<Group> selectGroupsByConnChain(String ConnChain);
 	List<Group> selectGroupsByGroupName(String groupName);
 	List<Group> selectGroupsByLocal(String local);
 }

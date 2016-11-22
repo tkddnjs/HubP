@@ -27,17 +27,17 @@ public class ListServiceLogic implements ListService {
 	private ConnChainStore connChainStore;
 	
 	@Override
-	public List<User> findUsersByConnChains(List<String> connChains) {
-		return userStore.selectUsersByConnChains(connChains);
+	public List<User> findUsersByConnChain(String connChain) {
+		return userStore.selectUsersByConnChain(connChain);
 	}
 	@Override
-	public List<Bucketlist> findBucketlistsByConnChains(List<String> connChains) {
-		return bucketlistStore.selectBucketlistsByConnChains(connChains);
+	public List<Bucketlist> findBucketlistsByConnChain(String connChain) {
+		return bucketlistStore.selectBucketlistsByConnChain(connChain);
 	}
 
 	@Override
-	public List<Cooper> findCoopersByConnChains(List<String> connChains) {
-		return cooperStore.selectCoopersByConnChains(connChains);
+	public List<Cooper> findCoopersByConnChain(String connChain) {
+		return cooperStore.selectCoopersByConnChain(connChain);
 	}
 
 	@Override

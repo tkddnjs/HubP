@@ -57,14 +57,11 @@
 		WHERE bucketId=#{bucketlistId}
 	</select>
 
-	<select id="selectBucketlistsByConnChains" resultMap="bucketlistMap">
+	<select id="selectBucketlistsByConnChain" resultMap="bucketlistMap">
 		<include refid="selectBucketlist" />
 		WHERE bucketId IN (SELECT bucketId
 							FROM bucketConn_tb
-							WHERE connChain IN
-								<foreach item="connChain" separator="," collection="list" open="(" close=")">
-									#{connChain}
-								</foreach>)
+							WHERE connChain = #{connChain} 
 	</select>
 	
 	<select id="selectConnChainsByBucketlistId" parameterType="int" resultType="String">

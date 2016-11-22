@@ -15,7 +15,7 @@ public interface BucketlistMapper {
 	int deleteBucketlist(int bucketlistId);
 	List<Bucketlist> selectAll(String userId);
 	Bucketlist selectBucketlistByBucketlistId(int bucketlistId);
-	List<Bucketlist> selectBucketlistsByConnChains(List<String> connChains);
+	List<Bucketlist> selectBucketlistsByConnChain(String connChain);
 	
 	List<String> selectConnChainsByBucketlistId(int bucketlistId);
 }
