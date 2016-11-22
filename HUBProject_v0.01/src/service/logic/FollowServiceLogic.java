@@ -2,65 +2,62 @@ package service.logic;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import domain.Follow;
 import service.pacade.FollowService;
-import store.logic.FollowStoreLogic;
 import store.pacade.FollowStore;
 
 @Service
 public class FollowServiceLogic implements FollowService {
 
-	private FollowStore store;
-	
-	public FollowServiceLogic() {
-		store = new FollowStoreLogic();
-	}
+	@Autowired
+	private FollowStore followStore;
 	
 	@Override
 	public int registerFollow(Follow follow) {
-		return store.insertFollow(follow);
+		return followStore.insertFollow(follow);
 	}
 
 	@Override
 	public int removeFollow(Follow follow) {
-		return store.deleteFollow(follow);
+		return followStore.deleteFollow(follow);
 	}
 
 	@Override
 	public int confirmFollow(Follow follow) {
-		return store.updateFollowConfirm(follow);
+		return followStore.updateFollowConfirm(follow);
 	}
 	
 	@Override
 	public List<Follow> findAll(String userId) {
-		return store.selectAll(userId);
+		return followStore.selectAll(userId);
 	}
 
 	@Override
 	public List<Follow> findRequestedFollows(String userId) {
-		return store.selectRequestedFollows(userId);
+		return followStore.selectRequestedFollows(userId);
 	}
 	
 	@Override
 	public List<Follow> findFollowsByConnChain(String userId, String connChain) {
-		return store.selectFollowsByConnChain(userId, connChain);
+		return followStore.selectFollowsByConnChain(userId, connChain);
 	}
 
 	@Override
 	public List<Follow> findFollowsByRelation(Follow follow) {
-		return store.selectFollowsByRelation(follow);
+		return followStore.selectFollowsByRelation(follow);
 	}
 
 	@Override
 	public boolean checkRequest(String userId, String followId){
-		for(Follow Follow : store.selectRequestedFollows(userId)){
+		for(Follow Follow : followStore.selectRequestedFollows(userId)){
 			if(Follow.getFollowId().equals(followId)){
 				return false;
 			}
 		}
-		for(Follow Follow : store.selectAll(userId)){
+		for(Follow Follow : followStore.selectAll(userId)){
 			if(Follow.getFollowId().equals(followId)){
 				return false;
 			}

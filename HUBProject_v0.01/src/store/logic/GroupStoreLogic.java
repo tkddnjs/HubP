@@ -3,11 +3,13 @@ package store.logic;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSessionFactory;
+import org.springframework.stereotype.Repository;
 
 import domain.Group;
 import store.factory.SqlSessionFactoryProvider;
 import store.pacade.GroupStore;
 
+@Repository
 public class GroupStoreLogic implements GroupStore {
 
 	private SqlSessionFactory factory;

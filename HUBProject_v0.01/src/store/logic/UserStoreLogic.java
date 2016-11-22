@@ -4,12 +4,14 @@ import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
+import org.springframework.stereotype.Repository;
 
 import domain.User;
 import store.factory.SqlSessionFactoryProvider;
 import store.mapper.UserMapper;
 import store.pacade.UserStore;
 
+@Repository
 public class UserStoreLogic implements UserStore {
 	
 	private SqlSessionFactory factory;

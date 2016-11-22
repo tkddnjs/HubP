@@ -4,12 +4,14 @@ import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
+import org.springframework.stereotype.Repository;
 
 import domain.Cooper;
 import store.factory.SqlSessionFactoryProvider;
 import store.mapper.CooperMapper;
 import store.pacade.CooperStore;
 
+@Repository
 public class CooperStoreLogic implements CooperStore {
 
 	private SqlSessionFactory factory;

@@ -2,23 +2,22 @@ package service.logic;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import domain.Group;
 import service.pacade.GroupService;
-import store.logic.GroupStoreLogic;
 import store.pacade.GroupStore;
 
+@Service
 public class GroupServiceLogic implements GroupService {
 
-	private GroupStore store;
-	
-	public GroupServiceLogic() {
-		store = new GroupStoreLogic();
-	}
+	@Autowired
+	private GroupStore groupStore;
 	
 	@Override
 	public int registerGroup(Group group) {
-		// TODO Auto-generated method stub
-		return 0;
+		return groupStore.insertGroup(group);
 	}
 
 	@Override
