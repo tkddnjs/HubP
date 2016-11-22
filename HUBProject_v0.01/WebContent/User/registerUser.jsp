@@ -74,7 +74,7 @@ dl dd p.error {
 					ID<span> (*) </span>
 				</dt>
 				<dd>
-					<input type="text" size="20" id="userId" name="userid"
+					<input type="text" size="20" id="userId" name="userId"
 						class="validate required">
 					<span id="idCheckResult"></span>
 				</dd>
@@ -105,16 +105,14 @@ dl dd p.error {
 					연결고리(직업, 취미 등 도움을 줄 수 있는 분야)<span> (*) 1개 이상 입력</span>
 				</dt>
 				<dd id="connForm">
-					<input type="text" size="10" name="connchain" class="validate">
+					<input type="text" size="10" name="connchains" class="validate">
 					<button type="button">+</button><br>
 				</dd>
 				
 				<dt>도움 리스트 조회 여부</dt>
 				<dd class="checkboxRequired">
-					<label for="toU"> 내가 <input type="checkbox"
-						name="listoption" checked value=1 /></label> <label for="toMe">나를
-						<input type="checkbox" name="listoption" checked value=2 />
-					</label>
+					<label for="toU"> 내가 <input type="checkbox" name="listoption" checked value=1 /></label>
+					<label for="toMe">나를 <input type="checkbox" name="listoption" checked value=2 /></label>
 				</dd>
 
 				<dt>
@@ -132,7 +130,7 @@ dl dd p.error {
 	<script>
 	$(document).ready(function a(){
 		$("button").click(function () {
-			$('<input type="text" size="10" name="connchain" class="validate"><br>').appendTo("#connForm");
+			$('<input type="text" size="10" name="connchains" class="validate"><br>').appendTo("#connForm");
 		});
 	});
 	
@@ -142,14 +140,14 @@ dl dd p.error {
 			var userId= $(this).val();
 			$.ajax({
 				type: 'POST', 
-				url: '../checkId.do',
+				url: 'user/check.do',
 				data: 
 					{
 						userId: userId
 						//앞의 id: getParameter할 것 / 뒤 id: 위의 var id= 값
 					},
 				success: function(result){
-					if($.trim(result) == "ok"){
+					if($.trim(result) == "OK"){
 						$("#idCheckResult").html("사용가능한 ID입니다.");
 					}else{
 						$("#idCheckResult").html("사용중인  ID입니다.");

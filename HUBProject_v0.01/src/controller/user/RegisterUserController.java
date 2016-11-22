@@ -25,14 +25,14 @@ public class RegisterUserController extends HttpServlet {
 			throws ServletException, IOException {
 		service = new UserServiceLogic();
 		User user = new User();
-		user.setUserId(req.getParameter("userid"));
+		user.setUserId(req.getParameter("userId"));
 		user.setPw(req.getParameter("pw"));
 		user.setEmail(req.getParameter("email"));
 		int sum = 0;
 		for(String listopt : req.getParameterValues("listoption")){
 				sum += Integer.parseInt(listopt);
 		}
-		user.setListOption(sum);
+//		user.setListOption(sum);
 		List<String> connChains = new ArrayList<>();
 		
 		for(String connChain : req.getParameterValues("connchain")){
