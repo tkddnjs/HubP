@@ -7,7 +7,7 @@
 	<typeAliases>
 		<typeAlias type="domain.Bucketlist" alias="Bucketlist" />
 		<typeAlias type="domain.Cooper" alias="Cooper" />
-		<typeAlias type="domain.Friend" alias="Friend" />
+		<typeAlias type="domain.Follow" alias="Follow" />
 		<typeAlias type="domain.Group" alias="Group" />
 		<typeAlias type="domain.Post" alias="Post" />
 		<typeAlias type="domain.User" alias="User" />
@@ -16,7 +16,6 @@
 	
 	<typeHandlers>
 		<typeHandler javaType="boolean" jdbcType="VARCHAR" handler="BooleanToYnHandler"/>
-	
 	</typeHandlers>
 
 	<environments default="development">
@@ -34,10 +33,11 @@
 	<mappers>
 		<mapper resource="mapper/BucketlistMapper.xml" />
 		<mapper resource="mapper/CooperMapper.xml" />
-		<mapper resource="mapper/FriendMapper.xml" />
+		<mapper resource="mapper/FollowMapper.xml" />
 		<mapper resource="mapper/GroupMapper.xml" />
 		<mapper resource="mapper/PostMapper.xml" />
 		<mapper resource="mapper/UserMapper.xml" />
 		<mapper resource="mapper/ConnChainMapper.xml" />
 	</mappers>
+	
 </configuration>

@@ -45,7 +45,7 @@
 		
 	</select>
 	
-	<select id="selectGroupsByConnChains" parameterType="String" resultMap="groupMap">
+	<select id="selectGroupsByConnChain" parameterType="String" resultMap="groupMap">
 		<include refid="selectGroup" />
 		
 	</select>

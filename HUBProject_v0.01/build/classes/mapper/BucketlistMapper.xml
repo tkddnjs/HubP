@@ -15,50 +15,53 @@
 	</resultMap>
 
 	<sql id="selectBucketlist">
-		<!-- SELECT bucketId, bucketName, bucketId, goalDay, starGrade, memo, sos, locker, userId
-		FROM bucketlist_tb -->
 		SELECT bucketId, bucketName, bucketId, goalDay, starGrade, memo, sos, locker, userId
 		FROM bucketlist_tb
 	</sql>
 
-	<!-- <insert id="insertBucketlist" parameterType="Bucketlist">
+	<insert id="insertBucketlist" parameterType="Bucketlist">
 		INSERT INTO bucketlist_tb(bucketId, bucketName, goalDay, starGrade, memo, sos, locker, userId)
-		VALUES (bucketlist_seq.nextVal, #{title}, #{goal}, #{star}, #{memo}, #{sos}, 'N', #{userId})
+		VALUES (#{bucketlistId}, #{title}, #{goal}, #{star}, #{memo}, #{sos}, 'N', #{userId})
 	</insert>
-	<insert id="insertBucketlist" parameterType="Map">
-		INSERT INTO Bucketconn_tb(bucektId, connChain)
-		VALUES (#{bucektId }, #{connChain})
-	</insert> -->
+	
+	<insert id="insertBucketlistConn" parameterType="Map">
+		INSERT INTO Bucketconn_tb(bucketId, connChain)
+		VALUES (#{bucketId }, #{connChain})
+	</insert>
 
 	<update id="updateBucketlist" parameterType="Bucketlist">
 		UPDATE bucketlist_tb
-		SET bucketName = #{title}, goalDay = #{goal}, starGrade = #{star}, memo = #{memo}, sos = #{sos}, locker = #{lock,typeHandler=BooleanToYnHandler}, userId = #{userId} 
+		SET bucketName = #{title}, goalDay = #{goal}, starGrade = #{star}, 
+				memo = #{memo}, sos = #{sos},  userId = #{userId} 
 		WHERE bucketId=#{bucketlistId}
 	</update>
+	<!-- locker = #{lock,typeHandler=BooleanToYnHandler}, -->
 
 	<delete id="deleteBucketlist" parameterType="int">
 		DELETE bucketlist_tb 
 		WHERE bucketId=#{bucketlistId}
 	</delete>
+
+	<select id="nextBucketlistId" resultType="int">
+		SELECT bucketlist_seq.nextval as bucketlistId
+		FROM dual
+	</select>
 	
 	<select id="selectAll" resultMap="bucketlistMap">
 		<include refid="selectBucketlist" />
 		WHERE userId=#{userId}
 	</select>
-
+	
 	<select id="selectBucketlistByBucketlistId" parameterType="int" resultMap="bucketlistMap">
 		<include refid="selectBucketlist" />
 		WHERE bucketId=#{bucketlistId}
 	</select>
 
-	<select id="selectBucketlistsByConnChains" resultMap="bucketlistMap">
+	<select id="selectBucketlistsByConnChain" resultMap="bucketlistMap">
 		<include refid="selectBucketlist" />
 		WHERE bucketId IN (SELECT bucketId
 							FROM bucketConn_tb
-							WHERE connChain IN
-								<foreach item="connChain" separator="," collection="list" open="(" close=")">
-									#{connChain}
-								</foreach>)
+							WHERE connChain = #{connChain} 
 	</select>
 	
 	<select id="selectConnChainsByBucketlistId" parameterType="int" resultType="String">
