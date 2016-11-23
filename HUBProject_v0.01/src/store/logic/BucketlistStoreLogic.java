@@ -4,12 +4,14 @@ import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
+import org.springframework.stereotype.Repository;
 
 import domain.Bucketlist;
 import store.factory.SqlSessionFactoryProvider;
 import store.mapper.BucketlistMapper;
 import store.pacade.BucketlistStore;
 
+@Repository
 public class BucketlistStoreLogic implements BucketlistStore {
 
 	private SqlSessionFactory factory;
@@ -136,12 +138,12 @@ public class BucketlistStoreLogic implements BucketlistStore {
 	}
 
 	@Override
-	public List<Bucketlist> selectBucketlistsByConnChains(List<String> connChains) {
+	public List<Bucketlist> selectBucketlistsByConnChain(String connChain) {
 		SqlSession session = factory.openSession();
 		
 		try {
 			BucketlistMapper mapper = session.getMapper(BucketlistMapper.class);
-			return mapper.selectBucketlistsByConnChains(connChains);
+			return mapper.selectBucketlistsByConnChain(connChain);
 		} finally {
 			session.close();
 		}

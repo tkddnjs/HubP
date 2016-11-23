@@ -3,11 +3,13 @@ package store.logic;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSessionFactory;
+import org.springframework.stereotype.Repository;
 
 import domain.Group;
 import store.factory.SqlSessionFactoryProvider;
 import store.pacade.GroupStore;
 
+@Repository
 public class GroupStoreLogic implements GroupStore {
 
 	private SqlSessionFactory factory;
@@ -65,7 +67,7 @@ public class GroupStoreLogic implements GroupStore {
 	}
 
 	@Override
-	public List<Group> selectGroupsByConnChains(List<String> ConnChains) {
+	public List<Group> selectGroupsByConnChain(String ConnChain) {
 		// TODO Auto-generated method stub
 		return null;
 	}

@@ -2,32 +2,32 @@ package service.logic;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import domain.Post;
 import service.pacade.PostService;
-import store.logic.PostStoreLogic;
 import store.pacade.PostStore;
 
+@Service
 public class PostServiceLogic implements PostService {
 
-	private PostStore store;
-	
-	public PostServiceLogic(){
-		store = new PostStoreLogic();
-	}
+	@Autowired
+	private PostStore postStore;
 	
 	@Override
 	public int sendPost(Post post) {
-		return store.insertPost(post);
+		return postStore.insertPost(post);
 	}
 
 	@Override
 	public int removePost(int postId) {
-		return store.deletePost(postId);
+		return postStore.deletePost(postId);
 	}
 
 	@Override
 	public List<Post> findAll(String userId) {
-		return store.selectAll(userId);
+		return postStore.selectAll(userId);
 	}
 
 	@Override

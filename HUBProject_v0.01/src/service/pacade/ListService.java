@@ -8,9 +8,9 @@ import domain.User;
 
 public interface ListService {
 
-	List<User> findUsersByConnChains(List<String> connChains);
-	List<Bucketlist> findBucketlistsByConnChains(List<String> connChains);
-	List<Cooper> findCoopersByConnChains(List<String> connChains);
+	List<User> findUsersByConnChain(String connChain);
+	List<Bucketlist> findBucketlistsByConnChain(String connChain);
+	List<Cooper> findCoopersByConnChain(String connChain);
 	List<String> findConnChainsByUserId(String userId);
 	List<String> findConnChains();
 }

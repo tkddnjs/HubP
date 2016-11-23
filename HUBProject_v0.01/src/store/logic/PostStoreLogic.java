@@ -4,12 +4,14 @@ import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
+import org.springframework.stereotype.Repository;
 
 import domain.Post;
 import store.factory.SqlSessionFactoryProvider;
 import store.mapper.PostMapper;
 import store.pacade.PostStore;
 
+@Repository
 public class PostStoreLogic implements PostStore {
 
 	private SqlSessionFactory factory;

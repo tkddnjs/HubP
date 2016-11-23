@@ -47,12 +47,9 @@ public class FollowController {
 		ModelAndView mav = new ModelAndView("Follow/listFollow");
 		String userId = (String)session.getAttribute("userId");
 		List<Follow> fList = new ArrayList<>();
-		
 		fList.addAll(followService.findRequestedFollows(userId));
 		fList.addAll(followService.findAll(userId));
-		
 		mav.addObject("follows", fList);
-		
 		return mav;
 	}
 	

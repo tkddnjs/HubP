@@ -12,7 +12,7 @@ public interface UserMapper {
 	int updateUser(User user);
 	int deleteUser(String userId);
 	User selectUserByUserId(String userId);
-	List<User> selectUsersByConnChains(List<String> connChains);
+	List<User> selectUsersByConnChain(String connChain);
 
 	List<String> selectConnChainsByUserId(String userId);
 	int insertConnChain(@Param("userId")String userId, @Param("connChain")String connChain);

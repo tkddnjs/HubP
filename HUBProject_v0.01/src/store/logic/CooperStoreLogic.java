@@ -4,12 +4,14 @@ import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
+import org.springframework.stereotype.Repository;
 
 import domain.Cooper;
 import store.factory.SqlSessionFactoryProvider;
 import store.mapper.CooperMapper;
 import store.pacade.CooperStore;
 
+@Repository
 public class CooperStoreLogic implements CooperStore {
 
 	private SqlSessionFactory factory;
@@ -95,11 +97,11 @@ public class CooperStoreLogic implements CooperStore {
 	}
 
 	@Override
-	public List<Cooper> selectCoopersByConnChains(List<String> connChains) {
+	public List<Cooper> selectCoopersByConnChain(String connChain) {
 		SqlSession session = factory.openSession();
 		try {
 			CooperMapper mapper = session.getMapper(CooperMapper.class);
-			return mapper.selectCoopersByConnChains(connChains);
+			return mapper.selectCoopersByConnChain(connChain);
 		} finally {
 			session.close();
 		}

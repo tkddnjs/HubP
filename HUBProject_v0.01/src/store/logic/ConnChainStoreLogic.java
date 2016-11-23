@@ -4,11 +4,13 @@ import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
+import org.springframework.stereotype.Repository;
 
 import store.factory.SqlSessionFactoryProvider;
 import store.mapper.ConnChainMapper;
 import store.pacade.ConnChainStore;
 
+@Repository
 public class ConnChainStoreLogic implements ConnChainStore {
 
 	private SqlSessionFactory factory;

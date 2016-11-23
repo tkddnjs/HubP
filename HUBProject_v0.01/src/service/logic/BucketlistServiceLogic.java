@@ -2,38 +2,34 @@ package service.logic;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import domain.Bucketlist;
 import service.pacade.BucketlistService;
-import store.logic.BucketlistStoreLogic;
-import store.logic.ConnChainStoreLogic;
 import store.pacade.BucketlistStore;
 import store.pacade.ConnChainStore;
 
 @Service
 public class BucketlistServiceLogic implements BucketlistService {
 
-	private BucketlistStore store;
-	private ConnChainStore ccStore;
-	
-	public BucketlistServiceLogic() {
-		store = new BucketlistStoreLogic();
-		ccStore = new ConnChainStoreLogic();
-	}
+	@Autowired
+	private BucketlistStore bucketlistStore;
+	@Autowired
+	private ConnChainStore connChainStore;
 	
 	@Override
 	public int registerBucketlist(Bucketlist bucketlist) {
 		int result = 1;
 		
-		bucketlist.setBucketlistId(store.nextBucketlistId());
+		bucketlist.setBucketlistId(bucketlistStore.nextBucketlistId());
 		
-		result *= store.insertBucketlist(bucketlist);
-		result *= store.insertBucketlistConn(bucketlist);
+		result *= bucketlistStore.insertBucketlist(bucketlist);
+		result *= bucketlistStore.insertBucketlistConn(bucketlist);
 		
 		List<String> sList = bucketlist.getConnChains();
 		for(String connChain : sList){
-			for(String str : ccStore.selectConnChains()){
+			for(String str : connChainStore.selectConnChains()){
 				if(connChain.equals(str)){
 					sList.remove(connChain);
 					break;
@@ -42,31 +38,30 @@ public class BucketlistServiceLogic implements BucketlistService {
 		}
 		
 		for(String connChain : sList){
-			result *= ccStore.insertConnChain(connChain);
+			result *= connChainStore.insertConnChain(connChain);
 		}
-		
 		
 		return result;
 	}
 
 	@Override
 	public int modifyBucketlist(Bucketlist bucketlist) {
-		return store.updateBucketlist(bucketlist);
+		return bucketlistStore.updateBucketlist(bucketlist);
 	}
 
 	@Override
 	public int removeBucketlist(int bucketlistId) {
-		return store.deleteBucketlist(bucketlistId);
+		return bucketlistStore.deleteBucketlist(bucketlistId);
 	}
 
 	@Override
 	public Bucketlist findBucketlistByBucketlistId(int bucketlistId) {
-		return store.selectBucketlistByBucketlistId(bucketlistId);
+		return bucketlistStore.selectBucketlistByBucketlistId(bucketlistId);
 	}
 
 	@Override
 	public List<Bucketlist> findAll(String userId) {
-		return store.selectAll(userId);
+		return bucketlistStore.selectAll(userId);
 	}
 
 }

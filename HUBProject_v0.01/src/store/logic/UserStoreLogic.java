@@ -4,12 +4,14 @@ import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
+import org.springframework.stereotype.Repository;
 
 import domain.User;
 import store.factory.SqlSessionFactoryProvider;
 import store.mapper.UserMapper;
 import store.pacade.UserStore;
 
+@Repository
 public class UserStoreLogic implements UserStore {
 	
 	private SqlSessionFactory factory;
@@ -96,11 +98,11 @@ public class UserStoreLogic implements UserStore {
 	}
 
 	@Override
-	public List<User> selectUsersByConnChains(List<String> connChains) {
+	public List<User> selectUsersByConnChain(String connChain) {
 		SqlSession session = factory.openSession();
 		try{
 			UserMapper mapper = session.getMapper(UserMapper.class);
-			return mapper.selectUsersByConnChains(connChains);
+			return mapper.selectUsersByConnChain(connChain);
 		}finally{
 			session.close();
 		}
