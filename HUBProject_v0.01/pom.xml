@@ -40,6 +40,7 @@
 	</dependencies>
 	<packaging>war</packaging>
 	<build>
+		<outputDirectory>${basedir}/build/classes</outputDirectory>
 		<sourceDirectory>src</sourceDirectory>
 		<testSourceDirectory>test</testSourceDirectory>
 		<resources>
