@@ -6,12 +6,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link href="/HUBProject_v0.01/resources/css/bootstrap-ko.min.css" rel="stylesheet">
-<link href="/HUBProject_v0.01/resources/css/bootstrap-responsive.min.css" rel="stylesheet">
-<link href="/HUBProject_v0.01/resources/css/bootstrap-theme.min.css" rel="stylesheet">
-<link href="/HUBProject_v0.01/resources/css/bootstrap.min.css" rel="stylesheet">
-<link href="/HUBProject_v0.01/resources/css/menu.css" rel="stylesheet">
-<script type="text/javascript" src="resources/js/menu.js"></script>
+<%@ include file="/View/layout/common.jsp" %>
 <style type="text/css">
 body {
 	padding: 50px;
@@ -36,12 +31,11 @@ h1 {
 					<li><a href="bucketlist/list.do" >버킷리스트</a></li>
 					<!-- /HUBProject_v0.01/listBucketlist.do -->
 					
-					<li><a href="/HUBProject_v0.01/list.do">도움리스트</a></li>
+					<li><a href="list/list.do">도움리스트</a></li>
 					
-					<li><a href="/HUBProject_v0.01/listCompany.do" >업체</a></li>
+					<li><a href="cooper/list.do" >업체</a></li>
 						
-					<li><a href="/HUBProject_v0.01/listGroup.do" >모임방</a></li>
-						
+					<li><a href="group/list.do" >모임방</a></li>
 										
 					<form class="navbar-search pull-right">
 						<input type="text" class="search-query" placeholder="검색">

@@ -4,15 +4,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
 <title>모임방 목록</title>
-<link href="resources/css/bootstrap-theme.min.css" rel="stylesheet">
-<link href="resources/css/bootstrap.min.css" rel="stylesheet">
-<link href="resources/css/bootstrap-ko.css" rel="stylsheet">
-<link href="resources/css/bootstrap-ko.min.css" rel="stylsheet">
-<link href="resources/css/bootstrap-responsive.css" rel="stylsheet">
-<link href="resources/css/bootstrap-responsive.min.css" rel="stylsheet">
-<link href="resources/css/bootstrap.css" rel="stylsheet">
+<%@ include file="/View/layout/common.jsp" %>
 
 <script type="text/javascript">
 	$(function() {
@@ -22,7 +15,6 @@
 		});
 	})
 </script>
-<script src="js/bootstrap.min.js" type="text/javascript"></script>
 
 <style type="text/css">
 body {
@@ -48,7 +40,7 @@ h1 {
 	<h1 align="center">HUB : Have U get a BucketList?</h1>
 
 	<div class="input-append pull-right">
-		<form action="searchGroup.do" method="post" class="form-inline">
+		<form action="group/search.do" method="post" class="form-inline">
 			<select class="ring" name="ring">
 				<option>연결고리</option>
 				<option>내가</option>
@@ -84,9 +76,9 @@ h1 {
 			<tr>
 				<td class="ranking">1</td>
 				<td><a class="btn btn-xs btn-default btn-block"
-					href="searchGroup.do?groupId=${groupId }">미니공연 밴드원 함께하실분!!</a></td>
+					href="group/search.do?groupId=${groupId }">미니공연 밴드원 함께하실분!!</a></td>
 				<td><a class="btn btn-xs btn-default btn-block"
-					href="searchFriend.do?userId=${userId }">IU</a></td>
+					href="follow/search.do?userId=${userId }">IU</a></td>
 				<td>2016.10.10</td>
 				<td>서울</td>
 				<td>#공연</td>
@@ -144,7 +136,7 @@ h1 {
 		</div>
 
 		<div class="pull-right">
-			<a class="btn btn-toolbar" href="registerGroupForm.jsp">
+			<a class="btn btn-toolbar" href="/View/registerGroupForm.jsp">
 
 				<button>글쓰기</button>
 			</a>

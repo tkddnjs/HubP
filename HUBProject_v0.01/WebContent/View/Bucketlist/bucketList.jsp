@@ -5,13 +5,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>HUB</title>
-<link href="/HUBProject_v0.01/resources/css/bootstrap-theme.min.css" rel="stylesheet">
-<link href="/HUBProject_v0.01/resources/css/bootstrap.min.css" rel="stylesheet">
-<link href="resources/css/bootstrap-ko.min.css" rel="stylsheet">
-<link href="resources/css/bootstrap-responsive.min.css" rel="stylsheet">
-<link href="resources/css/bootstrap.css" rel="stylsheet">
+
+	<title>HUB</title>
+	<%@ include file="/View/layout/common.jsp" %>
 
 <style type="text/css">
 body {
@@ -56,7 +52,6 @@ h1 {
 .btnPlay {
 	margin-top: 40%
 }
-
 </style>
 </head>
 <body>
@@ -69,12 +64,13 @@ h1 {
 	</div>
 
 	<div class="input-append pull-right">
-		<a class="btn btn-xs btn-info btnPlay" href="Bucketlist/registerBucketlist.jsp"  ><h5>버킷추가</h5></a>
+		<a class="btn btn-xs btn-info btnPlay"
+			href="/View/Bucketlist/registerBucketlist.jsp"><h5>버킷추가</h5></a>
 	</div>
 
 	<table class="table table-hover table-condensed">
-		<thead style="background: #60d7a9; color:white;">	
-			<tr style="align: center; font-size:14pt;">
+		<thead style="background: #60d7a9; color: white;">
+			<tr style="align: center; font-size: 14pt;">
 				<th width="60" align="center">잠금</th>
 				<th width="50" align="center">No</th>
 				<th width="400" align="center">버킷리스트</th>
@@ -84,7 +80,7 @@ h1 {
 			</tr>
 		</thead>
 
-		<tbody style="font-size:14pt;">
+		<tbody style="font-size: 14pt;">
 			<c:forEach items="${bucketlists }" var="bucketlist"
 				varStatus="status">
 				<tr>
@@ -98,20 +94,18 @@ h1 {
 						</c:otherwise>
 					</c:choose>
 
-					<td class="ranking" align="center" style="font-size:14pt;">${status.count  }</td>
-				
-					<td width="400" align="center">
-						<a href="bucketlist/modify.do?id=${bucketlist.bucketlistId}">
-						<b>${bucketlist.title  }</b></a>
+					<td class="ranking" align="center" style="font-size: 14pt;">${status.count  }</td>
+
+					<td width="400" align="center"><a
+						href="bucketlist/modify.do?id=${bucketlist.bucketlistId}"> <b>${bucketlist.title  }</b></a>
 					</td>
-						
+
 					<td><p class="goal">${bucketlist.goal  }</p></td>
 					<td>${bucketlist.star  }</td>
-					<td>${bucketlist.star  }</td>
-					
+					<td>${bucketlist.connChains  }</td>
 				</tr>
 			</c:forEach>
 		</tbody>
 	</table>
-			</body>
+</body>
 </html>

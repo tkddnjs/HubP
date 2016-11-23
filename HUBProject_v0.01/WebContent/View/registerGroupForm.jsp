@@ -4,22 +4,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
 <title>모임방 등록</title>
-
-<link href="resources/css/bootstrap-theme.min.css" rel="stylesheet">
-<link href="resources/css/bootstrap.min.css" rel="stylesheet">
-<link href="resources/css/bootstrap-ko.css" rel="stylsheet">
-<link href="resources/css/bootstrap-ko.min.css" rel="stylsheet">
-<link href="resources/css/bootstrap-responsive.css" rel="stylsheet">
-<link href="resources/css/bootstrap-responsive.min.css" rel="stylsheet">
-<link href="resources/css/bootstrap.css" rel="stylsheet">
-
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-<script type="text/javascript">
-	
-</script>
+<%@ include file="/View/layout/common.jsp" %>
 
 </head>
 <body>
@@ -27,7 +13,7 @@
 	<fieldset>
 		<legend>모임방 등록</legend>
 		<div>
-			<form class="form-inline" action="registerGroup.do" method="post">
+			<form class="form-inline" action="group/register.do" method="post">
 				<table>
 					<tr>
 					  <th>연결고리</th>

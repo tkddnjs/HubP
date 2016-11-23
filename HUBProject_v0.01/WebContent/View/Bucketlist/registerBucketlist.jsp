@@ -5,10 +5,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>버킷추가</title>
-
-<script type="text/javascript" src="../resources/js/jquery.min.js"></script>
+	<title>버킷추가</title>
+	<%@ include file="/View/layout/common.jsp" %>
 
 
 <style>

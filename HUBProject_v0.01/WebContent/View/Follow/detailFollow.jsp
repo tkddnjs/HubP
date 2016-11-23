@@ -4,8 +4,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
 <title>JSP</title>
+<%@ include file="/View/layout/common.jsp" %>
 </head>
 <body>
 

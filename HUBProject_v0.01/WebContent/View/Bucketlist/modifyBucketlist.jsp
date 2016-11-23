@@ -5,10 +5,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
 <title>버킷수정</title>
-
-<script type="text/javascript" src="../resources/js/jquery.min.js"></script>
+<%@ include file="/View/layout/common.jsp"%>
 
 
 <style>
@@ -78,26 +76,29 @@ dl dd p.error {
 				</dt>
 				<dd>
 					<input type="text" size="40" id="title" name="title"
-						class="validate required"  value="${bucketlist.title }" >
+						class="validate required" value="${bucketlist.title }">
 				</dd>
 
 				<dt>목표기간</dt>
 				<dd>
-					<input type="text" size="40" id="goal" name="goal"  value="${bucketlist.goal }" >
+					<input type="text" size="40" id="goal" name="goal"
+						value="${bucketlist.goal }">
 				</dd>
 
 				<dt>
 					중요도<span> 10점 만점 </span>
 				</dt>
 				<dd>
-					<input type="number" size="40" id="star" name="star"  value="${bucketlist.star }" >
+					<input type="number" size="40" id="star" name="star"
+						value="${bucketlist.star }">
 				</dd>
 
 				<dt>
 					연결고리 (버킷과 관련된 분야 - 도움을 받을 수 있습니다.)<span> (*) 1개 이상 입력</span>
 				</dt>
 				<dd id="connForm">
-					<input type="text" size="10" name="connchain" class="validate"  value="" >
+					<input type="text" size="10" name="connchain" class="validate"
+						value="">
 					<button type="button">+</button>
 					<br>
 				</dd>
@@ -106,20 +107,22 @@ dl dd p.error {
 					SOS (다른사람에게 도움받고 싶은 부분을 써주세요)<span>200byte</span>
 				</dt>
 				<dd>
-					<input type="text" size="50" id="sos" name="sos"  value="${bucketlist.sos }" >
+					<input type="text" size="50" id="sos" name="sos"
+						value="${bucketlist.sos }">
 				</dd>
 
 				<dt>
 					메모<span>500byte</span>
 				</dt>
 				<dd>
-					<textarea name="memo" rows="13"  cols="63"  class="" >${bucketlist.memo }</textarea>
+					<textarea name="memo" rows="13" cols="63" class="">${bucketlist.memo }</textarea>
 				</dd>
-				
+
 			</dl>
 			<p>
-				<input type="hidden"  name="bucketId"  value="${bucketlist.bucketlistId }">
-				<button type="submit" >수정완료</button>
+				<input type="hidden" name="bucketId"
+					value="${bucketlist.bucketlistId }">
+				<button type="submit">수정완료</button>
 			</p>
 		</form>
 	</div>

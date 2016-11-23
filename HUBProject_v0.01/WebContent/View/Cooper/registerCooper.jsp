@@ -4,9 +4,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
 <title> 업체등록 </title>
-<script src="../resources/js/jquery.min.js"></script>
+<%@ include file="/View/layout/common.jsp" %>
 
 <!-- <script type="text/javascript">
 	$(document).ready(function() {

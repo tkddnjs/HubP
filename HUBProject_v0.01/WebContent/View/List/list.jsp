@@ -5,17 +5,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
+
 <title>도움리스트 목록</title>
+<%@ include file="/View/layout/common.jsp" %>
 
-<link href="/HUBProject_v0.01/resources/css/bootstrap-theme.min.css" rel="stylesheet">
-<link href="/HUBProject_v0.01/resources/css/bootstrap.min.css" rel="stylesheet">
-<link href="/HUBProject_v0.01/resources/css/bootstrap-ko.min.css" rel="stylsheet">
-<link href="/HUBProject_v0.01/resources/css/bootstrap-responsive.min.css" rel="stylsheet">
-
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<script type="text/javascript" src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
 		var availableTags;
@@ -23,7 +16,7 @@
 			var listOpt = $("#listOpt").val();
 			$.ajax({
 				type : 'POST',
-				url : '/HUBProject_v0.01/listAutoComplete.do',
+				url : 'list/listAutoComplete.do',
 				data : {
 					listOpt : listOpt
 				},
@@ -42,7 +35,7 @@
 			var listOpt = $(this).val();
 			$.ajax({
 				type : 'POST',
-				url : '/HUBProject_v0.01/listAutoComplete.do',
+				url : 'list/listAutoComplete.do',
 				data : {
 					listOpt : listOpt
 				},
@@ -65,8 +58,6 @@
 		}
 	};
 </script>
-
-<script src="/HUBProject_v0.01/resources/js/bootstrap.min.js" type="text/javascript"></script>
 
 <style type="text/css">
 body {
@@ -95,7 +86,7 @@ h1 {
 
 	<br>
 		<div class="input-append pull-right">
-		<form action="/HUBProject_v0.01/list.do" method="post"
+		<form action="list/list.do" method="post"
 			class="form-inline" id="form">
 			<table>
 				<tr>
@@ -146,7 +137,7 @@ h1 {
 						<tr>
 							<td>${status.count }</td>
 							<td>
-								<form action="/HUBProject_v0.01/userDetail.do" method="post">
+								<form action="user/detail.do" method="post">
 									<button class="btn btn-xs btn-default btn-block" type="submit"
 										name="userId" value="${bucketlist.userId }">${bucketlist.userId }</button>
 									<input type="hidden" name="listOpt" value="${listOpt }">
@@ -154,7 +145,7 @@ h1 {
 								</form>
 							</td>
 							<td>
-								<form action="/HUBProject_v0.01/bucketlistDetail.do"
+								<form action="bucketlist/detail.do"
 									method="post">
 									<button class="btn btn-xs btn-default btn-block" type="submit"
 										name="bucketlistId" value="${bucketlist.bucketlistId }">${bucketlist.title }</button>
@@ -171,7 +162,7 @@ h1 {
 						<tr>
 							<td>${status.count }</td>
 							<td>
-								<form action="/HUBProject_v0.01/userDetail.do" method="post">
+								<form action="user/detail.do" method="post">
 									<button class="btn btn-xs btn-default btn-block" type="submit"
 										name="userId" value="${user.userId }">${user.userId }</button>
 									<input type="hidden" name="listOpt" value="${listOpt }">
@@ -187,10 +178,9 @@ h1 {
 						<tr>
 							<td>${status.count }</td>
 							<td>${cooper.coName }</td>
-							<td><a href="resources/img/${cooper.Banner }"></a></td>
+							<td><a href="${pageContext.request.contextPath}/resources/img/${cooper.Banner }"></a></td>
 						</tr>
 					</c:forEach>
-
 				</c:otherwise>
 			</c:choose>
 		</tbody>

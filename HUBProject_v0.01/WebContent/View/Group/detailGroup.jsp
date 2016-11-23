@@ -4,8 +4,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
 <title>모임방 상세</title>
+<%@ include file="/View/layout/common.jsp" %>
 </head>
 <body>
 

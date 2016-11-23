@@ -4,12 +4,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
 <title>사용자 상세</title>
-<link href="/HUBProject_v0.01/resources/css/bootstrap-theme.min.css"
-	rel="stylesheet">
-<link href="/HUBProject_v0.01/resources/css/bootstrap.min.css"
-	rel="stylesheet">
+<%@ include file="/View/layout/common.jsp" %>
 
 <style type="text/css">
 body {
@@ -79,7 +75,7 @@ h1 {
 		</tr>
 	</table>
 
-	<form action="/HUBProject_v0.01/list.do" method="post">
+	<form action="list/list.do" method="post">
 		<div class="input-append pull-right">
 			<button class="btn btn-xs btn-default btn-block" type="submit">돌아가기</button>
 		</div>
@@ -87,11 +83,11 @@ h1 {
 		<input type="hidden" name="connChain" value="${connChain }">
 	</form>
 	
-	<c:if test="${chkFriend }">
-		<form action="/HUBProject_v0.01/requestFriend.do" method="post">
+	<c:if test="${chkFollow }">
+		<form action="follow/request.do" method="post">
 			<div class="input-append pull-right">
 				<button class="btn btn-xs btn-default btn-block" type="submit"
-					name="friendId" value="${user.userId }">친구요청</button>
+					name="followId" value="${user.userId }">친구요청</button>
 				<input type="hidden" name="relation" value="${listOpt }">
 				<input type="hidden" name="connChain" value="${connChain }">
 			</div>

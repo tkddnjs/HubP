@@ -5,9 +5,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
 <title>회원가입</title>
-<script type="text/javascript" src="../resources/js/jquery.min.js"></script>
+<%@ include file="/View/layout/common.jsp" %>
 <style>
 #container {
 	width: 600px;
@@ -68,7 +67,7 @@ dl dd p.error {
 
 	<div id="container">
 		<h1>회원가입</h1>
-		<form action="../registerUser.do" method="post">
+		<form action="user/register.do" method="post">
 			<dl>
 				<dt>
 					ID<span> (*) </span>

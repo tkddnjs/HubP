@@ -5,25 +5,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
 <title>쪽지 목록</title>
-<link href="/HUBProject_v0.01/resources/css/bootstrap-theme.min.css"
-	rel="stylesheet">
-<link href="/HUBProject_v0.01/resources/css/bootstrap.min.css"
-	rel="stylesheet">
-<link href="/HUBProject_v0.01/resources/css/bootstrap-ko.css"
-	rel="stylsheet">
-<link href="/HUBProject_v0.01/resources/css/bootstrap-ko.min.css"
-	rel="stylsheet">
-<link href="/HUBProject_v0.01/resources/css/bootstrap-responsive.css"
-	rel="stylsheet">
-<link
-	href="/HUBProject_v0.01/resources/css/bootstrap-responsive.min.css"
-	rel="stylsheet">
-<link href="/HUBProject_v0.01/resources/css/bootstrap.css"
-	rel="stylsheet">
-<script src="/HUBProject_v0.01/js/bootstrap.min.js"
-	type="text/javascript"></script>
+<%@ include file="/View/layout/common.jsp" %>
 <style type="text/css">
 html, body {
 	overflow: hidden;
@@ -46,7 +29,7 @@ h1 {
 
 <script type="text/javascript">
 	function windowOpen() {
-		window.open("/HUBProject_v0.01/Post/sendPost.jsp", "subPopup",
+		window.open("/View/Post/sendPost.jsp", "subPopup",
 				"width=600px,height=600px");
 	}
 </script>
@@ -60,7 +43,7 @@ h1 {
 	<h1 align="center">HUB : Have U get a BucketList?</h1>
 
 
-		<form action="removePost.do" method="get" class="form-inline">
+		<form action="post/remove.do" method="get" class="form-inline">
 			<table class="table table-hover table-condensed table-striped">
 				<thead style="background: #60d7a9;">
 					<tr style="align: center;">
@@ -91,7 +74,7 @@ h1 {
 				</div>			
 		</form>
 		
-		<form action="sendPost.do" method="get">
+		<form action="post/send.do" method="get">
 				<div class="input-append pull-right">
 					<button type="submit">쪽지전송</button>
 				</div>			

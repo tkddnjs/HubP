@@ -4,12 +4,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
 <title> 친구 등록 처리 </title>
-<link href="/HUBProject_v0.01/resources/css/bootstrap-theme.min.css"
-	rel="stylesheet">
-<link href="/HUBProject_v0.01/resources/css/bootstrap.min.css"
-	rel="stylesheet">
+<%@ include file="/View/layout/common.jsp" %>
 
 <style type="text/css">
 body {
@@ -64,7 +60,7 @@ h1 {
 
 	<h3 align="center"> 새로운 친구가 등록되었습니다. </h3>
 
-	<form action="/HUBProject_v0.01/follow/listAll.do" method="get">
+	<form action="follow/listAll.do" method="get">
 		<div class="input-append pull-right">
 			<button class="btn btn-xs btn-default btn-block" type="submit">확인</button>
 		</div>

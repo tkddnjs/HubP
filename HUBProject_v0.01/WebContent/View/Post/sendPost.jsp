@@ -3,17 +3,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html>
 <head>
-<meta charset="UTF-8">
 <title>쪽지전송</title>
-<link href="/HUBProject_v0.01/resources/css/bootstrap-ko.css" rel="stylesheet">
-<link href="/HUBProject_v0.01/resources/css/bootstrap-ko.min.css" rel="stylesheet">
-<link href="/HUBProject_v0.01/resources/css/bootstrap-responsive.css" rel="stylesheet">
-<link href="/HUBProject_v0.01/resources/css/bootstrap-responsive.min.css" rel="stylesheet">
-<link href="/HUBProject_v0.01/resources/css/bootstrap-theme.min.css" rel="stylesheet">
-<link href="/HUBProject_v0.01/resources/css/bootstrap.css" rel="stylesheet">
-<link href="/HUBProject_v0.01/resources/css/bootstrap.min.css" rel="stylesheet">
-<link href="/HUBProject_v0.01/resources/css/bucketlist.css" rel="stylesheet">
-<script type="/HUBProject_v0.01/text/javascript" src="resources/js/bucketlist.js"></script>
+<%@ include file="/View/layout/common.jsp" %>
 <style type="text/css">
 body {
 	padding: 60px;
@@ -56,7 +47,7 @@ h1 {
 
 </head>
 <body>
-<form action="sendPost.do" method="post" >
+<form action="post/send.do" method="post" >
 	<div class="wrap" style="height: auto; width: 300px; border: 1px solid black;">
 		<div class="wrap">
 		

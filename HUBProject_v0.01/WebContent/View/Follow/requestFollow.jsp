@@ -4,10 +4,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
 <title> 친구 요청 </title>
-<link href="/HUBProject_v0.01/resources/css/bootstrap-theme.min.css"	rel="stylesheet">
-<link href="/HUBProject_v0.01/resources/css/bootstrap.min.css"	rel="stylesheet">
+<%@ include file="/View/layout/common.jsp" %>
 
 <style type="text/css">
 body {
@@ -62,7 +60,7 @@ h1 {
 
 	<h3 align="center"> 요청 완료 되었습니다. </h3>
 
-	<form action="/HUBProject_v0.01/userDetail.do" method="post">
+	<form action="user/detail.do" method="post">
 		<div class="input-append pull-right">
 			<button class="btn btn-xs btn-default btn-block" type="submit">확인</button>
 		</div>

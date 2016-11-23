@@ -4,21 +4,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
 <title>Welcome HUB : Have U get a BucketList?</title>
-<link href="${pageContext.request.contextPath}/resources/css/bootstrap-theme.min.css" rel="stylesheet">
-<link href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css" rel="stylesheet">
-<link href="${pageContext.request.contextPath}/resources/css/bootstrap-ko.css" rel="stylsheet">
-<link href="${pageContext.request.contextPath}/resources/css/bootstrap-ko.min.css" rel="stylsheet">
-<link href="${pageContext.request.contextPath}/resources/css/bootstrap-responsive.css" rel="stylsheet">
-<link href="${pageContext.request.contextPath}/resources/css/bootstrap-responsive.min.css" rel="stylsheet">
-<link href="${pageContext.request.contextPath}/resources/css/bootstrap.css" rel="stylsheet">
-
-<script type="text/javascript">
-
-	
-</script>
-<script src="${pageContext.request.contextPath}/resources/js/jquery.min.js" type="text/javascript"></script>
+<%@ include file="/View/layout/common.jsp" %>
 
 <style>
 .mainBody {

@@ -4,18 +4,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
 <title>친구 목록</title>
-
-<link href="/HUBProject_v0.01/resources/css/bootstrap-theme.min.css" rel="stylesheet">
-<link href="/HUBProject_v0.01/resources/css/bootstrap.min.css" rel="stylesheet">
-<link href="resources/css/bootstrap-ko.min.css" rel="stylsheet">
-<link href="resources/css/bootstrap-responsive.min.css" rel="stylsheet">
-<link href="resources/css/bootstrap.css" rel="stylsheet">
-
-<script src="/HUBProject_v0.01/resources/js/jquery.min.js"></script>
-<script src="/HUBProject_v0.01/resources/js/bootstrap.min.js"
-	type="text/javascript"></script>
+<%@ include file="/View/layout/common.jsp" %>
 
 <style type="text/css">
 body {
@@ -44,7 +34,7 @@ h1 {
 
 
 	<div class="input-append pull-right">
-		<form action="/HUBProject_v0.01/follow/listAll.do" method="post"
+		<form action="follow/listAll.do" method="post"
 			class="form-inline">
 			<select class="ring" name="searchOpt">
 				<option value="1">연결고리</option>
@@ -76,7 +66,7 @@ h1 {
 						<tr>
 						<td>${status.count }</td>
 						<td>
-							<form action="/HUBProject_v0.01/userDetail.do" method="post">
+							<form action="user/detail.do" method="post">
 								<button class="btn btn-xs btn-default btn-block" type="submit"
 									name="userId" value="${follow.followId }">${follow.followId }</button>
 								<input type="hidden" name="listOpt" value="${follow.relation }">
@@ -96,14 +86,14 @@ h1 {
 							</c:choose>
 						</td>
 						<td>
-							<form action="/HUBProject_v0.01/follow/confirm.do" method="post">
+							<form action="follow/confirm.do" method="post">
 								<button class="btn btn-xs btn-default btn-block" type="submit">수락</button>
 								<input type="hidden" name="followId" value="${follow.followId }">
 								<input type="hidden" name="searchOpt" value="${searchOpt }">
 							</form>
 						</td>
 						<td>
-							<form action="/HUBProject_v0.01/follow/remove.do" method="post">
+							<form action="follow/remove.do" method="post">
 								<button class="btn btn-xs btn-default btn-block" type="submit">거절</button>
 								<input type="hidden" name="followId" value="${follow.followId }">
 								<input type="hidden" name="searchOpt" value="${searchOpt }">
@@ -116,7 +106,7 @@ h1 {
 						<tr>
 						<td>${status.count }</td>
 						<td>
-							<form action="/HUBProject_v0.01/userDetail.do" method="post">
+							<form action="user/detail.do" method="post">
 								<button class="btn btn-xs btn-default btn-block" type="submit"
 									name="userId" value="${follow.followId }">${follow.followId }</button>
 								<input type="hidden" name="listOpt" value="${follow.relation }">
