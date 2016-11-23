@@ -23,7 +23,7 @@ public class UserController {
 	
 	@RequestMapping(value="register.do", method=RequestMethod.GET)
 	public String registerUser(){
-		return "redirect: User/registerUser";
+		return "/User/registerUser";
 	}
 	
 	// parameter 추가
@@ -36,7 +36,7 @@ public class UserController {
 			}
 		}
 		userService.registerUser(user);
-		return "redirect: HUBMain.jsp";
+		return "HUBMain";
 	}
 	
 	@RequestMapping(value="modify.do", method=RequestMethod.GET)
@@ -50,7 +50,7 @@ public class UserController {
 	@RequestMapping(value="modify.do", method=RequestMethod.POST)
 	public String modifyUser(User user){
 		userService.modifyUser(user);
-		return "redirect: user/detail.do";
+		return "redirect: /user/detail.do";
 	}
 
 	// 설계 문서 수정 => session 추가
@@ -80,7 +80,7 @@ public class UserController {
 	@RequestMapping(value="login.do", method=RequestMethod.POST)
 	public String login(HttpSession session, User user){
 		if(!userService.login(user)){
-			return "redirect: HUBMain.jsp";
+			return "HUBMain";
 		}
 		boolean isAdmin = userService.getIsAdmin();
 		
@@ -88,15 +88,15 @@ public class UserController {
 		session.setAttribute("isAdmin", isAdmin);
 		
 		if(isAdmin == true){
-			return "redirect: cooper/list.do";
+			return "redirect:/cooper/list.do";
 		} else {
-			return "redirect: bucketlist/list.do";		
+			return "redirect:/bucketlist/list.do";		
 		}
 	}
 	
 	@RequestMapping(value="logout.do", method=RequestMethod.GET)
 	public String logout(HttpSession session){
 		session.invalidate();
-		return "redirect: HUBMain.jsp";
+		return "HUBMain";
 	}
 }
