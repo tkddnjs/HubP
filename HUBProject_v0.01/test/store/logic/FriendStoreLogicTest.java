@@ -7,7 +7,8 @@ import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
-import store.pacade.FollowStore;
+import com.hub.store.logic.FollowStoreLogic;
+import com.hub.store.pacade.FollowStore;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class FriendStoreLogicTest {
