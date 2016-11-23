@@ -28,7 +28,7 @@
 
 </head>
 <body>
-	<form action="login.do" method="post">
+	<form action="user/login.do" method="post">
 		<table align="center">
 			<div class="maincenter" >
 				<a href=HUBMain.jsp><h1 align="center" >HUB : Have U get a
@@ -41,7 +41,7 @@
 				<td></td>
 				<th>Password</th>
 				<td></td>
-				<td><input id="password" name="password" class="form-control"
+				<td><input id="password" name="pw" class="form-control"
 					type="password" value="" placeholder="비밀번호를 입력해주세요."></td>
 				<td></td>
 				<th><button class="btn btn-xs btn-info btnPlay">로그인</button></th>
