@@ -10,8 +10,9 @@ import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
-import domain.Bucketlist;
-import store.pacade.BucketlistStore;
+import com.hub.domain.Bucketlist;
+import com.hub.store.logic.BucketlistStoreLogic;
+import com.hub.store.pacade.BucketlistStore;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class BucketlistStoreLogicTest {

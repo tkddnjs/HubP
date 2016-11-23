@@ -9,16 +9,15 @@
 
 	<mvc:annotation-driven/>
 	
-	<context:component-scan base-package="controller"/>
-	<context:component-scan base-package="service"/>
-	<context:component-scan base-package="store"/>
+	<context:component-scan base-package="com.hub"/>
 	
 	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-		<property name="prefix" value="/"/>
+		<property name="prefix" value="/View/"/>
 		<property name="suffix" value=".jsp"/>
 	</bean>
 
 	<mvc:interceptors>
-		<bean class="interceptor.CharaterEncodingInterceptor"/>
+		<bean class="com.hub.interceptor.CharaterEncodingInterceptor"></bean>
 	</mvc:interceptors>
+
 </beans>

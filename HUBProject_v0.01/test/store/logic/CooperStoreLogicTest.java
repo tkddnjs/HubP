@@ -11,8 +11,9 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
-import domain.Cooper;
-import store.pacade.CooperStore;
+import com.hub.domain.Cooper;
+import com.hub.store.logic.CooperStoreLogic;
+import com.hub.store.pacade.CooperStore;
 
 public class CooperStoreLogicTest {
 

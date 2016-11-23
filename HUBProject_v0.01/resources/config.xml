@@ -5,13 +5,13 @@
 	<properties resource="dataresource.properties"/>
 	
 	<typeAliases>
-		<typeAlias type="domain.Bucketlist" alias="Bucketlist" />
-		<typeAlias type="domain.Cooper" alias="Cooper" />
-		<typeAlias type="domain.Follow" alias="Follow" />
-		<typeAlias type="domain.Group" alias="Group" />
-		<typeAlias type="domain.Post" alias="Post" />
-		<typeAlias type="domain.User" alias="User" />
-		<typeAlias type="handler.BooleanToYnHandler" alias="BooleanToYnHandler" />
+		<typeAlias type="com.hub.domain.Bucketlist" alias="Bucketlist" />
+		<typeAlias type="com.hub.domain.Cooper" alias="Cooper" />
+		<typeAlias type="com.hub.domain.Follow" alias="Follow" />
+		<typeAlias type="com.hub.domain.Group" alias="Group" />
+		<typeAlias type="com.hub.domain.Post" alias="Post" />
+		<typeAlias type="com.hub.domain.User" alias="User" />
+		<typeAlias type="com.hub.handler.BooleanToYnHandler" alias="BooleanToYnHandler" />
 	</typeAliases>
 	
 	<typeHandlers>

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="store.mapper.FollowMapper">
+	<resultMap type="Follow" id="followMap">
+		<id property="userId" column="userId" />
+		<result property="followId" column="followId" />
+		<result property="relation" column="relation" />
+		<result property="confirm" column="confirm" typeHandler="BooleanToYnHandler"/>
+	</resultMap>
+
+	<sql id="selectFollow">
+		SELECT userId, followId, relation, confirm
+		FROM follow_tb
+	</sql>
+
+	<insert id="insertFollow" parameterType="Follow">
+		INSERT INTO follow_tb(userId, followId, relation, confirm) VALUES (#{userId}, #{followId}, #{relation}, #{confirm,typeHandler=BooleanToYnHandler})
+	</insert>
+
+	<delete id="deleteFollow" parameterType="Follow">
+		DELETE follow_tb
+		WHERE
+		(userId=#{userId} AND followId=#{followId})
+		OR (userId=#{followId} AND
+		followId=#{userId})
+	</delete>
+
+	<update id="updateFollowConfirm" parameterType="Follow">
+		UPDATE follow_tb
+		SET confirm='Y'
+		WHERE (userId=#{userId} and followId=#{followId})
+		OR (userId=#{followId} and followId=#{userId})
+	</update>
+
+
+	<select id="selectAll" parameterType="Follow" resultMap="followMap">
+		SELECT followId as userId, userId as followId, MOD(3-relation, 3) as relation, confirm
+		FROM follow_tb
+		WHERE followId=#{userId} AND confirm='Y'
+	</select>
+	
+	<select id="selectRequestedFollows" resultMap="followMap">
+		<include refid="selectFollow" />
+		WHERE userId=#{userId} AND confirm='N'
+	</select>
+
+	<select id="selectFollowsByConnChain" parameterType="Map"
+		resultMap="followMap">
+		<include refid="selectFollow" />
+		WHERE userId=#{userId} AND confirm='Y'
+		AND followId IN (
+			SELECT userId
+			FROM userConn_tb
+			WHERE connChain IN #{connChain}
+		)
+	</select>
+
+	<select id="selectFollowsByRelation" parameterType="Follow"
+		resultMap="followMap">
+		<include refid="selectFollow" />
+		WHERE userId=#{userId} AND confirm='Y'
+		AND relation=#{relation}
+	</select>
+
+</mapper>

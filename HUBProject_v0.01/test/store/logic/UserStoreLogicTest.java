@@ -8,8 +8,9 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
-import domain.User;
-import store.pacade.UserStore;
+import com.hub.domain.User;
+import com.hub.store.logic.UserStoreLogic;
+import com.hub.store.pacade.UserStore;
 
 public class UserStoreLogicTest {
 
