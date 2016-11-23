@@ -5,6 +5,6 @@
 <head>
 </head>
 <body>
-	<c:redirect url="/View/common/HUBMain.jsp"/>
+	<c:redirect url="/View/HUBMain.jsp"/>
 </body>
 </html>

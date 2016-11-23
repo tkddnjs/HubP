@@ -27,19 +27,19 @@ public class FollowController {
 		follow.setUserId((String)session.getAttribute("userId"));
 		follow.setFollowId(followId);
 		followService.registerFollow(follow);
-		return "redirect: list/list.do";
+		return "redirect: /list/list.do";
 	}
 	
 	@RequestMapping(value="confirm.do", method=RequestMethod.POST)
 	public String confirmFollow(Follow follow){
 		followService.confirmFollow(follow);
-		return "redirect: follow/list.do";
+		return "redirect: /follow/listAll.do";
 	}
 	
 	@RequestMapping(value="remove.do", method=RequestMethod.POST)
 	public String removeFollow(Follow follow){
 		followService.removeFollow(follow);
-		return "redirect: follow/list.do";
+		return "redirect: /follow/listAll.do";
 	}
 	
 	@RequestMapping(value="listAll.do", method=RequestMethod.POST)

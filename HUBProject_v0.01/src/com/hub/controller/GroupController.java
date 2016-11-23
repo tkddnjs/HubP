@@ -31,13 +31,13 @@ public class GroupController {
 	@RequestMapping(value="register.do", method=RequestMethod.POST)
 	public String registerGroup(Group group) {
 		groupService.registerGroup(group);
-		return "redirect: group/list.do?listOpt=0";
+		return "redirect: /group/list.do?listOpt=0";
 	}
 
 	@RequestMapping(value="join.do", method=RequestMethod.GET)
 	public String joinGroup(HttpSession session, int groupId) {
 		groupService.joinGroup(groupId, (String) session.getAttribute("userId"));
-		return "redirect: group/detail.do?groupId="+groupId;
+		return "redirect: /group/detail.do?groupId="+groupId;
 	}
 
 	// 문서 수정 필요 => parameter 변경
@@ -52,19 +52,19 @@ public class GroupController {
 	@RequestMapping(value="modify.do", method=RequestMethod.POST)
 	public String modifyGroup(Group group) {
 		groupService.modifyGroup(group);
-		return "redirect: group/detail.do?groupId="+group.getGroupId();
+		return "redirect: /group/detail.do?groupId="+group.getGroupId();
 	}
 
 	@RequestMapping(value="remove.do", method=RequestMethod.GET)
 	public String removeGroup(int groupId) {
 		groupService.removeGroup(groupId);
-		return "redirect: group/list.do?listOpt=0";
+		return "redirect: /group/list.do?listOpt=0";
 	}
 
 	@RequestMapping(value="exit.do", method=RequestMethod.GET)
 	public String exitGroup(HttpSession session, int groupId) {
 		groupService.exitGroup(groupId, (String) session.getAttribute("userId"));
-		return "redirect: group/list.dolistOpt=0";
+		return "redirect: /group/list.dolistOpt=0";
 	}
 
 	@RequestMapping(value="list.do", method=RequestMethod.GET)

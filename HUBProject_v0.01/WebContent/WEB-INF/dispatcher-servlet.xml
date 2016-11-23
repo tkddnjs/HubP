@@ -19,5 +19,5 @@
 	<mvc:interceptors>
 		<bean class="com.hub.interceptor.CharaterEncodingInterceptor"></bean>
 	</mvc:interceptors>
-	
+
 </beans>

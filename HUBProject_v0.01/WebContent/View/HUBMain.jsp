@@ -15,7 +15,7 @@
 
 </head>
 <body>
-	<form action="user/login.do" method="post">
+	<form action="${pageContext.request.contextPath}/user/login.do" method="post">
 		<table align="center">
 			<div class="maincenter" >
 				<a href=HUBMain.jsp><h1 align="center" >HUB : Have U get a
@@ -34,7 +34,7 @@
 				<th><button class="btn btn-xs btn-info btnPlay">로그인</button></th>
 
 				<th><a class="btn btn-xs btn-info btnPlay"
-					href="user/register.do">회원가입</a></th>
+					href="${pageContext.request.contextPath}/user/register.do">회원가입</a></th>
 			</tr>
 			</div>
 		</table>

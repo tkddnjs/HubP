@@ -23,7 +23,7 @@ public class UserController {
 	
 	@RequestMapping(value="register.do", method=RequestMethod.GET)
 	public String registerUser(){
-		return "/User/registerUser";
+		return "User/registerUser";
 	}
 	
 	// parameter 추가
@@ -58,7 +58,7 @@ public class UserController {
 	public String removeUser(String userId, HttpSession session){
 		session.invalidate();
 		userService.removeUser(userId);
-		return "redirect: HUBMain.jsp";
+		return "redirect: HUBMain";
 	}
 	
 	@RequestMapping(value="detail.do", method=RequestMethod.POST)	

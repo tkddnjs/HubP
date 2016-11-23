@@ -29,7 +29,7 @@ public class BucketlistController {
 	@RequestMapping(value="register.do", method=RequestMethod.GET)
 	public String registerBucketlist(Bucketlist bucketlist){
 		bucketlistService.registerBucketlist(bucketlist);
-		return "redirect: bucketlist/list.do";
+		return "redirect: /bucketlist/list.do";
 	}
 	
 	@RequestMapping(value="modify.do", method=RequestMethod.POST)
@@ -42,13 +42,13 @@ public class BucketlistController {
 	@RequestMapping(value="modify.do", method=RequestMethod.GET)
 	public String modifyBucketlist(Bucketlist bucketlist){
 		bucketlistService.modifyBucketlist(bucketlist);
-		return "redirect: bucketlist/list.do";
+		return "redirect: /bucketlist/list.do";
 	}
 	
 	@RequestMapping(value="remove.do", method=RequestMethod.GET)
 	public String removeBucketlist(int bucketlistId){
 		bucketlistService.removeBucketlist(bucketlistId);
-		return "redirect: bucketlist/list.do";
+		return "redirect: /bucketlist/list.do";
 	}
 	
 	@RequestMapping(value="detail.do", method=RequestMethod.POST)

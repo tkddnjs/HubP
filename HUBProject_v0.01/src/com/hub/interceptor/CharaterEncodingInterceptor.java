@@ -12,8 +12,6 @@ public class CharaterEncodingInterceptor implements HandlerInterceptor{
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
 		request.setCharacterEncoding("UTF-8");
-		response.setContentType("html/txt");
-		response.setCharacterEncoding("UTF-8");
 		return true;
 	}
 

@@ -22,7 +22,7 @@ public class ListController {
 
 	@RequestMapping(value = "list.do", method = RequestMethod.GET)
 	public ModelAndView listUser(int listOpt, String searchWord) {
-		ModelAndView mav = new ModelAndView("list.jsp");
+		ModelAndView mav = new ModelAndView("List/list");
 
 		switch (listOpt) {
 //		나를 도와줄 수 있는 사용자 목록

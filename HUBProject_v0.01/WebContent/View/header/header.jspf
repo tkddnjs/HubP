@@ -11,7 +11,9 @@
     
      <b>${userId } </b>님 반갑습니다.<br>
      
-    [<a href="user/logout.do">로그아웃</a>|<a href="user/modify.do">정보수정</a>|<a href="follow/list.do">친구목록</a>]
+    [<a href="${pageContext.request.contextPath}/user/logout.do">로그아웃</a>
+    |<a href="${pageContext.request.contextPath}/user/modify.do">정보수정</a>
+    |<a href="${pageContext.request.contextPath}/follow/list.do">친구목록</a>]
   
   </c:otherwise>
 
