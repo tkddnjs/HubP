@@ -61,7 +61,7 @@ h1 {
 </head>
 <body>
 	<div class="header" align="right">
-		<%@ include file="../header/header.jspf"%>
+		<%@ include file="/header/header.jspf"%>
 	</div>
 
 	<div>
