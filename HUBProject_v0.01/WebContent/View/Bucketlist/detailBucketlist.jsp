@@ -57,7 +57,7 @@ h1 {
 </head>
 <body>
 	<div class="header" align="right">
-		<%@ include file="/header/header.jspf"%>
+		<%@ include file="/View/header/header.jspf"%>
 	</div>
 
 	<h1 align="center">HUB : Have U get a BucketList?</h1>

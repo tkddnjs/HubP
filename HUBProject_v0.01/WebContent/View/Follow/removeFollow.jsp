@@ -59,7 +59,7 @@ h1 {
 </head>
 <body>
 	<div class="header" align="right">
-		<%@ include file="/header/header.jspf"%>
+		<%@ include file="/View/header/header.jspf"%>
 	</div>
 
 	<h3 align="center"> 친구를 삭제했습니다. </h3>

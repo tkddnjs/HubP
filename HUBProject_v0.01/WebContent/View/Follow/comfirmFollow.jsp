@@ -59,7 +59,7 @@ h1 {
 </head>
 <body>
 	<div class="header" align="right">
-		<%@ include file="/header/header.jspf"%>
+		<%@ include file="/View/header/header.jspf"%>
 	</div>
 
 	<h3 align="center"> 새로운 친구가 등록되었습니다. </h3>

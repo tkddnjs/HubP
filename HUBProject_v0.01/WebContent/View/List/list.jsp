@@ -87,10 +87,10 @@ h1 {
 </head>
 <body>
 	<div class="header" align="right">
-		<%@ include file="/header/header.jspf"%>
+		<%@ include file="/View/header/header.jspf"%>
 	</div>
 	<div>
-		<%@ include file="/menu.jsp"%>
+		<%@ include file="/View/menu.jsp"%>
 	</div>
 
 	<br>
