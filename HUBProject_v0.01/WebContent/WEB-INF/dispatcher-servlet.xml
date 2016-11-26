@@ -15,9 +15,16 @@
 		<property name="prefix" value="/View/"/>
 		<property name="suffix" value=".jsp"/>
 	</bean>
+	
+	<bean id="interceptor" class="com.hub.interceptor.CharaterEncodingInterceptor"/>
 
 	<mvc:interceptors>
-		<bean class="com.hub.interceptor.CharaterEncodingInterceptor"></bean>
+		<mvc:interceptor>
+			<mvc:mapping path="/"/>
+			<ref bean="interceptor"/>
+		</mvc:interceptor>
 	</mvc:interceptors>
+
+<!-- <bean class="com.hub.interceptor.CharaterEncodingInterceptor"></bean> -->
 
 </beans>
