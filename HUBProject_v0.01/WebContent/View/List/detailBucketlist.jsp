@@ -66,14 +66,6 @@ h1 {
 			<td width="100" align="center">${bucketlist.title }</td>
 		</tr>
 		<tr>
-			<th width="50" align="center">목표기간</th>
-			<td width="100" align="center">${bucketlist.goal }</td>
-		</tr>
-		<tr>
-			<th width="50" align="center">중요도</th>
-			<td width="100" align="center">${bucketlist.star }</td>
-		</tr>
-		<tr>
 			<th width="50" align="center">연결고리</th>
 			<td width="100" align="center">${bucketlist.connChains }</td>
 		</tr>
@@ -82,19 +74,17 @@ h1 {
 			<td width="100" align="center">${bucketlist.sos }</td>
 		</tr>
 		<tr>
-			<th width="50" align="center">메모</th>
-			<td width="100" align="center">${bucketlist.memo }</td>
+			<th width="50" align="center">사용자ID</th>
+			<td width="100" align="center">${bucketlist.userId }</td>
 		</tr>
 	</table>
 
-	<p>
-		<a class="btn btn-xs btn-default btn-block"
-		 href="${pageContext.request.contextPath}/bucketlist/modify.do?bucketlistId=${bucketlist.bucketlistId}">수정</a>
-		<a class="btn btn-xs btn-default btn-block"
-		 href="${pageContext.request.contextPath}/bucketlist/remove.do?bucketlistId=${bucketlist.bucketlistId}">삭제</a>
-		<a class="btn btn-xs btn-default btn-block"
-		 href="${pageContext.request.contextPath}/bucketlist/list.do">돌아가기</a>
-	</p>
-	
+	<form action="list/list.do" method="post">
+		<div class="input-append pull-right">
+			<button class="btn btn-xs btn-default btn-block" type="submit">돌아가기</button>
+		</div>
+		<input type="hidden" name="listOpt" value="${listOpt }">
+		<input type="hidden" name="connChain" value="${connChain }">
+	</form>
 </body>
 </html>
