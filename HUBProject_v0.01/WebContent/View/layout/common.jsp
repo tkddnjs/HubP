@@ -11,6 +11,7 @@
 <link href="${pageContext.request.contextPath}/resources/css/bootstrap-responsive.css" rel="stylsheet">
 <link href="${pageContext.request.contextPath}/resources/css/bootstrap-responsive.min.css" rel="stylsheet">
 <link href="${pageContext.request.contextPath}/resources/css/bucketlist.css" rel="stylesheet">
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
 <script src="${pageContext.request.contextPath}/resources/js/jquery.min.js" type="text/javascript"></script>
 <script src="${pageContext.request.contextPath}/resources/js/bootstrap.min.js" type="text/javascript"></script>

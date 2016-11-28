@@ -7,7 +7,7 @@
 <head>
 
 <title>도움리스트 목록</title>
-<%@ include file="/View/layout/common.jsp" %>
+<%@ include file="/View/layout/common.jsp"%>
 
 <script type="text/javascript">
 	$(document).ready(function() {
@@ -23,14 +23,15 @@
 				success : function(result) {
 					result = result.replace('[', '');
 					result = result.replace(']', '');
-					result = result.replace(' ','');
+					result = result.replace(' ', '');
 					availableTags = result.split(',');
 					$("#tags").html("");
 					list(availableTags);
 				}
 			});
-		};
-		
+		}
+		;
+
 		$("#listOpt").change(function() {
 			var listOpt = $(this).val();
 			$.ajax({
@@ -42,7 +43,7 @@
 				success : function(result) {
 					result = result.replace('[', '');
 					result = result.replace(']', '');
-					result = result.replace(' ','');
+					result = result.replace(' ', '');
 					availableTags = result.split(',');
 					$("#tags").html("");
 					list(availableTags);
@@ -50,11 +51,12 @@
 			});
 		});
 	});
-	
+
 	function list(array) {
 		for (var i = 0; i < array.length; i++) {
 			$("#tags").append(
-					"<option value='" + array[i] + "'>" + array[i] + "</option>");
+					"<option value='" + array[i] + "'>" + array[i]
+							+ "</option>");
 		}
 	};
 </script>
@@ -85,9 +87,9 @@ h1 {
 	</div>
 
 	<br>
-		<div class="input-append pull-right">
-		<form action="list/list.do" method="post"
-			class="form-inline" id="form">
+	<div class="input-append pull-right">
+		<form action="list/list.do" method="post" class="form-inline"
+			id="form">
 			<table>
 				<tr>
 					<td><select class="ring" name="listOpt" id="listOpt">
@@ -105,7 +107,8 @@ h1 {
 					</td>
 				</tr>
 			</table>
-		</form>	</div>
+		</form>
+	</div>
 
 	<br>
 	<table class="table table-hover table-condensed">
@@ -145,8 +148,7 @@ h1 {
 								</form>
 							</td>
 							<td>
-								<form action="bucketlist/detail.do"
-									method="post">
+								<form action="bucketlist/detail.do" method="post">
 									<button class="btn btn-xs btn-default btn-block" type="submit"
 										name="bucketlistId" value="${bucketlist.bucketlistId }">${bucketlist.title }</button>
 									<input type="hidden" name="listOpt" value="${listOpt }">
@@ -178,7 +180,8 @@ h1 {
 						<tr>
 							<td>${status.count }</td>
 							<td>${cooper.coName }</td>
-							<td><a href="${pageContext.request.contextPath}/resources/img/${cooper.Banner }"></a></td>
+							<td><a
+								href="${pageContext.request.contextPath}/resources/img/${cooper.Banner }"></a></td>
 						</tr>
 					</c:forEach>
 				</c:otherwise>
