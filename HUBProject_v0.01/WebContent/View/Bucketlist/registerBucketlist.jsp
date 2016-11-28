@@ -121,17 +121,13 @@ dl dd p.error {
 	</div>
 
 	<script>
-		$(document)
-				.ready(
-						function a() {
-							$("button")
-									.click(
-											function() {
-												$(
-														'<input type="text" size="10" name="connChain" class="validate"><br>')
-														.appendTo("#connForm");
-											});
-						});
+		$(document).ready(function a() {
+			$("button")
+			.click(function() {
+				$('<input type="text" size="10" name="connChain" class="validate"><br>')
+				.appendTo("#connForm");
+			});
+		});
 
 		$("form").submit(function() {
 			//에러 초기화 추가로 붙는 내용 삭제
