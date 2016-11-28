@@ -13,7 +13,7 @@
      
     [<a href="${pageContext.request.contextPath}/user/logout.do">로그아웃</a>
     |<a href="${pageContext.request.contextPath}/user/modify.do">정보수정</a>
-    |<a href="${pageContext.request.contextPath}/follow/list.do">친구목록</a>]
+    |<td><form action="follow/listAll.do" method="post"><a href="${pageContext.request.contextPath}/follow/listAll.do">친구목록</a></form></td>]
   
   </c:otherwise>
 

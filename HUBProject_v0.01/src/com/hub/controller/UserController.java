@@ -9,10 +9,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.hub.domain.User;
 import com.hub.service.pacade.UserService;
+
+
 
 @Controller
 @RequestMapping("user")
@@ -28,13 +31,14 @@ public class UserController {
 	
 	// parameter 추가
 	@RequestMapping(value="register.do", method=RequestMethod.POST)
-	public String registerUser(User user, String[] connChains){
+	public String registerUser(User user, @RequestParam("connChains") String[] connChains){
 		List<String> connChainList = new ArrayList<>();
 		for(String connChain : connChains){
 			if(!connChain.equals("")){
 				connChainList.add(connChain);
 			}
 		}
+		System.out.println(user.getUserId());
 		userService.registerUser(user);
 		return "HUBMain";
 	}

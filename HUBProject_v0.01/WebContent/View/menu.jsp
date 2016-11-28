@@ -28,14 +28,14 @@ h1 {
 			<div class="col-md-12">
 				<br>
 				<ul class="tab">
-					<li><a href="bucketlist/list.do" >버킷리스트</a></li>
+					<li><a href="${pageContext.request.contextPath}/bucketlist/list.do" >버킷리스트</a></li>
 					<!-- /HUBProject_v0.01/listBucketlist.do -->
 					
-					<li><a href="list/list.do">도움리스트</a></li>
+					<li><a href="${pageContext.request.contextPath}/list/list.do">도움리스트</a></li>
 					
-					<li><a href="cooper/list.do" >업체</a></li>
+					<li><a href="${pageContext.request.contextPath}/cooper/list.do" >업체</a></li>
 						
-					<li><a href="group/list.do" >모임방</a></li>
+					<li><a href="${pageContext.request.contextPath}/group/list.do" >모임방</a></li>
 										
 					<form class="navbar-search pull-right">
 						<input type="text" class="search-query" placeholder="검색">

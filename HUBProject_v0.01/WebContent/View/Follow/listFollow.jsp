@@ -85,23 +85,30 @@ h1 {
 								</c:otherwise>
 							</c:choose>
 						</td>
-						<td>
-							<form action="follow/confirm.do" method="post">
-								<button class="btn btn-xs btn-default btn-block" type="submit">수락</button>
-								<input type="hidden" name="followId" value="${follow.followId }">
-								<input type="hidden" name="searchOpt" value="${searchOpt }">
-							</form>
-						</td>
-						<td>
-							<form action="follow/remove.do" method="post">
-								<button class="btn btn-xs btn-default btn-block" type="submit">거절</button>
-								<input type="hidden" name="followId" value="${follow.followId }">
-								<input type="hidden" name="searchOpt" value="${searchOpt }">
-							</form>
-						</td>
+						<c:choose>
+							<c:when test="${follow.confirm eq N }">
+							<td>
+								<form action="follow/confirm.do" method="post">
+									<button class="btn btn-xs btn-default btn-block" type="submit">수락</button>
+									<input type="hidden" name="followId" value="${follow.followId }">
+									<input type="hidden" name="searchOpt" value="${searchOpt }">
+								</form>
+							</td>
+							<td>
+								<form action="follow/remove.do" method="post">
+									<button class="btn btn-xs btn-default btn-block" type="submit">거절</button>
+									<input type="hidden" name="followId" value="${follow.followId }">
+									<input type="hidden" name="searchOpt" value="${searchOpt }">
+								</form>
+							</td>
+							</c:when>
+						</c:choose>
+						
+						
 						</tr>
 					
 					</c:when>
+			
 					<c:otherwise>
 						<tr>
 						<td>${status.count }</td>
@@ -123,8 +130,28 @@ h1 {
 								서로 도움을 주는 관계
 								</c:otherwise>
 							</c:choose></td>
+							
+							<%-- <c:choose>
+							<c:when test="${follow.confirm eq N }"> --%>
+							<td>
+								<form action="follow/confirm.do" method="post">
+									<button class="btn btn-xs btn-default btn-block" type="submit">수락</button>
+									<input type="hidden" name="followId" value="${follow.followId }">
+									<input type="hidden" name="searchOpt" value="${searchOpt }">
+								</form>
+							</td>
+							<td>
+								<form action="follow/remove.do" method="post">
+									<button class="btn btn-xs btn-default btn-block" type="submit">거절</button>
+									<input type="hidden" name="followId" value="${follow.followId }">
+									<input type="hidden" name="searchOpt" value="${searchOpt }">
+								</form>
+							</td>
+							<%-- </c:when>
+						</c:choose> --%>
 						</tr>
 					</c:otherwise>
+					 
 			
 				</c:choose>
 			</c:forEach>

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.hub.domain.Bucketlist;
@@ -27,8 +28,10 @@ public class BucketlistController {
 	}
 	
 	@RequestMapping(value="register.do", method=RequestMethod.GET)
-	public String registerBucketlist(Bucketlist bucketlist){
+	public String registerBucketlist(Bucketlist bucketlist, @RequestParam("connChains") String[] connChains){
 		bucketlistService.registerBucketlist(bucketlist);
+		System.out.println(bucketlist);
+		System.out.println(bucketlist.getTitle());
 		return "redirect: /bucketlist/list.do";
 	}
 	

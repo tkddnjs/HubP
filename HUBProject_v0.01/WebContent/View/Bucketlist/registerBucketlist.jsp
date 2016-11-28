@@ -95,7 +95,7 @@ dl dd p.error {
 					연결고리 (버킷과 관련된 분야 - 도움을 받을 수 있습니다.)<span> (*) 1개 이상 입력</span>
 				</dt>
 				<dd id="connForm">
-					<input type="text" size="10" name="connchain" class="validate">
+					<input type="text" size="10" name="connChain" class="validate">
 					<button type="button">+</button>
 					<br>
 				</dd>
@@ -128,7 +128,7 @@ dl dd p.error {
 									.click(
 											function() {
 												$(
-														'<input type="text" size="10" name="connchain" class="validate"><br>')
+														'<input type="text" size="10" name="connChain" class="validate"><br>')
 														.appendTo("#connForm");
 											});
 						});

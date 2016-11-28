@@ -42,7 +42,8 @@ public class FollowController {
 		return "redirect: /follow/listAll.do";
 	}
 	
-	@RequestMapping(value="listAll.do", method=RequestMethod.POST)
+	
+	@RequestMapping(value="listAll.do", method=RequestMethod.GET)
 	public ModelAndView listAllFollows(HttpSession session){
 		ModelAndView mav = new ModelAndView("Follow/listFollow");
 		String userId = (String)session.getAttribute("userId");
