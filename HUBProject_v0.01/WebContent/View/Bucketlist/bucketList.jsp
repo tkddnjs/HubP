@@ -58,7 +58,7 @@ h1 {
 .starRating span{
     display:inline-block;
     height:14px;
-    background:transparent url(../img/icoFiveStar.gif) no-repeat;
+    background:transparent url(${pageContext.request.contextPath}/resources/img/icoFiveStar.gif) no-repeat;
     overflow:hidden;
 }
 .starRating{
