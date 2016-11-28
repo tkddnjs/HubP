@@ -15,29 +15,28 @@
 	</sql>
 
 	<insert id="insertFollow" parameterType="Follow">
-		INSERT INTO follow_tb(userId, followId, relation, confirm) VALUES (#{userId}, #{followId}, #{relation}, #{confirm,typeHandler=BooleanToYnHandler})
+		INSERT INTO follow_tb(userId, followId, relation, confirm) 
+		VALUES (#{userId}, #{followId}, #{relation}, #{confirm,typeHandler=BooleanToYnHandler})
 	</insert>
 
 	<delete id="deleteFollow" parameterType="Follow">
 		DELETE follow_tb
 		WHERE
 		(userId=#{userId} AND followId=#{followId})
-		OR (userId=#{followId} AND
-		followId=#{userId})
+		OR (userId=#{followId} AND followId=#{userId})
 	</delete>
 
 	<update id="updateFollowConfirm" parameterType="Follow">
 		UPDATE follow_tb
 		SET confirm='Y'
-		WHERE (userId=#{userId} and followId=#{followId})
-		OR (userId=#{followId} and followId=#{userId})
+		WHERE userId=#{userId} and followId=#{followId}
 	</update>
 
 
 	<select id="selectAll" parameterType="Follow" resultMap="followMap">
-		SELECT followId as userId, userId as followId, MOD(3-relation, 3) as relation, confirm
+		SELECT userId, followId, MOD(3-relation, 3) as relation, confirm
 		FROM follow_tb
-		WHERE followId=#{userId} AND confirm='Y'
+		WHERE userId=#{userId} AND confirm='Y'
 	</select>
 	
 	<select id="selectRequestedFollows" resultMap="followMap">
