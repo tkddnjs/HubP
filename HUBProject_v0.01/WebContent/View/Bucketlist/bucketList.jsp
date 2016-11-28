@@ -52,6 +52,28 @@ h1 {
 .btnPlay {
 	margin-top: 40%
 }
+
+/* Star Rating */
+.starRating,
+.starRating span{
+    display:inline-block;
+    height:14px;
+    background:transparent url(${pageContext.request.contextPath}/resources/img/icoFiveStar.gif) no-repeat;
+    overflow:hidden;
+}
+.starRating{
+    width:79px;
+    vertical-align:middle;
+}
+.starRating span{
+    font-size:0;
+    line-height:0;
+    vertical-align:top;
+    text-indent:-100px;
+    *text-indent:0;
+    background-position:0 -14px;
+}
+
 </style>
 </head>
 <body>
@@ -65,7 +87,8 @@ h1 {
 
 	<div class="input-append pull-right">
 		<a class="btn btn-xs btn-info btnPlay"
-			href="/View/Bucketlist/registerBucketlist.jsp"><h5>버킷추가</h5></a>
+			href="${pageContext.request.contextPath}/bucketlist/register.do">
+			<h5>버킷추가</h5></a>
 	</div>
 
 	<table class="table table-hover table-condensed">
@@ -86,8 +109,7 @@ h1 {
 				<tr>
 					<c:choose>
 						<c:when test="${bucketlist.lock }">
-							<td align="center"><input type="checkbox" name="lock"
-								checked /></td>
+							<td align="center"><input type="checkbox" name="lock" checked /></td>
 						</c:when>
 						<c:otherwise>
 							<td align="center"><input type="checkbox" name="lock" /></td>
@@ -97,11 +119,12 @@ h1 {
 					<td class="ranking" align="center" style="font-size: 14pt;">${status.count  }</td>
 
 					<td width="400" align="center"><a
-						href="bucketlist/modify.do?id=${bucketlist.bucketlistId}"> <b>${bucketlist.title  }</b></a>
+						href="${pageContext.request.contextPath}/bucketlist/detail.do?bucketlistId=${bucketlist.bucketlistId}">
+						<b>${bucketlist.title  }</b></a>
 					</td>
 
 					<td><p class="goal">${bucketlist.goal  }</p></td>
-					<td>${bucketlist.star  }</td>
+					<td><p><span class="starRating"><span style="width:${bucketlist.stars }%">${bucketlist.star  }</span></span></p></td>
 					<td>${bucketlist.connChains  }</td>
 				</tr>
 			</c:forEach>

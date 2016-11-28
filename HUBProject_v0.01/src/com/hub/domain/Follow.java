@@ -38,6 +38,8 @@ public class Follow {
 		return relation;
 	}
 	
+	
+
 	public void setRelation(int relation) {
 		this.relation = relation;
 	}
@@ -49,4 +51,5 @@ public class Follow {
 	public void setConfirm(boolean confirm){
 		this.confirm = confirm;
 	}
+	
 }

@@ -59,73 +59,97 @@ h1 {
 			</tr>
 		</thead>
 
-		<tbody>
+		<tbody style="font-size: 14pt;">
 			<c:forEach items="${follows }" var="follow" varStatus="status">
 				<c:choose>
 					<c:when test="${isRequest }">
 						<tr>
-						<td>${status.count }</td>
-						<td>
-							<form action="user/detail.do" method="post">
-								<button class="btn btn-xs btn-default btn-block" type="submit"
-									name="userId" value="${follow.followId }">${follow.followId }</button>
-								<input type="hidden" name="listOpt" value="${follow.relation }">
-							</form>
-						</td>
-						<td>
-							<c:choose>
-								<c:when test="${follow.relation eq 1}">
-								내가 도움을 주는 관계							
-								</c:when>
-								<c:when test="${follow.relation eq 2}">
-								내가 도움을 받는 관계
-								</c:when>
-								<c:otherwise>
-								서로 도움을 주는 관계
-								</c:otherwise>
-							</c:choose>
-						</td>
-						<td>
-							<form action="follow/confirm.do" method="post">
-								<button class="btn btn-xs btn-default btn-block" type="submit">수락</button>
-								<input type="hidden" name="followId" value="${follow.followId }">
-								<input type="hidden" name="searchOpt" value="${searchOpt }">
-							</form>
-						</td>
-						<td>
-							<form action="follow/remove.do" method="post">
-								<button class="btn btn-xs btn-default btn-block" type="submit">거절</button>
-								<input type="hidden" name="followId" value="${follow.followId }">
-								<input type="hidden" name="searchOpt" value="${searchOpt }">
-							</form>
-						</td>
+							<td>${status.count }</td>
+							<td>
+								<form action="user/detail.do" method="post">
+									<button class="btn btn-xs btn-default btn-block" type="submit"
+										name="userId" value="${follow.followId }">${follow.followId }</button>
+									<input type="hidden" name="listOpt" value="${follow.relation }">
+								</form>
+							</td>
+							<td>
+								<c:choose>
+									<c:when test="${follow.relation eq 1}">
+									내가 도움을 주는 관계							
+									</c:when>
+									<c:when test="${follow.relation eq 2}">
+									내가 도움을 받는 관계
+									</c:when>
+									<c:otherwise>
+									서로 도움을 주는 관계
+									</c:otherwise>
+								</c:choose>
+							</td>
 						</tr>
-					
 					</c:when>
+			
 					<c:otherwise>
 						<tr>
-						<td>${status.count }</td>
-						<td>
-							<form action="user/detail.do" method="post">
-								<button class="btn btn-xs btn-default btn-block" type="submit"
-									name="userId" value="${follow.followId }">${follow.followId }</button>
-								<input type="hidden" name="listOpt" value="${follow.relation }">
-							</form>
-						</td>
-						<td><c:choose>
-								<c:when test="${follow.relation eq 1}">
-								내가 도움을 주는 관계							
-								</c:when>
-								<c:when test="${follow.relation eq 2}">
-								내가 도움을 받는 관계
-								</c:when>
-								<c:otherwise>
-								서로 도움을 주는 관계
-								</c:otherwise>
-							</c:choose></td>
-						</tr>
+							<td>${status.count }</td>
+							<td>
+								<form action="user/detail.do" method="post">
+									<a href="${pageContext.request.contextPath}/user/detail.do"><b>${follow.followId }</b></a>
+									<input type="hidden" name="listOpt" value="${follow.relation }">
+								</form>
+							</td>
+							<td>
+								<c:choose>
+									<c:when test="${follow.relation eq 1}">
+									내가 도움을 주는 관계							
+									</c:when>
+									<c:when test="${follow.relation eq 2}">
+									내가 도움을 받는 관계
+									</c:when>
+									<c:otherwise>
+									서로 도움을 주는 관계
+									</c:otherwise>
+								</c:choose>
+							</td>
+							
+								<c:choose>
+									<c:when test="${follow.confirm eq false }">
+										<td>
+											<form action="${pageContext.request.contextPath}/follow/confirm.do" method="post">
+												<button class="btn btn-xs btn-warning" type="submit">수락</button>
+												<input type="hidden" name="followId" value="${follow.followId }">
+												<input type="hidden" name="userId" value="${follow.userId }">
+											</form>
+										</td>
+										<td>
+											<form action="${pageContext.request.contextPath}/follow/remove.do" method="post">
+												<button class="btn btn-xs btn-danger" type="submit">거절</button>
+												<input type="hidden" name="followId" value="${follow.followId }">
+												<input type="hidden" name="userId" value="${follow.userId }">
+											</form>
+										</td>
+									</c:when>
+									<c:when test="${follow.confirm eq true }">
+										<td>
+											<form action="${pageContext.request.contextPath}/follow/remove.do" method="post">
+												<button class="btn btn-xs btn-danger" type="submit">삭제</button>
+												<input type="hidden" name="followId" value="${follow.followId }">
+												<input type="hidden" name="userId" value="${follow.userId }">
+											</form>
+										</td>
+									</c:when>
+								
+									<c:otherwise>
+									<td>
+										<%-- <form action="follow/remove.do" method="post">
+											<button class="btn btn-xs btn-default btn-block" type="submit">삭제</button>
+											<input type="hidden" name="followId" value="${follow.followId }">
+											<input type="hidden" name="searchOpt" value="${searchOpt }">
+										</form> --%>
+									</td>
+									</c:otherwise>
+								</c:choose>
+							</tr>
 					</c:otherwise>
-			
 				</c:choose>
 			</c:forEach>
 		</tbody>

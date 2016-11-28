@@ -67,7 +67,7 @@ dl dd p.error {
 
 	<div id="container">
 		<h1>회원가입</h1>
-		<form action="user/register.do" method="post">
+		<form action="${pageContext.request.contextPath}/user/register.do" method="post">
 			<dl>
 				<dt>
 					ID<span> (*) </span>
@@ -104,7 +104,7 @@ dl dd p.error {
 					연결고리(직업, 취미 등 도움을 줄 수 있는 분야)<span> (*) 1개 이상 입력</span>
 				</dt>
 				<dd id="connForm">
-					<input type="text" size="10" name="connchains" class="validate">
+					<input type="text" size="10" name="connChains" class="validate">
 					<button type="button">+</button><br>
 				</dd>
 				
@@ -129,7 +129,7 @@ dl dd p.error {
 	<script>
 	$(document).ready(function a(){
 		$("button").click(function () {
-			$('<input type="text" size="10" name="connchains" class="validate"><br>').appendTo("#connForm");
+			$('<input type="text" size="10" name="connChains" class="validate"><br>').appendTo("#connForm");
 		});
 	});
 	

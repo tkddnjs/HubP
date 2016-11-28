@@ -31,8 +31,7 @@
 
 	<update id="updateBucketlist" parameterType="Bucketlist">
 		UPDATE bucketlist_tb
-		SET bucketName = #{title}, goalDay = #{goal}, starGrade = #{star}, 
-				memo = #{memo}, sos = #{sos},  userId = #{userId} 
+		SET bucketName = #{title}, goalDay = #{goal}, starGrade = #{star}, memo = #{memo}, sos = #{sos},  userId = #{userId} 
 		WHERE bucketId=#{bucketlistId}
 	</update>
 	<!-- locker = #{lock,typeHandler=BooleanToYnHandler}, -->
