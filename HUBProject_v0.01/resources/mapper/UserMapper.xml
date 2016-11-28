@@ -52,11 +52,11 @@
 											</foreach>)
 	</select>  -->
 		
-	<select id="selectUsersByConnChain" resultMap="userMap">
+	<select id="selectUsersByConnChain" parameterType="String" resultMap="userMap">
 		<include refid="selectUser" />
 		WHERE UserId IN (SELECT UserId
 						FROM userconn_tb
-						WHERE connChain IN #{connChain}
+						WHERE connChain IN #{connChain})
 	</select>
 
 	<select id="selectConnChainsByUserId" parameterType="String" resultType="String">

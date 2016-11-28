@@ -134,7 +134,7 @@ dl dd p.error {
 				type : 'POST',
 				url : '${pageContext.request.contextPath}/list/listAutoComplete.do',
 				data : {
-					listOpt : 4
+					listOpt : 2
 				},
 				success : function(result) {
 					result = result.replace(/ /gi, "");

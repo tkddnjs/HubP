@@ -9,58 +9,6 @@
 <title>도움리스트 목록</title>
 <%@ include file="/View/layout/common.jsp"%>
 
-<script type="text/javascript">
-	$(document).ready(function() {
-		var availableTags;
-		if ($("#listOpt").val() != null) {
-			var listOpt = $("#listOpt").val();
-			$.ajax({
-				type : 'POST',
-				url : 'list/listAutoComplete.do',
-				data : {
-					listOpt : listOpt
-				},
-				success : function(result) {
-					result = result.replace('[', '');
-					result = result.replace(']', '');
-					result = result.replace(' ', '');
-					availableTags = result.split(',');
-					$("#tags").html("");
-					list(availableTags);
-				}
-			});
-		}
-		;
-
-		$("#listOpt").change(function() {
-			var listOpt = $(this).val();
-			$.ajax({
-				type : 'POST',
-				url : 'list/listAutoComplete.do',
-				data : {
-					listOpt : listOpt
-				},
-				success : function(result) {
-					result = result.replace('[', '');
-					result = result.replace(']', '');
-					result = result.replace(' ', '');
-					availableTags = result.split(',');
-					$("#tags").html("");
-					list(availableTags);
-				}
-			});
-		});
-	});
-
-	function list(array) {
-		for (var i = 0; i < array.length; i++) {
-			$("#tags").append(
-					"<option value='" + array[i] + "'>" + array[i]
-							+ "</option>");
-		}
-	};
-</script>
-
 <style type="text/css">
 body {
 	padding: 5px;
@@ -88,7 +36,7 @@ h1 {
 
 	<br>
 	<div class="input-append pull-right">
-		<form action="list/list.do" method="post" class="form-inline"
+		<form action="${pageContext.request.contextPath}/list/list.do" method="get" class="form-inline"
 			id="form">
 			<table>
 				<tr>
@@ -98,9 +46,9 @@ h1 {
 							<option value="3">서로 도움을 줄 수 있는 사용자</option>
 							<option value="4">업체</option>
 					</select></td>
-					<td width='50'><select class="ring" id="tags" name="connChain">
-
-					</select></td>
+					<td id="connForm" width='50'>
+						<input type="text" id="tags" name="searchWord" class="ring"/>
+					</td>
 					<td></td>
 					<td>
 						<button class='btn btn-xs btn-default btn-block' type='submit'>검색</button>
@@ -124,10 +72,6 @@ h1 {
 						<th width="400" align="center">사용자ID</th>
 						<th width="600" align="center">연결고리목록</th>
 					</c:when>
-					<c:when test="${listOpt eq 4}">
-						<th width="400" align="center">업체이름</th>
-						<th width="600" align="center">사이트</th>
-					</c:when>
 				</c:choose>
 			</tr>
 		</thead>
@@ -140,18 +84,16 @@ h1 {
 						<tr>
 							<td>${status.count }</td>
 							<td>
-								<form action="user/detail.do" method="post">
+								<form action="${pageContext.request.contextPath}/user/detail.do" method="post">
 									<button class="btn btn-xs btn-default btn-block" type="submit"
 										name="userId" value="${bucketlist.userId }">${bucketlist.userId }</button>
-									<input type="hidden" name="listOpt" value="${listOpt }">
 									<input type="hidden" name="connChain" value="${connChain }">
 								</form>
 							</td>
 							<td>
-								<form action="bucketlist/detail.do" method="post">
+								<form action="${pageContext.request.contextPath}/bucketlist/detail.do" method="get">
 									<button class="btn btn-xs btn-default btn-block" type="submit"
 										name="bucketlistId" value="${bucketlist.bucketlistId }">${bucketlist.title }</button>
-									<input type="hidden" name="listOpt" value="${listOpt }">
 									<input type="hidden" name="connChain" value="${connChain }">
 								</form>
 							</td>
@@ -164,10 +106,9 @@ h1 {
 						<tr>
 							<td>${status.count }</td>
 							<td>
-								<form action="user/detail.do" method="post">
+								<form action="${pageContext.request.contextPath}/user/detail.do" method="post">
 									<button class="btn btn-xs btn-default btn-block" type="submit"
 										name="userId" value="${user.userId }">${user.userId }</button>
-									<input type="hidden" name="listOpt" value="${listOpt }">
 									<input type="hidden" name="connChain" value="${connChain }">
 								</form>
 							</td>
@@ -175,18 +116,53 @@ h1 {
 						</tr>
 					</c:forEach>
 				</c:when>
-				<c:otherwise>
-					<c:forEach items="${coopers }" var="cooper" varStatus="status">
-						<tr>
-							<td>${status.count }</td>
-							<td>${cooper.coName }</td>
-							<td><a
-								href="${pageContext.request.contextPath}/resources/img/${cooper.Banner }"></a></td>
-						</tr>
-					</c:forEach>
-				</c:otherwise>
 			</c:choose>
 		</tbody>
 	</table>
+	
+	<script type="text/javascript">
+		var availableTags = [];
+	
+		$(document).ready(function() {
+			if ($("#listOpt").val() != null) {
+				var listOpt = $("#listOpt").val();
+				autoComplete(listOpt);
+			};
+
+			$("#listOpt").change(function() {
+				var listOpt = $(this).val();
+				autoComplete(listOpt);
+			});
+		
+			function list(array) {
+				availableTags.length=0;
+				for (var i = 0; i < array.length; i++) {
+					availableTags.push(array[i]);
+				}
+			};
+		
+			function autoComplete(listOpt){
+				$.ajax({
+					type : 'POST',
+					url : '${pageContext.request.contextPath}/list/listAutoComplete.do',
+					data : {
+						listOpt : listOpt
+					},
+					success : function(result) {
+						result = result.replace(/ /gi, "");
+						result = result.replace('[', '');
+						result = result.replace(']', '');
+						result = result.split(',');
+						list(result);
+					}
+				});
+				$("#tags").autocomplete({
+					source: availableTags
+				});
+			}
+		});
+	</script>
 </body>
+
+
 </html>
