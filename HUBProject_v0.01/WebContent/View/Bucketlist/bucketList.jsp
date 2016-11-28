@@ -87,7 +87,7 @@ h1 {
 
 	<div class="input-append pull-right">
 		<a class="btn btn-xs btn-info btnPlay"
-			href="${pageContext.request.contextPath}/View/Bucketlist/registerBucketlist.jsp"><h5>버킷추가</h5></a>
+			href="${pageContext.request.contextPath}/bucketlist/register.do"><h5>버킷추가</h5></a>
 	</div>
 
 	<table class="table table-hover table-condensed">

@@ -20,14 +20,14 @@ public class BucketlistController {
 	@Autowired
 	private BucketlistService bucketlistService;
 	
-	@RequestMapping(value="register.do", method=RequestMethod.POST)
+	@RequestMapping(value="register.do", method=RequestMethod.GET)
 	public ModelAndView registerBucketlist(HttpSession session){
 		ModelAndView mav = new ModelAndView("Bucketlist/registerBucketlist");
 		mav.addObject("userId", session.getAttribute("userId"));
 		return mav;
 	}
 	
-	@RequestMapping(value="register.do", method=RequestMethod.GET)
+	@RequestMapping(value="register.do", method=RequestMethod.POST)
 	public String registerBucketlist(Bucketlist bucketlist, @RequestParam("connChains") String[] connChains){
 		bucketlistService.registerBucketlist(bucketlist);
 		System.out.println(bucketlist);
@@ -54,10 +54,21 @@ public class BucketlistController {
 		return "redirect: /bucketlist/list.do";
 	}
 	
-	@RequestMapping(value="detail.do", method=RequestMethod.POST)
-	public ModelAndView detailBucketlist(int bucketlistId){
-		ModelAndView mav = new ModelAndView("Bucketlist/detailBucketlist");
-		mav.addObject("bucketlist", bucketlistService.findBucketlistByBucketlistId(bucketlistId));
+	// 설계문서에 변수 추가 => HttpSession session, sequenceDiagram 수정
+	@RequestMapping(value="detail.do", method=RequestMethod.GET)
+	public ModelAndView detailBucketlist(HttpSession session, int bucketlistId){
+		ModelAndView mav = null;
+		
+		Bucketlist bucketlist = bucketlistService.findBucketlistByBucketlistId(bucketlistId);
+		String userId = (String) session.getAttribute("userId");
+		
+		if(bucketlist.getUserId().equals(userId)){
+			mav = new ModelAndView("Bucketlist/detailBucketlist");
+		} else {
+			mav = new ModelAndView("List/detailBucketlist");
+		}
+
+		mav.addObject("bucketlist", bucketlist);
 		return mav;
 	}
 	
