@@ -20,7 +20,7 @@ h1 {
 </style>
 </head>
 <body>
-	<h1 align="center">HUB : Have U get a BucketList??</h1>
+	<a href="${pageContext.request.contextPath}/bucketlist/list.do"><h1 align="center">HUB : Have U get a BucketList??</h1></a>
 
 	<div class="table table-hover table-condensed">
 	<thead style="background: #60d7a9; color:white;">	
