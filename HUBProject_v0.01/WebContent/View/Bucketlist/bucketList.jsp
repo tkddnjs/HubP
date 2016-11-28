@@ -87,7 +87,8 @@ h1 {
 
 	<div class="input-append pull-right">
 		<a class="btn btn-xs btn-info btnPlay"
-			href="${pageContext.request.contextPath}/bucketlist/register.do"><h5>버킷추가</h5></a>
+			href="${pageContext.request.contextPath}/bucketlist/register.do">
+			<h5>버킷추가</h5></a>
 	</div>
 
 	<table class="table table-hover table-condensed">
@@ -119,7 +120,8 @@ h1 {
 					<td class="ranking" align="center" style="font-size: 14pt;">${status.count  }</td>
 
 					<td width="400" align="center"><a
-						href="bucketlist/modify.do?id=${bucketlist.bucketlistId}"> <b>${bucketlist.title  }</b></a>
+						href="${pageContext.request.contextPath}/bucketlist/detail.do?bucketlistId=${bucketlist.bucketlistId}">
+						<b>${bucketlist.title  }</b></a>
 					</td>
 
 					<td><p class="goal">${bucketlist.goal  }</p></td>
