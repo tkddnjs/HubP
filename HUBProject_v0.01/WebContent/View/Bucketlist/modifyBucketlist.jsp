@@ -69,7 +69,7 @@ dl dd p.error {
 
 	<div id="container">
 		<h1>버킷수정</h1>
-		<form action="bucketlist/modify.do" method="post">
+		<form action="${pageContext.request.contextPath}/bucketlist/modify.do" method="post">
 			<dl>
 				<dt>
 					제목<span> (*) </span>
@@ -96,11 +96,20 @@ dl dd p.error {
 				<dt>
 					연결고리 (버킷과 관련된 분야 - 도움을 받을 수 있습니다.)<span> (*) 1개 이상 입력</span>
 				</dt>
+				
+				<c:forEach items="${bucketlist.connChains }" var="connChain" varStatus="status">
+					<dd id="conn${status.count }">
+						${connChain }
+						<button type="button" id="removeButton">-</button>
+					</dd>	
+				</c:forEach>
+				
 				<dd id="connForm">
-					<input type="text" size="10" name="connchain" class="validate"
-						value="">
-					<button type="button">+</button>
-					<br>
+					<div id="iconn">
+						<input style="vertical-align: top;" type="text" size="10"
+							id="connChains" name="connChains" class="validate">
+						<button type="button" id="addButton">+</button>
+					</div>
 				</dd>
 
 				<dt>
@@ -127,11 +136,62 @@ dl dd p.error {
 	</div>
 
 	<script>
+		var availableTags = [];
+		var counter = 0;
+		
 		$(document).ready(function a() {
-			$("button").click(function() {
-				$('<input type="text" size="10" name="connchain" class="validate"><br>')
-				.appendTo("#connForm");
+			$.ajax({
+				type : 'POST',
+				url : '${pageContext.request.contextPath}/list/listAutoComplete.do',
+				data : {
+					listOpt : 4
+				},
+				success : function(result) {
+					result = result.replace(/ /gi, "");
+					result = result.replace("[", "");
+					result = result.replace("]", "");
+					result = result.split(',');
+					list(result);
+				}
 			});
+
+			$("#connChains").autocomplete({
+				appendTo: "#connForm",
+				source: availableTags
+			});
+			
+			$("#connForm").on("create", function(event){
+				$("#connChains"+counter.toString()).autocomplete({
+					appendTo: "#connForm",
+					source: availableTags
+				});
+				$("#removeButton"+counter.toString()).click(function() {
+					var id = $(this).closest('div').attr('id');
+					$("#"+id).remove();
+				})
+			});
+			
+			function list(array){
+				for (var i=0; i<array.length; i++){
+					availableTags.push(array[i]);
+				}
+			}
+			
+			$("#addButton").click(function() {
+				counter++;
+				$("#connForm")
+				.append('<div id="iconn'+counter.toString()+'"><input style="vertical-align: top;" type="text" size="10" '
+				+'id="connChains'+counter.toString()+'" name="connChains" class="validate">'
+				+'<button id="removeButton'+counter.toString()+'" type="button">-</button></div>')
+				.trigger("create");
+			});
+			
+			
+			$("#removeButton").click(function() {
+				var id = $(this).closest('dd').attr('id');
+				$("#"+id).remove();
+			})
+			
 		});
 		
 		$("form").submit(function() {

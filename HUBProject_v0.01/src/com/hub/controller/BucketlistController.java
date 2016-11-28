@@ -30,28 +30,26 @@ public class BucketlistController {
 	@RequestMapping(value="register.do", method=RequestMethod.POST)
 	public String registerBucketlist(Bucketlist bucketlist, @RequestParam("connChains") String[] connChains){
 		bucketlistService.registerBucketlist(bucketlist);
-		System.out.println(bucketlist);
-		System.out.println(bucketlist.getTitle());
-		return "redirect: /bucketlist/list.do";
+		return "redirect: list.do";
 	}
 	
-	@RequestMapping(value="modify.do", method=RequestMethod.POST)
+	@RequestMapping(value="modify.do", method=RequestMethod.GET)
 	public ModelAndView modifyBucketlist(int bucketlistId){
 		ModelAndView mav = new ModelAndView("Bucketlist/modifyBucketlist");
 		mav.addObject("bucketlist", bucketlistService.findBucketlistByBucketlistId(bucketlistId));
 		return mav;
 	}
 	
-	@RequestMapping(value="modify.do", method=RequestMethod.GET)
+	@RequestMapping(value="modify.do", method=RequestMethod.POST)
 	public String modifyBucketlist(Bucketlist bucketlist){
 		bucketlistService.modifyBucketlist(bucketlist);
-		return "redirect: /bucketlist/list.do";
+		return "redirect: list.do";
 	}
 	
 	@RequestMapping(value="remove.do", method=RequestMethod.GET)
 	public String removeBucketlist(int bucketlistId){
 		bucketlistService.removeBucketlist(bucketlistId);
-		return "redirect: /bucketlist/list.do";
+		return "redirect: list.do";
 	}
 	
 	// 설계문서에 변수 추가 => HttpSession session, sequenceDiagram 수정

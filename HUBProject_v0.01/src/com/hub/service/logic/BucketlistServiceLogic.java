@@ -28,14 +28,7 @@ public class BucketlistServiceLogic implements BucketlistService {
 		result *= bucketlistStore.insertBucketlistConn(bucketlist);
 		
 		List<String> sList = bucketlist.getConnChains();
-		for(String connChain : sList){
-			for(String str : connChainStore.selectConnChains()){
-				if(connChain.equals(str)){
-					sList.remove(connChain);
-					break;
-				}
-			}
-		}
+		sList.removeAll(connChainStore.selectConnChains());
 		
 		for(String connChain : sList){
 			result *= connChainStore.insertConnChain(connChain);

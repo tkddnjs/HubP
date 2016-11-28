@@ -109,8 +109,7 @@ h1 {
 				<tr>
 					<c:choose>
 						<c:when test="${bucketlist.lock }">
-							<td align="center"><input type="checkbox" name="lock"
-								checked /></td>
+							<td align="center"><input type="checkbox" name="lock" checked /></td>
 						</c:when>
 						<c:otherwise>
 							<td align="center"><input type="checkbox" name="lock" /></td>

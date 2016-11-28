@@ -1,7 +1,10 @@
 package com.hub.controller;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,13 +45,12 @@ public class ListController {
 		return mav;
 	}
 	
-	// 설계문서 변경 필요 => parameter 추가(HttpSession session, int listOpt)
+	// 설계문서 변경 필요 => parameter 추가(HttpSession session, int listOpt), return type변경
 	@RequestMapping(value="listAutoComplete.do", method=RequestMethod.POST)
-	public ArrayList<String> autoComplete(HttpSession session, @RequestParam String searchWord, @RequestParam int listOpt){
+	public void autoComplete(HttpSession session, int listOpt, HttpServletResponse resp){
 		String userId = (String) session.getAttribute("userId");
 		
 		ArrayList<String> availableTags = new ArrayList<>();
-		
 		switch(listOpt){
 		case 1:
 		case 3:
@@ -64,6 +66,11 @@ public class ListController {
 			break;
 		}
 		
-		return availableTags;
+		try {
+			PrintWriter out = resp.getWriter();
+			out.println(availableTags);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 }

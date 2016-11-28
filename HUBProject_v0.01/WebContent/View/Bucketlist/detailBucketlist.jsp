@@ -87,12 +87,12 @@ h1 {
 		</tr>
 	</table>
 
-	<p>
-		<a class="btn btn-xs btn-default btn-block"
+	<p style="">
+		<a class="btn btn-xs btn-default"
 		 href="${pageContext.request.contextPath}/bucketlist/modify.do?bucketlistId=${bucketlist.bucketlistId}">수정</a>
-		<a class="btn btn-xs btn-default btn-block"
+		<a class="btn btn-xs btn-default"
 		 href="${pageContext.request.contextPath}/bucketlist/remove.do?bucketlistId=${bucketlist.bucketlistId}">삭제</a>
-		<a class="btn btn-xs btn-default btn-block"
+		<a class="btn btn-xs btn-default"
 		 href="${pageContext.request.contextPath}/bucketlist/list.do">돌아가기</a>
 	</p>
 	

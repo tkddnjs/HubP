@@ -30,6 +30,7 @@ public class BucketlistStoreLogic implements BucketlistStore {
 		} finally {
 			session.close();
 		}
+		System.out.println(nextBucketlistId);
 		return nextBucketlistId;
 	}
 	
