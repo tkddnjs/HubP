@@ -133,7 +133,7 @@ dl dd p.error {
 		});
 	});
 	
-	$(document).ready(function a(){
+	$(document).ready(function (){
 		$("#userId").keyup(function() {
 				
 			var userId= $(this).val();
@@ -176,7 +176,7 @@ dl dd p.error {
     	});
 	});
 	
-    $("form").submit(function(){
+    $("form").submit(function(event){
         //에러 초기화 추가로 붙는 내용 삭제
         $("p.error").remove();
         $("dl dd").removeClass("error");
@@ -232,7 +232,7 @@ dl dd p.error {
             	$("p.error.first").offset.top - 40}, "slow");
             	//에러 항목에 대한 음영 처리
             	$("p.error").parent().addClass("error");
-            	return false;
+            	event.preventDefault();
         	}
 		});
 	});
