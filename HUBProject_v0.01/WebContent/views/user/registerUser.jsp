@@ -104,8 +104,8 @@ dl dd p.error {
 					연결고리(직업, 취미 등 도움을 줄 수 있는 분야)<span> (*) 1개 이상 입력</span>
 				</dt>
 				<dd id="connForm">
-					<input type="text" size="10" name="connChains" class="validate">
-					<button type="button">+</button><br>
+					<input style="vertical-align: top;" type="text" size="10" id="connChains" name="connChains">
+					<button type="button" id="addButton">+</button><br>
 				</dd>
 				
 				<dt>도움 리스트 조회 여부</dt>
@@ -127,15 +127,56 @@ dl dd p.error {
 		</form>
 	</div>
 	<script>
-	$(document).ready(function a(){
-		$("button").click(function () {
-			$('<input type="text" size="10" name="connChains" class="validate"><br>').appendTo("#connForm");
-		});
-	});
-	
 	$(document).ready(function (){
+		var availableTags = [];
+		var counter = 0;
+		$.ajax({
+			type : 'POST',
+			url : '${pageContext.request.contextPath}/list/listAutoComplete.do',
+			data : {
+				listOpt : 2
+			},
+			success : function(result) {
+				result = result.replace(/ /gi, "");
+				result = result.replace("[", "");
+				result = result.replace("]", "");
+				result = result.split(',');
+				list(result);
+			}
+		});
+
+		$("#connChains").autocomplete({
+			appendTo: "#connForm",
+			source: availableTags
+		});
+		
+		$("#connForm").on("create", function(event){
+			$("#connChains"+counter.toString()).autocomplete({
+				appendTo: "#connForm",
+				source: availableTags
+			});
+			$("#removeButton"+counter.toString()).click(function() {
+				var id = $(this).closest('div').attr('id');
+				$("#"+id).remove();
+			})
+		});
+		
+		$("#addButton").click(function() {
+			counter++;
+			$("#connForm")
+			.append('<div id="iconn'+counter.toString()+'"><input style="vertical-align: top;" type="text" size="10" '
+			+'id="connChains'+counter.toString()+'" name="connChains">'
+			+'<button id="removeButton'+counter.toString()+'" type="button">-</button></div>')
+			.trigger("create");
+		});
+		
+		function list(array){
+			for (var i=0; i<array.length; i++){
+				availableTags.push(array[i]);
+			}
+		}
+		
 		$("#userId").keyup(function() {
-				
 			var userId= $(this).val();
 			$.ajax({
 				type: 'POST', 
@@ -154,7 +195,6 @@ dl dd p.error {
 				}
 			});
 		});
-		
 		
 		$("#pwCheck").keyup(function() {
 			var pw = $("#pw").val();
@@ -181,10 +221,16 @@ dl dd p.error {
         $("p.error").remove();
         $("dl dd").removeClass("error");
         
+    	// connChain check
+    	$(":text").filter("[name='connChains']").each(function(){
+			if($(this).val() === ""){
+				$(this).before("<p class='error'>필수 선택 항목입니다.</p>");
+			}
+		});
+        
         //filter메소드를 이용해서 text, textareea 요소들 중에 validate
-        //클래스를 같고 있는 것만 찾는다.
+        //클래스를 갖고 있는 것만 찾는다.
         $(":text, textarea").filter(".validate").each(function(){
-            
             //필수 항목 검사
             //this -> filter로 걸러진 text, textarea 중에 하나를 뜻한다.
             $(this).filter(".required").each(function(){
@@ -206,7 +252,7 @@ dl dd p.error {
                 	$(this).before("<p class='error'>메일 형식이 잘못되었습니다.</p>");
             	}
         	});
-         
+         	
         	//radio button check
         	$(":radio").filter(".validate").each(function(){
            		$(this).filter(".required").each(function(){
@@ -216,7 +262,6 @@ dl dd p.error {
             	});
         	});
         
-        
         	//check box check
         	$(".checkboxRequired").each(function(){
             	if($(":checkbox:checked", this).length == 0){
@@ -224,8 +269,6 @@ dl dd p.error {
             	}
         	});
             
-            
-        
         	if($("p.error").length> 0){
             	//에러가 발생한 위치로 스크롤 이동
             	$("html, body").animate({scrollTop : 

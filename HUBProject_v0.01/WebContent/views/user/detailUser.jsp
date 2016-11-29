@@ -75,12 +75,12 @@ h1 {
 		</tr>
 	</table>
 
-	<form action="list/list.do" method="post">
+	<form action="${pageContext.request.contextPath }list/list.do" method="post">
 		<div class="input-append pull-right">
 			<button class="btn btn-xs btn-default btn-block" type="submit">돌아가기</button>
 		</div>
 		<input type="hidden" name="listOpt" value="${listOpt }">
-		<input type="hidden" name="connChain" value="${connChain }">
+		<input type="hidden" name="searchWord" value="${connChain }">
 	</form>
 	
 	<c:if test="${chkFollow }">

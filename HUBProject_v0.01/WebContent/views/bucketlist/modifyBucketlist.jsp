@@ -214,7 +214,7 @@ dl dd p.error {
 						$(this).before("<p class='error'>필수 입력 사항입니다.</p>");
 					}
 				}
-			})
+			});
 			
 			$(":text").filter(".validate").each(function() {
 				//필수 항목 검사

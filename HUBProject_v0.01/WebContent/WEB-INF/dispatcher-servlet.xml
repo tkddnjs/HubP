@@ -16,7 +16,7 @@
 	</mvc:interceptors>
 	
 	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-		<property name="prefix" value="/View/"/>
+		<property name="prefix" value="/views/"/>
 		<property name="suffix" value=".jsp"/>
 	</bean>
 
