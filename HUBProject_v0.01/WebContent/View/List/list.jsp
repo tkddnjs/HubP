@@ -62,13 +62,14 @@ h1 {
 	<table class="table table-hover table-condensed">
 		<thead style="background: #60d7a9; color: white;">
 			<tr style="align: center; font-size: 14pt;">
-				<th width="20" align="center">NO</th>
 				<c:choose>
 					<c:when test="${listOpt eq 1 or listOpt eq 3}">
+						<th width="20" align="center">NO</th>
 						<th width="400" align="center">사용자ID</th>
 						<th width="600" align="center">버킷리스트이름</th>
 					</c:when>
 					<c:when test="${listOpt eq 2}">
+						<th width="20" align="center">NO</th>
 						<th width="400" align="center">사용자ID</th>
 						<th width="600" align="center">연결고리목록</th>
 					</c:when>
