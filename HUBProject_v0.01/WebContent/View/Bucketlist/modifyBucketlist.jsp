@@ -97,17 +97,20 @@ dl dd p.error {
 					연결고리 (버킷과 관련된 분야 - 도움을 받을 수 있습니다.)<span> (*) 1개 이상 입력</span>
 				</dt>
 				
-				<c:forEach items="${bucketlist.connChains }" var="connChain" varStatus="status">
-					<dd id="conn${status.count }">
-						${connChain }
-						<button type="button" id="removeButton">-</button>
-					</dd>	
-				</c:forEach>
+				<dd>
+					<c:forEach items="${bucketlist.connChains }" var="connChain" varStatus="status">
+						<div id="conn${status.count }">
+							${connChain }
+							<input type="hidden" name="connChains" value="${connChain }" id="a${status.count }">
+							<button type="button" name="removeButton">-</button>
+						</div>	
+					</c:forEach>
+				<dd>
 				
 				<dd id="connForm">
 					<div id="iconn">
 						<input style="vertical-align: top;" type="text" size="10"
-							id="connChains" name="connChains" class="validate">
+							id="connChains" name="connChains" class="validate required">
 						<button type="button" id="addButton">+</button>
 					</div>
 				</dd>
@@ -129,8 +132,9 @@ dl dd p.error {
 
 			</dl>
 			<p>
+				<input type="hidden" name="userId" value="${sessionScope.userId }">
 				<input type="hidden" name="bucketlistId" value="${bucketlist.bucketlistId }">
-				<button type="submit">수정완료</button>
+				<input type="submit" value="수정완료">
 			</p>
 		</form>
 	</div>
@@ -181,42 +185,47 @@ dl dd p.error {
 				counter++;
 				$("#connForm")
 				.append('<div id="iconn'+counter.toString()+'"><input style="vertical-align: top;" type="text" size="10" '
-				+'id="connChains'+counter.toString()+'" name="connChains" class="validate">'
+				+'id="connChains'+counter.toString()+'" name="connChains" class="validate required">'
 				+'<button id="removeButton'+counter.toString()+'" type="button">-</button></div>')
 				.trigger("create");
 			});
 			
 			
-			$("#removeButton").click(function() {
-				var id = $(this).closest('dd').attr('id');
+			$("[name='removeButton']").click(function() {
+				var id = $(this).closest('div').attr('id');
 				$("#"+id).remove();
 			})
 			
 		});
 		
-		$("form").submit(function() {
+		$("form").submit(function(event) {
 			//에러 초기화 추가로 붙는 내용 삭제
 			$("p.error").remove();
 			$("dl dd").removeClass("error");
 
 			//filter메소드를 이용해서 text, textareea 요소들 중에 validate
-			//클래스를 같고 있는 것만 찾는다.
-			$(":text, textarea").filter(".validate").each(function() {
-
+			//클래스를 갖고 있는 것만 찾는다.
+			
+			$(":text").filter("[name='connChains']").each(function(){
+				if($(this).val() === ""){
+					if($(":hidden").filter("[name='connChains']").length > 0){
+						$(this).closest("div").remove();						
+					} else {
+						$(this).before("<p class='error'>필수 입력 사항입니다.</p>");
+					}
+				}
+			})
+			
+			$(":text").filter(".validate").each(function() {
 				//필수 항목 검사
 				//this -> filter로 걸러진 text, textarea 중에 하나를 뜻한다.
-				$(this).filter(".required").each(function() {
-					if ($(this).val() == "") {
-						$(this).before("<p class='error'>필수 항목 입니다.</p>");
-					}
-				});
 
 				$(this).filter(".number").each(function() {
 					if (isNaN($(this).val())) {
 						$(this).before("<p class='error'>숫자만 입력 가능합니다.</p>");
 					}
 				});
-
+				
 				if ($("p.error").length > 0) {
 					//에러가 발생한 위치로 스크롤 이동
 					$("html, body").animate({
@@ -224,10 +233,11 @@ dl dd p.error {
 					}, "slow");
 					//에러 항목에 대한 음영 처리
 					$("p.error").parent().addClass("error");
-					return false;
+					event.preventDefault();
 				}
 			});
 		});
+		
 	</script>
 </body>
 </html>
