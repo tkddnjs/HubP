@@ -22,20 +22,20 @@ public class BucketlistController {
 	
 	@RequestMapping(value="register.do", method=RequestMethod.GET)
 	public ModelAndView registerBucketlist(HttpSession session){
-		ModelAndView mav = new ModelAndView("Bucketlist/registerBucketlist");
+		ModelAndView mav = new ModelAndView("bucketlist/registerBucketlist");
 		mav.addObject("userId", session.getAttribute("userId"));
 		return mav;
 	}
 	
 	@RequestMapping(value="register.do", method=RequestMethod.POST)
-	public String registerBucketlist(Bucketlist bucketlist, @RequestParam("connChains") String[] connChains){
+	public String registerBucketlist(Bucketlist bucketlist){
 		bucketlistService.registerBucketlist(bucketlist);
 		return "redirect: list.do";
 	}
 	
 	@RequestMapping(value="modify.do", method=RequestMethod.GET)
 	public ModelAndView modifyBucketlist(int bucketlistId){
-		ModelAndView mav = new ModelAndView("Bucketlist/modifyBucketlist");
+		ModelAndView mav = new ModelAndView("bucketlist/modifyBucketlist");
 		mav.addObject("bucketlist", bucketlistService.findBucketlistByBucketlistId(bucketlistId));
 		return mav;
 	}
@@ -61,7 +61,7 @@ public class BucketlistController {
 		String userId = (String) session.getAttribute("userId");
 		
 		if(bucketlist.getUserId().equals(userId)){
-			mav = new ModelAndView("Bucketlist/detailBucketlist");
+			mav = new ModelAndView("bucketlist/detailBucketlist");
 		} else {
 			mav = new ModelAndView("List/detailBucketlist");
 		}
@@ -72,7 +72,7 @@ public class BucketlistController {
 	
 	@RequestMapping(value="list.do", method=RequestMethod.GET)
 	public ModelAndView listBucketlist(HttpSession session){
-		ModelAndView mav = new ModelAndView("Bucketlist/bucketList");
+		ModelAndView mav = new ModelAndView("bucketlist/bucketList");
 		String userId = (String) session.getAttribute("userId");
 		mav.addObject("bucketlists", bucketlistService.findAll(userId));
 		return mav;

@@ -23,7 +23,7 @@ public class CooperController {
 
 	@RequestMapping(value="register.do", method=RequestMethod.GET)
 	public String registerCooper() {
-		return "Cooper/registerCooper";
+		return "cooper/registerCooper";
 	}
 
 	@RequestMapping(value="register.do", method=RequestMethod.POST)
@@ -53,14 +53,14 @@ public class CooperController {
 	
 	@RequestMapping(value="list.do", method=RequestMethod.GET)
 	public ModelAndView listCooper(HttpSession session, String searchWord) {
-		ModelAndView mav = new ModelAndView("Cooper/listCooper");
+		ModelAndView mav = new ModelAndView("cooper/listCooper");
 		mav.addObject("coopers", cooperService.findAll());
 		return mav;
 	}
 	
 	@RequestMapping(value="detail.do", method=RequestMethod.GET)
 	public ModelAndView detailCooper(int coId) {
-		ModelAndView mav = new ModelAndView("Cooper/detailCooper");
+		ModelAndView mav = new ModelAndView("cooper/detailCooper");
 		mav.addObject("cooper", cooperService.findCoopersByCoId(coId));
 		return mav;
 	}

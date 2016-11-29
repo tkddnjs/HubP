@@ -30,7 +30,6 @@ public class BucketlistStoreLogic implements BucketlistStore {
 		} finally {
 			session.close();
 		}
-		System.out.println(nextBucketlistId);
 		return nextBucketlistId;
 	}
 	
@@ -96,6 +95,25 @@ public class BucketlistStoreLogic implements BucketlistStore {
 		return result;
 	}
 
+	@Override
+	public int deleteBucketlistConn(int bucketlistId) {
+		SqlSession session = factory.openSession();
+		int result = 0;
+		
+		try {
+			BucketlistMapper mapper = session.getMapper(BucketlistMapper.class);
+			result = mapper.deleteBucketlistConn(bucketlistId);
+			if(result>0){
+				session.commit();
+			} else {
+				session.rollback();
+			}
+		} finally {
+			session.close();
+		}
+		return result;
+	}
+	
 	@Override
 	public int deleteBucketlist(int bucketlistId) {
 		SqlSession session = factory.openSession();

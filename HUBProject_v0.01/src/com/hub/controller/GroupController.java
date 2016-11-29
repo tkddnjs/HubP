@@ -23,7 +23,7 @@ public class GroupController {
 
 	@RequestMapping(value="register.do", method=RequestMethod.GET)
 	public ModelAndView registerGroup(HttpSession session) {
-		ModelAndView mav = new ModelAndView("Group/registerGroup");
+		ModelAndView mav = new ModelAndView("group/registerGroup");
 		mav.addObject("userId", (String) session.getAttribute("userId"));
 		return mav;
 	}
@@ -43,7 +43,7 @@ public class GroupController {
 	// 문서 수정 필요 => parameter 변경
 	@RequestMapping(value="modify.do", method=RequestMethod.GET)
 	public ModelAndView modifyGroup(HttpSession session, int groupId) {
-		ModelAndView mav = new ModelAndView("Group/modifyGroup");
+		ModelAndView mav = new ModelAndView("group/modifyGroup");
 		mav.addObject("corrector", (String) session.getAttribute("userId"));
 		mav.addObject("group", groupService.findGroupByGroupId(groupId));
 		return mav;
@@ -69,7 +69,7 @@ public class GroupController {
 
 	@RequestMapping(value="list.do", method=RequestMethod.GET)
 	public ModelAndView listGroup(HttpSession session, int listOpt, String searchWord) {
-		ModelAndView mav = new ModelAndView("Group/groupListForm");
+		ModelAndView mav = new ModelAndView("group/groupListForm");
 
 		switch (listOpt) {
 		// 전체 모임방 찾기
@@ -99,7 +99,7 @@ public class GroupController {
 	}
 	@RequestMapping(value="detail.do", method=RequestMethod.GET)
 	public ModelAndView detailGroup(int groupId) {
-		ModelAndView mav = new ModelAndView("Group/detailGroup");
+		ModelAndView mav = new ModelAndView("group/detailGroup");
 		mav.addObject("group", groupService.findGroupByGroupId(groupId));
 		return mav;
 	}

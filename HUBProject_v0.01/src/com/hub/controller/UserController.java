@@ -26,7 +26,7 @@ public class UserController {
 	
 	@RequestMapping(value="register.do", method=RequestMethod.GET)
 	public String registerUser(){
-		return "User/registerUser";
+		return "user/registerUser";
 	}
 	
 	// parameter 추가
@@ -45,7 +45,7 @@ public class UserController {
 	
 	@RequestMapping(value="modify.do", method=RequestMethod.GET)
 	public ModelAndView modifyUser(HttpSession session){
-		ModelAndView mav = new ModelAndView("User/modifyUser");
+		ModelAndView mav = new ModelAndView("user/modifyUser");
 		String userId = (String) session.getAttribute("userId");
 		mav.addObject("user", userService.findUserByUserId(userId));
 		return mav;
@@ -67,7 +67,7 @@ public class UserController {
 	
 	@RequestMapping(value="detail.do", method=RequestMethod.POST)	
 	public ModelAndView detailUser(String userId){
-		ModelAndView mav = new ModelAndView("User/detailUser");
+		ModelAndView mav = new ModelAndView("user/detailUser");
 		mav.addObject("user", userService.findUserByUserId(userId));
 		return mav;
 	}

@@ -46,7 +46,7 @@ public class FollowController {
 	
 	@RequestMapping(value="listAll.do", method=RequestMethod.GET)
 	public ModelAndView listAllFollows(HttpSession session){
-		ModelAndView mav = new ModelAndView("Follow/listFollow");
+		ModelAndView mav = new ModelAndView("follow/listFollow");
 		String userId = (String)session.getAttribute("userId");
 		List<Follow> fList = new ArrayList<>();
 		fList.addAll(followService.findRequestedFollows(userId));
@@ -57,7 +57,7 @@ public class FollowController {
 	
 	@RequestMapping(value="listRelation.do", method=RequestMethod.POST)
 	public ModelAndView listFollowsByRelation(HttpSession session, int listOpt){
-		ModelAndView mav = new ModelAndView("Follow/listFollow");
+		ModelAndView mav = new ModelAndView("follow/listFollow");
 		Follow follow = new Follow();
 		follow.setUserId((String)session.getAttribute("userId"));
 		follow.setRelation(listOpt);

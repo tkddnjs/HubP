@@ -24,7 +24,7 @@ public class ListController {
 
 	@RequestMapping(value = "list.do", method = RequestMethod.GET)
 	public ModelAndView listUser(int listOpt, String searchWord) {
-		ModelAndView mav = new ModelAndView("List/list");
+		ModelAndView mav = new ModelAndView("list/list");
 		
 		switch (listOpt) {
 //		페이지만 return
