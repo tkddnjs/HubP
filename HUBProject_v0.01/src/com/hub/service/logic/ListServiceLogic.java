@@ -6,12 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.hub.domain.Bucketlist;
-import com.hub.domain.Cooper;
 import com.hub.domain.User;
 import com.hub.service.pacade.ListService;
 import com.hub.store.pacade.BucketlistStore;
 import com.hub.store.pacade.ConnChainStore;
-import com.hub.store.pacade.CooperStore;
 import com.hub.store.pacade.UserStore;
 
 @Service
@@ -21,8 +19,6 @@ public class ListServiceLogic implements ListService {
 	private UserStore userStore;
 	@Autowired
 	private BucketlistStore bucketlistStore;
-	@Autowired
-	private CooperStore cooperStore;
 	@Autowired
 	private ConnChainStore connChainStore;
 	
@@ -34,19 +30,14 @@ public class ListServiceLogic implements ListService {
 	public List<Bucketlist> findBucketlistsByConnChain(String connChain) {
 		return bucketlistStore.selectBucketlistsByConnChain(connChain);
 	}
-
+	
 	@Override
-	public List<Cooper> findCoopersByConnChain(String connChain) {
-		return cooperStore.selectCoopersByConnChain(connChain);
+	public List<String> findConnChains(){
+		return connChainStore.selectConnChains();
 	}
 
 	@Override
 	public List<String> findConnChainsByUserId(String userId){
 		return userStore.selectUser(userId).getConnChains();
 	}
-	
-	public List<String> findConnChains(){
-		return connChainStore.selectConnChains();
-	}
-	
 }

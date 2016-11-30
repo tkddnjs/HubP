@@ -84,4 +84,22 @@ public class GroupStoreLogic implements GroupStore {
 		return null;
 	}
 
+	@Override
+	public int nextGroupId() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int insertGroupConn(Group group) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int deleteGroupConn(int groupId) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 }

@@ -12,8 +12,15 @@
     <b>${userId } </b>님 반갑습니다.<br>
      
     [<a href="${pageContext.request.contextPath}/user/logout.do">로그아웃</a>
-    |<a href="${pageContext.request.contextPath}/user/detail.do?userId=${sessionScope.userId}">회원정보</a>
+    |<form action="${pageContext.request.contextPath}/user/detail.do" method="get">
+    	회원정보
+    	<input type="hidden" name="myId" value="${sessionScope.userId}">
+    	<input type="hidden" name="userId" value="${sessionScope.userId}">
+     </form>
     |<a href="${pageContext.request.contextPath}/follow/listAll.do">친구목록</a>]
+  
+<!-- <a href="${pageContext.request.contextPath}/user/detail.do?myId=${sessionScope.userId}">회원정보</a> -->
+  
   
   </c:otherwise>
 

@@ -33,23 +33,22 @@ public class FollowController {
 //	}
 	
 	@RequestMapping(value="request.do", method=RequestMethod.POST)
-	public void requestFollow(Follow follow, HttpServletRequest request){
+	public void requestFollow(Follow follow){
 		follow.setConfirm(true);
-		followService.registerFollow(follow);
+		followService.requestFollow(follow);
 	}
 	
 	@RequestMapping(value="confirm.do", method=RequestMethod.POST)
 	public String confirmFollow(Follow follow){
 		followService.confirmFollow(follow);
-		return "redirect: listAll.do";
+		return "redirect: listAll.do?userId="+follow.getUserId();
 	}
 	
 	@RequestMapping(value="remove.do", method=RequestMethod.POST)
 	public String removeFollow(Follow follow){
 		followService.removeFollow(follow);
-		return "redirect: listAll.do";
+		return "redirect: listAll.do?userId="+follow.getUserId();
 	}
-	
 	
 	@RequestMapping(value="listAll.do", method=RequestMethod.GET)
 	public ModelAndView listAllFollows(HttpSession session){
@@ -65,10 +64,8 @@ public class FollowController {
 	@RequestMapping(value="listRelation.do", method=RequestMethod.POST)
 	public ModelAndView listFollowsByRelation(HttpSession session, int listOpt){
 		ModelAndView mav = new ModelAndView("follow/listFollow");
-		Follow follow = new Follow();
-		follow.setUserId((String)session.getAttribute("userId"));
-		follow.setRelation(listOpt);
-		mav.addObject("follows", followService.findFollowsByRelation(follow));
+		String userId = (String)session.getAttribute("userId");
+		mav.addObject("follows", followService.findFollowsByRelation(userId, listOpt));
 		return mav;
 	}
 }

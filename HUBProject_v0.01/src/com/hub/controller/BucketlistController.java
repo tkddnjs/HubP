@@ -21,9 +21,9 @@ public class BucketlistController {
 	private BucketlistService bucketlistService;
 	
 	@RequestMapping(value="register.do", method=RequestMethod.GET)
-	public ModelAndView registerBucketlist(HttpSession session){
+	public ModelAndView registerBucketlist(String userId){
 		ModelAndView mav = new ModelAndView("bucketlist/registerBucketlist");
-		mav.addObject("userId", session.getAttribute("userId"));
+		mav.addObject("userId", userId);
 		return mav;
 	}
 	
@@ -54,11 +54,10 @@ public class BucketlistController {
 	
 	// 설계문서에 변수 추가 => HttpSession session, sequenceDiagram 수정
 	@RequestMapping(value="detail.do", method=RequestMethod.GET)
-	public ModelAndView detailBucketlist(HttpSession session, int bucketlistId){
+	public ModelAndView detailBucketlist(String userId, int bucketlistId){
 		ModelAndView mav = null;
 		
 		Bucketlist bucketlist = bucketlistService.findBucketlistByBucketlistId(bucketlistId);
-		String userId = (String) session.getAttribute("userId");
 		
 		if(bucketlist.getUserId().equals(userId)){
 			mav = new ModelAndView("bucketlist/detailBucketlist");

@@ -8,10 +8,10 @@ import java.util.List;
 public class Cooper {
 	private int coId;
 	private String coName;
-	private String coBanner;
 	private Date startDay;
 	private Date lastDay;
 	private List<String> connChains;
+	private String coBanner;
 
 	public Cooper() {
 	}

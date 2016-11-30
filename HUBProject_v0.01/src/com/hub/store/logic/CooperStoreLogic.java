@@ -21,6 +21,12 @@ public class CooperStoreLogic implements CooperStore {
 	}
 	
 	@Override
+	public int nextCooperId() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	
+	@Override
 	public int insertCooper(Cooper cooper) {
 		SqlSession session = factory.openSession();
 		int result = 0;
@@ -38,6 +44,12 @@ public class CooperStoreLogic implements CooperStore {
 		return result;
 	}
 
+	@Override
+	public int insertCooperConn(Cooper cooper) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	
 	@Override
 	public int updateCooper(Cooper cooper) {
 		SqlSession session = factory.openSession();
@@ -74,6 +86,12 @@ public class CooperStoreLogic implements CooperStore {
 		return result;
 	}
 
+	@Override
+	public int deleteCooperConn(int coId) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	
 	@Override
 	public List<Cooper> selectAll() {
 		SqlSession session = factory.openSession();

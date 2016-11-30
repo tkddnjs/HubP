@@ -3,7 +3,6 @@ package com.hub.domain;
 public class Follow {
 	private String userId;
 	private String followId;
-//	private String relation;
 	private int relation;
 	private boolean confirm;
 
@@ -26,30 +25,20 @@ public class Follow {
 		this.followId = friendId;
 	}
 
-//	public String getRelation() {
-//		return relation;
-//	}
-//
-//	public void setRelation(String relation) {
-//		this.relation = relation;
-//	}
-	
-	public int getRelation(){
+	public int getRelation() {
 		return relation;
 	}
-	
-	
 
 	public void setRelation(int relation) {
 		this.relation = relation;
 	}
-	
-	public boolean getConfirm(){
+
+	public boolean getConfirm() {
 		return confirm;
 	}
 
-	public void setConfirm(boolean confirm){
+	public void setConfirm(boolean confirm) {
 		this.confirm = confirm;
 	}
-	
+
 }

@@ -34,15 +34,13 @@ public class BucketlistStoreLogic implements BucketlistStore {
 	}
 	
 	@Override
-	public int insertBucketlistConn(Bucketlist bucketlist) {
+	public int insertBucketlist(Bucketlist bucketlist) {
 		SqlSession session = factory.openSession();
 		int result = 0;
+		
 		try {
 			BucketlistMapper mapper = session.getMapper(BucketlistMapper.class);
-			
-			for(String connChain : bucketlist.getConnChains()){
-				result = mapper.insertBucketlistConn(bucketlist.getBucketlistId(), connChain);
-			}	
+			result = mapper.insertBucketlist(bucketlist);
 			if(result>0){
 				session.commit();
 			} else {
@@ -55,13 +53,15 @@ public class BucketlistStoreLogic implements BucketlistStore {
 	}
 	
 	@Override
-	public int insertBucketlist(Bucketlist bucketlist) {
+	public int insertBucketlistConn(Bucketlist bucketlist) {
 		SqlSession session = factory.openSession();
 		int result = 0;
-		
 		try {
 			BucketlistMapper mapper = session.getMapper(BucketlistMapper.class);
-			result = mapper.insertBucketlist(bucketlist);
+			
+			for(String connChain : bucketlist.getConnChains()){
+				result = mapper.insertBucketlistConn(bucketlist.getBucketlistId(), connChain);
+			}	
 			if(result>0){
 				session.commit();
 			} else {
@@ -94,15 +94,15 @@ public class BucketlistStoreLogic implements BucketlistStore {
 		}
 		return result;
 	}
-
+	
 	@Override
-	public int deleteBucketlistConn(int bucketlistId) {
+	public int deleteBucketlist(int bucketlistId) {
 		SqlSession session = factory.openSession();
 		int result = 0;
 		
 		try {
 			BucketlistMapper mapper = session.getMapper(BucketlistMapper.class);
-			result = mapper.deleteBucketlistConn(bucketlistId);
+			result = mapper.deleteBucketlist(bucketlistId);
 			if(result>0){
 				session.commit();
 			} else {
@@ -115,13 +115,13 @@ public class BucketlistStoreLogic implements BucketlistStore {
 	}
 	
 	@Override
-	public int deleteBucketlist(int bucketlistId) {
+	public int deleteBucketlistConn(int bucketlistId) {
 		SqlSession session = factory.openSession();
 		int result = 0;
 		
 		try {
 			BucketlistMapper mapper = session.getMapper(BucketlistMapper.class);
-			result = mapper.deleteBucketlist(bucketlistId);
+			result = mapper.deleteBucketlistConn(bucketlistId);
 			if(result>0){
 				session.commit();
 			} else {

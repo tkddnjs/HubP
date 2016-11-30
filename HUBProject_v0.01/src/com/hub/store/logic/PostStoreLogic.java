@@ -72,7 +72,7 @@ public class PostStoreLogic implements PostStore {
 	}
 
 	@Override
-	public List<Post> selectPosts(String userId, String friendId) {
+	public List<Post> selectPosts(String userId, String followId) {
 		// TODO Auto-generated method stub
 		return null;
 	}

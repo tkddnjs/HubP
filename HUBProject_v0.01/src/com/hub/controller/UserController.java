@@ -1,20 +1,12 @@
 package com.hub.controller;
 
-import java.io.BufferedInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.OutputStream;
 import java.io.PrintWriter;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -43,7 +35,8 @@ public class UserController {
 	
 	// parameter 추가
 	@RequestMapping(value="register.do", method=RequestMethod.POST)
-	public String registerUser(User user, HttpServletRequest req, @RequestParam("image") MultipartFile image){
+	public String registerUser(User user, HttpServletRequest req
+								, @RequestParam("image") MultipartFile image){
 		
 		String fileName = 
 				fileManager
@@ -56,9 +49,8 @@ public class UserController {
 	}
 	
 	@RequestMapping(value="modify.do", method=RequestMethod.GET)
-	public ModelAndView modifyUser(HttpSession session){
+	public ModelAndView modifyUser(String userId){
 		ModelAndView mav = new ModelAndView("user/modifyUser");
-		String userId = (String) session.getAttribute("userId");
 		mav.addObject("user", userService.findUserByUserId(userId));
 		return mav;
 	}
@@ -79,10 +71,10 @@ public class UserController {
 
 	// parameter 변경 (String userId => HttpSession session, String userId)
 	@RequestMapping(value="detail.do", method=RequestMethod.GET)	
-	public ModelAndView detailUser(HttpSession session, String userId){
+	public ModelAndView detailUser(String myId, String userId){
 		ModelAndView mav = null;
 		
-		if(userId.equals((String)session.getAttribute("userId"))){
+		if(userId.equals(myId)){
 			mav = new ModelAndView("user/detailUser");
 		} else {
 			mav = new ModelAndView("list/detailUser");

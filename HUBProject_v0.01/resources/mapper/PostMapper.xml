@@ -4,7 +4,7 @@
 <mapper namespace="com.hub.store.mapper.PostMapper">
 	<resultMap type="Post" id="postMap">
 		<id property="postId" column="postId" />		
-		<result property="transDT" column="dayTime" />
+		<result property="sendTime" column="dayTime" />
 	</resultMap>
 
 	<sql id="selectPost">
@@ -28,7 +28,7 @@
 		OR receiverId = #{userId}
 	</select>
 
-	<select id="selectPostByFriendId" parameterType="Map" resultMap="postMap">
+	<select id="selectPosts" parameterType="Map" resultMap="postMap">
 		<include refid="selectPost" />
 		
 	</select>

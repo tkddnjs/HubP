@@ -8,10 +8,13 @@ import com.hub.domain.Group;
 
 public interface GroupMapper {
 	
+	int nextGroupId();
 	int insertGroup(Group group);
+	int insertGroupConn(Group group);
+	int insertUserGroup(@Param("groupId")int groupId, @Param("userId")String userId);
 	int updateGroup(Group group);
 	int deleteGroup(int groupId);
-	int insertUserGroup(@Param("groupId")int groupId, @Param("userId")String userId);
+	int deleteGroupConn(int groupId);
 	int deleteUserGroup(@Param("groupId")int groupId, @Param("userId")String userId);
 	List<Group> selectAll();
 	Group selectGroupByGroupId(int groupId);

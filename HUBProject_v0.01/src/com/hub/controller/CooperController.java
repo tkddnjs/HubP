@@ -52,7 +52,7 @@ public class CooperController {
 	}
 	
 	@RequestMapping(value="list.do", method=RequestMethod.GET)
-	public ModelAndView listCooper(HttpSession session, String searchWord) {
+	public ModelAndView listCooper(int listOpt, String searchWord) {
 		ModelAndView mav = new ModelAndView("cooper/listCooper");
 		mav.addObject("coopers", cooperService.findAll());
 		return mav;

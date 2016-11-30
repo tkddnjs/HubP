@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.hub.domain.Group;
 import com.hub.service.pacade.GroupService;
+import com.hub.store.pacade.ConnChainStore;
 import com.hub.store.pacade.GroupStore;
 
 @Service
@@ -14,6 +15,8 @@ public class GroupServiceLogic implements GroupService {
 
 	@Autowired
 	private GroupStore groupStore;
+	@Autowired
+	private ConnChainStore connChainStore;
 	
 	@Override
 	public int registerGroup(Group group) {

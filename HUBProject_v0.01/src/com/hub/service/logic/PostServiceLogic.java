@@ -31,15 +31,18 @@ public class PostServiceLogic implements PostService {
 	}
 
 	@Override
-	public List<Post> findPosts(String userId, String toUserId) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Post> findPosts(String userId, String followId) {
+		return postStore.selectPosts(userId, followId);
 	}
 
 	@Override
-	public List<Post> findPostsByTransmit(String userId, String transmit) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Post> findSendPosts(String userId) {
+		return postStore.selectSendPosts(userId);
+	}
+
+	@Override
+	public List<Post> findReceivePosts(String userId) {
+		return postStore.selectReceivePosts(userId);
 	}
 
 }

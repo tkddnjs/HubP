@@ -8,12 +8,21 @@ import com.hub.domain.User;
 
 public interface UserMapper {
 
+	// user 등록
 	int insertUser(User user);
+	int insertUserConn(@Param("userId")String userId, @Param("connChain")String connChain);
+
+	// user 수정
 	int updateUser(User user);
+	
+	// user 삭제
 	int deleteUser(String userId);
+	int deleteUserConn(String userId);
+	
+	// user 조회
 	User selectUserByUserId(String userId);
 	List<User> selectUsersByConnChain(String connChain);
-	List<String> selectConnChainsByUserId(String userId);
 	
-	int insertConnChain(@Param("userId")String userId, @Param("connChain")String connChain);
+	// user 객체에 connChains를 set
+	List<String> selectConnChainsByUserId(String userId);
 }

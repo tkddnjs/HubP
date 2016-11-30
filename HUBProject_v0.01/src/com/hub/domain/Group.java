@@ -5,12 +5,13 @@ import java.util.List;
 
 public class Group {
 	private int groupId;
-	private String userId;
 	private String groupName;
-	private List<String> connChains;
+	private String managerId;
 	private Date lastDay;
-	private String local;
+	private List<String> connChains;
 	private String introduce;
+	private String local;
+	private List<User> joinPeople;
 	private int maxPeople;
 
 	public Group() {
@@ -24,14 +25,6 @@ public class Group {
 		this.groupId = groupId;
 	}
 
-	public String getUserId() {
-		return userId;
-	}
-
-	public void setUserId(String userId) {
-		this.userId = userId;
-	}
-
 	public String getGroupName() {
 		return groupName;
 	}
@@ -40,12 +33,12 @@ public class Group {
 		this.groupName = groupName;
 	}
 
-	public List<String> getConnChains() {
-		return connChains;
+	public String getManagerId() {
+		return managerId;
 	}
 
-	public void setConnChains(List<String> connChains) {
-		this.connChains = connChains;
+	public void setManagerId(String managerId) {
+		this.managerId = managerId;
 	}
 
 	public Date getLastDay() {
@@ -56,12 +49,12 @@ public class Group {
 		this.lastDay = lastDay;
 	}
 
-	public String getLocal() {
-		return local;
+	public List<String> getConnChains() {
+		return connChains;
 	}
 
-	public void setLocal(String local) {
-		this.local = local;
+	public void setConnChains(List<String> connChains) {
+		this.connChains = connChains;
 	}
 
 	public String getIntroduce() {
@@ -72,6 +65,22 @@ public class Group {
 		this.introduce = introduce;
 	}
 
+	public String getLocal() {
+		return local;
+	}
+
+	public void setLocal(String local) {
+		this.local = local;
+	}
+
+	public List<User> getJoinPeople() {
+		return joinPeople;
+	}
+
+	public void setJoinPeople(List<User> joinPeople) {
+		this.joinPeople = joinPeople;
+	}
+
 	public int getMaxPeople() {
 		return maxPeople;
 	}
@@ -79,5 +88,4 @@ public class Group {
 	public void setMaxPeople(int maxPeople) {
 		this.maxPeople = maxPeople;
 	}
-
 }

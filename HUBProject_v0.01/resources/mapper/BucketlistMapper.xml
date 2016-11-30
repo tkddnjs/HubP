@@ -36,13 +36,13 @@
 	</update>
 	<!-- locker = #{lock,typeHandler=BooleanToYnHandler}, -->
 
-	<delete id="deleteBucketlistConn" parameterType="int">
-		DELETE bucketConn_tb 
+	<delete id="deleteBucketlist" parameterType="int">
+		DELETE bucketlist_tb 
 		WHERE bucketId=#{bucketlistId}
 	</delete>
 
-	<delete id="deleteBucketlist" parameterType="int">
-		DELETE bucketlist_tb 
+	<delete id="deleteBucketlistConn" parameterType="int">
+		DELETE bucketConn_tb 
 		WHERE bucketId=#{bucketlistId}
 	</delete>
 
