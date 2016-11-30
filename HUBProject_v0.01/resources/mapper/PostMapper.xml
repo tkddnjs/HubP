@@ -30,21 +30,22 @@
 
 	<select id="selectPostByPostId" parameterType="int" resultMap="postMap">
 		<include refid="selectPost" />
-		
+		WHERE postId = #{postId}
 	</select>
 
 	<select id="selectPosts" parameterType="Map" resultMap="postMap">
 		<include refid="selectPost" />
-		
+		WHERE senderId = #{userId} AND receiverId = #{followId}
+		OR senderId = #{followId} AND receiverId = #{userId}
 	</select>
 
 	<select id="selectSendPosts" parameterType="String" resultMap="postMap">
 		<include refid="selectPost" />
-		
+		WHERE senderId = #{userId}
 	</select>
 	
 	<select id="selectReceivePosts" parameterType="String" resultMap="postMap">
 		<include refid="selectPost" />
-		
+		WHERE receiverId = #{userId}
 	</select>
 </mapper>

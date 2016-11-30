@@ -14,7 +14,7 @@ public interface GroupService {
 	List<Group> findAll();
 	Group findGroupByGroupId(int groupId);
 	List<Group> findGroupsByUserId(String userId);
-	List<Group> findGroupsByConnChains(List<String> connChain);
+	List<Group> findGroupsByConnChain(String connChain);
 	List<Group> findGroupsByGroupName(String groupName);
 	List<Group> findGroupsByLocal(String local);
 }

@@ -11,7 +11,7 @@ public class Group {
 	private List<String> connChains;
 	private String introduce;
 	private String local;
-	private List<User> joinPeople;
+	private List<String> joinPeople;
 	private int maxPeople;
 
 	public Group() {
@@ -73,11 +73,11 @@ public class Group {
 		this.local = local;
 	}
 
-	public List<User> getJoinPeople() {
+	public List<String> getJoinPeople() {
 		return joinPeople;
 	}
 
-	public void setJoinPeople(List<User> joinPeople) {
+	public void setJoinPeople(List<String> joinPeople) {
 		this.joinPeople = joinPeople;
 	}
 

@@ -1,8 +1,5 @@
 package com.hub.controller;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -82,9 +79,7 @@ public class GroupController {
 			break;
 		// 연결고리로 찾기
 		case 2:
-			List<String> connChains = new ArrayList<>();
-			connChains.add(searchWord);
-			mav.addObject("groups", groupService.findGroupsByConnChains(connChains));
+			mav.addObject("groups", groupService.findGroupsByConnChain(searchWord));
 			break;
 		// 지역 이름으로 찾기
 		case 3:

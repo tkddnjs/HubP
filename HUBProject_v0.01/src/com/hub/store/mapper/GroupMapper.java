@@ -10,7 +10,7 @@ public interface GroupMapper {
 	
 	int nextGroupId();
 	int insertGroup(Group group);
-	int insertGroupConn(Group group);
+	int insertGroupConn(@Param("groupId")int groupId, @Param("connChain")String connChain);
 	int insertUserGroup(@Param("groupId")int groupId, @Param("userId")String userId);
 	int updateGroup(Group group);
 	int deleteGroup(int groupId);
@@ -19,8 +19,10 @@ public interface GroupMapper {
 	List<Group> selectAll();
 	Group selectGroupByGroupId(int groupId);
 	List<Group> selectGroupsByUserId(String userId);
-	List<Group> selectGroupsByConnChain(String ConnChain);
+	List<Group> selectGroupsByConnChain(String connChain);
 	List<Group> selectGroupsByGroupName(String groupName);
 	List<Group> selectGroupsByLocal(String local);
 	
+	List<String> selectConnChainsByGroupId(int groupId);
+	List<String> selectJoinUsersByGroupId(int groupId);
 }

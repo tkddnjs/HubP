@@ -123,7 +123,7 @@ dl dd p.error {
 					자기소개<span>2000byte</span>
 				</dt>
 				<dd>
-					<textarea name="introduce" rows="13" cols="63" class=""></textarea>
+					<textarea name="introduce" rows="13" cols="63" class="">${user.introduce }</textarea>
 				</dd>
 			</dl>
 			<p>

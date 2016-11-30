@@ -73,28 +73,45 @@ public class PostStoreLogic implements PostStore {
 
 	@Override
 	public Post selectPostByPostId(int postId) {
-		// TODO Auto-generated method stub
-		return null;
+		SqlSession session = factory.openSession();
+		try {
+			PostMapper mapper = session.getMapper(PostMapper.class);
+			return mapper.selectPostByPostId(postId);
+		} finally {
+			session.close();
+		}
 	}
 	
 	@Override
 	public List<Post> selectPosts(String userId, String followId) {
-		// TODO Auto-generated method stub
-		return null;
+		SqlSession session = factory.openSession();
+		try {
+			PostMapper mapper = session.getMapper(PostMapper.class);
+			return mapper.selectPosts(userId, followId);
+		} finally {
+			session.close();
+		}
 	}
 
 	@Override
 	public List<Post> selectSendPosts(String userId) {
-		// TODO Auto-generated method stub
-		return null;
+		SqlSession session = factory.openSession();
+		try {
+			PostMapper mapper = session.getMapper(PostMapper.class);
+			return mapper.selectSendPosts(userId);
+		} finally {
+			session.close();
+		}
 	}
 
 	@Override
 	public List<Post> selectReceivePosts(String userId) {
-		// TODO Auto-generated method stub
-		return null;
+		SqlSession session = factory.openSession();
+		try {
+			PostMapper mapper = session.getMapper(PostMapper.class);
+			return mapper.selectReceivePosts(userId);
+		} finally {
+			session.close();
+		}
 	}
-
-
-
 }
