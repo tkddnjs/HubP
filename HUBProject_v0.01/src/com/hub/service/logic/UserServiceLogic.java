@@ -39,7 +39,6 @@ public class UserServiceLogic implements UserService {
 				sList.add(connChain);
 			}
 		}
-		System.out.println(sList);
 		for(String connChain : sList){
 			result *= connChainStore.insertConnChain(connChain);
 		}

@@ -39,7 +39,13 @@ public class BucketlistServiceLogic implements BucketlistService {
 
 	@Override
 	public int modifyBucketlist(Bucketlist bucketlist) {
-		return bucketlistStore.updateBucketlist(bucketlist);
+		int result = 1;
+		
+		result *= bucketlistStore.updateBucketlist(bucketlist);
+		result *= bucketlistStore.deleteBucketlistConn(bucketlist.getBucketlistId());
+		result *= bucketlistStore.insertBucketlistConn(bucketlist);
+
+		return result;
 	}
 
 	@Override

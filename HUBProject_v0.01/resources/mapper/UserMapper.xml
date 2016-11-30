@@ -18,8 +18,8 @@
 	</sql>
 
 	<insert id="insertUser" parameterType="User">
-		INSERT INTO User_TB(userId, pw, email, introduce, admin)
-		values (#{userId } , #{pw }, #{email }, #{introduce }, 'N')
+		INSERT INTO User_TB(userId, pw, email, picture, introduce, admin)
+		values (#{userId }, #{pw }, #{email }, #{picture }, #{introduce }, 'N')
 	</insert>
 	
 	<insert id="insertConnChain" parameterType="Map">
@@ -64,4 +64,5 @@
 		FROM userconn_tb
 		WHERE userId=#{userId}
 	</select>
+	
 </mapper>
