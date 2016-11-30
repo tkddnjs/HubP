@@ -72,6 +72,12 @@ public class PostStoreLogic implements PostStore {
 	}
 
 	@Override
+	public Post selectPostByPostId(int postId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	@Override
 	public List<Post> selectPosts(String userId, String followId) {
 		// TODO Auto-generated method stub
 		return null;
@@ -88,5 +94,7 @@ public class PostStoreLogic implements PostStore {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+
 
 }

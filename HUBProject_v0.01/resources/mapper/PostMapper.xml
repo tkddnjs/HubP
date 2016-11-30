@@ -28,6 +28,11 @@
 		OR receiverId = #{userId}
 	</select>
 
+	<select id="selectPostByPostId" parameterType="int" resultMap="postMap">
+		<include refid="selectPost" />
+		
+	</select>
+
 	<select id="selectPosts" parameterType="Map" resultMap="postMap">
 		<include refid="selectPost" />
 		

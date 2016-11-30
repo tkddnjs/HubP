@@ -31,6 +31,11 @@ public class PostServiceLogic implements PostService {
 	}
 
 	@Override
+	public Post findPostByPostId(int postId) {
+		return postStore.selectPostByPostId(postId);
+	}
+
+	@Override
 	public List<Post> findPosts(String userId, String followId) {
 		return postStore.selectPosts(userId, followId);
 	}
@@ -44,5 +49,6 @@ public class PostServiceLogic implements PostService {
 	public List<Post> findReceivePosts(String userId) {
 		return postStore.selectReceivePosts(userId);
 	}
+
 
 }

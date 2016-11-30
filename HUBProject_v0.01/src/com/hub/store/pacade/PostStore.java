@@ -14,6 +14,7 @@ public interface PostStore {
 	
 	// 쪽지 조회
 	List<Post> selectAll(String userId);
+	Post selectPostByPostId(int postId);
 	List<Post> selectPosts(String userId, String followId);
 	List<Post> selectSendPosts(String userId);
 	List<Post> selectReceivePosts(String userId);
