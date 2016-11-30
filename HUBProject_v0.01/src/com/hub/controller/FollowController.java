@@ -3,7 +3,6 @@ package com.hub.controller;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,13 +40,13 @@ public class FollowController {
 	@RequestMapping(value="confirm.do", method=RequestMethod.POST)
 	public String confirmFollow(Follow follow){
 		followService.confirmFollow(follow);
-		return "redirect: listAll.do?userId="+follow.getUserId();
+		return "redirect: listAll.do";
 	}
 	
 	@RequestMapping(value="remove.do", method=RequestMethod.POST)
 	public String removeFollow(Follow follow){
 		followService.removeFollow(follow);
-		return "redirect: listAll.do?userId="+follow.getUserId();
+		return "redirect: listAll.do";
 	}
 	
 	@RequestMapping(value="listAll.do", method=RequestMethod.GET)

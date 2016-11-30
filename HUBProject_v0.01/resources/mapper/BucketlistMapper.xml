@@ -4,9 +4,9 @@
 <mapper namespace="com.hub.store.mapper.BucketlistMapper">
 	<resultMap type="Bucketlist" id="bucketlistMap">
 		<id property="bucketlistId" column="bucketId"/>
-		<result property="title" column="bucketName"/>
-		<result property="goal" column="goalDay"/>
-		<result property="star" column="starGrade"/>
+		<result property="title" column="title"/>
+		<result property="goal" column="goal"/>
+		<result property="star" column="star"/>
 		<result property="memo" column="memo"/>
 		<result property="sos" column="sos"/>
 		<result property="lock" column="locker" typeHandler="BooleanToYnHandler"/>
@@ -15,12 +15,12 @@
 	</resultMap>
 
 	<sql id="selectBucketlist">
-		SELECT bucketId, bucketName, bucketId, goalDay, starGrade, memo, sos, locker, userId
+		SELECT bucketId, title, bucketId, goal, star, memo, sos, locker, userId
 		FROM bucketlist_tb
 	</sql>
 
 	<insert id="insertBucketlist" parameterType="Bucketlist">
-		INSERT INTO bucketlist_tb(bucketId, bucketName, goalDay, starGrade, memo, sos, locker, userId)
+		INSERT INTO bucketlist_tb(bucketId, title, goal, star, memo, sos, locker, userId)
 		VALUES (#{bucketlistId}, #{title}, #{goal}, #{star}, #{memo}, #{sos}, 'N', #{userId})
 	</insert>
 	
@@ -31,7 +31,7 @@
 
 	<update id="updateBucketlist" parameterType="Bucketlist">
 		UPDATE bucketlist_tb
-		SET bucketName = #{title}, goalDay = #{goal}, starGrade = #{star}, memo = #{memo}, sos = #{sos},  userId = #{userId} 
+		SET title = #{title}, goal = #{goal}, star = #{star}, memo = #{memo}, sos = #{sos},  userId = #{userId} 
 		WHERE bucketId=#{bucketlistId}
 	</update>
 	<!-- locker = #{lock,typeHandler=BooleanToYnHandler}, -->

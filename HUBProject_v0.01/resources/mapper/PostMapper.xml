@@ -4,16 +4,16 @@
 <mapper namespace="com.hub.store.mapper.PostMapper">
 	<resultMap type="Post" id="postMap">
 		<id property="postId" column="postId" />		
-		<result property="sendTime" column="dayTime" />
+		<result property="sendTime" column="sendTime" />
 	</resultMap>
 
 	<sql id="selectPost">
-		SELECT postId, senderId, receiverId, daytime, content
+		SELECT postId, senderId, receiverId, sendTime, content
 		FROM post_tb
 	</sql>
 
 	<insert id="insertPost" parameterType="Post">
-		insert into post_tb(postId, senderId, receiverId, daytime, content)
+		insert into post_tb(postId, senderId, receiverId, sendTime, content)
 		values (post_seq.nextVal, #{senderId}, #{receiverId}, sysdate, #{content})
 	</insert>
 

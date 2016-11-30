@@ -1,10 +1,13 @@
 package com.hub.controller;
 
+import java.util.Date;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.hub.domain.Post;
@@ -17,18 +20,20 @@ public class PostController {
 	@Autowired
 	private PostService postService;
 	
-	public ModelAndView sendPost(HttpSession session){
-		ModelAndView mav = new ModelAndView();
-		
-		return mav;
+	@RequestMapping(value="send.do", method=RequestMethod.GET)
+	public String sendPost(){
+		return "post/sendPost";
 	}
 	
+	@RequestMapping(value="send.do", method=RequestMethod.POST)
 	public String sendPost(Post post){
-		
-		
-		return "";
+		Date date = new Date();
+		post.setSendTime(new java.sql.Date(date.getTime()));
+		postService.sendPost(post);
+		return "post/listPost";
 	}
 	
+	@RequestMapping(value="remove.do", method=RequestMethod.POST)
 	public String removePost(int postId){
 		
 		return "";

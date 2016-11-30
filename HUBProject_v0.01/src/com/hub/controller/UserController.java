@@ -38,11 +38,8 @@ public class UserController {
 	public String registerUser(User user, HttpServletRequest req
 								, @RequestParam("image") MultipartFile image){
 		
-		String fileName = 
-				fileManager
-				.registerImage(req.getServletContext()
-						       .getRealPath("resources/img/userImg"), image);
-
+		String filePath = req.getServletContext().getRealPath("resources/img/userImg");
+		String fileName = fileManager.registerImage(filePath, image);
 		user.setPicture(fileName);
 		userService.registerUser(user);
 		return "HUBMain";
@@ -110,7 +107,7 @@ public class UserController {
 		if(isAdmin == true){
 			return "redirect:/cooper/list.do";
 		} else {
-			return "redirect:/bucketlist/list.do";		
+			return "redirect:/bucketlist/list.do";
 		}
 	}
 	
