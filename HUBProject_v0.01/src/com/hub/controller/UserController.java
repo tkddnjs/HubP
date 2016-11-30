@@ -1,21 +1,30 @@
 package com.hub.controller;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.io.BufferedInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.PrintWriter;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.hub.domain.User;
 import com.hub.service.pacade.UserService;
-
-
 
 @Controller
 @RequestMapping("user")
@@ -31,14 +40,9 @@ public class UserController {
 	
 	// parameter 추가
 	@RequestMapping(value="register.do", method=RequestMethod.POST)
-	public String registerUser(User user, @RequestParam("connChains") String[] connChains){
-		List<String> connChainList = new ArrayList<>();
-		for(String connChain : connChains){
-			if(!connChain.equals("")){
-				connChainList.add(connChain);
-			}
-		}
-		System.out.println(user.getUserId());
+	public String registerUser(User user, HttpServletRequest req, @RequestParam("image") MultipartFile image){
+		String fileName = registerImage(req.getServletContext().getRealPath("resources/img/userImg"), image);
+		user.setPicture(fileName);
 		userService.registerUser(user);
 		return "HUBMain";
 	}
@@ -54,7 +58,7 @@ public class UserController {
 	@RequestMapping(value="modify.do", method=RequestMethod.POST)
 	public String modifyUser(User user){
 		userService.modifyUser(user);
-		return "redirect: /user/detail.do";
+		return "redirect: detail.do?userId="+user.getUserId();
 	}
 
 	// 설계 문서 수정 => session 추가
@@ -65,7 +69,7 @@ public class UserController {
 		return "redirect: HUBMain";
 	}
 	
-	@RequestMapping(value="detail.do", method=RequestMethod.POST)	
+	@RequestMapping(value="detail.do", method=RequestMethod.GET)	
 	public ModelAndView detailUser(String userId){
 		ModelAndView mav = new ModelAndView("user/detailUser");
 		mav.addObject("user", userService.findUserByUserId(userId));
@@ -73,11 +77,16 @@ public class UserController {
 	}
 	
 	@RequestMapping(value="check.do", method=RequestMethod.GET)
-	public String checkId(String userId){
-		if(userService.findUserByUserId(userId) == null){
-			return "OK";
-		} else {
-			return "Duplicated";
+	public void checkId(String userId, HttpServletResponse resp){
+		try {
+			PrintWriter out = resp.getWriter();
+			if(userService.findUserByUserId(userId) == null){
+				out.println("OK");
+			} else {
+				out.println("Duplicated");
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 	}
 
@@ -102,5 +111,38 @@ public class UserController {
 	public String logout(HttpSession session){
 		session.invalidate();
 		return "HUBMain";
+	}
+	
+	public String registerImage(String saveDir, MultipartFile image){
+		OutputStream out = null;
+		int size = (int) image.getSize();
+		String originalName = image.getOriginalFilename();
+		int length = originalName.length();
+		String fileType = originalName.substring(length-4, length);
+		DateFormat dataFormat = new SimpleDateFormat("yyyymmddHHmmss");
+		Date date = new Date();
+		StringBuilder fileName = new StringBuilder();
+		fileName.append(originalName.substring(0, length-4));
+		fileName.append(dataFormat.format(date));
+		fileName.append(fileType);
+		
+		try {
+			out = new FileOutputStream(saveDir + "/" + fileName.toString());
+			BufferedInputStream bis = new BufferedInputStream(image.getInputStream());
+			byte [] buffer = new byte[size];
+			int read;
+			while ((read = bis.read(buffer)) > 0){
+				out.write(buffer, 0, read);
+			}
+			
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			IOUtils.closeQuietly(out);
+		}
+		
+		return fileName.toString();
 	}
 }
