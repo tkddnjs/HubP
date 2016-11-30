@@ -1,11 +1,11 @@
-insert into USER_TB values('admin', 'admin', null, null, null, null, 'Y');
-insert into USER_TB values('hub', 'hub', 'hub@hub.com', 3, null, '안녕하세요 HUB입니다.', 'N');
-insert into USER_TB values('111', '1', '111@hub.com', 3, null, '안녕하세요 111입니다.', 'N');
-insert into USER_TB values('222', '2', '222@hub.com', 3, null, '안녕하세요 222입니다.', 'N');
-insert into USER_TB values('333', '3', '333@hub.com', 3, null, '안녕하세요 333입니다.', 'N');
-insert into USER_TB values('444', '5', '444@hub.com', 3, null, '안녕하세요 444입니다.', 'N');
-insert into USER_TB values('555', '5', '555@hub.com', 3, null, '안녕하세요 555입니다.', 'N');
-insert into USER_TB values('666', '6', '666@hub.com', 3, null, '안녕하세요 666입니다.', 'N');
+insert into USER_TB values('admin', 'admin', null, null, null, 'Y');
+insert into USER_TB values('hub', 'hub', 'hub@hub.com', 'default.png', '안녕하세요 HUB입니다.', 'N');
+insert into USER_TB values('111', '1', '111@hub.com', 'default.png', '안녕하세요 111입니다.', 'N');
+insert into USER_TB values('222', '2', '222@hub.com', 'default.png', '안녕하세요 222입니다.', 'N');
+insert into USER_TB values('333', '3', '333@hub.com', 'default.png', '안녕하세요 333입니다.', 'N');
+insert into USER_TB values('444', '5', '444@hub.com', 'default.png', '안녕하세요 444입니다.', 'N');
+insert into USER_TB values('555', '5', '555@hub.com', 'default.png', '안녕하세요 555입니다.', 'N');
+insert into USER_TB values('666', '6', '666@hub.com', 'default.png', '안녕하세요 666입니다.', 'N');
 
 insert into Userconn_TB values('hub', '운동');
 insert into Userconn_TB values('111', '여행');

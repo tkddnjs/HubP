@@ -65,7 +65,7 @@
 		<include refid="selectBucketlist" />
 		WHERE bucketId IN (SELECT bucketId
 							FROM bucketConn_tb
-							WHERE connChain = #{connChain} 
+							WHERE connChain = #{connChain})
 	</select>
 	
 	<select id="selectConnChainsByBucketlistId" parameterType="int" resultType="String">

@@ -63,7 +63,7 @@ public class BucketlistController {
 		if(bucketlist.getUserId().equals(userId)){
 			mav = new ModelAndView("bucketlist/detailBucketlist");
 		} else {
-			mav = new ModelAndView("List/detailBucketlist");
+			mav = new ModelAndView("list/detailBucketlist");
 		}
 
 		mav.addObject("bucketlist", bucketlist);

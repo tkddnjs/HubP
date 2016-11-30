@@ -85,17 +85,17 @@ h1 {
 						<tr>
 							<td>${status.count }</td>
 							<td>
-								<form action="${pageContext.request.contextPath}/user/detail.do" method="post">
+								<form action="${pageContext.request.contextPath}/user/detail.do" method="get">
 									<button class="btn btn-xs btn-default btn-block" type="submit"
 										name="userId" value="${bucketlist.userId }">${bucketlist.userId }</button>
-									<input type="hidden" name="connChain" value="${connChain }">
+									<input type="hidden" name="searchWord" value="${searchWord }">
 								</form>
 							</td>
 							<td>
 								<form action="${pageContext.request.contextPath}/bucketlist/detail.do" method="get">
 									<button class="btn btn-xs btn-default btn-block" type="submit"
 										name="bucketlistId" value="${bucketlist.bucketlistId }">${bucketlist.title }</button>
-									<input type="hidden" name="connChain" value="${connChain }">
+									<input type="hidden" name="searchWord" value="${searchWord }">
 								</form>
 							</td>
 						</tr>
@@ -110,7 +110,7 @@ h1 {
 								<form action="${pageContext.request.contextPath}/user/detail.do" method="post">
 									<button class="btn btn-xs btn-default btn-block" type="submit"
 										name="userId" value="${user.userId }">${user.userId }</button>
-									<input type="hidden" name="connChain" value="${connChain }">
+									<input type="hidden" name="searchWord" value="${searchWord }">
 								</form>
 							</td>
 							<td>${user.connChains }</td>
@@ -123,7 +123,6 @@ h1 {
 	
 	<script type="text/javascript">
 		var availableTags = [];
-	
 		$(document).ready(function() {
 			if ($("#listOpt").val() != null) {
 				var listOpt = $("#listOpt").val();

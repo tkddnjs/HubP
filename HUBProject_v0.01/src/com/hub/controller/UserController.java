@@ -24,6 +24,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.hub.domain.User;
+import com.hub.filemanager.FileManager;
 import com.hub.service.pacade.UserService;
 
 @Controller
@@ -33,6 +34,8 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 	
+	private FileManager fileManager = new FileManager();
+	
 	@RequestMapping(value="register.do", method=RequestMethod.GET)
 	public String registerUser(){
 		return "user/registerUser";
@@ -41,7 +44,12 @@ public class UserController {
 	// parameter 추가
 	@RequestMapping(value="register.do", method=RequestMethod.POST)
 	public String registerUser(User user, HttpServletRequest req, @RequestParam("image") MultipartFile image){
-		String fileName = registerImage(req.getServletContext().getRealPath("resources/img/userImg"), image);
+		
+		String fileName = 
+				fileManager
+				.registerImage(req.getServletContext()
+						       .getRealPath("resources/img/userImg"), image);
+
 		user.setPicture(fileName);
 		userService.registerUser(user);
 		return "HUBMain";
@@ -68,10 +76,17 @@ public class UserController {
 		userService.removeUser(userId);
 		return "redirect: HUBMain";
 	}
-	
+
+	// parameter 변경 (String userId => HttpSession session, String userId)
 	@RequestMapping(value="detail.do", method=RequestMethod.GET)	
-	public ModelAndView detailUser(String userId){
-		ModelAndView mav = new ModelAndView("user/detailUser");
+	public ModelAndView detailUser(HttpSession session, String userId){
+		ModelAndView mav = null;
+		
+		if(userId.equals((String)session.getAttribute("userId"))){
+			mav = new ModelAndView("user/detailUser");
+		} else {
+			mav = new ModelAndView("list/detailUser");
+		}
 		mav.addObject("user", userService.findUserByUserId(userId));
 		return mav;
 	}
@@ -110,39 +125,6 @@ public class UserController {
 	@RequestMapping(value="logout.do", method=RequestMethod.GET)
 	public String logout(HttpSession session){
 		session.invalidate();
-		return "HUBMain";
-	}
-	
-	public String registerImage(String saveDir, MultipartFile image){
-		OutputStream out = null;
-		int size = (int) image.getSize();
-		String originalName = image.getOriginalFilename();
-		int length = originalName.length();
-		String fileType = originalName.substring(length-4, length);
-		DateFormat dataFormat = new SimpleDateFormat("yyyymmddHHmmss");
-		Date date = new Date();
-		StringBuilder fileName = new StringBuilder();
-		fileName.append(originalName.substring(0, length-4));
-		fileName.append(dataFormat.format(date));
-		fileName.append(fileType);
-		
-		try {
-			out = new FileOutputStream(saveDir + "/" + fileName.toString());
-			BufferedInputStream bis = new BufferedInputStream(image.getInputStream());
-			byte [] buffer = new byte[size];
-			int read;
-			while ((read = bis.read(buffer)) > 0){
-				out.write(buffer, 0, read);
-			}
-			
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		} finally {
-			IOUtils.closeQuietly(out);
-		}
-		
-		return fileName.toString();
+		return "redirect: HUBMain";
 	}
 }

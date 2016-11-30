@@ -3,6 +3,7 @@ package com.hub.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,14 +22,20 @@ public class FollowController {
 	@Autowired
 	private FollowService followService;
 	
+//	@RequestMapping(value="request.do", method=RequestMethod.POST)
+//	public String requestFollow(HttpSession session, String followId){
+//		Follow follow = new Follow();
+//		follow.setUserId((String)session.getAttribute("userId"));
+//		follow.setFollowId(followId);
+//		follow.setConfirm(true);
+//		followService.registerFollow(follow);
+//		return "redirect: list/list.do";
+//	}
+	
 	@RequestMapping(value="request.do", method=RequestMethod.POST)
-	public String requestFollow(HttpSession session, String followId){
-		Follow follow = new Follow();
-		follow.setUserId((String)session.getAttribute("userId"));
-		follow.setFollowId(followId);
+	public void requestFollow(Follow follow, HttpServletRequest request){
 		follow.setConfirm(true);
 		followService.registerFollow(follow);
-		return "redirect: list/list.do";
 	}
 	
 	@RequestMapping(value="confirm.do", method=RequestMethod.POST)
