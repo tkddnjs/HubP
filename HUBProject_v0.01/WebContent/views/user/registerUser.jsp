@@ -67,7 +67,7 @@ dl dd p.error {
 
 	<div id="container">
 		<h1>회원가입</h1>
-		<form action="${pageContext.request.contextPath}/user/register.do" method="post">
+		<form action="${pageContext.request.contextPath}/user/register.do" method="post" enctype="multipart/form-data">
 			<dl>
 				<dt>
 					ID<span> (*) </span>
@@ -98,6 +98,11 @@ dl dd p.error {
 					<input type="text" size="50" id="email" name="email"
 						class="validate mail mail_check">
 					<span id="mailCheckResult"></span>
+				</dd>
+
+				<dt>사진</dt>
+				<dd>
+					<input type="file" name="image">
 				</dd>
 
 				<dt>
@@ -179,8 +184,8 @@ dl dd p.error {
 		$("#userId").keyup(function() {
 			var userId= $(this).val();
 			$.ajax({
-				type: 'POST', 
-				url: 'user/check.do',
+				type: 'GET', 
+				url: '${pageContext.request.contextPath}/user/check.do',
 				data: 
 					{
 						userId: userId

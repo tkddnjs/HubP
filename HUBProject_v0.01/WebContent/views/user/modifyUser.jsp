@@ -196,7 +196,7 @@ dl dd p.error {
 			var userId= $(this).val();
 			$.ajax({
 				type: 'POST', 
-				url: 'user/check.do',
+				url: '${pageContext.request.contextPath}/user/check.do',
 				data: 
 					{
 						userId: userId

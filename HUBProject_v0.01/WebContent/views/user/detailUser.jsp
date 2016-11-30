@@ -62,6 +62,10 @@ h1 {
 
 	<table class="table table-hover table-condensed">
 		<tr>
+			<th width="50" align="center">사진</th>
+			<td width="100" align="center"><img src="${pageContext.request.contextPath }/resources/img/userImg/${user.picture }"></td>
+		</tr>
+		<tr>
 			<th width="50" align="center">ID</th>
 			<td width="100" align="center">${user.userId }</td>
 		</tr>
@@ -75,13 +79,12 @@ h1 {
 		</tr>
 	</table>
 
-	<form action="${pageContext.request.contextPath }list/list.do" method="post">
-		<div class="input-append pull-right">
-			<button class="btn btn-xs btn-default btn-block" type="submit">돌아가기</button>
-		</div>
-		<input type="hidden" name="listOpt" value="${listOpt }">
-		<input type="hidden" name="searchWord" value="${connChain }">
-	</form>
+	<div style="float: right;">
+		<a class="btn btn-xs btn-default"
+		  	href="${pageContext.request.contextPath }/user/modify.do?userId=${sessionScope.userId}">수정</a>
+		<a class="btn btn-xs btn-default"
+		 	href="${pageContext.request.contextPath }/user/delete.do?userId=${sessionScope.userId}">탈퇴</a>
+	</div>
 	
 	<c:if test="${chkFollow }">
 		<form action="follow/request.do" method="post">
