@@ -3,61 +3,102 @@
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.hub.store.mapper.GroupMapper">
 	<resultMap type="Group" id="groupMap">
-		
+		<id property="groupId" column="groupId"/>
+		<result property="groupName" column="groupName"/>
+		<result property="managerId" column="managerId"/>
+		<result property="lastDay" column="lastDay"/>
+		<result property="introduce" column="introduce"/>
+		<result property="local" column="local"/>
+		<result property="maxPeople" column="maxPeople"/>
+		<collection property="connChains" column="groupId" ofType="String" select="com.hub.store.mapper.GroupMapper.selectConnChainsByGroupId" javaType="ArrayList" jdbcType="NUMERIC"/>
+		<collection property="joinPeople" column="groupId" ofType="String" select="com.hub.store.mapper.GroupMapper.selectJoinUsersByGroupId" javaType="ArrayList" jdbcType="NUMERIC"/>
 	</resultMap>
 
 	<sql id="selectGroup">
-		SELECT 
-		FROM 
+		SELECT groupId, groupName, managerId, lastDay, local, introduce, maxPeople
+		FROM group_tb
 	</sql>
 
-	<insert id="insertGroup" parameterType="Group">
+	<select id="nextGroupId" resultType="int">
+		SELECT group_seq.nextval as bucketlistId
+		FROM dual
+	</select>
 
+	<insert id="insertGroup" parameterType="Group">
+		INSERT INTO group_tb(groupId, groupName, managerId, lastDay, local, introduce, maxPeople)
+		VALUES (#{groupId}, #{groupName}, #{managerId}, #{lastDay}, #{local}, #{introduce}, #{maxPeople})
+	</insert>
+	
+	<insert id="insertGroupConn" parameterType="Map">
+		INSERT INTO groupConn_tb(groupId, connChain)
+		VALUES (#{groupId}, #{connChain})
+	</insert>
+	
+	<insert id="insertUserGroup" parameterType="Map">
+		INSERT INTO userGroup_tb(userId, groupId)
+		VALUES (#{userId}, #{groupId})
 	</insert>
 
 	<update id="updateGroup" parameterType="Group">
-
+		UPDATE group_tb
+		SET groupName = #{groupName}, lastDay = #{lastDay}, local = #{local}, introduce = #{introduce}, maxPeople = #{maxPeople}
+		WHERE groupId = #{groupId}
 	</update>
 
 	<delete id="deleteGroup" parameterType="int">
-
+		DELETE group_tb
+		WHERE groupId = #{groupId}
 	</delete>
 	
-	<insert id="insertUserGroup" parameterType="Map">
-
-	</insert>
+	<delete id="deleteGroupConn" parameterType="int">
+		DELETE groupConn_tb(groupId, connChain)
+		WHERE groupId=#{groupId}
+	</delete>
 
 	<delete id="deleteUserGroup" parameterType="Map">
-
+		DELETE userGroup_tb
+		WHERE userId=#{userId} AND groupId=#{groupId}
 	</delete>
 		
 	<select id="selectAll" resultMap="groupMap">
 		<include refid="selectGroup" />
 	</select>
 
-	<select id="selectGroupByGroupId" parameterType="int" resultType="Group">
+	<select id="selectGroupByGroupId" parameterType="int" resultType="groupMap">
 		<include refid="selectGroup" />
-		
+		WHERE groupId=#{groupId}
 	</select>
 
 	<select id="selectGroupsByUserId" parameterType="String" resultMap="groupMap">
 		<include refid="selectGroup" />
-		
+		WHERE userId=#{userId}
 	</select>
 	
 	<select id="selectGroupsByConnChain" parameterType="String" resultMap="groupMap">
 		<include refid="selectGroup" />
-		
+		WHERE connChain=#{connChain}
 	</select>
 	
 	<select id="selectGroupsByGroupName" parameterType="String" resultMap="groupMap">
 		<include refid="selectGroup" />
-		
+		WHERE groupName=#{groupName}
 	</select>
 	
 	<select id="selectGroupsByLocal" parameterType="String" resultMap="groupMap">
 		<include refid="selectGroup" />
-		
+		WHERE local=#{local}
+	</select>
+	
+	<select id="selectConnChainsByGroupId" parameterType="int" resultMap="String">
+		SELECT connChain
+		FROM groupConn_tb
+		WHERE groupId = #{groupId}
+	</select>
+	
+	<select id="selectJoinUsersByGroupId" parameterType="int" resultMap="String">
+		SELECT userId
+		FROM userGroup_tb
+		WHERE groupId = #{groupId}
 	</select>
 	
 </mapper>

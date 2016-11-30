@@ -4,16 +4,16 @@
 <mapper namespace="com.hub.store.mapper.PostMapper">
 	<resultMap type="Post" id="postMap">
 		<id property="postId" column="postId" />		
-		<result property="transDT" column="dayTime" />
+		<result property="sendTime" column="sendTime" />
 	</resultMap>
 
 	<sql id="selectPost">
-		SELECT postId, senderId, receiverId, daytime, content
+		SELECT postId, senderId, receiverId, sendTime, content
 		FROM post_tb
 	</sql>
 
 	<insert id="insertPost" parameterType="Post">
-		insert into post_tb(postId, senderId, receiverId, daytime, content)
+		insert into post_tb(postId, senderId, receiverId, sendTime, content)
 		values (post_seq.nextVal, #{senderId}, #{receiverId}, sysdate, #{content})
 	</insert>
 
@@ -28,18 +28,24 @@
 		OR receiverId = #{userId}
 	</select>
 
-	<select id="selectPostByFriendId" parameterType="Map" resultMap="postMap">
+	<select id="selectPostByPostId" parameterType="int" resultMap="postMap">
 		<include refid="selectPost" />
-		
+		WHERE postId = #{postId}
+	</select>
+
+	<select id="selectPosts" parameterType="Map" resultMap="postMap">
+		<include refid="selectPost" />
+		WHERE senderId = #{userId} AND receiverId = #{followId}
+		OR senderId = #{followId} AND receiverId = #{userId}
 	</select>
 
 	<select id="selectSendPosts" parameterType="String" resultMap="postMap">
 		<include refid="selectPost" />
-		
+		WHERE senderId = #{userId}
 	</select>
 	
 	<select id="selectReceivePosts" parameterType="String" resultMap="postMap">
 		<include refid="selectPost" />
-		
+		WHERE receiverId = #{userId}
 	</select>
 </mapper>

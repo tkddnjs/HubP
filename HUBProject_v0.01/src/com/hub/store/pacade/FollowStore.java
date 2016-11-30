@@ -6,15 +6,17 @@ import com.hub.domain.Follow;
 
 public interface FollowStore {
 	
+	// 팔로우 추가 (팔로우 요청)
 	int insertFollow(Follow follow);
+	
+	// 팔로우 수정 (팔로우 요청 수락)
+	int updateFollow(Follow follow);
+	
+	// 팔로우 삭제 (팔로우 요청 거절 / 팔로우 삭제)
 	int deleteFollow(Follow follow);
 	
-	//추가
-	int updateFollowConfirm(Follow follow);
-	List<Follow> selectRequestedFollows(String userId);
-	//
-	
+	// 팔로우 조회
 	List<Follow> selectAll(String userId);
-	List<Follow> selectFollowsByConnChain(String userId, String connChain);
-	List<Follow> selectFollowsByRelation(Follow follow);
+	List<Follow> selectFollowsRequested(String userId);
+	List<Follow> selectFollowsByRelation(String userId, int relation);
 }

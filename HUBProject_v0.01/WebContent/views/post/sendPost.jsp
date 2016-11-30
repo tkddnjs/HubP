@@ -62,7 +62,7 @@ h1 {
 			
 			<div class="container">
 				<div class="wrap" align="center">
-					<textarea name="inputMassage"></textarea>
+					<textarea name="content"></textarea>
 				</div>
 			</div>
 			

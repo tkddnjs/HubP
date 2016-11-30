@@ -2,48 +2,73 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.hub.store.mapper.CooperMapper">
-	<!-- <resultMap type="Cooper" id="cooperMap">
-		<id property="coId" column="cooper_id"/>
-		<result property="coName" column="cooper_name"/>
-		<result property="coBanner" column="cooper_banner"/>
-		<result property="startDay" column="cooper_startDay"/>
-		<result property="lastDay" column="cooper_lastDay"/>
-		<collection property="connChains" column="cooper_connChains" ofType="String" javaType="ArrayList" jdbcType="VARCHAR"/>
+	<resultMap type="Cooper" id="cooperMap">
+		<id property="coId" column="coId"/>
+		<result property="coName" column="coName"/>
+		<result property="startDay" column="startDay"/>
+		<result property="lastDay" column="lastDay"/>
+		<result property="coBanner" column="banner"/>
+		<collection property="connChains" column="coId" ofType="String" select="com.hub.store.mapper.CooperMapper.selectConnChainsByCoId" javaType="ArrayList" jdbcType="NUMERIC"/>
 	</resultMap>
- 	-->
- 	<!-- 
+
 	<sql id="selectCooper">
-		SELECT cooper_id, cooper_name, cooper_banner, cooper_startDay, cooper_lastDay, cooper_connChains
+		SELECT coId, coName, banner, startDay, lastDay
 		FROM cooper_tb
 	</sql>
- -->
+
+	<select id="nextCooperId">
+		SELECT cooper_seq.nextval as coId
+		FROM dual
+	</select>
+
 	<insert id="insertCooper" parameterType="Cooper">
-		<!-- INSERT
-		INTO cooper_tb(cooper_id, cooper_name, cooper_banner, cooper_startDay, cooper_lastDay, cooper_connChains)
-		VALUES(cooper_seq.nextVal, #{coName}, #{coBanner}, sysdate, #{lastday}, #{connChains}) -->
 		INSERT
-		INTO cooper_tb(cooper_id, cooper_name, cooper_banner, cooper_startDay, cooper_lastDay)
-		VALUES(cooper_seq.nextVal, #{coName}, #{coBanner}, sysdate, #{lastDay})
+		INTO cooper_tb(coId, coName, banner, startDay, lastDay)
+		VALUES(#{coId}, #{coName}, #{coBanner}, sysdate, #{lastDay})
 	</insert>
-<!-- 
+	
+	<insert id="insertCooper" parameterType="Map">
+		INSERT
+		INTO cooperConn_tb(coId, connChain)
+		VALUES(#{coId}, #{connChain})
+	</insert>
+
 	<update id="updateCooper" parameterType="Cooper">
 		UPDATE cooper_tb
-		SET (cooper_name = #{coName}, cooper_banner = #{coBanner}, cooper_lastDay = #{lastday}, cooper_connChains = #{connChains})
-		WHERE cooper_id = #{coId}
+		SET (coName = #{coName}, banner = #{coBanner}, lastDay = #{lastDay})
+		WHERE coId = #{coId}
 	</update>
 
 	<delete id="deleteCooper" parameterType="int">
 		DELETE cooper_tb
-		WHERE cooper_id = #{coId}
+		WHERE coId = #{coId}
+	</delete>
+	
+	<delete id="deleteCooperConn" parameterType="int">
+		DELETE cooperConn_tb
+		WHERE coId = #{coId}
 	</delete>
 	
 	<select id="selectAll" resultMap="cooperMap">
 		<include refid="selectCooper" />
 	</select>
 
-	<select id="selectCooperByCoId" parameterType="int" resultType="Cooper">
+	<select id="selectCooperByCoId" parameterType="int" resultType="cooperMap">
 		<include refid="selectCooper" />
-		WHERE cooper_id = #{coId}
+		WHERE coId = #{coId}
 	</select>
--->
+	
+	<select id="selectCoopersByConnChain" parameterType="String" resultType="cooperMap">
+		<include refid="selectCooper" />
+		WHERE coId IN (SELECT coId
+						FROM cooperConn_tb
+						WHERE connChain=#{connChain})
+	</select>
+
+	<select id="selectConnChainsByCoId" parameterType="int" resultType="String">
+		SELECT connChain
+		FROM cooperConn_tb
+		WHERE coId = #{coId}
+	</select>
+	
 </mapper>

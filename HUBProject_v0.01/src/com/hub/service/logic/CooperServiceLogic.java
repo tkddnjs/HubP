@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.hub.domain.Cooper;
 import com.hub.service.pacade.CooperService;
+import com.hub.store.pacade.ConnChainStore;
 import com.hub.store.pacade.CooperStore;
 
 @Service
@@ -14,6 +15,8 @@ public class CooperServiceLogic implements CooperService {
 
 	@Autowired
 	private CooperStore cooperStore;
+	@Autowired
+	private ConnChainStore connChainStore;
 	
 	@Override
 	public int registerCooper(Cooper cooper) {
@@ -38,6 +41,11 @@ public class CooperServiceLogic implements CooperService {
 	@Override
 	public Cooper findCoopersByCoId(int coId) {
 		return cooperStore.selectCooperByCoId(coId);
+	}
+
+	@Override
+	public List<Cooper> findCoopersByConnChain(String connChain) {
+		return cooperStore.selectCoopersByConnChain(connChain);
 	}
 
 }

@@ -16,7 +16,7 @@ public class FollowServiceLogic implements FollowService {
 	private FollowStore followStore;
 	
 	@Override
-	public int registerFollow(Follow follow) {
+	public int requestFollow(Follow follow) {
 		return followStore.insertFollow(follow);
 	}
 
@@ -27,7 +27,7 @@ public class FollowServiceLogic implements FollowService {
 
 	@Override
 	public int confirmFollow(Follow follow) {
-		return followStore.updateFollowConfirm(follow);
+		return followStore.updateFollow(follow);
 	}
 	
 	@Override
@@ -37,22 +37,17 @@ public class FollowServiceLogic implements FollowService {
 
 	@Override
 	public List<Follow> findRequestedFollows(String userId) {
-		return followStore.selectRequestedFollows(userId);
+		return followStore.selectFollowsRequested(userId);
 	}
 	
 	@Override
-	public List<Follow> findFollowsByConnChain(String userId, String connChain) {
-		return followStore.selectFollowsByConnChain(userId, connChain);
+	public List<Follow> findFollowsByRelation(String userId, int relation) {
+		return followStore.selectFollowsByRelation(userId, relation);
 	}
 
 	@Override
-	public List<Follow> findFollowsByRelation(Follow follow) {
-		return followStore.selectFollowsByRelation(follow);
-	}
-
-	@Override
-	public boolean checkRequest(String userId, String followId){
-		for(Follow Follow : followStore.selectRequestedFollows(userId)){
+	public boolean checkFollowRequested(String userId, String followId){
+		for(Follow Follow : followStore.selectFollowsRequested(userId)){
 			if(Follow.getFollowId().equals(followId)){
 				return false;
 			}
@@ -62,7 +57,6 @@ public class FollowServiceLogic implements FollowService {
 				return false;
 			}
 		}
-		
 		return true;
 	}
 

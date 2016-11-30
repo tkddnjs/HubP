@@ -6,7 +6,7 @@ public class Post {
 	private int postId;
 	private String senderId;
 	private String receiverId;
-	private Date transDT;
+	private Date sendTime;
 	private String content;
 
 	public Post() {
@@ -36,12 +36,12 @@ public class Post {
 		this.receiverId = receiverId;
 	}
 
-	public Date getTransDT() {
-		return transDT;
+	public Date getSendTime() {
+		return sendTime;
 	}
 
-	public void setTransDT(Date transDT) {
-		this.transDT = transDT;
+	public void setSendTime(Date sendTime) {
+		this.sendTime = sendTime;
 	}
 
 	public String getContent() {

@@ -21,6 +21,17 @@ public class CooperStoreLogic implements CooperStore {
 	}
 	
 	@Override
+	public int nextCooperId() {
+		SqlSession session = factory.openSession();
+		try {
+			CooperMapper mapper = session.getMapper(CooperMapper.class);
+			return mapper.nextCooperId();
+		} finally {
+			session.close();
+		}
+	}
+	
+	@Override
 	public int insertCooper(Cooper cooper) {
 		SqlSession session = factory.openSession();
 		int result = 0;
@@ -38,6 +49,26 @@ public class CooperStoreLogic implements CooperStore {
 		return result;
 	}
 
+	@Override
+	public int insertCooperConn(Cooper cooper) {
+		SqlSession session = factory.openSession();
+		int result = 0;
+		try {
+			CooperMapper mapper = session.getMapper(CooperMapper.class);
+			for(String connChain : cooper.getConnChains()){
+				result = mapper.insertCooperConn(cooper.getCoId(), connChain);
+			}
+			if(result > 0){
+				session.commit();
+			} else {
+				session.rollback();
+			}
+		} finally {
+			session.close();
+		}
+		return result;
+	}
+	
 	@Override
 	public int updateCooper(Cooper cooper) {
 		SqlSession session = factory.openSession();
@@ -74,6 +105,24 @@ public class CooperStoreLogic implements CooperStore {
 		return result;
 	}
 
+	@Override
+	public int deleteCooperConn(int coId) {
+		SqlSession session = factory.openSession();
+		int result = 0;
+		try {
+			CooperMapper mapper = session.getMapper(CooperMapper.class);
+			result = mapper.deleteCooperConn(coId);
+			if(result > 0){
+				session.commit();
+			} else {
+				session.rollback();
+			}
+		} finally {
+			session.close();
+		}
+		return result;
+	}
+	
 	@Override
 	public List<Cooper> selectAll() {
 		SqlSession session = factory.openSession();

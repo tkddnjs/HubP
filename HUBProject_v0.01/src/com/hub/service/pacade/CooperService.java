@@ -11,4 +11,5 @@ public interface CooperService {
 	int removeCooper(int coId);
 	List<Cooper> findAll();
 	Cooper findCoopersByCoId(int coId);
+	List<Cooper> findCoopersByConnChain(String connChain);
 }

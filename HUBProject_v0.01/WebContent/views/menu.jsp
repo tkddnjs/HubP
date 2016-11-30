@@ -28,7 +28,7 @@ h1 {
 			<div class="col-md-12">
 				<br>
 				<ul class="tab">
-					<li><a href="${pageContext.request.contextPath}/bucketlist/list.do" >버킷리스트</a></li>
+					<li><a href="${pageContext.request.contextPath}/bucketlist/list.do?userId=${sessionScope.userId}" >버킷리스트</a></li>
 					<!-- /HUBProject_v0.01/listBucketlist.do -->
 					
 					<li><a href="${pageContext.request.contextPath}/list/list.do?listOpt=0">도움리스트</a></li>

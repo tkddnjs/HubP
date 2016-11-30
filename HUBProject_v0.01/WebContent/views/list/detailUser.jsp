@@ -62,29 +62,39 @@ h1 {
 
 	<table class="table table-hover table-condensed">
 		<tr>
-			<th width="50" align="center">제목</th>
-			<td width="100" align="center">${bucketlist.title }</td>
+			<th width="50" align="center">사진</th>
+			<td width="100" align="center">${user.picture }</td>
+		</tr>
+		<tr>
+			<th width="50" align="center">ID</th>
+			<td width="100" align="center">${user.userId }</td>
 		</tr>
 		<tr>
 			<th width="50" align="center">연결고리</th>
-			<td width="100" align="center">${bucketlist.connChains }</td>
+			<td width="100" align="center">${user.connChains }</td>
 		</tr>
 		<tr>
-			<th width="50" align="center">SOS</th>
-			<td width="100" align="center">${bucketlist.sos }</td>
-		</tr>
-		<tr>
-			<th width="50" align="center">사용자ID</th>
-			<td width="100" align="center">${bucketlist.userId }</td>
+			<th width="50" align="center">소개</th>
+			<td width="100" align="center">${user.introduce }</td>
 		</tr>
 	</table>
 
-	<form action="list/list.do" method="post">
+	<form action="${pageContext.request.contextPath}/list/list.do" method="post">
 		<div class="input-append pull-right">
 			<button class="btn btn-xs btn-default btn-block" type="submit">돌아가기</button>
 		</div>
 		<input type="hidden" name="listOpt" value="${listOpt }">
-		<input type="hidden" name="connChain" value="${connChain }">
+		<input type="hidden" name="connChain" value="${searchWord }">
 	</form>
+	
+	<form action="${pageContext.request.contextPath}/follow/request.do" method="post">
+		<div class="input-append pull-right">
+			<button class="btn btn-xs btn-default btn-block" type="submit">팔로우신청</button>
+			<input type="hidden" name="userId" value="${sessionScope.userId }">
+			<input type="hidden" name="followId" value="${user.userId }">
+			<input type="hidden" name="relation" value="${listOpt }">
+		</div>
+	</form>
+	
 </body>
 </html>

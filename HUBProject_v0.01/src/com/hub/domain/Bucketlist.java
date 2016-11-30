@@ -87,7 +87,7 @@ public class Bucketlist {
 	public void setUserId(String userId) {
 		this.userId = userId;
 	}
-	
+
 	public int getStars() {
 		int stars = 0;
 		for (int i = 0; i < star; i++) {
@@ -95,5 +95,5 @@ public class Bucketlist {
 		}
 		return stars * 20;
 	}
-	
+
 }

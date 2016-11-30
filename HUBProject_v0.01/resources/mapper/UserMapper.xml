@@ -22,7 +22,7 @@
 		values (#{userId }, #{pw }, #{email }, #{picture }, #{introduce }, 'N')
 	</insert>
 	
-	<insert id="insertConnChain" parameterType="Map">
+	<insert id="insertUserConn" parameterType="Map">
 		INSERT INTO Userconn_tb(userId, connChain)
 		VALUES (#{userId }, #{connChain})
 	</insert>
@@ -36,6 +36,11 @@
 	<delete id="deleteUser" parameterType="String">
 		DELETE User_tb
 		WHERE userId=#{userId}
+	</delete>
+	
+	<delete id="deleteUserConn" parameterType="Map">
+		DELETE Userconn_tb
+		WHERE userId = #{userId }
 	</delete>
 	
 	<select id="selectUserByUserId" parameterType="String" resultMap="userMap">

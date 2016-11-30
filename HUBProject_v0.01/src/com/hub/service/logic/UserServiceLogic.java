@@ -32,6 +32,7 @@ public class UserServiceLogic implements UserService {
 		int result = 1;
 		
 		result *= userStore.insertUser(user);
+		result *= userStore.insertUserConn(user);
 		
 		List<String> sList = new ArrayList<>();
 		for(String connChain : user.getConnChains()){

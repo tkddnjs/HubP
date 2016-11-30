@@ -25,7 +25,6 @@ public class ListController {
 	@RequestMapping(value = "list.do", method = RequestMethod.GET)
 	public ModelAndView listUser(int listOpt, String searchWord) {
 		ModelAndView mav = new ModelAndView("list/list");
-		
 		switch (listOpt) {
 //		페이지만 return
 		case 0:
@@ -45,6 +44,7 @@ public class ListController {
 //			break;
 		}
 		mav.addObject("listOpt", listOpt);
+		mav.addObject("searchWord", searchWord);
 		return mav;
 	}
 	

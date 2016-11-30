@@ -85,17 +85,19 @@ h1 {
 						<tr>
 							<td>${status.count }</td>
 							<td>
-								<form action="${pageContext.request.contextPath}/user/detail.do" method="post">
+								<form action="${pageContext.request.contextPath}/user/detail.do" method="get">
+									<input type="hidden" name="myId" value="${sessionScope.userId }">
+									<input type="hidden" name="searchWord" value="${searchWord }">
 									<button class="btn btn-xs btn-default btn-block" type="submit"
 										name="userId" value="${bucketlist.userId }">${bucketlist.userId }</button>
-									<input type="hidden" name="connChain" value="${connChain }">
 								</form>
 							</td>
 							<td>
 								<form action="${pageContext.request.contextPath}/bucketlist/detail.do" method="get">
+									<input type="hidden" name="userId" value="${sessionScope.userId }">
+									<input type="hidden" name="searchWord" value="${searchWord }">
 									<button class="btn btn-xs btn-default btn-block" type="submit"
 										name="bucketlistId" value="${bucketlist.bucketlistId }">${bucketlist.title }</button>
-									<input type="hidden" name="connChain" value="${connChain }">
 								</form>
 							</td>
 						</tr>
@@ -108,9 +110,10 @@ h1 {
 							<td>${status.count }</td>
 							<td>
 								<form action="${pageContext.request.contextPath}/user/detail.do" method="post">
+									<input type="hidden" name="myId" value="${sessionScope.userId }">
+									<input type="hidden" name="searchWord" value="${searchWord }">
 									<button class="btn btn-xs btn-default btn-block" type="submit"
 										name="userId" value="${user.userId }">${user.userId }</button>
-									<input type="hidden" name="connChain" value="${connChain }">
 								</form>
 							</td>
 							<td>${user.connChains }</td>
@@ -123,7 +126,6 @@ h1 {
 	
 	<script type="text/javascript">
 		var availableTags = [];
-	
 		$(document).ready(function() {
 			if ($("#listOpt").val() != null) {
 				var listOpt = $("#listOpt").val();

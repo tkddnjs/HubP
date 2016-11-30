@@ -52,15 +52,14 @@ public class BucketlistServiceLogic implements BucketlistService {
 	public int removeBucketlist(int bucketlistId) {
 		return bucketlistStore.deleteBucketlist(bucketlistId);
 	}
-
-	@Override
-	public Bucketlist findBucketlistByBucketlistId(int bucketlistId) {
-		return bucketlistStore.selectBucketlistByBucketlistId(bucketlistId);
-	}
-
+	
 	@Override
 	public List<Bucketlist> findAll(String userId) {
 		return bucketlistStore.selectAll(userId);
 	}
 
+	@Override
+	public Bucketlist findBucketlistByBucketlistId(int bucketlistId) {
+		return bucketlistStore.selectBucketlistByBucketlistId(bucketlistId);
+	}
 }

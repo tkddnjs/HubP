@@ -119,17 +119,11 @@ dl dd p.error {
 					<button type="button" id="addButton">+</button><br>
 				</dd>
 				
-				<dt>도움 리스트 조회 여부</dt>
-				<dd class="checkboxRequired">
-					<label for="toU"> 내가 <input type="checkbox" name="listoption" checked value=1 /></label>
-					<label for="toMe">나를 <input type="checkbox" name="listoption" checked value=2 /></label>
-				</dd>
-
 				<dt>
 					자기소개<span>2000byte</span>
 				</dt>
 				<dd>
-					<textarea name="introduce" rows="13" cols="63" class=""></textarea>
+					<textarea name="introduce" rows="13" cols="63" class="">${user.introduce }</textarea>
 				</dd>
 			</dl>
 			<p>

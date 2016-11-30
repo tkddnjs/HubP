@@ -9,14 +9,9 @@ import com.hub.domain.Follow;
 public interface FollowMapper {
 	
 	int insertFollow(Follow follow);
+	int updateFollow(Follow follow);
 	int deleteFollow(Follow follow);
-	
-	// 추가
-	int updateFollowConfirm(Follow follow);
-	List<Follow> selectRequestedFollows(String userId);
-	//
-	
 	List<Follow> selectAll(String userId);
-	List<Follow> selectFollowsByConnChain(@Param("userId")String userId, @Param("connChain")String connChain);
-	List<Follow> selectFollowsByRelation(Follow follow);
+	List<Follow> selectFollowsRequested(String userId);
+	List<Follow> selectFollowsByRelation(@Param("userId")String userId, @Param("relation")int relation);
 }

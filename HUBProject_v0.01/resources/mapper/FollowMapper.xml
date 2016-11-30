@@ -26,7 +26,7 @@
 		OR (userId=#{followId} AND followId=#{userId})
 	</delete>
 
-	<update id="updateFollowConfirm" parameterType="Follow">
+	<update id="updateFollow" parameterType="Follow">
 		UPDATE follow_tb
 		SET confirm='Y'
 		WHERE userId=#{userId} and followId=#{followId}
@@ -39,23 +39,12 @@
 		WHERE userId=#{userId} AND confirm='Y'
 	</select>
 	
-	<select id="selectRequestedFollows" resultMap="followMap">
+	<select id="selectFollowsRequested" resultMap="followMap">
 		<include refid="selectFollow" />
 		WHERE userId=#{userId} AND confirm='N'
 	</select>
 
-	<select id="selectFollowsByConnChain" parameterType="Map"
-		resultMap="followMap">
-		<include refid="selectFollow" />
-		WHERE userId=#{userId} AND confirm='Y'
-		AND followId IN (
-			SELECT userId
-			FROM userConn_tb
-			WHERE connChain IN #{connChain}
-		)
-	</select>
-
-	<select id="selectFollowsByRelation" parameterType="Follow"
+	<select id="selectFollowsByRelation" parameterType="Map"
 		resultMap="followMap">
 		<include refid="selectFollow" />
 		WHERE userId=#{userId} AND confirm='Y'
