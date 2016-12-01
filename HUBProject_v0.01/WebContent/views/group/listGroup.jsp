@@ -7,15 +7,6 @@
 <title>모임방 목록</title>
 <%@ include file="/views/layout/common.jsp" %>
 
-<script type="text/javascript">
-	$(function() {
-		var autocomplete_text = [ "자동완성기능", "Autocomplete", "개발로짜", "국이" ];
-		$("#searchs").autocomplete({
-			source : autocomplete_text
-		});
-	})
-</script>
-
 <style type="text/css">
 body {
 	padding: 5px;
@@ -65,7 +56,7 @@ h1 {
 			<tr style="align: center;">
 				<th>NO</th>
 				<th>제목</th>
-				<th>작성자</th>
+				<th>개설자</th>
 				<th>마감일</th>
 				<th>지역</th>
 				<th>연결고리</th>
@@ -73,48 +64,21 @@ h1 {
 		</thead>
 
 		<tbody>
-			<tr>
-				<td class="ranking">1</td>
-				<td><a class="btn btn-xs btn-default btn-block"
-					href="group/search.do?groupId=${groupId }">미니공연 밴드원 함께하실분!!</a></td>
-				<td><a class="btn btn-xs btn-default btn-block"
-					href="follow/search.do?userId=${userId }">IU</a></td>
-				<td>2016.10.10</td>
-				<td>서울</td>
-				<td>#공연</td>
-			</tr>
-
-			<tr>
-				<td class="ranking">2</td>
-				<td><a class="btn btn-xs btn-default btn-block"
-					href="searchGroup.do?groupId=${groupId }">리듬체조강습</a></td>
-				<td><a class="btn btn-xs btn-default btn-block" href="#">SON</a></td>
-				<td>2016.10.10</td>
-				<td>경기</td>
-				<td>#리듬체조</td>
-			</tr>
-
-			<tr>
-				<td class="ranking">3</td>
-				<td><a class="btn btn-xs btn-default btn-block" href="#">속초
-						투어</a></td>
-				<td><a class="btn btn-xs btn-default btn-block" href="#">HELL</a></td>
-				<td>마감</td>
-				<td>인천</td>
-				<td>#투어</td>
-			</tr>
-
-			<tr>
-				<td class="ranking">4</td>
-				<td><a class="btn btn-xs btn-default btn-block" href="#">JAVA강의
-						개설</a></td>
-				<td><a class="btn btn-xs btn-default btn-block"
-					href="searchFriend.do?userId=${userId }">KOSTA</a></td>
-				<td>2016.10.10</td>
-				<td>서울</td>
-				<td>#JAVA</td>
-			</tr>
-		</tbody>		
+			<c:forEach items="${groups }" var="group" varStatus="status">
+				<tr>
+					<td class="ranking">${status.count }</td>
+					<td><a class="btn btn-xs btn-default btn-block"
+						href="group/detail.do?groupId=${group.groupId }">${group.groupName }</a></td>
+					<td><a class="btn btn-xs btn-default btn-block"
+						href="user/detail.do?userId=${group.managerId }">${group.managerId }</a></td>
+					<td>${group.lastDay }</td>
+					<td>${group.local }</td>
+					<td>
+						${group.connChains }
+					</td>
+				</tr>
+			</c:forEach>
+		</tbody>
 	</table>
 
 	<div>
@@ -142,5 +106,14 @@ h1 {
 			</a>
 		</div>
 	</div>
+	
+	<script type="text/javascript">
+	$(function() {
+		var autocomplete_text = [ "자동완성기능", "Autocomplete", "개발로짜", "국이" ];
+		$("#searchs").autocomplete({
+			source : autocomplete_text
+		});
+	})
+</script>
 </body>
 </html>

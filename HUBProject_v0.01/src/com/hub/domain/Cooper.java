@@ -53,7 +53,7 @@ public class Cooper {
 	}
 
 	public void setLastDay(String lastDay) {
-		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyymmdd");
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		Date lDay = null;
 		try {
 			lDay = new Date(dateFormat.parse(lastDay).getTime());
