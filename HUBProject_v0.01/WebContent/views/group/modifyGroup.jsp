@@ -24,6 +24,7 @@
 							<c:forEach items="${group.connChains }" var="connChain" varStatus="status">
 								<div id="conn${status.count }">
 									${connChain }
+									<input type="hidden" name="connChains" value="${connChain }">
 									<button type="button" name="removeButton">-</button>
 								</div>
 							</c:forEach>
@@ -77,8 +78,9 @@
 	</fieldset>
 
 	<script>
-		var availableTag = [];
+		var availableTags = [];
 		var counter = 0;
+		
 		$(document).ready(function() {
 			$("#local").val('${group.local}');
 			$.ajax({
@@ -132,9 +134,10 @@
 
 		function list(array) {
 			for (var i = 0; i < array.length; i++) {
-				availableTag.push(array[i]);
+				availableTags.push(array[i]);
 			}
 		};
+		
 	</script>
 
 </body>

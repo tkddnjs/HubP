@@ -14,13 +14,13 @@
 			<tr>
 				<th>업체이름</th>
 				<td>
-					<input type="text" name="coName" value="${cooper.coName }" placeholder="업체이름입력" />
+					<input type="text" name="coName" value="${cooper.coName }" />
 				</td>
 			</tr>
 			<tr>
 				<th>만료일자</th>
 				<td>
-					<input type="date" name="lastDay" value="${cooper.lastDay }" placeholder="만료일자입력" />
+					<input type="date" name="lastDay" value="${cooper.lastDay }" />
 				</td>
 			</tr>
 			<tr>
@@ -29,11 +29,12 @@
 					<c:forEach items="${cooper.connChains }" var="connChain" varStatus="status">
 						<div id="conn${status.count }">
 							${connChain }
+							<input type="hidden" name="connChains" value="${connChain }">
 							<button type="button" name="removeButton">-</button>
 						</div>
 					</c:forEach>
 					<div id="connForm">
-						<input type="text" id="connChain" name="connChains" placeholder="연결고리입력" />
+						<input type="text" id="connChain" name="connChains" />
 						<button type="button" name="addButton">+</button>
 					</div>
 				</td>
@@ -41,20 +42,20 @@
 			<tr>
 				<th>배너정보</th>
 				<td>
-					<input type="text" name="coBanner" value="${cooper.coBanner}" placeholder="배너정보(url)입력" />
+					<input type="text" name="coBanner" value="${cooper.coBanner}" />
 				</td>
 			</tr>
 		</table>
 		<div>
+			<input type="hidden" name="coId" value="${cooper.coId }">
 			<input type="hidden" name="startDay" value="${cooper.startDay }">
 			<button class="btn btn-xs btn-default" type="submit">등록</button>
 		</div>
 	</form>
 	
 	<script>
-		var availableTag = [];
+		var availableTags = [];
 		var counter = 0;
-		var temp;
 		$(document).ready(function() {
 			$.ajax({
 				type : 'POST',
@@ -136,7 +137,7 @@
 		
 		function list(array){
 			for(var i=0; i<array.length; i++){
-				availableTag.push(array[i]);
+				availableTags.push(array[i]);
 			}
 		};
 		

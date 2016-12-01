@@ -63,7 +63,7 @@ public class UserController {
 	public String removeUser(String userId, HttpSession session){
 		session.invalidate();
 		userService.removeUser(userId);
-		return "redirect: HUBMain";
+		return "HUBMain";
 	}
 
 	// parameter 변경 (String userId => HttpSession session, String userId)
@@ -105,7 +105,7 @@ public class UserController {
 		session.setAttribute("isAdmin", isAdmin);
 		
 		if(isAdmin == true){
-			return "redirect:/cooper/list.do";
+			return "redirect:/cooper/list.do?listOpt=0";
 		} else {
 			return "redirect:/bucketlist/list.do";
 		}
@@ -114,6 +114,6 @@ public class UserController {
 	@RequestMapping(value="logout.do", method=RequestMethod.GET)
 	public String logout(HttpSession session){
 		session.invalidate();
-		return "redirect: HUBMain";
+		return "HUBMain";
 	}
 }

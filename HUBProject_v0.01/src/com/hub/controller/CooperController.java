@@ -23,7 +23,8 @@ public class CooperController {
 
 	@RequestMapping(value="register.do", method=RequestMethod.POST)
 	public String registerCooper(Cooper cooper) {
-		return "redirecr: /cooper/list.do";
+		cooperService.registerCooper(cooper);
+		return "redirect: list.do?listOpt=0";
 	}
 
 	@RequestMapping(value="modify.do", method=RequestMethod.GET)
@@ -36,13 +37,13 @@ public class CooperController {
 	@RequestMapping(value="modify.do", method=RequestMethod.POST)
 	public String modifyCooper(Cooper cooper) {
 		cooperService.modifyCooper(cooper);
-		return "redirect: /cooper/detail.do";
+		return "redirect: list.do?listOpt=0";
 	}
 
 	@RequestMapping(value="remove.do", method=RequestMethod.GET)
 	public String removeCooper(int coId) {
 		cooperService.removeCooper(coId);
-		return "redirect: /cooper/list.do";
+		return "redirect: list.do?listOpt=0";
 	}
 	
 	@RequestMapping(value="list.do", method=RequestMethod.GET)

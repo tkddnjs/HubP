@@ -20,12 +20,31 @@ public class CooperServiceLogic implements CooperService {
 	
 	@Override
 	public int registerCooper(Cooper cooper) {
-		return cooperStore.insertCooper(cooper);
+		int result = 1;
+		cooper.setCoId(cooperStore.nextCooperId());
+		
+		result *= cooperStore.insertCooper(cooper);
+		result *= cooperStore.insertCooperConn(cooper);
+		
+		List<String> sList = cooper.getConnChains();
+		sList.removeAll(connChainStore.selectConnChains());
+		
+		for(String connChain : sList){
+			result *= connChainStore.insertConnChain(connChain);
+		}
+		
+		return result;
 	}
 
 	@Override
 	public int modifyCooper(Cooper cooper) {
-		return cooperStore.updateCooper(cooper);
+		int result = 1;
+		
+		result *= cooperStore.updateCooper(cooper);
+		result *= cooperStore.deleteCooperConn(cooper.getCoId());
+		result *= cooperStore.insertCooperConn(cooper);
+		
+		return result;
 	}
 
 	@Override

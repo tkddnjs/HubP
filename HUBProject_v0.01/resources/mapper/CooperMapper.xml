@@ -11,31 +11,31 @@
 		<collection property="connChains" column="coId" ofType="String" select="com.hub.store.mapper.CooperMapper.selectConnChainsByCoId" javaType="ArrayList" jdbcType="NUMERIC"/>
 	</resultMap>
 
+	<select id="nextCooperId" resultType="int">
+		SELECT cooper_seq.nextval as coId
+		FROM dual
+	</select>
+
 	<sql id="selectCooper">
 		SELECT coId, coName, banner, startDay, lastDay
 		FROM cooper_tb
 	</sql>
-
-	<select id="nextCooperId">
-		SELECT cooper_seq.nextval as coId
-		FROM dual
-	</select>
 
 	<insert id="insertCooper" parameterType="Cooper">
 		INSERT
 		INTO cooper_tb(coId, coName, banner, startDay, lastDay)
 		VALUES(#{coId}, #{coName}, #{coBanner}, sysdate, #{lastDay})
 	</insert>
-	
+
 	<insert id="insertCooperConn" parameterType="Map">
 		INSERT
 		INTO coConn_tb(coId, connChain)
 		VALUES(#{coId}, #{connChain})
 	</insert>
 
-	<update id="updateCooperConn" parameterType="Cooper">
+	<update id="updateCooper" parameterType="Cooper">
 		UPDATE cooper_tb
-		SET (coName = #{coName}, banner = #{coBanner}, lastDay = #{lastDay})
+		SET coName = #{coName}, banner = #{coBanner}, lastDay = #{lastDay}
 		WHERE coId = #{coId}
 	</update>
 

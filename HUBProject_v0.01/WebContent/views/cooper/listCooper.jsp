@@ -52,7 +52,7 @@
 					<td width="500" align="center">${cooper.coBanner }</td>
 					<c:if test="${sessionScope.isAdmin }">
 						<td width="100" align="center">
-							<form action="${pageContext.request.contextPath}/cooper/modify.do" method="POST">
+							<form action="${pageContext.request.contextPath}/cooper/modify.do" method="GET">
 								<input type="hidden" name="coId" value="${cooper.coId}">
 								<button type="submit">수정</button>
 							</form>
