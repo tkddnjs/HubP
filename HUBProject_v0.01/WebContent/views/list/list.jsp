@@ -64,20 +64,20 @@ h1 {
 			<tr style="align: center; font-size: 14pt;">
 				<c:choose>
 					<c:when test="${listOpt eq 1 or listOpt eq 3}">
-						<th width="20" align="center">NO</th>
-						<th width="400" align="center">사용자ID</th>
-						<th width="600" align="center">버킷리스트이름</th>
+						<th width="50" align="center">NO</th>
+						<th width="300" align="center">사용자ID</th>
+						<th width="400" align="center">버킷리스트이름</th>
 					</c:when>
 					<c:when test="${listOpt eq 2}">
-						<th width="20" align="center">NO</th>
-						<th width="400" align="center">사용자ID</th>
-						<th width="600" align="center">연결고리목록</th>
+						<th width="50" align="center">NO</th>
+						<th width="300" align="center">사용자ID</th>
+						<th width="500" align="center">연결고리목록</th>
 					</c:when>
 				</c:choose>
 			</tr>
 		</thead>
 
-		<tbody>
+		<tbody style="font-size: 14pt;">
 			<c:choose>
 				<c:when test="${listOpt eq 1 or listOpt eq 3}">
 					<c:forEach items="${bucketlists }" var="bucketlist"
@@ -85,20 +85,14 @@ h1 {
 						<tr>
 							<td>${status.count }</td>
 							<td>
-								<form action="${pageContext.request.contextPath}/user/detail.do" method="get">
+								<a href="${pageContext.request.contextPath}/user/detail.do"><b>${bucketlist.userId }</b></a>
 									<input type="hidden" name="myId" value="${sessionScope.userId }">
 									<input type="hidden" name="searchWord" value="${searchWord }">
-									<button class="btn btn-xs btn-default btn-block" type="submit"
-										name="userId" value="${bucketlist.userId }">${bucketlist.userId }</button>
-								</form>
 							</td>
 							<td>
-								<form action="${pageContext.request.contextPath}/bucketlist/detail.do" method="get">
+								<a href="${pageContext.request.contextPath}/bucketlist/detail.do"><b>${bucketlist.title }</b></a>
 									<input type="hidden" name="userId" value="${sessionScope.userId }">
 									<input type="hidden" name="searchWord" value="${searchWord }">
-									<button class="btn btn-xs btn-default btn-block" type="submit"
-										name="bucketlistId" value="${bucketlist.bucketlistId }">${bucketlist.title }</button>
-								</form>
 							</td>
 						</tr>
 					</c:forEach>
@@ -110,10 +104,9 @@ h1 {
 							<td>${status.count }</td>
 							<td>
 								<form action="${pageContext.request.contextPath}/user/detail.do" method="post">
+									<a><b>${user.userId }</b></a>
 									<input type="hidden" name="myId" value="${sessionScope.userId }">
 									<input type="hidden" name="searchWord" value="${searchWord }">
-									<button class="btn btn-xs btn-default btn-block" type="submit"
-										name="userId" value="${user.userId }">${user.userId }</button>
 								</form>
 							</td>
 							<td>${user.connChains }</td>
