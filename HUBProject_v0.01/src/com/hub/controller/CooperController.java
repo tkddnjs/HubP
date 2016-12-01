@@ -1,7 +1,5 @@
 package com.hub.controller;
 
-import java.util.Date;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,9 +23,6 @@ public class CooperController {
 
 	@RequestMapping(value="register.do", method=RequestMethod.POST)
 	public String registerCooper(Cooper cooper) {
-		Date date = new Date();
-		cooper.setStartDay(new java.sql.Date(date.getTime()));
-		cooperService.registerCooper(cooper);
 		return "redirecr: /cooper/list.do";
 	}
 

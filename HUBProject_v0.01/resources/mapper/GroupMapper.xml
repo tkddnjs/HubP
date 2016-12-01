@@ -64,7 +64,7 @@
 		<include refid="selectGroup" />
 	</select>
 
-	<select id="selectGroupByGroupId" parameterType="int" resultType="groupMap">
+	<select id="selectGroupByGroupId" parameterType="int" resultMap="groupMap">
 		<include refid="selectGroup" />
 		WHERE groupId=#{groupId}
 	</select>
@@ -89,13 +89,13 @@
 		WHERE local=#{local}
 	</select>
 	
-	<select id="selectConnChainsByGroupId" parameterType="int" resultMap="String">
+	<select id="selectConnChainsByGroupId" parameterType="int" resultType="String">
 		SELECT connChain
 		FROM groupConn_tb
 		WHERE groupId = #{groupId}
 	</select>
 	
-	<select id="selectJoinUsersByGroupId" parameterType="int" resultMap="String">
+	<select id="selectJoinUsersByGroupId" parameterType="int" resultType="String">
 		SELECT userId
 		FROM userGroup_tb
 		WHERE groupId = #{groupId}

@@ -27,13 +27,13 @@
 		VALUES(#{coId}, #{coName}, #{coBanner}, sysdate, #{lastDay})
 	</insert>
 	
-	<insert id="insertCooper" parameterType="Map">
+	<insert id="insertCooperConn" parameterType="Map">
 		INSERT
 		INTO cooperConn_tb(coId, connChain)
 		VALUES(#{coId}, #{connChain})
 	</insert>
 
-	<update id="updateCooper" parameterType="Cooper">
+	<update id="updateCooperConn" parameterType="Cooper">
 		UPDATE cooper_tb
 		SET (coName = #{coName}, banner = #{coBanner}, lastDay = #{lastDay})
 		WHERE coId = #{coId}
@@ -53,12 +53,12 @@
 		<include refid="selectCooper" />
 	</select>
 
-	<select id="selectCooperByCoId" parameterType="int" resultType="cooperMap">
+	<select id="selectCooperByCoId" parameterType="int" resultMap="cooperMap">
 		<include refid="selectCooper" />
 		WHERE coId = #{coId}
 	</select>
 	
-	<select id="selectCoopersByConnChain" parameterType="String" resultType="cooperMap">
+	<select id="selectCoopersByConnChain" parameterType="String" resultMap="cooperMap">
 		<include refid="selectCooper" />
 		WHERE coId IN (SELECT coId
 						FROM cooperConn_tb
