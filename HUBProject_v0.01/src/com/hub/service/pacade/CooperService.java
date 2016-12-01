@@ -10,6 +10,6 @@ public interface CooperService {
 	int modifyCooper(Cooper cooper);
 	int removeCooper(int coId);
 	List<Cooper> findAll();
-	Cooper findCoopersByCoId(int coId);
+	Cooper findCooperByCoId(int coId);
 	List<Cooper> findCoopersByConnChain(String connChain);
 }

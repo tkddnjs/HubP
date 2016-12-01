@@ -29,7 +29,7 @@
 	
 	<insert id="insertCooperConn" parameterType="Map">
 		INSERT
-		INTO cooperConn_tb(coId, connChain)
+		INTO coConn_tb(coId, connChain)
 		VALUES(#{coId}, #{connChain})
 	</insert>
 
@@ -45,7 +45,7 @@
 	</delete>
 	
 	<delete id="deleteCooperConn" parameterType="int">
-		DELETE cooperConn_tb
+		DELETE coConn_tb
 		WHERE coId = #{coId}
 	</delete>
 	
@@ -61,13 +61,13 @@
 	<select id="selectCoopersByConnChain" parameterType="String" resultMap="cooperMap">
 		<include refid="selectCooper" />
 		WHERE coId IN (SELECT coId
-						FROM cooperConn_tb
+						FROM coConn_tb
 						WHERE connChain=#{connChain})
 	</select>
 
 	<select id="selectConnChainsByCoId" parameterType="int" resultType="String">
 		SELECT connChain
-		FROM cooperConn_tb
+		FROM coConn_tb
 		WHERE coId = #{coId}
 	</select>
 	

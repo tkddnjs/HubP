@@ -71,7 +71,7 @@
 
 	<select id="selectGroupsByUserId" parameterType="String" resultMap="groupMap">
 		<include refid="selectGroup" />
-		WHERE userId=#{userId}
+		WHERE managerId=#{userId}
 	</select>
 	
 	<select id="selectGroupsByConnChain" parameterType="String" resultMap="groupMap">

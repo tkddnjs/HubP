@@ -7,6 +7,7 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.stereotype.Repository;
 
 import com.hub.domain.Group;
+import com.hub.store.factory.SqlSessionFactoryProvider;
 import com.hub.store.mapper.GroupMapper;
 import com.hub.store.pacade.GroupStore;
 
@@ -15,6 +16,10 @@ public class GroupStoreLogic implements GroupStore {
 
 	private SqlSessionFactory factory;
 
+	public GroupStoreLogic(){
+		factory = SqlSessionFactoryProvider.getSqlSessionFactory();
+	}
+	
 	@Override
 	public int nextGroupId() {
 		SqlSession session = factory.openSession();

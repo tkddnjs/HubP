@@ -12,7 +12,7 @@
 	<fieldset>
 		<legend>모임방 등록</legend>
 		<div>
-			<form class="form-inline" action="group/register.do" method="post">
+			<form class="form-inline" action="${pageContext.request.contextPath}/group/register.do" method="post">
 				<table>
 					<tr>
 						<th>모임방이름</th>

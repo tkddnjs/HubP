@@ -23,6 +23,8 @@ public class GroupServiceLogic implements GroupService {
 	public int registerGroup(Group group) {
 		int result = 1;
 		
+		group.setGroupId(groupStore.nextGroupId());
+		
 		result *= groupStore.insertGroup(group);
 		result *= groupStore.insertGroupConn(group);
 		

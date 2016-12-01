@@ -33,9 +33,9 @@ h1 {
 					
 					<li><a href="${pageContext.request.contextPath}/list/list.do?listOpt=0">도움리스트</a></li>
 					
-					<li><a href="${pageContext.request.contextPath}/cooper/list.do" >업체</a></li>
+					<li><a href="${pageContext.request.contextPath}/cooper/list.do?listOpt=0" >업체</a></li>
 						
-					<li><a href="${pageContext.request.contextPath}/group/list.do" >모임방</a></li>
+					<li><a href="${pageContext.request.contextPath}/group/list.do?listOpt=0" >모임방</a></li>
 										
 					<form class="navbar-search pull-right">
 						<input type="text" class="search-query" placeholder="검색">

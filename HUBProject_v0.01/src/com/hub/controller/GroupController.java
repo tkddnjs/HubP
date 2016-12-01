@@ -66,7 +66,7 @@ public class GroupController {
 
 	@RequestMapping(value="list.do", method=RequestMethod.GET)
 	public ModelAndView listGroup(HttpSession session, int listOpt, String searchWord) {
-		ModelAndView mav = new ModelAndView("group/groupListForm");
+		ModelAndView mav = new ModelAndView("group/listGroup");
 
 		switch (listOpt) {
 		// 전체 모임방 찾기

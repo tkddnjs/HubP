@@ -39,7 +39,7 @@ public class CooperServiceLogic implements CooperService {
 	}
 
 	@Override
-	public Cooper findCoopersByCoId(int coId) {
+	public Cooper findCooperByCoId(int coId) {
 		return cooperStore.selectCooperByCoId(coId);
 	}
 

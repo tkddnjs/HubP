@@ -18,6 +18,14 @@
 		<%@ include file="/views/menu.jsp"%>
 	</div>
 	
+	<div class="input-append pull-right">
+		<form action="${pageContext.request.contextPath}/cooper/list.do" method="get" class="form-inline">
+			<input type="text" name="searchWord" placeholder="연결고리를 입력하세요">
+			<input type="hidden" name="listOpt" value=1>
+			<button class="btn" type="submit">검색</button>
+		</form>
+	</div>
+	
 	<c:if test="${sessionScope.isAdmin }">
 		<div class="input-append pull-right">
 			<a class="btn btn-xs btn-info btnPlay"

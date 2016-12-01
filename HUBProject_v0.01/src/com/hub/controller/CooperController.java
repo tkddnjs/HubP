@@ -29,7 +29,7 @@ public class CooperController {
 	@RequestMapping(value="modify.do", method=RequestMethod.GET)
 	public ModelAndView modifyCooper(int coId) {
 		ModelAndView mav = new ModelAndView("cooper/modifyCooper");
-		mav.addObject("cooper", cooperService.findCoopersByCoId(coId));
+		mav.addObject("cooper", cooperService.findCooperByCoId(coId));
 		return mav;
 	}
 
@@ -48,14 +48,21 @@ public class CooperController {
 	@RequestMapping(value="list.do", method=RequestMethod.GET)
 	public ModelAndView listCooper(int listOpt, String searchWord) {
 		ModelAndView mav = new ModelAndView("cooper/listCooper");
-		mav.addObject("coopers", cooperService.findAll());
+		switch(listOpt){
+		case 0: 
+			mav.addObject("coopers", cooperService.findAll());
+			break;
+		case 1:
+			mav.addObject("coopers", cooperService.findCoopersByConnChain(searchWord));
+			break;
+		}
 		return mav;
 	}
 	
 	@RequestMapping(value="detail.do", method=RequestMethod.GET)
 	public ModelAndView detailCooper(int coId) {
 		ModelAndView mav = new ModelAndView("cooper/detailCooper");
-		mav.addObject("cooper", cooperService.findCoopersByCoId(coId));
+		mav.addObject("cooper", cooperService.findCooperByCoId(coId));
 		return mav;
 	}
 }

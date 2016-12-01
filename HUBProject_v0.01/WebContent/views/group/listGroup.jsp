@@ -27,21 +27,26 @@ h1 {
 	<div class="header" align="right">
 		<%@ include file="/views/header/header.jspf"%>
 	</div>
-
-	<h1 align="center">HUB : Have U get a BucketList?</h1>
+	<div>
+		<%@ include file="/views/menu.jsp"%>
+	</div>
 
 	<div class="input-append pull-right">
-		<form action="group/search.do" method="post" class="form-inline">
-			<select class="ring" name="ring">
-				<option>연결고리</option>
-				<option>내가</option>
-				<option>너를</option>
-				<option>서로</option>
-				<option>업체</option>
-			</select> <input class="span2" type="text" name="search" value="#"
-				id="searchs" data-source="typeahead">
+		<form action="${pageContext.request.contextPath}/group/list.do" method="get" class="form-inline">
+			<select name="listOpt">
+				<option value=1>모임방이름</option>
+				<option value=2>연결고리</option>
+				<option value=3>지역</option>
+			</select>
+			<input class="span2" type="text" name="searchWord" value="" id="searchs">
 			<button class="btn" type="button">검색</button>
+		</form>
+	</div>
 
+	<div class="input-append pull-right">
+		<form action="${pageContext.request.contextPath}/group/list.do" method="get">
+			<input type="hidden" name="listOpt" value=4>
+			<button class="btn" type="submit">내 리스트 조회</button>
 		</form>
 	</div>
 
@@ -68,9 +73,9 @@ h1 {
 				<tr>
 					<td class="ranking">${status.count }</td>
 					<td><a class="btn btn-xs btn-default btn-block"
-						href="group/detail.do?groupId=${group.groupId }">${group.groupName }</a></td>
+						href="${pageContext.request.contextPath}/group/detail.do?groupId=${group.groupId }">${group.groupName }</a></td>
 					<td><a class="btn btn-xs btn-default btn-block"
-						href="user/detail.do?userId=${group.managerId }">${group.managerId }</a></td>
+						href="${pageContext.request.contextPath}/user/detail.do?userId=${group.managerId }">${group.managerId }</a></td>
 					<td>${group.lastDay }</td>
 					<td>${group.local }</td>
 					<td>
@@ -100,9 +105,9 @@ h1 {
 		</div>
 
 		<div class="pull-right">
-			<a class="btn btn-toolbar" href="/views/registerGroupForm.jsp">
+			<a class="btn btn-toolbar" href="/views/registerGroup.jsp">
 
-				<button>글쓰기</button>
+				<button>모임방등록</button>
 			</a>
 		</div>
 	</div>
