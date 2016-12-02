@@ -63,7 +63,7 @@
 	</fieldset>
 
 	<script>
-		var availableTag = [];
+		var availableTags = [];
 		var counter = 0;
 		$(document).ready(function() {
 			$.ajax({
@@ -110,7 +110,7 @@
 
 		function list(array) {
 			for (var i = 0; i < array.length; i++) {
-				availableTag.push(array[i]);
+				availableTags.push(array[i]);
 			}
 		};
 	</script>

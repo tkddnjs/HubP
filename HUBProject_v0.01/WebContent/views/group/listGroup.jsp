@@ -38,7 +38,7 @@ h1 {
 				<option value=2>연결고리</option>
 				<option value=3>지역</option>
 			</select>
-			<input class="span2" type="text" name="searchWord" value="" id="searchs">
+			<input class="span2" type="text" name="searchWord" id="searchWord">
 			<button class="btn" type="button">검색</button>
 		</form>
 	</div>
@@ -112,7 +112,8 @@ h1 {
 		</div>
 	</div>
 	
-	<script type="text/javascript">
+<script type="text/javascript">
+	var availableTags = [];
 	$(function() {
 		var autocomplete_text = [ "자동완성기능", "Autocomplete", "개발로짜", "국이" ];
 		$("#searchs").autocomplete({
