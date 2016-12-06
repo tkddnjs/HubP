@@ -12,24 +12,23 @@
 	<fieldset>
 		<legend>모임방 수정</legend>
 		<div>
-			<form class="form-inline" action="${pageContext.request.contextPath}/group/register.do" method="post">
+			<form class="form-inline" action="${pageContext.request.contextPath}/group/modify.do" method="post">
 				<table>
 					<tr>
 						<th>모임방이름</th>
-						<td><input type="text" name="groupName" value="${group.groupName }"></td>
+						<td><input type="text" name="groupName" value="${group.groupName }" readonly="readonly"></td>
 					</tr>
 					<tr>
 						<th>연결고리</th>
 						<td>
 							<c:forEach items="${group.connChains }" var="connChain" varStatus="status">
 								<div id="conn${status.count }">
-									${connChain }
-									<input type="hidden" name="connChains" value="${connChain }">
+									<input type="hidden" name="connChains" value="">
 									<button type="button" name="removeButton">-</button>
 								</div>
 							</c:forEach>
 							<div id="connForm">						
-								<input type="text" id="connChain" name="connChains">
+								<input type="text" id="connChain" name="connChains" value="${group.connChains }" readOnly>
 								<button type="button" id="addButton">+</button>
 							</div>
 						</td>
@@ -68,10 +67,10 @@
 					</tr>
 				</table>
 				
-				<div>
+				<div style="margin-left: 150px;">
 					<input type="hidden" name="groupId" value="${group.groupId }">
 					<input type="hidden" name="managerId" value="${group.managerId }">
-					<button type="submit">수정</button>
+					<button type="submit">모임방수정완료</button>
 				</div>
 			</form>
 		</div>

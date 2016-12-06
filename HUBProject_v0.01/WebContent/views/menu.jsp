@@ -37,7 +37,7 @@ h1 {
 						
 					<li><a href="${pageContext.request.contextPath}/group/list.do?listOpt=0" >모임방</a></li>
 										
-					<form class="navbar-search pull-right">
+					<form class="navbar-search pull-right" action="${pageContext.request.contextPath }">
 						<input type="text" class="search-query" placeholder="검색">
 						<button class="btn" type="button">검색</button>
 						<button class="btn" type="button">선택사항</button>
