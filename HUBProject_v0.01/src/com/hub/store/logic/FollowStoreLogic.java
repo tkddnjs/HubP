@@ -28,7 +28,13 @@ public class FollowStoreLogic implements FollowStore {
 		Follow temp = new Follow();
 		temp.setFollowId(follow.getUserId());
 		temp.setUserId(follow.getFollowId());
-		temp.setRelation((3-follow.getRelation())%3);
+		
+		if(follow.getRelation() != 4){
+			
+			temp.setRelation((3-follow.getRelation())%3);
+		}else {
+			temp.setRelation(4);
+		}
 		temp.setConfirm(false);
 		try {
 			FollowMapper mapper = session.getMapper(FollowMapper.class);

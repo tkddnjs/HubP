@@ -163,9 +163,12 @@ dl dd p.error {
 		$("#addButton").click(function() {
 			counter++;
 			$("#connForm")
-			.append('<div id="iconn'+counter.toString()+'"><input style="vertical-align: top;" type="text" size="10" '
-			+'id="connChains'+counter.toString()+'" name="connChains">'
-			+'<button id="removeButton'+counter.toString()+'" type="button">-</button></div>')
+			.append('<div id="iconn'+counter.toString()
+			+'"><input style="vertical-align: top;" type="text" size="10" '
+			+'id="connChains'+counter.toString()
+			+'" name="connChains">'
+			+'<button id="removeButton'+counter.toString()
+			+'" type="button">-</button></div>')
 			.trigger("create");
 		});
 		

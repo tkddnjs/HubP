@@ -83,7 +83,7 @@ h1 {
 		<a class="btn btn-xs btn-default"
 		  	href="${pageContext.request.contextPath }/user/modify.do?userId=${sessionScope.userId}">수정</a>
 		<a class="btn btn-xs btn-default"
-		 	href="${pageContext.request.contextPath }/user/delete.do?userId=${sessionScope.userId}">탈퇴</a>
+		 	href="${pageContext.request.contextPath }/user/remove.do?userId=${sessionScope.userId}">탈퇴</a>
 	</div>
 	
 	<c:if test="${chkFollow }">

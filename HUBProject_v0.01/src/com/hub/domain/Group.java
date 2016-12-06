@@ -1,6 +1,9 @@
 package com.hub.domain;
 
 import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Group {
@@ -14,6 +17,7 @@ public class Group {
 	private List<String> joinPeople;
 	private int maxPeople;
 
+	
 	public Group() {
 	}
 
@@ -45,8 +49,15 @@ public class Group {
 		return lastDay;
 	}
 
-	public void setLastDay(Date lastDay) {
-		this.lastDay = lastDay;
+	public void setLastDay(String lastDay) {
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		Date lDay = null;
+		try {
+			lDay = new Date(dateFormat.parse(lastDay).getTime());
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		this.lastDay = lDay;
 	}
 
 	public List<String> getConnChains() {
@@ -73,11 +84,11 @@ public class Group {
 		this.local = local;
 	}
 
-	public List<String> getJoinPeople() {
+	public List<String> getJoinPeople() {	
 		return joinPeople;
 	}
 
-	public void setJoinPeople(List<String> joinPeople) {
+	public void setJoinPeople(List<String> joinPeople) {	
 		this.joinPeople = joinPeople;
 	}
 
@@ -88,4 +99,13 @@ public class Group {
 	public void setMaxPeople(int maxPeople) {
 		this.maxPeople = maxPeople;
 	}
+
+	@Override
+	public String toString() {
+		return "[groupId=" + groupId + ", groupName=" + groupName + ", managerId=" + managerId + ", lastDay="
+				+ lastDay + ", connChains=" + connChains + ", introduce=" + introduce + ", local=" + local
+				+ ", joinPeople=" + joinPeople + ", maxPeople=" + maxPeople + "]";
+	}
+	
+	
 }

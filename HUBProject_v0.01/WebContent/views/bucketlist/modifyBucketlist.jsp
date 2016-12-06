@@ -190,11 +190,10 @@ dl dd p.error {
 				.trigger("create");
 			});
 			
-			
 			$("[name='removeButton']").click(function() {
 				var id = $(this).closest('div').attr('id');
 				$("#"+id).remove();
-			})
+			});
 			
 		});
 		

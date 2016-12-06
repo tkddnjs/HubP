@@ -49,13 +49,14 @@ h1 {
 	<table class="table table-hover table-condensed">
 		<thead style="background: #60d7a9; color:white;">
 			<tr style="align: center; font-size:14pt;">
-				<th width="20" align="center">NO</th>
-				<th width="300" align="center">친구ID</th>
-				<th width="300" align="center">관계</th>
+				<th width="50" align="center">NO</th>
+				<th width="200" align="center">친구ID</th>
+				<th width="200" align="center">관계</th>
+				<th width="50dp" align="right">관리</th>
+				<th width="50dp"></th>
 				<c:if test="${isRequest }">
 					<th colspan='2' width="200" align="center">친구요청</th>
 				</c:if>
-				<th>
 			</tr>
 		</thead>
 

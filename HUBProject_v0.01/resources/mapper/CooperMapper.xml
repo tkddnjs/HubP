@@ -11,31 +11,31 @@
 		<collection property="connChains" column="coId" ofType="String" select="com.hub.store.mapper.CooperMapper.selectConnChainsByCoId" javaType="ArrayList" jdbcType="NUMERIC"/>
 	</resultMap>
 
+	<select id="nextCooperId" resultType="int">
+		SELECT cooper_seq.nextval as coId
+		FROM dual
+	</select>
+
 	<sql id="selectCooper">
 		SELECT coId, coName, banner, startDay, lastDay
 		FROM cooper_tb
 	</sql>
-
-	<select id="nextCooperId">
-		SELECT cooper_seq.nextval as coId
-		FROM dual
-	</select>
 
 	<insert id="insertCooper" parameterType="Cooper">
 		INSERT
 		INTO cooper_tb(coId, coName, banner, startDay, lastDay)
 		VALUES(#{coId}, #{coName}, #{coBanner}, sysdate, #{lastDay})
 	</insert>
-	
-	<insert id="insertCooper" parameterType="Map">
+
+	<insert id="insertCooperConn" parameterType="Map">
 		INSERT
-		INTO cooperConn_tb(coId, connChain)
+		INTO coConn_tb(coId, connChain)
 		VALUES(#{coId}, #{connChain})
 	</insert>
 
 	<update id="updateCooper" parameterType="Cooper">
 		UPDATE cooper_tb
-		SET (coName = #{coName}, banner = #{coBanner}, lastDay = #{lastDay})
+		SET coName = #{coName}, banner = #{coBanner}, lastDay = #{lastDay}
 		WHERE coId = #{coId}
 	</update>
 
@@ -45,7 +45,7 @@
 	</delete>
 	
 	<delete id="deleteCooperConn" parameterType="int">
-		DELETE cooperConn_tb
+		DELETE coConn_tb
 		WHERE coId = #{coId}
 	</delete>
 	
@@ -53,21 +53,21 @@
 		<include refid="selectCooper" />
 	</select>
 
-	<select id="selectCooperByCoId" parameterType="int" resultType="cooperMap">
+	<select id="selectCooperByCoId" parameterType="int" resultMap="cooperMap">
 		<include refid="selectCooper" />
 		WHERE coId = #{coId}
 	</select>
 	
-	<select id="selectCoopersByConnChain" parameterType="String" resultType="cooperMap">
+	<select id="selectCoopersByConnChain" parameterType="String" resultMap="cooperMap">
 		<include refid="selectCooper" />
 		WHERE coId IN (SELECT coId
-						FROM cooperConn_tb
+						FROM coConn_tb
 						WHERE connChain=#{connChain})
 	</select>
 
 	<select id="selectConnChainsByCoId" parameterType="int" resultType="String">
 		SELECT connChain
-		FROM cooperConn_tb
+		FROM coConn_tb
 		WHERE coId = #{coId}
 	</select>
 	
