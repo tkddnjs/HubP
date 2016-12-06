@@ -51,7 +51,7 @@
 	</delete>
 	
 	<delete id="deleteGroupConn" parameterType="int">
-		DELETE groupConn_tb(groupId, connChain)
+		DELETE groupConn_tb
 		WHERE groupId=#{groupId}
 	</delete>
 
@@ -71,22 +71,23 @@
 
 	<select id="selectGroupsByUserId" parameterType="String" resultMap="groupMap">
 		<include refid="selectGroup" />
-		WHERE managerId=#{userId}
+		WHERE managerId like '%'||#{userId}||'%'
 	</select>
 	
 	<select id="selectGroupsByConnChain" parameterType="String" resultMap="groupMap">
-		<include refid="selectGroup" />
-		WHERE connChain=#{connChain}
+		select groupId, connChain
+		from groupConn_tb
+		WHERE connChain like '%'||#{connChain}||'%'
 	</select>
 	
 	<select id="selectGroupsByGroupName" parameterType="String" resultMap="groupMap">
 		<include refid="selectGroup" />
-		WHERE groupName=#{groupName}
+		WHERE groupName like '%'||#{groupName}||'%'
 	</select>
 	
 	<select id="selectGroupsByLocal" parameterType="String" resultMap="groupMap">
 		<include refid="selectGroup" />
-		WHERE local=#{local}
+		WHERE local like '%'||#{local}||'%'
 	</select>
 	
 	<select id="selectConnChainsByGroupId" parameterType="int" resultType="String">
@@ -101,4 +102,15 @@
 		WHERE groupId = #{groupId}
 	</select>
 	
+	<!-- <select id="joinMemberCounting" parameterType="int" resultType="int">
+	 select count(distinct userId) as totalJoinMember
+	 from userGroup_tb
+	 where goupId = #{groupId}
+	</select> -->
+	
 </mapper>
+
+
+
+
+
