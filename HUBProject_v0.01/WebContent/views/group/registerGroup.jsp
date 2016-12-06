@@ -9,30 +9,29 @@
 
 </head>
 <body>
-<div align="right">
-<%@ include file="/views/header/header.jspf" %>
-</div>
-<%@ include file="/views/menu.jsp" %>
 	<fieldset>
 		<legend>모임방 등록</legend>
 		<div>
-			<form class="form-inline" action="${pageContext.request.contextPath}/group/register.do" method="post">
+			<form class="form-inline"
+				action="${pageContext.request.contextPath}/group/register.do"
+				method="post">
 				<table>
-				
-				 <tr>
-				  <th>모임방 개설자</th>
-				  <td><input type="text" value="${userId }"  name="managerId" readonly>
-				 </tr>
+
+					<tr>
+						<th>모임방 개설자</th>
+						<td><input type="text" value="${userId }" name="managerId"
+							readonly>
+					</tr>
+
 					<tr>
 						<th>모임방이름</th>
 						<td><input type="text" name="groupName"></td>
 					</tr>
 					<tr>
 						<th>연결고리</th>
-						<td id="connForm">
-							<input type="text" id="connChain" name="connChains">
-							<button type="button" id="addButton">+</button>
-						</td>
+						<td id="connForm"><input type="text" id="connChain"
+							name="connChains">
+							<button type="button" id="addButton">+</button></td>
 					</tr>
 					<tr>
 						<th>모임마감일</th>
@@ -67,69 +66,99 @@
 								name="introduce"></textarea></td>
 					</tr>
 				</table>
-				
+
 				<div>
-				 <input class="btn btn-primary" type="submit" value="개설" style="margin-left: 100px;">
-				 <a href="${pageContext.request.contextPath }/group/list.do?listOpt=0" class="btn btn-primary">취소</a>
+					<input class="btn btn-primary" type="submit" value="개설"
+						style="margin-left: 100px;"> <a
+						href="${pageContext.request.contextPath }/group/list.do?listOpt=0"
+						class="btn btn-primary">취소</a>
 				</div>
 			</form>
-		
 		</div>
 	</fieldset>
 
 	<script>
-		var availableTag = [];
+		var availableTags = [];
 		var counter = 0;
-		$(document).ready(function() {
-			$.ajax({
-				type : 'POST',
-				url : '${pageContext.request.contextPath}/list/listAutoComplete.do',
-				data : {
-					listOpt : 2
-				},
-				success : function(result) {
-					result = result.replace(/ /gi, "");
-					result = result.replace("[", "");
-					result = result.replace("]", "");
-					result = result.split(",");
-					list(result);
-				}
-			});
+		$(document)
+				.ready(
+						function() {
+							$
+									.ajax({
+										type : 'POST',
+										url : '${pageContext.request.contextPath}/list/listAutoComplete.do',
+										data : {
+											listOpt : 2
+										},
+										success : function(result) {
+											result = result.replace(/ /gi, "");
+											result = result.replace("[", "");
+											result = result.replace("]", "");
+											result = result.split(",");
+											list(result);
+										}
+									});
 
-			$("#connChain").autocomplete({
-				source : availableTags
-			})
+							$("#connChain").autocomplete({
+								source : availableTags
+							})
 
-			$("#connForm").on("create", function() {
-				$("#connCahin"+ counter.toString()).autoComplete({
-					appendTo : "#connForm",
-					source : availableTags
-				});
-				$("#removeButton"+ counter.toString()).click(function() {
-					var id = $(this).closest('div').attr('id');
-					$("#" + id).remove();
-				});
-			});
+							$("#connForm")
+									.on(
+											"create",
+											function() {
+												$(
+														"#connCahin"
+																+ counter
+																		.toString())
+														.autoComplete(
+																{
+																	appendTo : "#connForm",
+																	source : availableTags
+																});
+												$(
+														"#removeButton"
+																+ counter
+																		.toString())
+														.click(
+																function() {
+																	var id = $(
+																			this)
+																			.closest(
+																					'div')
+																			.attr(
+																					'id');
+																	$("#" + id)
+																			.remove();
+																});
+											});
 
-			$("#addButton").click(function() {
-				counter++;
-				$("#connForm")
-				.append('<div id="iconn'+ counter.toString()
-				+ '"><input type="text" id="connChain"'+ counter.toString()
-				+ ' name="connChains" placeholder="연결고리입력" />'
-				+ '<button type="button" id="removeButton"'+ counter.toString()
-				+ '">-</button></div>')
-				.trigger("create");
-			});
-		});
+							$("#addButton")
+									.click(
+											function() {
+												counter++;
+												$("#connForm")
+														.append(
+																'<div id="iconn'
+																		+ counter
+																				.toString()
+																		+ '"><input type="text" id="connChain"'
+																		+ counter
+																				.toString()
+																		+ ' name="connChains" placeholder="연결고리입력" />'
+																		+ '<button type="button" id="removeButton"'
+																		+ counter
+																				.toString()
+																		+ '">-</button></div>')
+														.trigger("create");
+											});
+						});
 
 		function list(array) {
 			for (var i = 0; i < array.length; i++) {
-				availableTag.push(array[i]);
+				availableTags.push(array[i]);
 			}
 		};
-		
-		
 	</script>
 
 </body>
