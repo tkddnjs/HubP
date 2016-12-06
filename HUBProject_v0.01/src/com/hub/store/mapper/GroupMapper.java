@@ -25,4 +25,7 @@ public interface GroupMapper {
 	
 	List<String> selectConnChainsByGroupId(int groupId);
 	List<String> selectJoinUsersByGroupId(int groupId);
+	
+	//모임방 참여인원 카운팅
+	//int joinMemberCounting(int groupId);
 }

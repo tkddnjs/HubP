@@ -1,5 +1,7 @@
 package com.hub.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,21 +22,25 @@ public class GroupController {
 
 	@RequestMapping(value="register.do", method=RequestMethod.GET)
 	public ModelAndView registerGroup(HttpSession session) {
+		
 		ModelAndView mav = new ModelAndView("group/registerGroup");
-		mav.addObject("userId", (String) session.getAttribute("userId"));
+
+		mav.addObject("userId", (String) session.getAttribute("userId"));	
+		
 		return mav;
 	}
 
 	@RequestMapping(value="register.do", method=RequestMethod.POST)
 	public String registerGroup(Group group) {
+		
 		groupService.registerGroup(group);
-		return "redirect: /group/list.do?listOpt=0";
+		return "redirect:/group/list.do?listOpt=0";
 	}
 
 	@RequestMapping(value="join.do", method=RequestMethod.GET)
 	public String joinGroup(HttpSession session, int groupId) {
 		groupService.joinGroup(groupId, (String) session.getAttribute("userId"));
-		return "redirect: /group/detail.do?groupId="+groupId;
+		return "redirect:/group/detail.do?groupId="+groupId;
 	}
 
 	// 문서 수정 필요 => parameter 변경
@@ -43,31 +49,35 @@ public class GroupController {
 		ModelAndView mav = new ModelAndView("group/modifyGroup");
 		mav.addObject("corrector", (String) session.getAttribute("userId"));
 		mav.addObject("group", groupService.findGroupByGroupId(groupId));
+		
 		return mav;
 	}
 
 	@RequestMapping(value="modify.do", method=RequestMethod.POST)
 	public String modifyGroup(Group group) {
+		
 		groupService.modifyGroup(group);
-		return "redirect: /group/detail.do?groupId="+group.getGroupId();
+		
+		return "redirect:/group/detail.do?groupId="+group.getGroupId();
 	}
 
 	@RequestMapping(value="remove.do", method=RequestMethod.GET)
 	public String removeGroup(int groupId) {
 		groupService.removeGroup(groupId);
-		return "redirect: /group/list.do?listOpt=0";
+		return "redirect:/group/list.do?listOpt=0";
 	}
 
 	@RequestMapping(value="exit.do", method=RequestMethod.GET)
 	public String exitGroup(HttpSession session, int groupId) {
 		groupService.exitGroup(groupId, (String) session.getAttribute("userId"));
-		return "redirect: /group/list.dolistOpt=0";
+		return "redirect:/group/list.do?listOpt=0";
 	}
 
 	@RequestMapping(value="list.do", method=RequestMethod.GET)
 	public ModelAndView listGroup(HttpSession session, int listOpt, String searchWord) {
 		ModelAndView mav = new ModelAndView("group/listGroup");
 
+		
 		switch (listOpt) {
 		// 전체 모임방 찾기
 		case 0:
@@ -95,7 +105,30 @@ public class GroupController {
 	@RequestMapping(value="detail.do", method=RequestMethod.GET)
 	public ModelAndView detailGroup(int groupId) {
 		ModelAndView mav = new ModelAndView("group/detailGroup");
-		mav.addObject("group", groupService.findGroupByGroupId(groupId));
+		
+		Group group = groupService.findGroupByGroupId(groupId);
+		
+		mav.addObject("group", group);
+		mav.addObject("totalJoinUsers", group.getJoinPeople().size());
+		
 		return mav;
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

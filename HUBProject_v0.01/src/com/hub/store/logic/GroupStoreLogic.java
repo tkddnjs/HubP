@@ -1,5 +1,6 @@
 package com.hub.store.logic;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -82,7 +83,8 @@ public class GroupStoreLogic implements GroupStore {
 			GroupMapper mapper = session.getMapper(GroupMapper.class);
 			result = mapper.insertUserGroup(groupId, userId);
 			if(result > 0 ){
-				session.commit();
+				session.commit();	
+				
 			} else {
 				session.rollback();
 			}
@@ -178,12 +180,22 @@ public class GroupStoreLogic implements GroupStore {
 	@Override
 	public Group selectGroupByGroupId(int groupId) {
 		SqlSession session = factory.openSession();
+		
+		//Group group = new Group();
 		try {
 			GroupMapper mapper = session.getMapper(GroupMapper.class);
 			return mapper.selectGroupByGroupId(groupId);
+			
+//			if(group != null){
+//				group.setTotalJoinPeople(mapper.joinMemberCounting(groupId));
+//				
+//				return group;
+//			}
 		} finally {
 			session.close();
 		}
+		
+		//return group;
 	}
 
 	@Override
@@ -228,6 +240,23 @@ public class GroupStoreLogic implements GroupStore {
 		} finally {
 			session.close();
 		}
+	}
+
+	@Override
+	public List<String> selectConnChainByGroupId(int groupId) {
+		SqlSession session = factory.openSession();
+		List<String> list = new ArrayList<>();
+		
+		GroupMapper mapper = session.getMapper(GroupMapper.class);
+		list = mapper.selectConnChainsByGroupId(groupId);
+		
+		if(list != null){
+			session.close();
+			
+			return list;
+		}
+		
+		return null;
 	}
 
 }

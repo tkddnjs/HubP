@@ -31,4 +31,7 @@ public interface GroupStore {
 	List<Group> selectGroupsByConnChain(String connChain);
 	List<Group> selectGroupsByGroupName(String groupName);
 	List<Group> selectGroupsByLocal(String local);
+	
+	//groupConnChain
+	List<String>selectConnChainByGroupId(int groupId);
 }
