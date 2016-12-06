@@ -167,21 +167,7 @@ public class GroupServiceLogic implements GroupService {
 
 	@Override
 	public List<Group> findGroupsByConnChain(String connChain) {
-		
-		List<Group> list = groupStore.selectGroupsByConnChain(connChain);
-		
-		Group resultCheckedAllGroup = new Group();
-		
-		for(Group group : list){
-			if(group != null){
-				resultCheckedAllGroup = groupStore.selectGroupByGroupId(group.getGroupId());
-				list.add(resultCheckedAllGroup);
-				
-				return list;
-			}
-		}
-		
-		return null;
+		return groupStore.selectGroupsByConnChain(connChain);
 	}
 
 	@Override

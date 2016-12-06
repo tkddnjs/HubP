@@ -75,9 +75,10 @@
 	</select>
 	
 	<select id="selectGroupsByConnChain" parameterType="String" resultMap="groupMap">
-		select groupId, connChain
-		from groupConn_tb
-		WHERE connChain like '%'||#{connChain}||'%'
+		<include refid="selectGroup"></include>
+		WHERE groupId IN (SELECT groupId
+						 FROM groupConn_tb
+						 WHERE connChain like '%'||#{connChain}||'%')
 	</select>
 	
 	<select id="selectGroupsByGroupName" parameterType="String" resultMap="groupMap">
