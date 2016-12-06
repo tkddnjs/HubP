@@ -9,11 +9,20 @@
 
 </head>
 <body>
+<div align="right">
+<%@ include file="/views/header/header.jspf" %>
+</div>
+<%@ include file="/views/menu.jsp" %>
 	<fieldset>
 		<legend>모임방 등록</legend>
 		<div>
 			<form class="form-inline" action="${pageContext.request.contextPath}/group/register.do" method="post">
 				<table>
+				
+				 <tr>
+				  <th>모임방 개설자</th>
+				  <td><input type="text" value="${userId }"  name="managerId" readonly>
+				 </tr>
 					<tr>
 						<th>모임방이름</th>
 						<td><input type="text" name="groupName"></td>
@@ -58,12 +67,18 @@
 								name="introduce"></textarea></td>
 					</tr>
 				</table>
+				
+				<div>
+				 <input class="btn btn-primary" type="submit" value="개설" style="margin-left: 100px;">
+				 <a href="${pageContext.request.contextPath }/group/list.do?listOpt=0" class="btn btn-primary">취소</a>
+				</div>
 			</form>
+		
 		</div>
 	</fieldset>
 
 	<script>
-		var availableTags = [];
+		var availableTag = [];
 		var counter = 0;
 		$(document).ready(function() {
 			$.ajax({
@@ -110,9 +125,11 @@
 
 		function list(array) {
 			for (var i = 0; i < array.length; i++) {
-				availableTags.push(array[i]);
+				availableTag.push(array[i]);
 			}
 		};
+		
+		
 	</script>
 
 </body>

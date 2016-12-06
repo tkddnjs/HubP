@@ -5,7 +5,7 @@
 <html>
 <head>
 <title>모임방 목록</title>
-<%@ include file="/views/layout/common.jsp" %>
+<%@ include file="/views/layout/common.jsp"%>
 
 <style type="text/css">
 body {
@@ -32,19 +32,21 @@ h1 {
 	</div>
 
 	<div class="input-append pull-right">
-		<form action="${pageContext.request.contextPath}/group/list.do" method="get" class="form-inline">
+		<form action="${pageContext.request.contextPath}/group/list.do"
+			method="get" class="form-inline">
 			<select name="listOpt">
 				<option value=1>모임방이름</option>
 				<option value=2>연결고리</option>
 				<option value=3>지역</option>
-			</select>
-			<input class="span2" type="text" name="searchWord" id="searchWord">
+			</select> 
+			<input class="span2" type="text" name="searchWord" value=""	id="searchs">
 			<button class="btn" type="button">검색</button>
 		</form>
 	</div>
 
 	<div class="input-append pull-right">
-		<form action="${pageContext.request.contextPath}/group/list.do" method="get">
+		<form action="${pageContext.request.contextPath}/group/list.do"
+			method="get">
 			<input type="hidden" name="listOpt" value=4>
 			<button class="btn" type="submit">내 리스트 조회</button>
 		</form>
@@ -75,12 +77,10 @@ h1 {
 					<td><a class="btn btn-xs btn-default btn-block"
 						href="${pageContext.request.contextPath}/group/detail.do?groupId=${group.groupId }">${group.groupName }</a></td>
 					<td><a class="btn btn-xs btn-default btn-block"
-						href="${pageContext.request.contextPath}/user/detail.do?userId=${group.managerId }">${group.managerId }</a></td>
+						href="${pageContext.request.contextPath}/user/detail.do?managerId=${group.managerId }">${group.managerId }</a></td>
 					<td>${group.lastDay }</td>
 					<td>${group.local }</td>
-					<td>
-						${group.connChains }
-					</td>
+					<td>${group.connChains }</td>
 				</tr>
 			</c:forEach>
 		</tbody>
@@ -89,7 +89,7 @@ h1 {
 	<div>
 		<div class="pagination" align="center">
 			<ul>
-				<li><a href="#">Prev</a></li>
+				<li><a href="${pageContext.request.contextPath }/group/list.do?listOpt=">Prev</a></li>
 				<li><a href="#">1</a></li>
 				<li><a href="#">2</a></li>
 				<li><a href="#">3</a></li>
@@ -103,23 +103,22 @@ h1 {
 				<li><a href="#">Next</a></li>
 			</ul>
 		</div>
+			<div class="pull-right">
+				<a class="btn btn-toolbar"
+					href="${pageContext.request.contextPath }/group/register.do?userId=${userId}">
 
-		<div class="pull-right">
-			<a class="btn btn-toolbar" href="/views/registerGroup.jsp">
-
-				<button>모임방등록</button>
-			</a>
-		</div>
+					<button>모임방등록</button>
+				</a>
+			</div>
 	</div>
-	
-<script type="text/javascript">
-	var availableTags = [];
-	$(function() {
-		var autocomplete_text = [ "자동완성기능", "Autocomplete", "개발로짜", "국이" ];
-		$("#searchs").autocomplete({
-			source : autocomplete_text
-		});
-	})
-</script>
+
+	<script type="text/javascript">
+		$(function() {
+			var autocomplete_text = [ "자동완성기능", "Autocomplete", "개발로짜", "국이" ];
+			$("#searchs").autocomplete({
+				source : autocomplete_text
+			});
+		})
+	</script>
 </body>
 </html>
