@@ -42,7 +42,7 @@ public class UserController {
 		String fileName = fileManager.registerImage(filePath, image);
 		user.setPicture(fileName);
 		userService.registerUser(user);
-		return "HUBMain";
+		return "HUBMainTest";
 	}
 	
 	@RequestMapping(value="modify.do", method=RequestMethod.GET)
@@ -114,6 +114,6 @@ public class UserController {
 	@RequestMapping(value="logout.do", method=RequestMethod.GET)
 	public String logout(HttpSession session){
 		session.invalidate();
-		return "HUBMain";
+		return "HUBMainTest";
 	}
 }

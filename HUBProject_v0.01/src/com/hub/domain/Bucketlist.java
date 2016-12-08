@@ -12,6 +12,16 @@ public class Bucketlist {
 	private String sos;
 	private boolean lock;
 	private String userId;
+	
+	private int progress;
+
+	public int getProgress() {
+		return progress;
+	}
+
+	public void setProgress(int progress) {
+		this.progress = progress;
+	}
 
 	public Bucketlist() {
 	}
@@ -87,13 +97,6 @@ public class Bucketlist {
 	public void setUserId(String userId) {
 		this.userId = userId;
 	}
-
-	public int getStars() {
-		int stars = 0;
-		for (int i = 0; i < star; i++) {
-			stars += 1;
-		}
-		return stars * 20;
-	}
+	
 
 }

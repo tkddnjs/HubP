@@ -70,7 +70,7 @@ public class BucketlistController {
 	
 	@RequestMapping(value="list.do", method=RequestMethod.GET)
 	public ModelAndView listBucketlist(HttpSession session){
-		ModelAndView mav = new ModelAndView("bucketlist/bucketList");
+		ModelAndView mav = new ModelAndView("bucketlist/bucketListTest");
 		String userId = (String) session.getAttribute("userId");
 		mav.addObject("bucketlists", bucketlistService.findAll(userId));
 		return mav;
