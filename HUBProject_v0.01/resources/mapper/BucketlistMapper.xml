@@ -15,13 +15,13 @@
 	</resultMap>
 
 	<sql id="selectBucketlist">
-		SELECT bucketId, title, bucketId, goal, star, memo, sos, locker, userId
+		SELECT bucketId, title, bucketId, goal, star, progress, memo, sos, locker, userId
 		FROM bucketlist_tb
 	</sql>
 
 	<insert id="insertBucketlist" parameterType="Bucketlist">
-		INSERT INTO bucketlist_tb(bucketId, title, goal, star, memo, sos, locker, userId)
-		VALUES (#{bucketlistId}, #{title}, #{goal}, #{star}, #{memo}, #{sos}, 'N', #{userId})
+		INSERT INTO bucketlist_tb(bucketId, title, goal, star, progress, memo, sos, locker, userId)
+		VALUES (#{bucketlistId}, #{title}, #{goal}, #{star}, #{progress}, #{memo}, #{sos}, 'N', #{userId})
 	</insert>
 	
 	<insert id="insertBucketlistConn" parameterType="Map">
@@ -31,7 +31,7 @@
 
 	<update id="updateBucketlist" parameterType="Bucketlist">
 		UPDATE bucketlist_tb
-		SET title = #{title}, goal = #{goal}, star = #{star}, memo = #{memo}, sos = #{sos},  userId = #{userId} 
+		SET title = #{title}, goal = #{goal}, star = #{star}, progress = #{progress}, memo = #{memo}, sos = #{sos},  userId = #{userId} 
 		WHERE bucketId=#{bucketlistId}
 	</update>
 	<!-- locker = #{lock,typeHandler=BooleanToYnHandler}, -->
