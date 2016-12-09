@@ -1,114 +1,89 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" isErrorPage="true" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
- 
-<!DOCTYPE html>
-<html>
-<head>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<title> 업체리스트 </title>
-<%@ include file="/views/layout/common.jsp" %>
-
-</head>
-<body>
-	<%@ include file="/views/layout/modalCSSCommon.jsp"%>
-	<%@ include file="/views/layout/modalJSCommon.jsp"%>
-	<%@ include file="/views/cooper/modifyCooper.jsp"%>
-	<%@ include file="/views/cooper/registerCooper.jsp"%>
-
-	<div class="header" align="right">
-		<%@ include file="/views/header/header.jspf"%>
-	</div>
-
-	<div>
-		<%@ include file="/views/menu.jsp"%>
-	</div>
-	
-	<div class="input-append pull-right">
-		<form action="${pageContext.request.contextPath}/cooper/list.do" method="get" class="form-inline">
-			<input type="text" name="searchWord" placeholder="연결고리를 입력하세요">
-			<input type="hidden" name="listOpt" value=1>
-			<button class="btn" type="submit">검색</button>
-		</form>
-	</div>
-	
-	<c:if test="${sessionScope.isAdmin }">
-		<div class="input-append pull-right">
-			<button type="button" class="btn btn-xs btn-info btnPlay" data-toggle="modal" data-target="#registerCooperModal">업체등록</button>
-			<!-- <a class="btn btn-xs btn-info btnPlay"
-				href="${pageContext.request.contextPath}/cooper/register.do">업체등록</a> -->
+<%@ include file="/views/cooper/registerCooper.jsp"%>
+<%@ include file="/views/cooper/modifyCooper.jsp"%>
+>
+<div class="col-xs-12">
+	<!-- 업체 목록 -->
+	<div class="x_panel">
+		<!-- 업체 목록 헤드 -->
+		<div class="x_title">
+			<h2>
+				<i class="fa fa-bitbucket"></i>업체목록
+			</h2>
+			<ul class="nav navbar-right panel_toolbox">
+				<li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
+				<li class="dropdown"><a href="#" class="dropdown-toggle"
+					data-toggle="dropdown" role="button" aria-expanded="false"> <i
+						class="fa fa-wrench"></i></a>
+					<ul class="dropdown-menu" role="menu">
+						<li><a href="#">Settings 1</a></li>
+						<li><a href="#">Settings 2</a></li>
+					</ul></li>
+				<li><a class="close-link"><i class="fa fa-close"></i></a></li>
+			</ul>
+			<div class="clearfix"></div>
 		</div>
-	</c:if>
-	
-	<table class="table table-hover table-condensed">
-		<thead style="background: #60d7a9; color: white;">
-			<tr style="align: center; font-size: 14pt;">
-				<th width="60" align="center">No</th>
-				<th width="200" align="center">업체이름</th>
-				<th width="500" align="center">업체배너</th>
-				<th width="100" align="center"></th>
-				<th width="100" align="center"></th>
-			</tr>
-		</thead>
+		<!-- /업체 목록 헤드 -->
 
-		<tbody style="font-size: 14pt;">
-			<c:forEach items="${coopers }" var="cooper" varStatus="status">
-				<tr>
-					<c:set var="no" value="${status.count }"></c:set>
-					<td width="60" align="center">${no }</td>
-					<td width="200" align="center">${cooper.coName }</td>
-					<td width="500" align="center"><a href="${cooper.coBanner }"></a></td>
-					<c:if test="${sessionScope.isAdmin }">
-						<td width="100" align="center">
-							<button type="button" name="modifyBtn" value="${no }" data-toggle="modal" data-target="#modifyCooperModal">수정</button>
-<!-- 							<form action="${pageContext.request.contextPath}/cooper/modify.do" method="GET">
-								<input type="hidden" name="coId" value="${cooper.coId}">
-								<button type="submit">수정</button>
-							</form> -->
-						</td>
-						<td width="100" align="center">
-							<form action="${pageContext.request.contextPath}/cooper/remove.do" method="GET">
-								<input type="hidden" name="coId" value="${cooper.coId}">
-								<button type="submit">삭제</button>
-							</form>
-						</td>
-					</c:if>
-				</tr>
-			</c:forEach>
-		</tbody>
-	</table>
-	
-	
-	<script type="text/javascript">
+		<!-- 업체 목록 바디 -->
+		<div class="x_content">
+			<div class="accordion" id="accordion1" role="tablist"
+				aria-multiselectable="true">
+				<!--1st item-->
+				<c:forEach items="${coopers }" var="cooper" varStatus="status">
+					<c:set var="no" value="${status.count  }"></c:set>
+						<div class="panel">
+							<a class="panel-heading " role="tab" id="headingOne1"
+								data-toggle="collapse" data-parent="#accordion1"
+								href="#collapseOne${no  }" aria-expanded="true"
+								aria-controls="collapseOne">
+								<h3 class="panel-title">${cooper.coName }</h3>
+							</a>
+							<div id="collapseOne${no  }"
+								class="panel-collapse collapse" role="tabpanel"
+								aria-labelledby="headingOne">
+								<div class="panel-body">
+									<table class="table table-striped"
+										style="width: 70%; height: 100px; margin: 20px 10px 0 140px; gravity: center; font-size: 16px">
+										<tr>
+											<td>${cooper.coBanner }</td>
+										</tr>
+									</table>
+								</div>
+
+								<div style="margin-left: 90%;">
+									<button type="button" value="${no }" data-toggle="modal" name="modifyBtn"
+										data-target="#modifyCooperModal">수정</button>
+									<a href="${pageContext.request.contextPath }/cooper/remove.do?cooperId=${cooper.coId }"></a>
+								</div>
+								
+							</div>
+						</div>
+				</c:forEach>
+
+				<!-- 업체 등록 -->
+				<c:if test="${isAdmin }">
+					<div class="panel">
+						<a id="registerBtn" data-toggle="modal" data-target="#registerCooperModal">
+							<h1 align="center">
+								<i class="fa fa-plus-circle"></i>
+							</h1>
+						</a>
+					</div>
+				</c:if>
+				<!-- /업체 등록 -->
+				
+			</div>
+		</div>
+		<!-- 업체 목록  바디 -->
+	</div>
+	<!-- 업체 목록 -->
+</div>
+<script>
 	var coopers = new Array();
-	<c:forEach items="${coopers}" var="cooper">
-		var cooper = new Array();
-		cooper.push("${cooper.coId}");
-		cooper.push("${cooper.coName}");
-		cooper.push("${cooper.startDay}");
-		cooper.push("${cooper.lastDay}");
-		cooper.push("${cooper.connChains}");
-		cooper.push("${cooper.coBanner}");
-		coopers.push(cooper);
-	</c:forEach>
 	
-	$("[name=modifyBtn]").click(function(){
-		var index = $(this).val() - 1;
-		$("#modifyCooperModal #coId").val(coopers[index][0]);
-		$("#modifyCooperModal #coName").val(coopers[index][1]);
-		$("#modifyCooperModal #startDay").val(coopers[index][2]);
-		$("#modifyCooperModal #lastDay").val(coopers[index][3]);
-		initConn(coopers[index][4]);
-    	$("#modifyCooperModal #coBanner").val(coopers[index][5]);
-    	
-	});
 	
-	function initConn(str){
-		var conn = str;
-		conn = conn.replace("[","");
-		conn = conn.replace(/ /gi,"");
-		conn = conn.replace("]","");
-		$("#mctags").importTags(conn);
-	};
-	</script>
-</body>
-</html>
+</script>
