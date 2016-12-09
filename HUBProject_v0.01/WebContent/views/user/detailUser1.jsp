@@ -4,9 +4,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>사용자 상세</title>
-	<%@ include file="/views/layout/common.jsp" %>
-	<%@ include file="/views/post/sendPost.jsp" %>
+<title>사용자 상세</title>
+
+<%@ include file="/views/layout/common.jsp" %>
+<%@ include file="/views/user/modifyUser.jsp" %>
+
 <style type="text/css">
 body {
 	padding: 5px;
@@ -63,7 +65,7 @@ h1 {
 	<table class="table table-hover table-condensed">
 		<tr>
 			<th width="50" align="center">사진</th>
-			<td width="100" align="center">${user.picture }</td>
+			<td width="100" align="center"><img src="${pageContext.request.contextPath }/resources/img/userImg/${user.picture }"></td>
 		</tr>
 		<tr>
 			<th width="50" align="center">ID</th>
@@ -74,29 +76,28 @@ h1 {
 			<td width="100" align="center">${user.connChains }</td>
 		</tr>
 		<tr>
-			<th width="50" align="center">소개</th>
+			<th width="50" align="center">자기소개</th>
 			<td width="100" align="center">${user.introduce }</td>
 		</tr>
 	</table>
 
-	<form action="${pageContext.request.contextPath}/list/list.do" method="post">
-		<div class="input-append pull-right">
-			<button class="btn btn-xs btn-default btn-block" type="submit">돌아가기</button>
-		</div>
-		<input type="hidden" name="listOpt" value="${listOpt }">
-		<input type="hidden" name="connChain" value="${searchWord }">
-	</form>
+	<div style="float: right;">
+		<button class="btn btn-xs btn-default" type="button" data-toggle="modal" data-target="#modifyUserModal">수정</button>
+		<!-- <a class="btn btn-xs btn-default"
+		  	href="${pageContext.request.contextPath }/user/modify.do?userId=${sessionScope.userId}">수정</a> -->
+		<a class="btn btn-xs btn-default"
+		 	href="${pageContext.request.contextPath }/user/remove.do?userId=${sessionScope.userId}">탈퇴</a>
+	</div>
 	
-	<form action="${pageContext.request.contextPath}/follow/request.do" method="post">
-		<div class="input-append pull-right">
-			<button class="btn btn-xs btn-default btn-block" type="submit">팔로우신청</button>
-			<input type="hidden" name="userId" value="${sessionScope.userId }">
-			<input type="hidden" name="followId" value="${user.userId }">
-			<input type="hidden" name="relation" value="${listOpt }">
-		</div>
-	</form>
-	
-	<button type="button" class="btn btn-xs btn-info btnPlay" data-toggle="modal" data-target="#sendPostModal">쪽지전송</button>
-	
+	<c:if test="${chkFollow }">
+		<form action="follow/request.do" method="post">
+			<div class="input-append pull-right">
+				<button class="btn btn-xs btn-default btn-block" type="submit"
+					name="followId" value="${user.userId }">친구요청</button>
+				<input type="hidden" name="relation" value="${listOpt }">
+				<input type="hidden" name="connChain" value="${connChain }">
+			</div>
+		</form>
+	</c:if>
 </body>
 </html>

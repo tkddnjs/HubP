@@ -11,7 +11,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title> 모임방상세 </title>
+    <title> 회원상세 </title>
 
     <!-- Bootstrap -->
     <link href="${pageContext.request.contextPath}/resources/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -144,34 +144,29 @@
               <div class="col-md-8 col-sm-12 col-xs-12 col-md-offset-2">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2><b>모임방상세</b></h2>
+                    <h2><b>회원상세</b></h2>
                     <div class="clearfix"></div>
                   </div>
                   <div class="x_content">
                     <br />
-					<form id="demo-form2" action="${pageContext.request.contextPath}/group/modify.do" data-parsley-validate class="form-horizontal form-label-left" method="get">
+					<form id="demo-form2" action="${pageContext.request.contextPath}/user/modify.do" data-parsley-validate class="form-horizontal form-label-left" method="get">
                       <div class="form-group">
-                        <label class="control-label col-md-2 col-sm-3 col-xs-12" for="groupName">GroupName</label>
+                          <label for="picture" class="control-label col-md-2 col-sm-3 col-xs-12">Picture</label>
+                          <div class="col-md-6 col-sm-6 col-xs-8">
+                              <img width="40%" height="40%" src="${pageContext.request.contextPath}/resources/img/userImg/${user.picture}">
+                          </div>
+                      </div>
+                      <div></div>
+                      <div class="form-group">
+                        <label class="control-label col-md-2 col-sm-3 col-xs-12" for="email">Email</label>
                         <div class="col-md-3 col-sm-4 col-xs-5">
-                          <label id="groupName" class="control-label">${group.groupName }</label>
+                          <label id="email" class="control-label">${user.email }</label>
                         </div>
                       </div>
-                      <div class="form-group">
-                        <label class="control-label col-md-2 col-sm-3 col-xs-12" for="managerId">Manager</label>
-                        <div class="col-md-3 col-sm-4 col-xs-5">
-						  <label id="managerId" class="control-label">${group.managerId }</label>
-                        </div>
-                      </div>
-                      <div class="form-group">
-                        <label class="control-label col-md-2 col-sm-3 col-xs-12" for="lastDay">LastDay</label>
-                        <div class="col-md-3 col-sm-4 col-xs-5">
-                          <label id="lastDay" class="control-label">${group.lastDay }</label>
-                        </div>
-                      </div>
-                      <div class="form-group">
+                      <div class="control-group">
                         <label class="control-label col-md-2 col-sm-3 col-xs-12">ConnChains</label>
                         <div class="col-md-6 col-sm-6 col-xs-8" id="connForm">
-                          <c:forEach items="${group.connChains }" var="connChain">
+                          <c:forEach items="${user.connChains }" var="connChain">
                           	<label class="control-label">${connChain }</label>
                           </c:forEach>
                         </div>
@@ -180,47 +175,15 @@
                       <div class="form-group">
                         <label class="control-label col-md-2 col-sm-3 col-xs-12">Introduce</label>
                         <div class="col-md-6 col-sm-6 col-xs-8">
-                          <textarea disabled="disabled" class="form-control" rows="3" name="introduce">${group.introduce }</textarea>
+                          <textarea readonly="readonly" class="form-control" rows="3" name="introduce">${user.introduce }</textarea>
                         </div>
                       </div>
-                      <div class="form-group"></div>
-                      <div class="form-group">
-                        <label class="control-label col-md-2 col-sm-3 col-xs-12" for="local">Local</label>
-                        <div class="col-md-3 col-sm-4 col-xs-5">
-                          <label id="local" class="control-label">${group.local }</label>
-                        </div>
-                      </div>
-                      <div class="form-group">
-                        <label class="control-label col-md-2 col-sm-3 col-xs-12">ConnChains</label>
-                        <div class="col-md-6 col-sm-6 col-xs-8" id="connForm">
-                          <c:forEach items="${group.joinPeople }" var="member">
-                          	<label class="control-label">${member }</label>
-                          </c:forEach>
-                        </div>
-                      </div>
-                      <div class="form-group">
-                        <label class="control-label col-md-2 col-sm-3 col-xs-12" for="maxPeople">MaxPeople</label>
-                        <div class="col-md-3 col-sm-4 col-xs-5">
-                          <label id="maxPeople" class="control-label">${group.maxPeople }</label>
-                        </div>
-                      </div>
-                      
                       <div class="ln_solid"></div>
                       <div class="form-group">
                         <div class="col-md-6 col-sm-6 col-xs-8 col-md-offset-4 col-sm-offset-4 col-xs-offset-4">
-                          <c:choose>
-                          	<c:when test="${group.managerId eq sessionScope.userId}">
-                          		<input type="hidden" name=groupId value="${group.groupId }">
-                          		<button type="submit" class="btn btn-success">수정</button>
-                          		<a class="btn btn-primary" href="${pageContext.request.contextPath }/group/remove.do?groupId=${group.groupId}">삭제</a>
-                          	</c:when>
-                          	<c:otherwise>
-                          		<c:choose>
-                          			<a class="btn btn-primary" href="${pageContext.request.contextPath }/group/join.do?bucketlistId=${bucketlist.bucketlistId}">참여</a>
-                          			<a class="btn btn-primary" href="${pageContext.request.contextPath }/group/exit.do?bucketlistId=${bucketlist.bucketlistId}">탈퇴</a>
-                          		</c:choose>
-                          	</c:otherwise>
-                          </c:choose>
+                          <a class="btn btn-primary" href="${pageContext.request.contextPath }/user/remove.do?userId=${user.userId}">탈퇴</a>
+                          <input type="hidden" value="${user.userId }">
+                          <button type="submit" class="btn btn-success">수정</button>
                         </div>
                       </div>
                     </form>

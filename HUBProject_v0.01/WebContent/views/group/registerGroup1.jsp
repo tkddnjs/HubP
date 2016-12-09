@@ -4,47 +4,38 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>모임방 수정</title>
+<title>모임방 등록</title>
 <%@ include file="/views/layout/common.jsp"%>
 
 </head>
 <body>
 	<fieldset>
-		<legend>모임방 수정</legend>
+		<legend>모임방 등록</legend>
 		<div>
 			<form class="form-inline" action="${pageContext.request.contextPath}/group/register.do" method="post">
 				<table>
 					<tr>
 						<th>모임방이름</th>
-						<td><input type="text" name="groupName" value="${group.groupName }"></td>
+						<td><input type="text" name="groupName"></td>
 					</tr>
 					<tr>
 						<th>연결고리</th>
-						<td>
-							<c:forEach items="${group.connChains }" var="connChain" varStatus="status">
-								<div id="conn${status.count }">
-									${connChain }
-									<input type="hidden" name="connChains" value="${connChain }">
-									<button type="button" name="removeButton">-</button>
-								</div>
-							</c:forEach>
-							<div id="connForm">						
-								<input type="text" id="connChain" name="connChains">
-								<button type="button" id="addButton">+</button>
-							</div>
+						<td id="connForm">
+							<input type="text" id="connChain" name="connChains">
+							<button type="button" id="addButton">+</button>
 						</td>
 					</tr>
 					<tr>
 						<th>모임마감일</th>
-						<td><input type="date" name="lastDay" value="${group.lastDay }"></td>
+						<td><input type="date" name="lastDay"></td>
 					</tr>
 					<tr>
 						<th>최대인원</th>
-						<td><input type="number" min="3" max="25" name="maxPeople" value="${group.maxPeople }"></td>
+						<td><input type="number" min="3" max="25" name="maxPeople"></td>
 					</tr>
 					<tr>
 						<th>지역</th>
-						<td><select class="ring" name="local" id="local" >
+						<td><select class="ring" name="local" id="local">
 								<option value="서울">서울</option>
 								<option value="경기">경기</option>
 								<option value="강원">강원</option>
@@ -64,15 +55,9 @@
 					<tr>
 						<th>소개</th>
 						<td><textarea rows="5" style="width: 100%; height: 300px;"
-								name="introduce">${group.introduce }</textarea></td>
+								name="introduce"></textarea></td>
 					</tr>
 				</table>
-				
-				<div>
-					<input type="hidden" name="groupId" value="${group.groupId }">
-					<input type="hidden" name="managerId" value="${group.managerId }">
-					<button type="submit">수정</button>
-				</div>
 			</form>
 		</div>
 	</fieldset>
@@ -80,9 +65,7 @@
 	<script>
 		var availableTags = [];
 		var counter = 0;
-		
 		$(document).ready(function() {
-			$("#local").val('${group.local}');
 			$.ajax({
 				type : 'POST',
 				url : '${pageContext.request.contextPath}/list/listAutoComplete.do',
@@ -102,12 +85,6 @@
 				source : availableTags
 			})
 
-						
-			$(":button [name='removeButton']").click(function() {
-				var id = $(this).closest('div').attr('id');
-				$("#"+id).remove();
-			});
-			
 			$("#connForm").on("create", function() {
 				$("#connCahin"+ counter.toString()).autoComplete({
 					appendTo : "#connForm",
@@ -129,7 +106,6 @@
 				+ '">-</button></div>')
 				.trigger("create");
 			});
-			
 		});
 
 		function list(array) {
@@ -137,7 +113,6 @@
 				availableTags.push(array[i]);
 			}
 		};
-		
 	</script>
 
 </body>

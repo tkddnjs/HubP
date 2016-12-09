@@ -1,147 +1,61 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" isErrorPage="true" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<!DOCTYPE html>
-<html>
-<head>
-<title> 업체수정 </title>
-<%@ include file="/views/layout/common.jsp" %>
-
-</head>
-<body>
-	<form action="${pageContext.request.contextPath}/cooper/modify.do" method="post">
-		<table>
-			<tr>
-				<th>업체이름</th>
-				<td>
-					<input type="text" name="coName" value="${cooper.coName }" />
-				</td>
-			</tr>
-			<tr>
-				<th>만료일자</th>
-				<td>
-					<input type="date" name="lastDay" value="${cooper.lastDay }" />
-				</td>
-			</tr>
-			<tr>
-				<th>연결고리</th>
-				<td>
-					<c:forEach items="${cooper.connChains }" var="connChain" varStatus="status">
-						<div id="conn${status.count }">
-							${connChain }
-							<input type="hidden" name="connChains" value="${connChain }">
-							<button type="button" name="removeButton">-</button>
+<!-- Modal -->
+<div class="modal fade" id="modifyCooperModal" role="dialog">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title">업체수정</h4>
+			</div>
+   			<div class="modal-body">
+				<form id="demo-form2" action="${pageContext.request.contextPath}/user/modify.do" data-parsley-validate class="form-horizontal form-label-left" method="post" enctype="multipart/form-data">
+					<div class="form-group">
+						<label class="control-label col-md-2 col-sm-3 col-xs-12" for="coName">CooperName <span class="required">*</span></label>
+						<div class="col-md-2 col-sm-3 col-xs-3">
+							<input type="text" id="coName" name="coName" required="required" class="form-control col-md-7 col-xs-12">
 						</div>
-					</c:forEach>
-					<div id="connForm">
-						<input type="text" id="connChain" name="connChains" />
-						<button type="button" name="addButton">+</button>
 					</div>
-				</td>
-			</tr>
-			<tr>
-				<th>배너정보</th>
-				<td>
-					<input type="text" name="coBanner" value="${cooper.coBanner}" />
-				</td>
-			</tr>
-		</table>
-		<div>
-			<input type="hidden" name="coId" value="${cooper.coId }">
-			<input type="hidden" name="startDay" value="${cooper.startDay }">
-			<button class="btn btn-xs btn-default" type="submit">등록</button>
-		</div>
-	</form>
-	
-	<script>
-		var availableTags = [];
-		var counter = 0;
-		$(document).ready(function() {
-			$.ajax({
-				type : 'POST',
-				url : '${pageContext.request.contextPath}/list/listAutoComplete.do',
-				data : {
-					listOpt : 2
-				},
-				success : function(result) {
-					result = result.replace(/ /gi, "");
-					result = result.replace("[", "");
-					result = result.replace("]", "");
-					result = result.split(",");
-					list(result);
-				}
-			});
-			
-			$("#connChain").autocomplete({
-				source : availableTags
-			})
-			
-			$(":button [name='removeButton']").click(function(){
-				var id = $(this).closest('div').attr('id');
-				$("#"+id).remove();
-			});
-			
-			$("#connForm").on("create", function(){
-				$("#connCahin" + counter.toString()).autoComplete({
-					appendTo: "#connForm",
-					source: availableTags
-				})
-				$("#removeButton"+counter.toString()).click(function() {
-					var id = $(this).closest('div').attr('id');
-					$("#"+id).remove();
-				})
-			})
-			
-			$("#addButton").click(function () {
-				counter++;
-				$("#connForm")
-				.append('<div id="iconn'+counter.toString()
-						+ '"><input type="text" id="connChain"' + counter.toString()
-						+ ' name="connChains" placeholder="연결고리입력" />'
-						+ '<button type="button" id="removeButton"' + counter.toString()
-						+ '">-</button></div>')
-				.trigger("create");
-			});
-			
-		});
-		
-		$("form").submit(function(event) {
-			//에러 초기화 추가로 붙는 내용 삭제
-			$("p.error").remove();
-			$("dl dd").removeClass("error");
-
-			//filter메소드를 이용해서 text, textareea 요소들 중에 validate
-			//클래스를 갖고 있는 것만 찾는다.
-			
-			$(":text").filter("[name='connChains']").each(function(){
-				if($(this).val() === ""){
-					if($(":hidden").filter("[name='connChains']").length > 0){
-						$(this).closest("div").remove();						
-					} else {
-						$(this).before("<p class='error'>필수 입력 사항입니다.</p>");
-					}
-				}
-			});
-			
-			if ($("p.error").length > 0) {
-				//에러가 발생한 위치로 스크롤 이동
-				$("html, body").animate({
-					scrollTop : $("p.error.first").offset.top - 40
-				}, "slow");
-				//에러 항목에 대한 음영 처리
-				$("p.error").parent().addClass("error");
-				event.preventDefault();
-			}
-		});
-		
-		
-		function list(array){
-			for(var i=0; i<array.length; i++){
-				availableTags.push(array[i]);
-			}
-		};
-		
-	</script>
-	
-</body>
-</html>
+					<div class="form-group">
+						<label class="control-label col-md-2 col-sm-3 col-xs-12" for="lastDay">LastDay <span class="required">*</span></label>
+							<div class="col-md-3 col-sm-3 col-xs-4">
+								<input type="date" id="lastDay" name="lastDay" required="required" class="form-control col-md-7 col-xs-12">
+							</div>
+					</div>
+					<div class="form-group">
+						<label class="control-label col-md-2 col-sm-3 col-xs-12">ConnChains <span class="required">*</span></label>
+						<div class="col-md-6 col-sm-6 col-xs-8">
+							<input type="text" id="mctags" name="connChains" class="tags form-control" />
+						</div>
+					</div>
+					<div class="form-group"></div>
+					<div class="form-group">
+						<label class="control-label col-md-2 col-sm-3 col-xs-12" for="coBanner">CooperBanner </label>
+						<div class="col-md-2 col-sm-3 col-xs-5">
+							<input type="text" id="coBanner" name="coBanner" class="form-control col-md-7 col-xs-12">
+						</div>
+					</div>
+					
+<!-- 					<div class="form-group">
+						<label class="control-label col-md-2 col-sm-3 col-xs-12" for="picture">Picture</label>
+						<div class="col-md-6 col-sm-6 col-xs-8">
+							<button type="button" id="pictureBtn" class="btn btn-primary">사진입력</button>
+							<input type="file" name="image" data-role="magic-overlay" data-target="#pictureBtn" data-edit="insertImage"/>
+							<img width="10%" height="10%" src="${pageContext.request.contextPath}/resources/img/userImg/${user.picture}">
+						</div>
+					</div> -->
+					<div class="ln_solid"></div>
+					<div class="form-group">
+						<div class="col-md-6 col-sm-6 col-xs-8 col-md-offset-4 col-sm-offset-4 col-xs-offset-4">
+							<button type="reset" class="btn btn-primary">초기화</button>
+							<input type="hidden" name="coId">
+							<input type="hidden" name="startDay">
+							<button type="submit" class="btn btn-success">수정</button>
+						</div>
+					</div>
+				</form>
+			</div>
+  		</div>
+	</div>
+</div>

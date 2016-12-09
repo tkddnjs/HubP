@@ -11,7 +11,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title> 모임방상세 </title>
+    <title> 버킷리스트등록 </title>
 
     <!-- Bootstrap -->
     <link href="${pageContext.request.contextPath}/resources/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -32,16 +32,16 @@
     <!-- bootstrap-daterangepicker -->
     <link href="${pageContext.request.contextPath}/resources/vendors/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-
+    
     <!-- Custom Theme Style -->
-    <link href="${pageContext.request.contextPath}/resources/css/custom.min.css" rel="stylesheet">    
+    <link href="${pageContext.request.contextPath}/resources/css/custom.min.css" rel="stylesheet">
   </head>
 
   <body class="nav-md" style="background: #FFFFFF">
     <div class="container body">
       <div class="main_container">
       
-            <div class="nav_menu">
+      <div class="nav_menu">
             <nav>
               <div class="nav toggle">
                 <a id="menu_toggle"><i class="fa fa-bars"></i></a>
@@ -144,83 +144,50 @@
               <div class="col-md-8 col-sm-12 col-xs-12 col-md-offset-2">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2><b>모임방상세</b></h2>
+                    <h2><b>버킷리스트등록</b></h2>
                     <div class="clearfix"></div>
                   </div>
                   <div class="x_content">
                     <br />
-					<form id="demo-form2" action="${pageContext.request.contextPath}/group/modify.do" data-parsley-validate class="form-horizontal form-label-left" method="get">
+					<form id="demo-form2" action="${pageContext.request.contextPath}/bucketlist/register.do" data-parsley-validate class="form-horizontal form-label-left" method="post">
                       <div class="form-group">
-                        <label class="control-label col-md-2 col-sm-3 col-xs-12" for="groupName">GroupName</label>
-                        <div class="col-md-3 col-sm-4 col-xs-5">
-                          <label id="groupName" class="control-label">${group.groupName }</label>
-                        </div>
-                      </div>
-                      <div class="form-group">
-                        <label class="control-label col-md-2 col-sm-3 col-xs-12" for="managerId">Manager</label>
-                        <div class="col-md-3 col-sm-4 col-xs-5">
-						  <label id="managerId" class="control-label">${group.managerId }</label>
-                        </div>
-                      </div>
-                      <div class="form-group">
-                        <label class="control-label col-md-2 col-sm-3 col-xs-12" for="lastDay">LastDay</label>
-                        <div class="col-md-3 col-sm-4 col-xs-5">
-                          <label id="lastDay" class="control-label">${group.lastDay }</label>
-                        </div>
-                      </div>
-                      <div class="form-group">
-                        <label class="control-label col-md-2 col-sm-3 col-xs-12">ConnChains</label>
-                        <div class="col-md-6 col-sm-6 col-xs-8" id="connForm">
-                          <c:forEach items="${group.connChains }" var="connChain">
-                          	<label class="control-label">${connChain }</label>
-                          </c:forEach>
-                        </div>
-                      </div>
-                      <div class="form-group"></div>
-                      <div class="form-group">
-                        <label class="control-label col-md-2 col-sm-3 col-xs-12">Introduce</label>
+                        <label class="control-label col-md-2 col-sm-3 col-xs-12" for="title">Title <span class="required">*</span>
+                        </label>
                         <div class="col-md-6 col-sm-6 col-xs-8">
-                          <textarea disabled="disabled" class="form-control" rows="3" name="introduce">${group.introduce }</textarea>
+                          <input type="text" id="title" name="title" required="required" class="form-control col-md-7 col-xs-12">
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="control-label col-md-2 col-sm-3 col-xs-12" for="goal">Goal</label>
+                        <div class="col-md-6 col-sm-6 col-xs-8">
+                          <input type="text" id="goal" name="goal" placeholder="목표기간을 입력하세요(ex. 올해안에, 3년안에...)" class="form-control col-md-7 col-xs-12">
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="control-label col-md-2 col-sm-3 col-xs-12" for="star">Star <span><small>(10점 만점)</small></span></label>
+                        <div class="col-md-2 col-sm-3 col-xs-3">
+                          <input type="number" id="star" class="form-control col-md-7 col-xs-12">
+                        </div>
+                      </div>
+                      <div class="control-group">
+                        <label class="control-label col-md-2 col-sm-3 col-xs-12">ConnChains <span class="required">*</span></label>
+                        <div class="col-md-6 col-sm-6 col-xs-8" id="connForm">
+                          <input id="tags" type="text" name="connChains" class="tags form-control" />
                         </div>
                       </div>
                       <div class="form-group"></div>
                       <div class="form-group">
-                        <label class="control-label col-md-2 col-sm-3 col-xs-12" for="local">Local</label>
-                        <div class="col-md-3 col-sm-4 col-xs-5">
-                          <label id="local" class="control-label">${group.local }</label>
+                        <label class="control-label col-md-2 col-sm-3 col-xs-12">SOS </label>
+                        <div class="col-md-6 col-sm-6 col-xs-8">
+                          <textarea class="form-control" rows="3" name="sos" placeholder='도움 받고 싶은 부분을 입력하세요'></textarea>
                         </div>
                       </div>
-                      <div class="form-group">
-                        <label class="control-label col-md-2 col-sm-3 col-xs-12">ConnChains</label>
-                        <div class="col-md-6 col-sm-6 col-xs-8" id="connForm">
-                          <c:forEach items="${group.joinPeople }" var="member">
-                          	<label class="control-label">${member }</label>
-                          </c:forEach>
-                        </div>
-                      </div>
-                      <div class="form-group">
-                        <label class="control-label col-md-2 col-sm-3 col-xs-12" for="maxPeople">MaxPeople</label>
-                        <div class="col-md-3 col-sm-4 col-xs-5">
-                          <label id="maxPeople" class="control-label">${group.maxPeople }</label>
-                        </div>
-                      </div>
-                      
                       <div class="ln_solid"></div>
                       <div class="form-group">
                         <div class="col-md-6 col-sm-6 col-xs-8 col-md-offset-4 col-sm-offset-4 col-xs-offset-4">
-                          <c:choose>
-                          	<c:when test="${group.managerId eq sessionScope.userId}">
-                          		<input type="hidden" name=groupId value="${group.groupId }">
-                          		<button type="submit" class="btn btn-success">수정</button>
-                          		<a class="btn btn-primary" href="${pageContext.request.contextPath }/group/remove.do?groupId=${group.groupId}">삭제</a>
-                          	</c:when>
-                          	<c:otherwise>
-                          		<c:choose>
-                          			<a class="btn btn-primary" href="${pageContext.request.contextPath }/group/join.do?bucketlistId=${bucketlist.bucketlistId}">참여</a>
-                          			<a class="btn btn-primary" href="${pageContext.request.contextPath }/group/exit.do?bucketlistId=${bucketlist.bucketlistId}">탈퇴</a>
-                          		</c:choose>
-                          	</c:otherwise>
-                          </c:choose>
+                          <button type="reset" class="btn btn-primary">초기화</button>
+                          <input type="hidden" name="userId" value="${sessionScope.userId }">
+                          <button type="submit" class="btn btn-success">등록</button>
                         </div>
                       </div>
                     </form>
@@ -260,6 +227,196 @@
     <script src="${pageContext.request.contextPath}/resources/js/custom.min.js"></script>
     
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js" type="text/javascript"></script>
+
     
+    <script>
+    var availableTags = [];
+    
+	$(document).ready(function (){
+		alert("${sessionScope.userId }");
+		
+		$.ajax({
+			type : 'POST',
+			url : '${pageContext.request.contextPath}/list/listAutoComplete.do',
+			data : {
+				listOpt : 2
+			},
+			success : function(result) {
+				result = result.replace(/ /gi, "");
+				result = result.replace("[", "");
+				result = result.replace("]", "");
+				result = result.split(',');
+				list(result);
+			}
+		});
+	});
+	
+	function list(array){
+		availableTags.length = 0;
+		for (var i=0; i<array.length; i++){
+			availableTags.push(array[i]);
+		}
+	};
+	
+	$("form").submit(function(event) {
+	});
+	
+	</script>
+    
+    <!-- bootstrap-daterangepicker -->
+    <script>
+      $(document).ready(function() {
+        $('#birthday').daterangepicker({
+          singleDatePicker: true,
+          calender_style: "picker_4"
+        }, function(start, end, label) {
+          console.log(start.toISOString(), end.toISOString(), label);
+        });
+      });
+    </script>
+    <!-- /bootstrap-daterangepicker -->
+
+    <!-- bootstrap-wysiwyg -->
+    <script>
+      $(document).ready(function() {
+        function initToolbarBootstrapBindings() {
+          var fonts = ['Serif', 'Sans', 'Arial', 'Arial Black', 'Courier',
+              'Courier New', 'Comic Sans MS', 'Helvetica', 'Impact', 'Lucida Grande', 'Lucida Sans', 'Tahoma', 'Times',
+              'Times New Roman', 'Verdana'
+            ],
+            fontTarget = $('[title=Font]').siblings('.dropdown-menu');
+          $.each(fonts, function(idx, fontName) {
+            fontTarget.append($('<li><a data-edit="fontName ' + fontName + '" style="font-family:\'' + fontName + '\'">' + fontName + '</a></li>'));
+          });
+          $('a[title]').tooltip({
+            container: 'body'
+          });
+          $('.dropdown-menu input').click(function() {
+              return false;
+            })
+            .change(function() {
+              $(this).parent('.dropdown-menu').siblings('.dropdown-toggle').dropdown('toggle');
+            })
+            .keydown('esc', function() {
+              this.value = '';
+              $(this).change();
+            });
+
+          $('[data-role=magic-overlay]').each(function() {
+            var overlay = $(this),
+              target = $(overlay.data('target'));
+            overlay.css('opacity', 0).css('position', 'absolute').offset(target.offset()).width(target.outerWidth()).height(target.outerHeight());
+          });
+
+          if ("onwebkitspeechchange" in document.createElement("input")) {
+            var editorOffset = $('#editor').offset();
+
+            $('.voiceBtn').css('position', 'absolute').offset({
+              top: editorOffset.top,
+              left: editorOffset.left + $('#editor').innerWidth() - 35
+            });
+          } else {
+            $('.voiceBtn').hide();
+          }
+        }
+
+        function showErrorAlert(reason, detail) {
+          var msg = '';
+          if (reason === 'unsupported-file-type') {
+            msg = "Unsupported format " + detail;
+          } else {
+            console.log("error uploading file", reason, detail);
+          }
+          $('<div class="alert"> <button type="button" class="close" data-dismiss="alert">&times;</button>' +
+            '<strong>File upload error</strong> ' + msg + ' </div>').prependTo('#alerts');
+        }
+
+        initToolbarBootstrapBindings();
+
+        $('#editor').wysiwyg({
+          fileUploadError: showErrorAlert
+        });
+
+        window.prettyPrint;
+        prettyPrint();
+      });
+    </script>
+    <!-- /bootstrap-wysiwyg -->
+
+    <!-- jQuery Tags Input -->
+    <script>
+      function onAddTag(tag) {
+        alert("Added a tag: " + tag);
+      }
+
+      function onRemoveTag(tag) {
+        alert("Removed a tag: " + tag);
+      }
+
+      function onChangeTag(input, tag) {
+        alert("Changed a tag: " + tag);
+      }
+
+      $(document).ready(function() {
+        $('#tags').tagsInput({
+          width: 'auto',
+          autocomplete_url: availableTags
+        });
+      });
+    </script>
+    <!-- /jQuery Tags Input -->
+
+    <!-- Parsley -->
+    <script>
+      $(document).ready(function() {
+        $.listen('parsley:field:validate', function() {
+          validateFront();
+        });
+        $('#demo-form .btn').on('click', function() {
+          $('#demo-form').parsley().validate();
+          validateFront();
+        });
+        var validateFront = function() {
+          if (true === $('#demo-form').parsley().isValid()) {
+            $('.bs-callout-info').removeClass('hidden');
+            $('.bs-callout-warning').addClass('hidden');
+          } else {
+            $('.bs-callout-info').addClass('hidden');
+            $('.bs-callout-warning').removeClass('hidden');
+          }
+        };
+      });
+
+      $(document).ready(function() {
+        $.listen('parsley:field:validate', function() {
+          validateFront();
+        });
+        $('#demo-form2 .btn').on('click', function() {
+          $('#demo-form2').parsley().validate();
+          validateFront();
+        });
+        var validateFront = function() {
+          if (true === $('#demo-form2').parsley().isValid()) {
+            $('.bs-callout-info').removeClass('hidden');
+            $('.bs-callout-warning').addClass('hidden');
+          } else {
+            $('.bs-callout-info').addClass('hidden');
+            $('.bs-callout-warning').removeClass('hidden');
+          }
+        };
+      });
+      try {
+        hljs.initHighlightingOnLoad();
+      } catch (err) {}
+    </script>
+    <!-- /Parsley -->
+
+    <!-- Autosize -->
+    <script>
+      $(document).ready(function() {
+        autosize($('.resizable_textarea'));
+      });
+    </script>
+    <!-- /Autosize -->
   </body>
 </html>

@@ -11,7 +11,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title> 모임방상세 </title>
+    <title> 버킷리스트상세 </title>
 
     <!-- Bootstrap -->
     <link href="${pageContext.request.contextPath}/resources/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -35,6 +35,8 @@
 
     <!-- Custom Theme Style -->
     <link href="${pageContext.request.contextPath}/resources/css/custom.min.css" rel="stylesheet">    
+    
+    <%@ include file="/views/bucketlist/modifyBucketlist.jsp" %>
   </head>
 
   <body class="nav-md" style="background: #FFFFFF">
@@ -144,83 +146,73 @@
               <div class="col-md-8 col-sm-12 col-xs-12 col-md-offset-2">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2><b>모임방상세</b></h2>
+                    <h2><b>버킷리스트상세</b></h2>
                     <div class="clearfix"></div>
                   </div>
                   <div class="x_content">
                     <br />
-					<form id="demo-form2" action="${pageContext.request.contextPath}/group/modify.do" data-parsley-validate class="form-horizontal form-label-left" method="get">
+				 	<form id="demo-form2" action="${pageContext.request.contextPath}/bucketlist/modify.do" data-parsley-validate class="form-horizontal form-label-left" method="get">
                       <div class="form-group">
-                        <label class="control-label col-md-2 col-sm-3 col-xs-12" for="groupName">GroupName</label>
+                        <label class="control-label col-md-2 col-sm-3 col-xs-12" for="title">Title</label>
                         <div class="col-md-3 col-sm-4 col-xs-5">
-                          <label id="groupName" class="control-label">${group.groupName }</label>
+                          <label id="title" class="control-label">${bucketlist.title }</label>
                         </div>
                       </div>
                       <div class="form-group">
-                        <label class="control-label col-md-2 col-sm-3 col-xs-12" for="managerId">Manager</label>
+                        <label class="control-label col-md-2 col-sm-3 col-xs-12" for="lock">Lock</label>
                         <div class="col-md-3 col-sm-4 col-xs-5">
-						  <label id="managerId" class="control-label">${group.managerId }</label>
+                          <c:choose>
+                          	<c:when test="${bucketlist.lock }">
+                          		<label id="lock" class="control-label">비공개</label>
+                          	</c:when>
+                          	<c:otherwise>
+                          		<label id="lock" class="control-label">공개</label>
+                          	</c:otherwise>
+                          </c:choose>
                         </div>
                       </div>
                       <div class="form-group">
-                        <label class="control-label col-md-2 col-sm-3 col-xs-12" for="lastDay">LastDay</label>
+                        <label class="control-label col-md-2 col-sm-3 col-xs-12" for="goal">Goal</label>
                         <div class="col-md-3 col-sm-4 col-xs-5">
-                          <label id="lastDay" class="control-label">${group.lastDay }</label>
+                          <label id="goal" class="control-label">${bucketlist.goal }</label>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="control-label col-md-2 col-sm-3 col-xs-12" for="star">Star</label>
+                        <div class="col-md-3 col-sm-4 col-xs-5">
+                          <label id="star" class="control-label">${bucketlist.star }</label>
                         </div>
                       </div>
                       <div class="form-group">
                         <label class="control-label col-md-2 col-sm-3 col-xs-12">ConnChains</label>
                         <div class="col-md-6 col-sm-6 col-xs-8" id="connForm">
-                          <c:forEach items="${group.connChains }" var="connChain">
-                          	<label class="control-label">${connChain }</label>
+                          <c:forEach items="${bucketlist.connChains }" var="connChain">
+                          	<label class="control-label">${connChain } </label>
                           </c:forEach>
                         </div>
                       </div>
                       <div class="form-group"></div>
                       <div class="form-group">
-                        <label class="control-label col-md-2 col-sm-3 col-xs-12">Introduce</label>
+                        <label class="control-label col-md-2 col-sm-3 col-xs-12">SOS</label>
                         <div class="col-md-6 col-sm-6 col-xs-8">
-                          <textarea disabled="disabled" class="form-control" rows="3" name="introduce">${group.introduce }</textarea>
+                          <textarea disabled="disabled" class="form-control" rows="3" name="sos">${bucketlist.sos }</textarea>
                         </div>
                       </div>
                       <div class="form-group"></div>
                       <div class="form-group">
-                        <label class="control-label col-md-2 col-sm-3 col-xs-12" for="local">Local</label>
-                        <div class="col-md-3 col-sm-4 col-xs-5">
-                          <label id="local" class="control-label">${group.local }</label>
-                        </div>
-                      </div>
-                      <div class="form-group">
-                        <label class="control-label col-md-2 col-sm-3 col-xs-12">ConnChains</label>
-                        <div class="col-md-6 col-sm-6 col-xs-8" id="connForm">
-                          <c:forEach items="${group.joinPeople }" var="member">
-                          	<label class="control-label">${member }</label>
-                          </c:forEach>
-                        </div>
-                      </div>
-                      <div class="form-group">
-                        <label class="control-label col-md-2 col-sm-3 col-xs-12" for="maxPeople">MaxPeople</label>
-                        <div class="col-md-3 col-sm-4 col-xs-5">
-                          <label id="maxPeople" class="control-label">${group.maxPeople }</label>
+                        <label class="control-label col-md-2 col-sm-3 col-xs-12">Memo</label>
+                        <div class="col-md-6 col-sm-6 col-xs-8">
+                          <textarea disabled="disabled" class="form-control" rows="3" name="memo">${bucketlist.memo }</textarea>
                         </div>
                       </div>
                       
                       <div class="ln_solid"></div>
                       <div class="form-group">
                         <div class="col-md-6 col-sm-6 col-xs-8 col-md-offset-4 col-sm-offset-4 col-xs-offset-4">
-                          <c:choose>
-                          	<c:when test="${group.managerId eq sessionScope.userId}">
-                          		<input type="hidden" name=groupId value="${group.groupId }">
-                          		<button type="submit" class="btn btn-success">수정</button>
-                          		<a class="btn btn-primary" href="${pageContext.request.contextPath }/group/remove.do?groupId=${group.groupId}">삭제</a>
-                          	</c:when>
-                          	<c:otherwise>
-                          		<c:choose>
-                          			<a class="btn btn-primary" href="${pageContext.request.contextPath }/group/join.do?bucketlistId=${bucketlist.bucketlistId}">참여</a>
-                          			<a class="btn btn-primary" href="${pageContext.request.contextPath }/group/exit.do?bucketlistId=${bucketlist.bucketlistId}">탈퇴</a>
-                          		</c:choose>
-                          	</c:otherwise>
-                          </c:choose>
+                          <a class="btn btn-primary" href="${pageContext.request.contextPath }/user/remove.do?bucketlistId=${bucketlist.bucketlistId}">탈퇴</a>
+                          <input type="hidden" name="bucketlistId" value="${bucketlist.bucketlistId }">
+                          <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modifyBucketlistModal">수정(modal)</button>
+                          <button type="submit" class="btn btn-success">수정</button>
                         </div>
                       </div>
                     </form>

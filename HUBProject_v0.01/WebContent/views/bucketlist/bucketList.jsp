@@ -6,129 +6,167 @@
 <html>
 <head>
 
-	<title>HUB</title>
-	<%@ include file="/views/layout/common.jsp" %>
+<title>HUB:Have U get a Bucketlist?</title>
+<%@ include file="/views/layout/modalCSSCommon.jsp" %>\
 
-<style type="text/css">
-body {
-	padding: 5px;
-}
-
-h1 {
-	font-weight: bold;
-	color: #A0B0DB;
-	size: 50px;
-}
-
-.header {
-	font-size: 15px;
-}
-
-.ranking {
-	text-align: center;
-	font-size: 10pt;
-}
-
-.spanTitle {
-	width: 2%;
-	text-align: center;
-	font-size: 18px;
-	font-weight: bold;
-	color: #A0B0DB;
-}
-
-.goal {
-	font-size: 12pt;
-	color: gray;
-	margin-left: 5px;
-}
-
-.imgbucket {
-	width: 80px;
-	height: 80px;
-	margin-right: 10px;
-}
-
-.btnPlay {
-	margin-top: 40%
-}
-
-/* Star Rating */
-.starRating,
-.starRating span{
-    display:inline-block;
-    height:14px;
-    background:transparent url(${pageContext.request.contextPath}/resources/img/icoFiveStar.gif) no-repeat;
-    overflow:hidden;
-}
-.starRating{
-    width:79px;
-    vertical-align:middle;
-}
-.starRating span{
-    font-size:0;
-    line-height:0;
-    vertical-align:top;
-    text-indent:-100px;
-    *text-indent:0;
-    background-position:0 -14px;
-}
-
-</style>
 </head>
-<body>
-	<div class="header" align="right">
-		<%@ include file="/views/header/header.jspf"%>
+
+
+<body class="nav-md">
+	<div class="container body">
+		<div class="main_container">
+
+			<%@ include file="/views/follow/listFollowTest.jsp"%>
+
+			<%@ include file="/views/header/header.jspf"%>
+
+			<!-- page content -->
+			<div class="right_col" role="main">
+				<div class="">
+					<div class="page-title">
+						<div class="clearfix">
+							<div
+								class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
+							</div>
+						</div>
+					</div>
+					<div class=""></div>
+					<div class="clearfix">
+						<div class="col-xs-12">
+							<div class="">
+								<div class="x_content">
+
+									<!--tab-->
+									<div class="" role="tabpanel" data-example-id="togglable-tabs">
+
+										<ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
+											<li role="presentation" class="active"><a
+												href="#tab_content1" id="home-tab" role="tab"
+												data-toggle="tab" aria-expanded="true">Bucketlist</a></li>
+											<li role="presentation" class=""><a href="#tab_content2"
+												role="tab" id="profile-tab" data-toggle="tab"
+												aria-expanded="false">Helper </a></li>
+											<li role="presentation" class=""><a href="#tab_content3"
+												role="tab" id="profile-tab2" data-toggle="tab"
+												aria-expanded="false">Cooper </a></li>
+											<li role="presentation" class=""><a href="#tab_content4"
+												role="tab" id="profile-tab3" data-toggle="tab"
+												aria-expanded="false">Group </a></li>
+										</ul>
+
+										<div id="myTabContent" class="tab-content">
+
+											<!-- tab1-->
+											<div role="tabpanel" class="tab-pane fade active in"
+												id="tab_content1" aria-labelledby="home-tab">
+												<%@ include file="/views/bucketlist/listElement.jsp"%>
+
+											</div>
+											<!-- end tab1-->
+
+											<!-- tab2-->
+											<div role="tabpanel" class="tab-pane fade" id="tab_content2"
+												aria-labelledby="profile-tab">
+												<%-- <%@ include file="/views/list/list.jsp"%> --%>
+											</div>
+											<!-- end tab2-->
+
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
-
-	<div>
-		<%@ include file="/views/menu.jsp"%>
-	</div>
-
-	<div class="input-append pull-right">
-		<a class="btn btn-xs btn-info btnPlay"
-			href="${pageContext.request.contextPath}/bucketlist/register.do?userId=${sessionScope.userId }">
-			<h5>버킷추가</h5></a>
-	</div>
-
-	<table class="table table-hover table-condensed">
-		<thead style="background: #60d7a9; color: white;">
-			<tr style="align: center; font-size: 14pt;">
-				<th width="60" align="center">잠금</th>
-				<th width="50" align="center">No</th>
-				<th width="400" align="center">버킷리스트</th>
-				<th width="150" align="center">목표일</th>
-				<th width="150" align="center">중요도</th>
-				<th width="150" align="center">연결고리</th>
-			</tr>
-		</thead>
-
-		<tbody style="font-size: 14pt;">
-			<c:forEach items="${bucketlists }" var="bucketlist"
-				varStatus="status">
-				<tr>
-					<c:choose>
-						<c:when test="${bucketlist.lock }">
-							<td align="center"><input type="checkbox" name="lock" checked /></td>
-						</c:when>
-						<c:otherwise>
-							<td align="center"><input type="checkbox" name="lock" /></td>
-						</c:otherwise>
-					</c:choose>
-
-					<td class="ranking" align="center" style="font-size: 14pt;">${status.count  }</td>
-
-					<td width="400" align="center"><a
-						href="${pageContext.request.contextPath}/bucketlist/detail.do?bucketlistId=${bucketlist.bucketlistId}&userId=${sessionScope.userId }">
-						<b>${bucketlist.title  }</b></a>
-					</td>
-
-					<td><p class="goal">${bucketlist.goal  }</p></td>
-					<td><p><span class="starRating"><span style="width:${bucketlist.stars }%">${bucketlist.star  }</span></span></p></td>
-					<td>${bucketlist.connChains  }</td>
-				</tr>
-			</c:forEach>
-		</tbody>
-	</table>
+	<%@ include file="/views/layout/modalJSCommon.jsp" %>
+	<script>
+		$("#modifyBucketlistForm").submit(function(){
+			//$(".tags").each(function(){
+			//	var tags = $(this).val();
+			//	tags = tags.split(",");
+			//	$(this).val(tags);
+			//});
+			
+			//var tags = $("#mbtags").val();
+			//tags = tags.split(",");
+			//$("#mbtags").val(tags);
+			
+			var tags = $(this).find(".tags").val();
+			tags = tags.split(",");
+			$(this).find(".tags").val(tags);
+			
+			var star = $(this).find(".changeStar").attr("data-rating");
+			$(this).find("#star").val(star);	
+			
+			var memo = $(this).find("[name='memo']").val();
+			memo = memo.replace(/\n/gi, " ");
+			$(this).find("[name='memo']").val(memo);
+		});
+	</script>
+	
+<script type="text/javascript">
+	var bucketlists = new Array();
+	<c:forEach items="${bucketlists}" var="bucketlist">
+		var bucketlist = new Array();
+		bucketlist.push("${bucketlist.bucketlistId}");
+		bucketlist.push("${bucketlist.title}");
+		bucketlist.push("${bucketlist.connChains}");
+		bucketlist.push("${bucketlist.goal}");
+		bucketlist.push("${bucketlist.star}");
+		bucketlist.push("${bucketlist.progress}");
+		bucketlist.push("${bucketlist.memo}");
+		bucketlist.push("${bucketlist.sos}");
+		bucketlist.push("${bucketlist.lock}");
+		bucketlist.push("${bucketlist.userId}");
+		bucketlists.push(bucketlist);
+	</c:forEach>
+	
+	$("[name=modifyBtn]").click(function(){
+		var index = $(this).val() - 1;
+		$("#modifyBucketlistModal #bucketlistId").val(bucketlists[index][0]);
+		$("#modifyBucketlistModal #title").val(bucketlists[index][1]);
+		initConn(bucketlists[index][2]);
+		$("#modifyBucketlistModal #goal").val(bucketlists[index][3]);
+		initStar(bucketlists[index][4]);
+		$("#modifyBucketlistModal #progress").val(bucketlists[index][5]).trigger("change");
+    	$("#modifyBucketlistModal #memo").val(bucketlists[index][6]);
+		$("#modifyBucketlistModal #sos").val(bucketlists[index][7]);
+		var lock = bucketlists[index][8];
+		if(lock == 'true'){
+			$('#modifyBucketlistModal #private').attr("checked", true);
+		} else {
+			$("#modifyBucketlistModal #public").attr("checked", true);
+		}
+    	$("#modifyBucketlistModal #userId").val(bucketlists[index][9]);
+	});
+	
+	function initConn(str){
+		var conn = str;
+		conn = conn.replace("[","");
+		conn = conn.replace(/ /gi,"");
+		conn = conn.replace("]","");
+		$(".tags").each(function(){
+			$(this).importTags(conn);
+		});
+	};
+	
+	function initStar(str){
+		$("#modifyBucketlistModal .changeStar").each(function(){
+			$(this).starrr();
+			$(this).starrr('setRating', str);
+			$(this).attr("data-rating", str);
+			$(this).on('starrr:change', function(e, value){
+				$(this).attr("data-rating", value);
+			});
+			$("[name='star']").val(str);
+			//$("#"+id).val(str);
+			//alert(str);
+			//alert($("#"+id).val());
+		});
+	}
+</script>
 </body>
 </html>

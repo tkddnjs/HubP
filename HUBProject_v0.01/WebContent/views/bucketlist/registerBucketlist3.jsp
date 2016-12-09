@@ -38,58 +38,60 @@
 </style>
 
 <!-- Modal -->
-<div class="modal fade" id="registerGroupModal" role="dialog">
+<div class="modal fade" id="registerBucketlistModal" role="dialog">
 	<div class="modal-dialog modal-lg">
 		<div class="modal-content">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
-				<h4 class="modal-title">모임방등록</h4>
+				<h4 class="modal-title">버킷리스트추가</h4>
 			</div>
    			<div class="modal-body">
-				<form id="demo-form2" action="${pageContext.request.contextPath}/group/register.do" data-parsley-validate class="form-horizontal form-label-left" method="post" enctype="multipart/form-data">
+				<form id="demo-form2" action="${pageContext.request.contextPath}/bucketlist/register.do" data-parsley-validate class="form-horizontal form-label-left" method="post" enctype="multipart/form-data">
 					<div class="form-group">
-						<label class="control-label col-md-2 col-sm-3 col-xs-12" for="groupName">GroupName <span class="required">*</span></label>
+						<label class="control-label col-md-2 col-sm-3 col-xs-12" for="title">Title <span class="required">*</span></label>
 						<div class="col-md-2 col-sm-3 col-xs-3">
-							<input type="text" id="groupName" name="groupName" required="required" class="form-control col-md-7 col-xs-12">
+							<input type="text" id="title" name="title" required="required" class="form-control col-md-7 col-xs-12">
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="control-label col-md-2 col-sm-3 col-xs-12" for="lastDay">LastDay <span class="required">*</span></label>
-							<div class="col-md-3 col-sm-3 col-xs-3">
-								<input type="date" id="lastDay" name="lastDay" required="required" class="form-control col-md-7 col-xs-12">
+						<label class="control-label col-md-2 col-sm-3 col-xs-12" for="lock">Lock</label>
+						<div class="col-md-6 col-sm-6 col-xs-8">
+							<div style="vertical-align: middle;">
+								<input type="radio" id="public" name="lock" value="${true }"><b>공개</b>
+								<input type="radio" id="private" name="lock" value="${false }"><b>비공개</b>
+							</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="control-label col-md-2 col-sm-3 col-xs-12" for="goal">Goal <span class="required">*</span></label>
+							<div class="col-md-2 col-sm-3 col-xs-3">
+								<input type="text" id="goal" name="goal" placeholder="목표기간을 입력하세요(ex. 올해안에, 3년안에...)" required="required" class="form-control col-md-7 col-xs-12">
 							</div>
 					</div>
 					<div class="form-group">
-						<label class="control-label col-md-2 col-sm-3 col-xs-12" for="local">Local <span class="required">*</span></label>
-							<div class="col-md-2 col-sm-3 col-xs-3">
-								<input type="text" id="local" name="local" required="required" class="form-control col-md-7 col-xs-12">
-							</div>
+						<label class="control-label col-md-2 col-sm-3 col-xs-12" for="star">Star <span><small>(10점 만점)</small></span></label>
+						<div class="col-md-2 col-sm-3 col-xs-3">
+							<input type="number" id="star" name="star" class="form-control col-md-7 col-xs-12">
+						</div>
 					</div>
 					<div class="form-group">
 						<label class="control-label col-md-2 col-sm-3 col-xs-12">ConnChains <span class="required">*</span></label>
 						<div class="col-md-6 col-sm-6 col-xs-8">
-							<input type="text" id="tags" name="connChains" class="tags form-control" />
+							<input id="tags" type="text" name="connChains" class="tags form-control" />
 						</div>
 					</div>
 					<div class="form-group"></div>
 					<div class="form-group">
-						<label class="control-label col-md-2 col-sm-3 col-xs-12" for="maxPeople">MaxPeople </label>
-						<div class="col-md-2 col-sm-3 col-xs-3">
-							<input type="number" id="maxPeople" name="maxPeople" class="form-control col-md-7 col-xs-12">
-						</div>
-					</div>
-					<div class="form-group">
-						<label class="control-label col-md-2 col-sm-3 col-xs-12" for="introduce">Introduce</label>
+						<label class="control-label col-md-2 col-sm-3 col-xs-12" for="sos">SOS</label>
 						<div class="col-md-6 col-sm-6 col-xs-8">
-							<textarea class="form-control" rows="3" name="introduce"></textarea>
+							<textarea class="form-control" rows="3" name="sos" placeholder='도움 받고 싶은 부분을 입력하세요'></textarea>
 						</div>
-					</div>  
-					<div class="form-group"></div>
+					</div>
 					<div class="ln_solid"></div>
 					<div class="form-group">
 						<div class="col-md-6 col-sm-6 col-xs-8 col-md-offset-4 col-sm-offset-4 col-xs-offset-4">
 							<button type="reset" class="btn btn-primary">초기화</button>
-							<input type="hidden" name="managerId" value="${sessionScope.userId }">
+							<input type="hidden" name="userId" value="${sessionScope.userId }">
 							<button type="submit" class="btn btn-success">등록</button>
 						</div>
 					</div>
@@ -151,6 +153,13 @@
 			connChains.push(array[i]);
 		}
 	};
+	
+	$("form").submit(function(){
+		var tags = $("#tags").val();
+		tags = tags.split(",");
+		$("#tags").val(tag);
+	});
+	
 	</script>
 
 

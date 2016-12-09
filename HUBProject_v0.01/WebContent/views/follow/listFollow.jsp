@@ -67,10 +67,11 @@ h1 {
 						<tr>
 							<td>${status.count }</td>
 							<td>
-								<form action="user/detail.do" method="post">
-									<button class="btn btn-xs btn-default btn-block" type="submit"
-										name="userId" value="${follow.followId }">${follow.followId }</button>
+								<form action="${pageContext.request.contextPath}/user/detail.do" method="get">
+									<input type="hidden" name="myId" value="${sessionScope.userId}">
 									<input type="hidden" name="listOpt" value="${follow.relation }">
+									<input type="hidden" name="userId" value="${follow.followId }">
+									<button class="btn btn-xs btn-default btn-block" type="submit">${follow.followId }</button>
 								</form>
 							</td>
 							<td>
@@ -93,9 +94,11 @@ h1 {
 						<tr>
 							<td>${status.count }</td>
 							<td>
-								<form action="user/detail.do" method="post">
-									<a href="${pageContext.request.contextPath}/user/detail.do"><b>${follow.followId }</b></a>
+								<form action="${pageContext.request.contextPath}/user/detail.do" method="get">
+									<input type="hidden" name="myId" value="${sessionScope.userId}">
 									<input type="hidden" name="listOpt" value="${follow.relation }">
+									<input type="hidden" name="userId" value="${follow.followId }">
+									<button class="btn btn-xs btn-default btn-block" type="submit">${follow.followId }</button>
 								</form>
 							</td>
 							<td>

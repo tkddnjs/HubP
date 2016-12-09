@@ -5,6 +5,7 @@
 <html>
 <head>
 <title>모임방 목록</title>
+<%@ include file="/views/group/registerGroup.jsp" %>
 <%@ include file="/views/layout/common.jsp" %>
 
 <style type="text/css">
@@ -105,10 +106,10 @@ h1 {
 		</div>
 
 		<div class="pull-right">
-			<a class="btn btn-toolbar" href="${pageContext.request.contextPath }/group/register.do?userId=${userId}">
-
+			<button type="button" class="btn btn-toolbar" data-toggle="modal" data-target="#registerGroupModal">모임방등록</button>
+			<!-- <a class="btn btn-toolbar" href="/views/registerGroup.jsp">
 				<button>모임방등록</button>
-			</a>
+			</a> -->
 		</div>
 	</div>
 	

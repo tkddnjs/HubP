@@ -1,82 +1,82 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<html>
-<head>
-<title>쪽지전송</title>
-<%@ include file="/views/layout/common.jsp" %>
-<style type="text/css">
-body {
-	padding: 60px;
-}
 
-h1 {
-	text-align: center;
-	font-weight: bold;
-	color: #A0B0DB;
-}
-
-.wrap {
-	width: 300px;
-	margin: o;
-}
-
-.wrap textarea {
-	width: 260px;
-	height: 100px
-	resize: none;
-	overflow-y: hidden; /* prevents scroll bar flash */
-	padding: 1.1em; /* prevents text jump on Enter keypress */
-	padding-bottom: 14em;
-	margin-bottom: 0;
-	line-height: 1.6;
-}
+<style>
+	.ui-autocomplete{
+		z-index: 99999;
+	}
 </style>
 
-<script>
-    $(document).ready(function() {
-      $('.wrap').on( 'keyup', 'textarea', function (e){
-        $(this).css('height', 'auto' );
-        $(this).height( this.scrollHeight );
-      });
-      $('.wrap').find( 'textarea' ).keyup();
-    });
-</script>
-
-
-
-</head>
-<body>
-<form action="post/send.do" method="post" >
-	<div class="wrap" style="height: auto; width: 300px; border: 1px solid black;">
-		<div class="wrap">
-		
-			<div style="background-color: #666666" align="center">
-				<font color="#FFFFFF"><b>쪽지쓰기</b></font>
+<!-- Modal -->
+<div class="modal fade" id="sendPostModal" role="dialog">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title">쪽지전송</h4>
 			</div>
-		
-			<div style="background-color: ;" id="receiverId">
-				<font style="font-style: oblique; margin-left: 5px;" size=2>To : </font>
-				<input type="text" name="receiverId">
+   			<div class="modal-body">
+				<form id="demo-form2" action="${pageContext.request.contextPath}/post/send.do" data-parsley-validate class="form-horizontal form-label-left" method="post">
+					<div class="form-group">
+						<label class="control-label col-md-2 col-sm-3 col-xs-12" for="senderId">Sender </label>
+						<div class="col-md-2 col-sm-3 col-xs-3" style="float: left;">
+							<input type="text" id="senderId" name="senderId" value="${sessionScope.userId }" readonly="readonly" required="required" class="form-control col-md-7 col-xs-12">
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="control-label col-md-2 col-sm-3 col-xs-12">Introduce</label>
+						<div class="col-md-6 col-sm-6 col-xs-8">
+							<textarea name="content" class="form-control" rows="3" placeholder="쪽지내용입력"></textarea>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="control-label col-md-2 col-sm-3 col-xs-12" for="receiverId">Receiver <span class="required">*</span></label>
+						<div class="col-md-3 col-sm-4 col-xs-5">
+							<input type="text" id="receiverId" name="receiverId" class="form-control col-md-7 col-xs-12">
+						</div>
+					</div>
+					<div class="ln_solid"></div>
+					<div class="form-group">
+						<div class="col-md-6 col-sm-6 col-xs-8 col-md-offset-4 col-sm-offset-4 col-xs-offset-4">
+							<button type="reset" class="btn btn-primary">초기화</button>
+							<button type="submit" class="btn btn-success">전송</button>
+						</div>
+					</div>
+				</form>
 			</div>
-			
-			<div class="container">
-				<div class="wrap" align="center">
-					<textarea name="content"></textarea>
-				</div>
-			</div>
-			
-			<div align="right">
-				<font style="font-style: oblique; margin-right: 10px;" size=2>From : ${userId }</font>
-			</div>
-		</div>
-		<br>
-		
-		<div class="btn-post" align="center" style="width:300px; border-top: 1px solid #CDC9C9;">
- 			<button class="btn" type="submit" value='쪽지'>전송</button>
- 			<button class="btn" type=button value='닫기' onClick="window.close()">닫기</button>
-		</div>
+  		</div>
 	</div>
-</form>
-</body>
-</html>
+</div>
+
+<script>
+	var follows = [];
+	var userId = '${sessionScope.userId}';
+	$(document).ready(function (){
+		$.ajax({
+			type : 'POST',
+			url : '${pageContext.request.contextPath}/follow/autoComplete.do',
+			data : {
+				userId : userId
+			},
+			success : function(result) {
+				result = result.replace(/ /gi, "");
+				result = result.replace("[", "");
+				result = result.replace("]", "");
+				result = result.split(',');
+				list(result);
+			}
+		});
+	});
+	
+	function list(array){
+		follows.length = 0;
+		for (var i=0; i<array.length; i++){
+			follows.push(array[i]);
+		}
+	};
+	
+	$("#receiverId").autocomplete({
+		source : follows
+	})
+</script>
