@@ -8,10 +8,13 @@ import org.springframework.web.servlet.ModelAndView;
 
 public class CharacterEncodingInterceptor implements HandlerInterceptor{
 
+	public static final String ENCODING = "UTF-8";
+	
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
-		request.setCharacterEncoding("UTF-8");
+		request.setCharacterEncoding(ENCODING);
+		response.setCharacterEncoding(ENCODING);
 		return true;
 	}
 
