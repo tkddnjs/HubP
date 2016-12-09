@@ -8,10 +8,9 @@
 
 <title>HUB:Have U get a Bucketlist?</title>
 
-<%@ include file="/views/layout/commonCSS.jsp" %>
+<%@ include file="/views/layout/modalCSSCommon.jsp" %>
 
 </head>
-
 
 <body class="nav-md">
 	<div class="container body">
@@ -72,6 +71,21 @@
 											</div>
 											<!-- end tab2-->
 
+											<!-- tab3-->
+											<div role="tabpanel" class="tab-pane fade" id="tab_content3"
+												aria-labelledby="profile-tab2">
+												<%@ include file="/views/cooper/listCooper.jsp"%>
+											</div>
+											<!-- end tab3-->
+											
+											<!-- tab4-->
+											<div role="tabpanel" class="tab-pane fade" id="tab_content4"
+												aria-labelledby="profile-tab3">
+												<%-- <%@ include file="/views/list/list.jsp"%> --%>
+											</div>
+											<!-- end tab4-->
+											
+
 										</div>
 									</div>
 								</div>
@@ -82,94 +96,16 @@
 			</div>
 		</div>
 	</div>
-	<%@ include file="/views/layout/commonJS.jsp" %>
-
+	<%@ include file="/views/layout/modalJSCommon.jsp" %>
 	<script>
-		$(".bucketlistForm").submit(function(){
-			var tags = $(this).find(".tags").val();
-			tags = tags.split(",");
-			$(this).find(".tags").val(tags);
-
-			var star = $(this).find(".changeStar").attr("data-rating");
-			$(this).find("#star").val(star);
+		$("[role='tab']").each(function(){
+			$(this).attr("aria-expanded", false);
 		});
-	</script>
 	
-	<script>
-		$("#modifyBucketlistForm").submit(function(){
-			var memo = $(this).find("[name='memo']").val();
-			memo = memo.replace(/\n/gi, " ");
-			$(this).find("[name='memo']").val(memo);
+		$("[role='tab']").click(function(){
+			alert($(this).attr("aria-expanded"));
 		});
-	</script>
 	
-	<script type="text/javascript">
-		var bucketlists = new Array();
-		<c:forEach items="${bucketlists}" var="bucketlist">
-			var bucketlist = new Array();
-			bucketlist.push("${bucketlist.bucketlistId}");
-			bucketlist.push("${bucketlist.title}");
-			bucketlist.push("${bucketlist.connChains}");
-			bucketlist.push("${bucketlist.goal}");
-			bucketlist.push("${bucketlist.star}");
-			bucketlist.push("${bucketlist.progress}");
-			bucketlist.push("${bucketlist.memo}");
-			bucketlist.push("${bucketlist.sos}");
-			bucketlist.push("${bucketlist.lock}");
-			bucketlist.push("${bucketlist.userId}");
-			bucketlists.push(bucketlist);
-		</c:forEach>
-	
-		$("#registerBtn").click(function() {
-			$(".tags").importTags("");
-			$(".changeStar").starrr();
-			$(".changeStar").starrr('setRating', 0);
-			$(".changeStar").attr("data-rating", 0);
-			$(".changeStar").on('starrr:change', function(e, value){
-				$(this).attr("data-rating", value);
-			});
-		});
-
-		$("[name=modifyBtn]").click(function(){
-			var index = $(this).val() - 1;
-			$("#modifyBucketlistModal #bucketlistId").val(bucketlists[index][0]);
-			$("#modifyBucketlistModal #title").val(bucketlists[index][1]);
-			initConn(bucketlists[index][2]);
-			$("#modifyBucketlistModal #goal").val(bucketlists[index][3]);
-			initStar(bucketlists[index][4]);
-			$("#modifyBucketlistModal #progress").val(bucketlists[index][5]).trigger("change");
-	    	$("#modifyBucketlistModal #memo").val(bucketlists[index][6]);
-			$("#modifyBucketlistModal #sos").val(bucketlists[index][7]);
-			var lock = bucketlists[index][8];
-			if(lock == 'true'){
-				$('#modifyBucketlistModal #private').attr("checked", true);
-			} else {
-				$("#modifyBucketlistModal #public").attr("checked", true);
-			}
-	    	$("#modifyBucketlistModal #userId").val(bucketlists[index][9]);
-		});
-
-		function initConn(str){
-			var conn = str;
-			conn = conn.replace("[","");
-			conn = conn.replace(/ /gi,"");
-			conn = conn.replace("]","");
-			$(".tags").each(function(){
-				$(this).importTags(conn);
-			});
-		};
-
-		function initStar(str){
-			$(".changeStar").each(function(){
-				$(this).starrr();
-				$(this).starrr('setRating', str);
-				$(this).attr("data-rating", str);
-				$(this).on('starrr:change', function(e, value){
-					$(this).attr("data-rating", value);
-				});
-				$("[name='star']").val(str);
-			});
-		}
 	</script>
 </body>
 </html>
