@@ -89,10 +89,9 @@
 			var tags = $(this).find(".tags").val();
 			tags = tags.split(",");
 			$(this).find(".tags").val(tags);
-			
+
 			var star = $(this).find(".changeStar").attr("data-rating");
-			$(this).find("#star").val(star);	
-			
+			$(this).find("#star").val(star);
 		});
 	</script>
 	
@@ -123,7 +122,12 @@
 	
 		$("#registerBtn").click(function() {
 			$(".tags").importTags("");
-			$(".changeStar").starrr("setRating", 0)
+			$(".changeStar").starrr();
+			$(".changeStar").starrr('setRating', 0);
+			$(".changeStar").attr("data-rating", 0);
+			$(".changeStar").on('starrr:change', function(e, value){
+				$(this).attr("data-rating", value);
+			});
 		});
 
 		$("[name=modifyBtn]").click(function(){
