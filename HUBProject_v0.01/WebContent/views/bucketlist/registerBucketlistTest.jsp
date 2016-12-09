@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!-- 
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<!-- <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 Meta, title, CSS, favicons, etc.
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -41,7 +41,7 @@ Meta, title, CSS, favicons, etc.
 					</div>
 					<div class="form-group">
 						<label class="control-label col-md-2 col-sm-3 col-xs-12" for="goal">Goal <span class="required">*</span></label>
-							<div class="col-md-2 col-sm-3 col-xs-3">
+							<div class="col-md-6 col-sm-3 col-xs-3">
 								<input type="text" id="goal" name="goal" placeholder="목표기간을 입력하세요(ex. 올해안에, 3년안에...)" required="required" class="form-control col-md-7 col-xs-12">
 							</div>
 					</div>
@@ -82,11 +82,6 @@ Meta, title, CSS, favicons, etc.
   		</div>
 	</div>
 </div>
-<%-- 
-<!-- jQuery -->
-<script src="${pageContext.request.contextPath}/resources/vendors/jquery/dist/jquery.min.js"></script>
-<!-- Bootstrap -->
-<script src="${pageContext.request.contextPath}/resources/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
 
 <!-- bootstrap-daterangepicker -->
 <script src="${pageContext.request.contextPath}/resources/vendors/moment/min/moment.min.js"></script>
@@ -105,10 +100,6 @@ Meta, title, CSS, favicons, etc.
 <!-- Autosize -->
 <script src="${pageContext.request.contextPath}/resources/vendors/autosize/dist/autosize.min.js"></script>
 
-<!-- Custom Theme Scripts -->
-<script src="${pageContext.request.contextPath}/resources/js/custom.min.js"></script>
-
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js" type="text/javascript"></script>
 
 <script>
 	var connChains = [];
@@ -144,7 +135,6 @@ Meta, title, CSS, favicons, etc.
 	
 	</script>
 
-
 <!-- bootstrap-daterangepicker -->
 <script>
 	$(document).ready(function() {
@@ -157,7 +147,7 @@ Meta, title, CSS, favicons, etc.
 	});
 </script>
 <!-- /bootstrap-daterangepicker -->
-
+ 
 <!-- bootstrap-wysiwyg -->
 <script>
 	$(document).ready(function() {
@@ -222,7 +212,7 @@ Meta, title, CSS, favicons, etc.
 	});
 </script>
 <!-- /bootstrap-wysiwyg -->
-
+ 
 <!-- jQuery Tags Input -->
 <script>
 	function onAddTag(tag) {
@@ -245,7 +235,7 @@ Meta, title, CSS, favicons, etc.
 	});
 </script>
 <!-- /jQuery Tags Input -->
-
+ 
 <!-- Parsley -->
 <script>
 	$(document).ready(function() {
@@ -291,7 +281,6 @@ Meta, title, CSS, favicons, etc.
 	} catch (err) {}
 </script>
 <!-- /Parsley -->
-
 <!-- Autosize -->
 <script>
 	$(document).ready(function() {
@@ -299,5 +288,3 @@ Meta, title, CSS, favicons, etc.
 	});
 </script>
 <!-- /Autosize -->
-
- --%>

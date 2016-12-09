@@ -20,10 +20,12 @@
 
 	<form action="${pageContext.request.contextPath}/user/login.do"
 		method="post">
-		<div class="maincenter">
-			<a href=HUBMain.jsp><h1 align="center">HUB : Have U get a
-					BucketList?</h1></a>
+		<div class="maincenter" style="margin-top:240px;">
+			<a href=HUBMainTest.jsp>
+			<h1 align="center" style="font-weight:bold; color:#DAE9E4;">
+			HUB : Have U get a BucketList?</h1></a>
 		</div>
+		<br>
 		<table align="center">
 			<tr>
 				<th>ID</th>

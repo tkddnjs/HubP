@@ -77,9 +77,11 @@
 		<nav>
 			<div class="nav">
 				<div class="" style="width: 100%; align: center;">
-					<h1 align="center"
-						style="font-weight: bold; color: #A0B0DB; font-size: 30px">
-						HUB : Have U get a Bucketlist?</h1>
+					<h1 align="center"  
+                    style="margin-left:20%; font-weight:bold;
+                             color: #8BCBC8;
+                             font-size:30px">
+                    HUB : Have U get a Bucketlist?</h1>
 				</div>
 			</div>
 		</nav>

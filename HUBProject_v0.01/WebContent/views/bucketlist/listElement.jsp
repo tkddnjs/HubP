@@ -4,7 +4,7 @@
 
 <%@ include file="/views/bucketlist/registerBucketlist.jsp"%>
 <%@ include file="/views/bucketlist/modifyBucketlist.jsp"%>
->
+
 <div class="col-xs-12">
 	<!--진행중인 Bucketlist-->
 	<div class="x_panel">

@@ -44,7 +44,7 @@
 
 										<ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
 											<li role="presentation" class="active"><a
-												href="#tab_content1" id="home-tab" role="tab"
+												href="#tab_content1" id="home-tab" role="tab" 
 												data-toggle="tab" aria-expanded="true">Bucketlist</a></li>
 											<li role="presentation" class=""><a href="#tab_content2"
 												role="tab" id="profile-tab" data-toggle="tab"
