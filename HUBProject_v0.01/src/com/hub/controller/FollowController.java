@@ -1,8 +1,11 @@
 package com.hub.controller;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -66,5 +69,21 @@ public class FollowController {
 		String userId = (String)session.getAttribute("userId");
 		mav.addObject("follows", followService.findFollowsByRelation(userId, listOpt));
 		return mav;
+	}
+	
+	@RequestMapping(value="autoComplete.do", method=RequestMethod.POST)
+	public void autoCompleteFollows(HttpServletResponse resp, String userId){
+		List<String> followList = new ArrayList<>();
+		
+		for(Follow follow : followService.findAll(userId)){
+			followList.add(follow.getFollowId());
+		}
+		
+		try {
+			PrintWriter out = resp.getWriter();
+			out.println(followList);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 }
