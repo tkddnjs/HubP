@@ -7,6 +7,7 @@
 		<result property="title" column="title"/>
 		<result property="goal" column="goal"/>
 		<result property="star" column="star"/>
+		<result property="progress" column="progress"/>
 		<result property="memo" column="memo"/>
 		<result property="sos" column="sos"/>
 		<result property="lock" column="locker" typeHandler="BooleanToYnHandler"/>
@@ -15,13 +16,18 @@
 	</resultMap>
 
 	<sql id="selectBucketlist">
-		SELECT bucketId, title, bucketId, goal, star, progress, memo, sos, locker, userId
+		SELECT bucketId, title, bucketId, goal, progress, star, memo, sos, locker, userId
 		FROM bucketlist_tb
 	</sql>
 
+<!-- 	<insert id="insertBucketlist" parameterType="Bucketlist">
+		INSERT INTO bucketlist_tb(bucketId, title, goal, star, memo, sos, locker, userId)
+		VALUES (#{bucketlistId}, #{title}, #{goal}, #{star}, #{memo}, #{sos}, 'N', #{userId})
+	</insert> -->
+	
 	<insert id="insertBucketlist" parameterType="Bucketlist">
-		INSERT INTO bucketlist_tb(bucketId, title, goal, star, progress, memo, sos, locker, userId)
-		VALUES (#{bucketlistId}, #{title}, #{goal}, #{star}, #{progress}, #{memo}, #{sos}, 'N', #{userId})
+		INSERT INTO bucketlist_tb(bucketId, title, goal, star, progress, sos, locker, userId)
+		VALUES (#{bucketlistId}, #{title}, #{goal}, #{star}, #{progress}, #{sos}, 'N', #{userId})
 	</insert>
 	
 	<insert id="insertBucketlistConn" parameterType="Map">
