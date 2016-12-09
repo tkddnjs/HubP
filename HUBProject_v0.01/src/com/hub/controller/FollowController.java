@@ -54,7 +54,8 @@ public class FollowController {
 	
 	@RequestMapping(value="listAll.do", method=RequestMethod.GET)
 	public ModelAndView listAllFollows(HttpSession session){
-		ModelAndView mav = new ModelAndView("follow/listFollow");
+		//ModelAndView mav = new ModelAndView("follow/listFollowTest");
+		ModelAndView mav = new ModelAndView("bucketlist/bucketListTest");
 		String userId = (String)session.getAttribute("userId");
 		List<Follow> fList = new ArrayList<>();
 		fList.addAll(followService.findRequestedFollows(userId));
