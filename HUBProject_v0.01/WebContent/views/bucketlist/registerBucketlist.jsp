@@ -17,7 +17,7 @@
 				<h4 class="modal-title">버킷리스트추가</h4>
 			</div>
    			<div class="modal-body">
-				<form id="demo-form2" action="${pageContext.request.contextPath}/bucketlist/register.do" data-parsley-validate class="form-horizontal form-label-left" method="post" enctype="multipart/form-data">
+				<form id="registerBucketlistForm" action="${pageContext.request.contextPath}/bucketlist/register.do" data-parsley-validate class="form-horizontal form-label-left" method="post" enctype="multipart/form-data">
 					<div class="form-group">
 						<label class="control-label col-md-2 col-sm-3 col-xs-12" for="title">Title <span class="required">*</span></label>
 						<div class="col-md-2 col-sm-3 col-xs-3">
@@ -40,9 +40,10 @@
 							</div>
 					</div>
 					<div class="form-group">
-						<label class="control-label col-md-2 col-sm-3 col-xs-12" for="star">Star <span><small>(10점 만점)</small></span></label>
-						<div class="col-md-2 col-sm-3 col-xs-3">
-							<input type="number" id="star" name="star" class="form-control col-md-7 col-xs-12">
+						<label class="control-label col-md-2 col-sm-3 col-xs-12" for="star">Star　</label>
+						<div class="col-md-3 col-sm-3 col-xs-3">
+							<input type="hidden" id="star" name="star">
+							<div class="starrr changeStar" style="padding-top: 5%;" data-rating="0"></div>
 						</div>
 					</div>
 					<div class="form-group">

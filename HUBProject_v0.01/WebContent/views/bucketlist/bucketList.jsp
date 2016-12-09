@@ -83,18 +83,9 @@
 		</div>
 	</div>
 	<%@ include file="/views/layout/modalJSCommon.jsp" %>
+
 	<script>
-		$("#modifyBucketlistForm").submit(function(){
-			//$(".tags").each(function(){
-			//	var tags = $(this).val();
-			//	tags = tags.split(",");
-			//	$(this).val(tags);
-			//});
-			
-			//var tags = $("#mbtags").val();
-			//tags = tags.split(",");
-			//$("#mbtags").val(tags);
-			
+		$(".bucketlistForm").submit(function(){
 			var tags = $(this).find(".tags").val();
 			tags = tags.split(",");
 			$(this).find(".tags").val(tags);
@@ -102,6 +93,11 @@
 			var star = $(this).find(".changeStar").attr("data-rating");
 			$(this).find("#star").val(star);	
 			
+		});
+	</script>
+	
+	<script>
+		$("#modifyBucketlistForm").submit(function(){
 			var memo = $(this).find("[name='memo']").val();
 			memo = memo.replace(/\n/gi, " ");
 			$(this).find("[name='memo']").val(memo);
@@ -124,6 +120,11 @@
 		bucketlist.push("${bucketlist.userId}");
 		bucketlists.push(bucketlist);
 	</c:forEach>
+	
+	$("#registerBtn").click(function() {
+		$(".tags").importTags("");
+		$(".changeStar").starrr("setRating", 0)
+	});
 	
 	$("[name=modifyBtn]").click(function(){
 		var index = $(this).val() - 1;
@@ -155,7 +156,7 @@
 	};
 	
 	function initStar(str){
-		$("#modifyBucketlistModal .changeStar").each(function(){
+		$(".changeStar").each(function(){
 			$(this).starrr();
 			$(this).starrr('setRating', str);
 			$(this).attr("data-rating", str);
@@ -163,9 +164,6 @@
 				$(this).attr("data-rating", value);
 			});
 			$("[name='star']").val(str);
-			//$("#"+id).val(str);
-			//alert(str);
-			//alert($("#"+id).val());
 		});
 	}
 </script>

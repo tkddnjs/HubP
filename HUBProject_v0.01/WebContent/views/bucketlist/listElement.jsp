@@ -112,7 +112,7 @@
 
 				<!-- bucketlist 추가 -->
 				<div class="panel">
-					<a data-toggle="modal" data-target="#registerBucketlistModal">
+					<a id="registerBtn" data-toggle="modal" data-target="#registerBucketlistModal">
 						<h1 align="center">
 							<i class="fa fa-plus-circle"></i>
 						</h1>

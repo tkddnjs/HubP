@@ -17,7 +17,7 @@
 				<h4 class="modal-title">버킷리스트수정</h4>
 			</div>
    			<div class="modal-body">
-				<form id="modifyBucketlistForm" action="${pageContext.request.contextPath}/bucketlist/modify.do" class="form-horizontal form-label-left" method="post" enctype="multipart/form-data">
+				<form id="modifyBucketlistForm" action="${pageContext.request.contextPath}/bucketlist/modify.do" class="form-horizontal form-label-left bucketlistForm" method="post" enctype="multipart/form-data">
 					<div class="form-group">
 						<label class="control-label col-md-2 col-sm-3 col-xs-12" for="title">Title <span class="required">*</span></label>
 						<div class="col-md-6 col-sm-6 col-xs-8">
