@@ -104,68 +104,68 @@
 		});
 	</script>
 	
-<script type="text/javascript">
-	var bucketlists = new Array();
-	<c:forEach items="${bucketlists}" var="bucketlist">
-		var bucketlist = new Array();
-		bucketlist.push("${bucketlist.bucketlistId}");
-		bucketlist.push("${bucketlist.title}");
-		bucketlist.push("${bucketlist.connChains}");
-		bucketlist.push("${bucketlist.goal}");
-		bucketlist.push("${bucketlist.star}");
-		bucketlist.push("${bucketlist.progress}");
-		bucketlist.push("${bucketlist.memo}");
-		bucketlist.push("${bucketlist.sos}");
-		bucketlist.push("${bucketlist.lock}");
-		bucketlist.push("${bucketlist.userId}");
-		bucketlists.push(bucketlist);
-	</c:forEach>
+	<script type="text/javascript">
+		var bucketlists = new Array();
+		<c:forEach items="${bucketlists}" var="bucketlist">
+			var bucketlist = new Array();
+			bucketlist.push("${bucketlist.bucketlistId}");
+			bucketlist.push("${bucketlist.title}");
+			bucketlist.push("${bucketlist.connChains}");
+			bucketlist.push("${bucketlist.goal}");
+			bucketlist.push("${bucketlist.star}");
+			bucketlist.push("${bucketlist.progress}");
+			bucketlist.push("${bucketlist.memo}");
+			bucketlist.push("${bucketlist.sos}");
+			bucketlist.push("${bucketlist.lock}");
+			bucketlist.push("${bucketlist.userId}");
+			bucketlists.push(bucketlist);
+		</c:forEach>
 	
-	$("#registerBtn").click(function() {
-		$(".tags").importTags("");
-		$(".changeStar").starrr("setRating", 0)
-	});
-	
-	$("[name=modifyBtn]").click(function(){
-		var index = $(this).val() - 1;
-		$("#modifyBucketlistModal #bucketlistId").val(bucketlists[index][0]);
-		$("#modifyBucketlistModal #title").val(bucketlists[index][1]);
-		initConn(bucketlists[index][2]);
-		$("#modifyBucketlistModal #goal").val(bucketlists[index][3]);
-		initStar(bucketlists[index][4]);
-		$("#modifyBucketlistModal #progress").val(bucketlists[index][5]).trigger("change");
-    	$("#modifyBucketlistModal #memo").val(bucketlists[index][6]);
-		$("#modifyBucketlistModal #sos").val(bucketlists[index][7]);
-		var lock = bucketlists[index][8];
-		if(lock == 'true'){
-			$('#modifyBucketlistModal #private').attr("checked", true);
-		} else {
-			$("#modifyBucketlistModal #public").attr("checked", true);
-		}
-    	$("#modifyBucketlistModal #userId").val(bucketlists[index][9]);
-	});
-	
-	function initConn(str){
-		var conn = str;
-		conn = conn.replace("[","");
-		conn = conn.replace(/ /gi,"");
-		conn = conn.replace("]","");
-		$(".tags").each(function(){
-			$(this).importTags(conn);
+		$("#registerBtn").click(function() {
+			$(".tags").importTags("");
+			$(".changeStar").starrr("setRating", 0)
 		});
-	};
-	
-	function initStar(str){
-		$(".changeStar").each(function(){
-			$(this).starrr();
-			$(this).starrr('setRating', str);
-			$(this).attr("data-rating", str);
-			$(this).on('starrr:change', function(e, value){
-				$(this).attr("data-rating", value);
+
+		$("[name=modifyBtn]").click(function(){
+			var index = $(this).val() - 1;
+			$("#modifyBucketlistModal #bucketlistId").val(bucketlists[index][0]);
+			$("#modifyBucketlistModal #title").val(bucketlists[index][1]);
+			initConn(bucketlists[index][2]);
+			$("#modifyBucketlistModal #goal").val(bucketlists[index][3]);
+			initStar(bucketlists[index][4]);
+			$("#modifyBucketlistModal #progress").val(bucketlists[index][5]).trigger("change");
+	    	$("#modifyBucketlistModal #memo").val(bucketlists[index][6]);
+			$("#modifyBucketlistModal #sos").val(bucketlists[index][7]);
+			var lock = bucketlists[index][8];
+			if(lock == 'true'){
+				$('#modifyBucketlistModal #private').attr("checked", true);
+			} else {
+				$("#modifyBucketlistModal #public").attr("checked", true);
+			}
+	    	$("#modifyBucketlistModal #userId").val(bucketlists[index][9]);
+		});
+
+		function initConn(str){
+			var conn = str;
+			conn = conn.replace("[","");
+			conn = conn.replace(/ /gi,"");
+			conn = conn.replace("]","");
+			$(".tags").each(function(){
+				$(this).importTags(conn);
 			});
-			$("[name='star']").val(str);
-		});
-	}
-</script>
+		};
+
+		function initStar(str){
+			$(".changeStar").each(function(){
+				$(this).starrr();
+				$(this).starrr('setRating', str);
+				$(this).attr("data-rating", str);
+				$(this).on('starrr:change', function(e, value){
+					$(this).attr("data-rating", value);
+				});
+				$("[name='star']").val(str);
+			});
+		}
+	</script>
 </body>
 </html>
