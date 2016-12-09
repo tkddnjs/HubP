@@ -10,6 +10,7 @@
 		<result property="progress" column="progress"/>
 		<result property="memo" column="memo"/>
 		<result property="sos" column="sos"/>
+		<result property="progress" column="progress"/>
 		<result property="lock" column="locker" typeHandler="BooleanToYnHandler"/>
 		<result property="userId" column="userId"/>
 		<collection property="connChains" column="bucketId" ofType="String" select="com.hub.store.mapper.BucketlistMapper.selectConnChainsByBucketlistId" javaType="ArrayList" jdbcType="NUMERIC"/>
@@ -60,6 +61,7 @@
 	<select id="selectAll" resultMap="bucketlistMap">
 		<include refid="selectBucketlist" />
 		WHERE userId=#{userId}
+		ORDER BY bucketlist_tb.bucketId ASC
 	</select>
 	
 	<select id="selectBucketlistByBucketlistId" parameterType="int" resultMap="bucketlistMap">
