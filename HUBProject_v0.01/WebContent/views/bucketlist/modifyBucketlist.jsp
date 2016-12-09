@@ -20,37 +20,42 @@
 				<form id="modifyBucketlistForm" action="${pageContext.request.contextPath}/bucketlist/modify.do" class="form-horizontal form-label-left" method="post" enctype="multipart/form-data">
 					<div class="form-group">
 						<label class="control-label col-md-2 col-sm-3 col-xs-12" for="title">Title <span class="required">*</span></label>
-						<div class="col-md-2 col-sm-3 col-xs-3">
+						<div class="col-md-6 col-sm-6 col-xs-8">
 							<input type="text" id="title" name="title" required="required" class="form-control col-md-7 col-xs-12">
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="control-label col-md-2 col-sm-3 col-xs-12" for="lock">Lock</label>
-						<div class="col-md-6 col-sm-6 col-xs-8">
-							<div style="vertical-align: middle;">
-								<input type="radio" id="public" name="lock" value="${true }"><b>공개</b>
-								<input type="radio" id="private" name="lock" value="${false }"><b>비공개</b>
-							</div>
-						</div>
-					</div>
-					<div class="form-group">
-						<label class="control-label col-md-2 col-sm-3 col-xs-12" for="goal">Goal <span class="required">*</span></label>
+						<div>
+							<label class="control-label col-md-2 col-sm-3 col-xs-12" for="goal">Progress <span class="required">*</span></label>
 							<div class="col-md-2 col-sm-3 col-xs-3">
-								<input type="text" id="goal" name="goal" required="required" class="form-control col-md-7 col-xs-12">
+								<input id="progress" name="progress" class="knob" data-width="90" data-height="120" data-angleOffset=90 data-linecap=round
+									data-fgColor="#26B99A" data-displayPrevious=true>
 							</div>
-					</div>
-					<div class="form-group">
-						<label class="control-label col-md-2 col-sm-3 col-xs-12" for="goal">Progress <span class="required">*</span></label>
-						<div class="col-md-2 col-sm-3 col-xs-3">
-							<input id="progress" name="progress" class="knob" data-width="90" data-height="120" data-angleOffset=90 data-linecap=round
-								data-fgColor="#26B99A" data-displayPrevious=true>
 						</div>
-					</div>
-					<div class="form-group">
-						<label class="control-label col-md-2 col-sm-3 col-xs-12" for="star">Star <span><small>(10점 만점)</small></span></label>
-						<div class="col-md-2 col-sm-3 col-xs-3">
-							<div class="starrr changeStar" data-rating="0"></div>
-							<input type="text" id="star" name="star">
+						<div style="margin-right:40%;">
+							<div>
+								<label class="control-label col-md-2 col-sm-3 col-xs-12" for="lock">Lock　</label>
+								<div class="col-md-3 col-sm-3 col-xs-3">
+									<div style="vertical-align: middle;">
+										<input type="radio" id="public" name="lock" value="${true }"><b>공개</b>
+										<input type="radio" id="private" name="lock" value="${false }"><b>비공개</b>
+									</div>
+									<div class="form-group"></div>
+								</div>
+							</div>
+							<div>
+								<label class="control-label col-md-2 col-sm-3 col-xs-12" for="goal">Goal <span class="required">*</span></label>
+								<div class="col-md-3 col-sm-3 col-xs-3">
+									<input type="text" id="goal" name="goal" required="required" class="form-control col-md-7 col-xs-12">
+								</div>
+							</div>
+							<div>
+								<label class="control-label col-md-2 col-sm-3 col-xs-12" for="star">Star　</label>
+								<div class="col-md-3 col-sm-3 col-xs-3">
+									<input type="hidden" id="star" name="star">
+									<div class="starrr changeStar" style="padding-top: 5%;" data-rating="0"></div>
+								</div>
+							</div>
 						</div>
 					</div>
 					<div class="form-group">
@@ -69,7 +74,7 @@
 					<div class="form-group">
 						<label class="control-label col-md-2 col-sm-3 col-xs-12" for="memo">Memo</label>
 						<div class="col-md-6 col-sm-6 col-xs-8">
-							<textarea class="form-control" rows="3" id="memo" name="memo"></textarea>
+							<textarea class="form-control" rows="12" id="memo" name="memo"></textarea>
 						</div>
 					</div>
 					<div class="ln_solid"></div>
