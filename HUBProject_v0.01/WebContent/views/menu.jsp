@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<%@ include file="/views/layout/common.jsp" %>
+<%@ include file="/views/layout/commonCSS.jsp" %>
 <style type="text/css">
 body {
 	padding: 50px;

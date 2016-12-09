@@ -1,11 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-	
+
 <!DOCTYPE html>
 <html>
 <head>
 <title>Welcome HUB : Have U get a BucketList?</title>
-<%@ include file="/views/layout/common.jsp" %>
+
+<%@ include file="/views/user/registerUserTest.jsp"%>
+<%@ include file="/views/layout/commonCSS.jsp"%>
 
 <style>
 .mainBody {
@@ -15,11 +17,16 @@
 
 </head>
 <body>
-	<form action="${pageContext.request.contextPath}/user/login.do" method="post">
+
+	<form action="${pageContext.request.contextPath}/user/login.do"
+		method="post">
+		<div class="maincenter" style="margin-top:240px;">
+			<a href=HUBMainTest.jsp>
+			<h1 align="center" style="font-weight:bold; color:#DAE9E4;">
+			HUB : Have U get a BucketList?</h1></a>
+		</div>
+		<br>
 		<table align="center">
-			<div class="maincenter" >
-				<a href=HUBMain.jsp><h1 align="center" >HUB : Have U get a
-						BucketList?</h1></a>
 			<tr>
 				<th>ID</th>
 				<td></td>
@@ -33,10 +40,12 @@
 				<td></td>
 				<th><button class="btn btn-xs btn-info btnPlay">로그인</button></th>
 
-				<th><a class="btn btn-xs btn-info btnPlay"
-					href="${pageContext.request.contextPath}/user/register.do">회원가입</a></th>
+				<!-- 				<th><a class="btn btn-xs btn-info btnPlay"
+					href="${pageContext.request.contextPath}/user/register.do">회원가입</a></th> -->
+				<th><button type="button" class="btn btn-xs btn-info btnPlay"
+						data-toggle="modal" data-target="#registerUserModal">회원가입</button></th>
 			</tr>
-			</div>
+
 		</table>
 	</form>
 </body>
