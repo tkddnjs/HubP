@@ -15,14 +15,13 @@ insert into Userconn_TB values('444', '게임');
 insert into Userconn_TB values('555', '자바');
 insert into Userconn_TB values('666', '음악');
 
-
-insert into Bucketlist_tb values(bucketlist_seq.nextVal, '세계일주 하기', '죽기전에', 2, '꼭 가야지', '돈이 없음', 'N', 'hub');
-insert into Bucketlist_tb values(bucketlist_seq.nextVal, '호날두 따라잡기', '내일까지', 5, '가능할까?', '축구화가 없음', 'N', '111');
-insert into Bucketlist_tb values(bucketlist_seq.nextVal, '효도르처럼 되기', '모레까지', 2, '가능할까?', '축구화가 없음', 'N', '222');
-insert into Bucketlist_tb values(bucketlist_seq.nextVal, '사진잘찍기', '2월까지', 1, '1. 카메라 사기 2. 돈모으기', '없음', 'N', '333');
-insert into Bucketlist_tb values(bucketlist_seq.nextVal, '버스킹 하기', '새해첫날', 3, '기타 사기, 노래잘하기', '스피커가 없어요', 'N', '444');
-insert into Bucketlist_tb values(bucketlist_seq.nextVal, '다이아 찍기', '올말까지', 4, '2016.10.22 브론즈5', '마우스가 없음', 'N', '555');
-insert into Bucketlist_tb values(bucketlist_seq.nextVal, '포토샾 고수', '내일까지', 6, '툴, 단축키, 효과', '수업좀 해주세요', 'N', '666');
+insert into Bucketlist_tb values(bucketlist_seq.nextVal, '세계일주 하기', '죽기전에', 2, 40, '꼭 가야지', '돈이 없음', 'N', 'hub');
+insert into Bucketlist_tb values(bucketlist_seq.nextVal, '호날두 따라잡기', '내일까지', 5, 60, '가능할까?', '축구화가 없음', 'N', '111');
+insert into Bucketlist_tb values(bucketlist_seq.nextVal, '효도르처럼 되기', '모레까지', 2, 36, '가능할까?', '축구화가 없음', 'N', '222');
+insert into Bucketlist_tb values(bucketlist_seq.nextVal, '사진잘찍기', '2월까지', 1, 62, '1. 카메라 사기 2. 돈모으기', '없음', 'N', '333');
+insert into Bucketlist_tb values(bucketlist_seq.nextVal, '버스킹 하기', '새해첫날', 3, 45, '기타 사기, 노래잘하기', '스피커가 없어요', 'N', '444');
+insert into Bucketlist_tb values(bucketlist_seq.nextVal, '다이아 찍기', '올말까지', 4, 30, '2016.10.22 브론즈5', '마우스가 없음', 'N', '555');
+insert into Bucketlist_tb values(bucketlist_seq.nextVal, '포토샾 고수', '내일까지', 6, 50, '툴, 단축키, 효과', '수업좀 해주세요', 'N', '666');
 
 insert into bucketconn_tb values(1, '여행');
 insert into bucketconn_tb values(2, '운동');
