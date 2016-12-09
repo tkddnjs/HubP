@@ -39,7 +39,7 @@
 					<c:if test="${bucketlist.progress != 100 }">
 						<div class="panel">
 						
-							<ul class="nav navbar-right panel_toolbox" style="gravity:center;">
+							<ul class="nav navbar-right panel_toolbox" style="padding-top: 13px">
                           		<li><button class="fa fa-edit" value="${no }" data-toggle="modal" 
                           		name="modifyBtn" data-target="#modifyBucketlistModal"
                           		style="font-size:20px; background:none!important; border:none;"></button>
