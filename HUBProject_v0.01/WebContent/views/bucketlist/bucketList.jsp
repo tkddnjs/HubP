@@ -7,7 +7,7 @@
 <head>
 
 <title>HUB:Have U get a Bucketlist?</title>
-<%@ include file="/views/layout/modalCSSCommon.jsp" %>\
+<%@ include file="/views/layout/modalCSSCommon.jsp" %>
 
 </head>
 
