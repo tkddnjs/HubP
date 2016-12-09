@@ -8,7 +8,7 @@
 
 <title>HUB:Have U get a Bucketlist?</title>
 
-<%@ include file="/views/layout/modalCSSCommon.jsp" %>
+<%@ include file="/views/layout/commonCSS.jsp" %>
 
 </head>
 
@@ -82,7 +82,7 @@
 			</div>
 		</div>
 	</div>
-	<%@ include file="/views/layout/modalJSCommon.jsp" %>
+	<%@ include file="/views/layout/commonJS.jsp" %>
 
 	<script>
 		$(".bucketlistForm").submit(function(){

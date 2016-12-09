@@ -38,12 +38,26 @@
 					<c:set var="no" value="${status.count  }"></c:set>
 					<c:if test="${bucketlist.progress != 100 }">
 						<div class="panel">
+						
+							<ul class="nav navbar-right panel_toolbox" style="gravity:center;">
+                          		<li><button class="fa fa-edit" value="${no }" data-toggle="modal" 
+                          		name="modifyBtn" data-target="#modifyBucketlistModal"
+                          		style="font-size:25px; background:none!important; border:none;"></button>
+                          		</li>
+                          		
+                           		<li><button class="fa fa-trash-o" style="font-size:25px; background:none!important; border:none;" 
+                           		href="${pageContext.request.contextPath}/bucketlist/remove.do?bucketlistId=${bucketlist.bucketlistId } "></button>
+                          		</li>
+                       		</ul>
+						
 							<a class="panel-heading " role="tab" id="headingOne1"
 								data-toggle="collapse" data-parent="#accordion1"
 								href="#collapseOne${no  }" aria-expanded="true"
 								aria-controls="collapseOne">
 								<h3 class="panel-title">${bucketlist.title }</h3>
 							</a>
+							
+							
 							<div id="collapseOne${no  }"
 								class="panel-collapse collapse" role="tabpanel"
 								aria-labelledby="headingOne">
@@ -99,11 +113,18 @@
 											<td>${bucketlist.memo }</td>
 										</tr>
 									</table>
+									<table>
+										<div style="float:right;">
+											
+												<button type="button" class="btn btn-success" value="${no }" data-toggle="modal" name="modifyBtn"
+														data-target="#modifyBucketlistModal">수정</button>
+												<a class="btn btn-danger"  
+												href="${pageContext.request.contextPath}/bucketlist/remove.do?bucketlistId=${bucketlist.bucketlistId } ">삭제</a>
+											
+										</div>
+									</table>
 								</div>
-								<div style="margin-left: 90%;">
-									<button type="button" value="${no }" data-toggle="modal" name="modifyBtn"
-										data-target="#modifyBucketlistModal">수정</button>
-								</div>
+								
 							</div>
 						</div>
 					</c:if>
