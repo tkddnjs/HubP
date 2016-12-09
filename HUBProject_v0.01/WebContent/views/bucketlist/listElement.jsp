@@ -38,26 +38,12 @@
 					<c:set var="no" value="${status.count  }"></c:set>
 					<c:if test="${bucketlist.progress != 100 }">
 						<div class="panel">
-						
-							<ul class="nav navbar-right panel_toolbox" style="gravity:center;">
-                          		<li><button class="fa fa-edit" value="${no }" data-toggle="modal" 
-                          		name="modifyBtn" data-target="#modifyBucketlistModal"
-                          		style="font-size:25px; background:none!important; border:none;"></button>
-                          		</li>
-                          		
-                           		<li><button class="fa fa-trash-o" style="font-size:25px; background:none!important; border:none;" 
-                           		href="${pageContext.request.contextPath}/bucketlist/remove.do?bucketlistId=${bucketlist.bucketlistId } "></button>
-                          		</li>
-                       		</ul>
-						
 							<a class="panel-heading " role="tab" id="headingOne1"
 								data-toggle="collapse" data-parent="#accordion1"
 								href="#collapseOne${no  }" aria-expanded="true"
 								aria-controls="collapseOne">
 								<h3 class="panel-title">${bucketlist.title }</h3>
 							</a>
-							
-							
 							<div id="collapseOne${no  }"
 								class="panel-collapse collapse" role="tabpanel"
 								aria-labelledby="headingOne">
@@ -113,18 +99,11 @@
 											<td>${bucketlist.memo }</td>
 										</tr>
 									</table>
-									<table>
-										<div style="float:right;">
-											
-												<button type="button" class="btn btn-success" value="${no }" data-toggle="modal" name="modifyBtn"
-														data-target="#modifyBucketlistModal">수정</button>
-												<a class="btn btn-danger"  
-												href="${pageContext.request.contextPath}/bucketlist/remove.do?bucketlistId=${bucketlist.bucketlistId } ">삭제</a>
-											
-										</div>
-									</table>
 								</div>
-								
+								<div style="margin-left: 90%;">
+									<button type="button" value="${no }" data-toggle="modal" name="modifyBtn"
+										data-target="#modifyBucketlistModal">수정</button>
+								</div>
 							</div>
 						</div>
 					</c:if>
@@ -252,3 +231,91 @@
 		</div>
 	</div>
 </div>
+
+	<script>
+		$(".bucketlistForm").submit(function(){
+			var tags = $(this).find(".tags").val();
+			tags = tags.split(",");
+			$(this).find(".tags").val(tags);
+
+			var star = $(this).find(".changeStar").attr("data-rating");
+			$(this).find("#star").val(star);
+		});
+	</script>
+	
+	<script>
+		$("#modifyBucketlistForm").submit(function(){
+			var memo = $(this).find("[name='memo']").val();
+			memo = memo.replace(/\n/gi, " ");
+			$(this).find("[name='memo']").val(memo);
+		});
+	</script>
+	
+	<script type="text/javascript">
+		var bucketlists = new Array();
+		<c:forEach items="${bucketlists}" var="bucketlist">
+			var bucketlist = new Array();
+			bucketlist.push("${bucketlist.bucketlistId}");
+			bucketlist.push("${bucketlist.title}");
+			bucketlist.push("${bucketlist.connChains}");
+			bucketlist.push("${bucketlist.goal}");
+			bucketlist.push("${bucketlist.star}");
+			bucketlist.push("${bucketlist.progress}");
+			bucketlist.push("${bucketlist.memo}");
+			bucketlist.push("${bucketlist.sos}");
+			bucketlist.push("${bucketlist.lock}");
+			bucketlist.push("${bucketlist.userId}");
+			bucketlists.push(bucketlist);
+		</c:forEach>
+	
+		$("#registerBtn").click(function() {
+			$(".tags").importTags("");
+			$(".changeStar").starrr();
+			$(".changeStar").starrr('setRating', 0);
+			$(".changeStar").attr("data-rating", 0);
+			$(".changeStar").on('starrr:change', function(e, value){
+				$(this).attr("data-rating", value);
+			});
+		});
+
+		$("[name=modifyBtn]").click(function(){
+			var index = $(this).val() - 1;
+			$("#modifyBucketlistModal #bucketlistId").val(bucketlists[index][0]);
+			$("#modifyBucketlistModal #title").val(bucketlists[index][1]);
+			initConn(bucketlists[index][2]);
+			$("#modifyBucketlistModal #goal").val(bucketlists[index][3]);
+			initStar(bucketlists[index][4]);
+			$("#modifyBucketlistModal #progress").val(bucketlists[index][5]).trigger("change");
+	    	$("#modifyBucketlistModal #memo").val(bucketlists[index][6]);
+			$("#modifyBucketlistModal #sos").val(bucketlists[index][7]);
+			var lock = bucketlists[index][8];
+			if(lock == 'true'){
+				$('#modifyBucketlistModal #private').attr("checked", true);
+			} else {
+				$("#modifyBucketlistModal #public").attr("checked", true);
+			}
+	    	$("#modifyBucketlistModal #userId").val(bucketlists[index][9]);
+		});
+
+		function initConn(str){
+			var conn = str;
+			conn = conn.replace("[","");
+			conn = conn.replace(/ /gi,"");
+			conn = conn.replace("]","");
+			$(".tags").each(function(){
+				$(this).importTags(conn);
+			});
+		};
+
+		function initStar(str){
+			$(".changeStar").each(function(){
+				$(this).starrr();
+				$(this).starrr('setRating', str);
+				$(this).attr("data-rating", str);
+				$(this).on('starrr:change', function(e, value){
+					$(this).attr("data-rating", value);
+				});
+				$("[name='star']").val(str);
+			});
+		}
+	</script>
