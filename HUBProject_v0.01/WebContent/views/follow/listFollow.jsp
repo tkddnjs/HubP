@@ -1,162 +1,193 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE html>
 <html>
 <head>
-<title>친구 목록</title>
-<%@ include file="/views/layout/common.jsp" %>
 
-<style type="text/css">
-body {
-	padding: 5px;
-}
+<title>HUB:Have U get a Bucketlist?</title>
 
-h1 {
-	font-weight: bold;
-	color: #A0B0DB;
-	size: 50px;
-}
+<%-- <%@ include file="/views/layout/commonCSS.jsp" %> --%>
 
-.header {
-	font-size: 15px;
-}
-</style>
 </head>
 
-<body>
-	<div class="header" align="right">
-		<%@ include file="/views/header/header.jspf"%>
-	</div>
-	<div>
-		<%@ include file="/views/menu.jsp"%>
-	</div>
 
+<!--follow-->
+<div class="col-md-3 left_col" style="background: #8BCBC8;">
 
-	<div class="input-append pull-right">
-		<form action="follow/listAll.do" method="post"
-			class="form-inline">
-			<select class="ring" name="searchOpt">
-				<option value="1">연결고리</option>
-				<option value="2">관계</option>
-				<option value="3">친구요청</option>
-			</select> <input class="span2" type="text" name="searchWord" id="searchs"
-				data-source="typeahead" placeholder="검색어를 입력하세요">
-			<button class="btn" type="submit">검색</button>
-		</form>
-	</div>
+	<div class="left_col scroll-view" style="background: #8BCBC8;">
+		<div class="navbar nav_title" style="border: 0;">
+			<a href="${pageContext.request.contextPath}/follow/listAll.do"
+				class="site_title"><i class="fa fa-users"></i> <span>팔로우
+					관리</span></a>
+		</div>
+		<div class="clearfix"></div>
+		<!-- /menu profile quick info -->
+		<br />
 
-	<table class="table table-hover table-condensed">
-		<thead style="background: #60d7a9; color:white;">
-			<tr style="align: center; font-size:14pt;">
-				<th width="50" align="center">NO</th>
-				<th width="200" align="center">친구ID</th>
-				<th width="200" align="center">관계</th>
-				<th width="50dp" align="right">관리</th>
-				<th width="50dp"></th>
-				<c:if test="${isRequest }">
-					<th colspan='2' width="200" align="center">친구요청</th>
-				</c:if>
-			</tr>
-		</thead>
+		<!-- sidebar menu -->
+		<div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+			<div class="menu_section">
+				<ul class="nav side-menu" style="font-size: 20px;">
 
-		<tbody style="font-size: 14pt;">
-			<c:forEach items="${follows }" var="follow" varStatus="status">
-				<c:choose>
-					<c:when test="${isRequest }">
-						<tr>
-							<td>${status.count }</td>
-							<td>
-								<form action="${pageContext.request.contextPath}/user/detail.do" method="get">
-									<input type="hidden" name="myId" value="${sessionScope.userId}">
-									<input type="hidden" name="listOpt" value="${follow.relation }">
-									<input type="hidden" name="userId" value="${follow.followId }">
-									<button class="btn btn-xs btn-default btn-block" type="submit">${follow.followId }</button>
-								</form>
-							</td>
-							<td>
-								<c:choose>
-									<c:when test="${follow.relation eq 1}">
-									내가 도움을 주는 관계							
-									</c:when>
-									<c:when test="${follow.relation eq 2}">
-									내가 도움을 받는 관계
-									</c:when>
-									<c:otherwise>
-									서로 도움을 주는 관계
-									</c:otherwise>
-								</c:choose>
-							</td>
-						</tr>
-					</c:when>
-			
-					<c:otherwise>
-						<tr>
-							<td>${status.count }</td>
-							<td>
-								<form action="${pageContext.request.contextPath}/user/detail.do" method="get">
-									<input type="hidden" name="myId" value="${sessionScope.userId}">
-									<input type="hidden" name="listOpt" value="${follow.relation }">
-									<input type="hidden" name="userId" value="${follow.followId }">
-									<button class="btn btn-xs btn-default btn-block" type="submit">${follow.followId }</button>
-								</form>
-							</td>
-							<td>
-								<c:choose>
-									<c:when test="${follow.relation eq 1}">
-									내가 도움을 주는 관계							
-									</c:when>
-									<c:when test="${follow.relation eq 2}">
-									내가 도움을 받는 관계
-									</c:when>
-									<c:otherwise>
-									서로 도움을 주는 관계
-									</c:otherwise>
-								</c:choose>
-							</td>
-							
-								<c:choose>
-									<c:when test="${follow.confirm eq false }">
-										<td>
-											<form action="${pageContext.request.contextPath}/follow/confirm.do" method="post">
-												<button class="btn btn-xs btn-warning" type="submit">수락</button>
-												<input type="hidden" name="followId" value="${follow.followId }">
-												<input type="hidden" name="userId" value="${follow.userId }">
+					<!--도움 대기-->
+					<li><a><i class="fa fa-history"></i>도움대기 <span
+							class="fa fa-chevron-down"></span></a> <!-- <form action="follow/listAll.do" method="post" class="form-inline"> -->
+
+						<ul class="nav child_menu">
+							<c:forEach items="${follows }" var="follow" varStatus="status">
+								<c:if test="${follow.confirm eq false}">
+									<!--for-->
+									<li class="sub_menu" style="height: 70px;">
+									
+									<form action="${pageContext.request.contextPath}/user/detail.do" method="get">
+										<input type="hidden" name="myId" value="${sessionScope.userId}">
+										<input type="hidden" name="userId" value="${follow.followId }">
+										<button class="btn btn-xs btn-default btn-block" style="border:hidden; font-size: 15px; background:none !important;" type="submit">${follow.followId }</button>
+									</form>
+										<%-- <form action="user/detail.do" method="post">
+
+											<a style="font-size: 15px" name="userId" href="${pageContext.request.contextPath}/user/detail.do?userId=${follow.followId}"
+												value="${follow.followId }">${follow.followId }</a>
+											
+										</form>  --%><span style="display: block; float: left">
+											<form
+												action="${pageContext.request.contextPath}/follow/confirm.do"
+												method="post" style="width: 60px;">
+												<button class="fa fa-plus-square"
+													style="width: 60px; font-size: 16px; background: none !important; border: none;">수락</button>
+												<input type="hidden" name="followId"
+													value="${follow.followId }"> <input type="hidden"
+													name="userId" value="${follow.userId }">
 											</form>
-										</td>
-										<td>
-											<form action="${pageContext.request.contextPath}/follow/remove.do" method="post">
-												<button class="btn btn-xs btn-danger" type="submit">거절</button>
-												<input type="hidden" name="followId" value="${follow.followId }">
-												<input type="hidden" name="userId" value="${follow.userId }">
+									</span> <span
+										style="display: block; margin-right: 50px; float: right;">
+											<form
+												action="${pageContext.request.contextPath}/follow/remove.do"
+												method="post" style="width: 60px;">
+												<button class="fa fa-minus-square"
+													style="width: 60px; font-size: 16px; background: none !important; border: none;">거절</button>
+												<input type="hidden" name="followId"
+													value="${follow.followId }"> <input type="hidden"
+													name="userId" value="${follow.userId }">
 											</form>
-										</td>
-									</c:when>
-									<c:when test="${follow.confirm eq true }">
-										<td>
-											<form action="${pageContext.request.contextPath}/follow/remove.do" method="post">
-												<button class="btn btn-xs btn-danger" type="submit">삭제</button>
-												<input type="hidden" name="followId" value="${follow.followId }">
-												<input type="hidden" name="userId" value="${follow.userId }">
-											</form>
-										</td>
-									</c:when>
-								
-									<c:otherwise>
-									<td>
-										<%-- <form action="follow/remove.do" method="post">
-											<button class="btn btn-xs btn-default btn-block" type="submit">삭제</button>
-											<input type="hidden" name="followId" value="${follow.followId }">
-											<input type="hidden" name="searchOpt" value="${searchOpt }">
-										</form> --%>
-									</td>
-									</c:otherwise>
-								</c:choose>
-							</tr>
-					</c:otherwise>
-				</c:choose>
-			</c:forEach>
-		</tbody>
-	</table>
-</body>
+									</span>
+
+									</li>
+								</c:if>
+							</c:forEach>
+							<!--end for-->
+						</ul> <!-- </form> --></li>
+					<!--도움 대기 end-->
+
+					<!--팔로우-->
+					<li><a><i class="fa fa-child"></i> 팔로우 <span
+							class="fa fa-chevron-down"></span></a>
+						<ul class="nav child_menu">
+
+							<!--내가 도움-->
+							<li><a style="font-size: 17px;">내가 도움 <span
+									class="fa fa-chevron-down"></span></a>
+								<ul class="nav child_menu">
+
+									<!--for-->
+									<c:forEach items="${follows }" var="follow" varStatus="status">
+										<c:if test="${follow.confirm eq true && follow.relation == 1}">
+											<li class="sub_menu">
+												<form action="user/detail.do" method="post">
+													<a style="font-size: 15px" name="userId"
+														value="${follow.followId }">${follow.followId }</a> <input
+														type="hidden" name="listOpt" value="${follow.relation }">
+												</form>
+											</li>
+										</c:if>
+									</c:forEach>
+									<!--end for-->
+
+								</ul></li>
+
+							<!--나를 도움-->
+							<li><a style="font-size: 17px;">나를 도움 <span
+									class="fa fa-chevron-down"></span></a>
+								<ul class="nav child_menu">
+
+									<c:forEach items="${follows }" var="follow" varStatus="status">
+										<c:if test="${follow.confirm eq true && follow.relation == 2}">
+											<!--for-->
+											<li class="sub_menu">
+												<form action="user/detail.do" method="post">
+													<a style="font-size: 15px" name="userId"
+														value="${follow.followId }">${follow.followId }</a> <input
+														type="hidden" name="listOpt" value="${follow.relation }">
+												</form>
+											</li>
+										</c:if>
+									</c:forEach>
+
+								</ul></li>
+
+
+							<!--서로 도움-->
+							<li><a style="font-size: 17px;">서로 도움 <span
+									class="fa fa-chevron-down"></span></a>
+								<ul class="nav child_menu">
+
+									<c:forEach items="${follows }" var="follow" varStatus="status">
+										<c:if
+											test="${follow.confirm eq true && follow.relation != 1 && follow.relation != 2}">
+											<!--for-->
+											<li class="sub_menu">
+												<form action="user/detail.do" method="post">
+													<a style="font-size: 15px" name="userId"
+														value="${follow.followId }">${follow.followId }</a> <input
+														type="hidden" name="listOpt" value="${follow.relation }">
+												</form>
+											</li>
+										</c:if>
+									</c:forEach>
+								</ul></li>
+
+						</ul></li>
+					<!-- end 팔로우-->
+
+					<!--모임방-->
+					<li><a><i class="fa fa-spinner"></i> 모임방 <span
+							class="fa fa-chevron-down"></span></a>
+						<ul class="nav child_menu">
+							<li><a href="general_elements.html">General Elements</a></li>
+							<li><a href="media_gallery.html">Media Gallery</a></li>
+							<li><a href="typography.html">Typography</a></li>
+							<li><a href="icons.html">Icons</a></li>
+							<li><a href="glyphicons.html">Glyphicons</a></li>
+							<li><a href="widgets.html">Widgets</a></li>
+							<li><a href="invoice.html">Invoice</a></li>
+							<li><a href="inbox.html">Inbox</a></li>
+							<li><a href="calendar.html">Calendar</a></li>
+
+
+							<li><a style="font-size: 17px;">333 <span
+									class="fa fa-chevron-down"></span></a>
+								<ul class="nav child_menu">
+									<li class="sub_menu"><a href="level2.html">111님의 정보</a></li>
+									<li class="sub_menu">
+										<tr style="font-size: 15px;">
+											<th class="fa fa-plus-square"></th>
+											<td><a href="#level2_2">수락</a></td>
+											<th class="fa fa-minus-square"></th>
+											<td><a href="#level2_2">거절</a></td>
+										</tr>
+									</li>
+								</ul></li>
+						</ul></li>
+					<!--end 모임방-->
+
+				</ul>
+			</div>
+		</div>
+		<!-- /sidebar menu -->
+	</div>
+</div>
+<!--end follow-->
+
 </html>

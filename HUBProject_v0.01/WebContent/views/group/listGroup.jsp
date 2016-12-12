@@ -1,126 +1,202 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
-<!DOCTYPE html>
-<html>
-<head>
-<title>모임방 목록</title>
-<%@ include file="/views/group/registerGroup.jsp" %>
-<%@ include file="/views/layout/common.jsp" %>
+<%@ include file="/views/group/registerGroup.jsp"%>
+<%@ include file="/views/group/modifyGroup.jsp"%>
 
-<style type="text/css">
-body {
-	padding: 5px;
-}
-
-h1 {
-	font-weight: bold;
-	color: #A0B0DB;
-	size: 50px;
-}
-
-.header {
-	font-size: 15px;
-}
-</style>
-</head>
-<body>
-	<div class="header" align="right">
-		<%@ include file="/views/header/header.jspf"%>
-	</div>
-	<div>
-		<%@ include file="/views/menu.jsp"%>
-	</div>
-
-	<div class="input-append pull-right">
-		<form action="${pageContext.request.contextPath}/group/list.do" method="get" class="form-inline">
-			<select name="listOpt">
-				<option value=1>모임방이름</option>
-				<option value=2>연결고리</option>
-				<option value=3>지역</option>
-			</select>
-			<input class="span2" type="text" name="searchWord" id="searchWord">
-			<button class="btn" type="button">검색</button>
-		</form>
-	</div>
-
-	<div class="input-append pull-right">
-		<form action="${pageContext.request.contextPath}/group/list.do" method="get">
-			<input type="hidden" name="listOpt" value=4>
-			<button class="btn" type="submit">내 리스트 조회</button>
-		</form>
-	</div>
-
-	<table class="table table-hover table-condensed">
-		<!-- <colgroup>
-			<col width="80" align="center">
-			<col width="*">
-			<col width="70">
-		</colgroup> -->
-
-		<thead style="background: #60d7a9;">
-			<tr style="align: center;">
-				<th>NO</th>
-				<th>제목</th>
-				<th>개설자</th>
-				<th>마감일</th>
-				<th>지역</th>
-				<th>연결고리</th>
-			</tr>
-		</thead>
-
-		<tbody>
-			<c:forEach items="${groups }" var="group" varStatus="status">
-				<tr>
-					<td class="ranking">${status.count }</td>
-					<td><a class="btn btn-xs btn-default btn-block"
-						href="${pageContext.request.contextPath}/group/detail.do?groupId=${group.groupId }">${group.groupName }</a></td>
-					<td><a class="btn btn-xs btn-default btn-block"
-						href="${pageContext.request.contextPath}/user/detail.do?userId=${group.managerId }">${group.managerId }</a></td>
-					<td>${group.lastDay }</td>
-					<td>${group.local }</td>
-					<td>
-						${group.connChains }
-					</td>
-				</tr>
-			</c:forEach>
-		</tbody>
-	</table>
-
-	<div>
-		<div class="pagination" align="center">
-			<ul>
-				<li><a href="#">Prev</a></li>
-				<li><a href="#">1</a></li>
-				<li><a href="#">2</a></li>
-				<li><a href="#">3</a></li>
-				<li><a href="#">4</a></li>
-				<li><a href="#">5</a></li>
-				<li><a href="#">6</a></li>
-				<li><a href="#">7</a></li>
-				<li><a href="#">8</a></li>
-				<li><a href="#">9</a></li>
-				<li><a href="#">10</a></li>
-				<li><a href="#">Next</a></li>
+<div class="col-xs-12">
+	<!-- 모임방 목록 -->
+	<div class="x_panel">
+		<!-- 모임방 목록 헤드 -->
+		<div class="x_title">
+			<h2>
+				<i class="fa fa-bitbucket"></i>모임방
+			</h2>
+			<ul class="nav navbar-right panel_toolbox">
+				<li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
+				<li><a class="close-link"><i class="fa fa-close"></i></a></li>
 			</ul>
+			<div class="clearfix"></div>
 		</div>
+		<!-- /모임방 목록 헤드 -->
 
-		<div class="pull-right">
-			<button type="button" class="btn btn-toolbar" data-toggle="modal" data-target="#registerGroupModal">모임방등록</button>
-			<!-- <a class="btn btn-toolbar" href="/views/registerGroup.jsp">
-				<button>모임방등록</button>
-			</a> -->
+		<!-- 모임방 목록 바디 -->
+		<div class="x_content">
+			<div class="accordion" id="accordion3" role="tablist"
+				aria-multiselectable="true">
+				<!--1st item-->
+				<c:forEach items="${groups }" var="group" varStatus="status">
+					<c:set var="no" value="${status.count  }"></c:set>
+						<div class="panel">
+							<a class="panel-heading " role="tab" id="headingOne1"
+								data-toggle="collapse" data-parent="#accordion3"
+								href="#collapseOne${no  }" aria-expanded="true"
+								aria-controls="collapseOne">
+								<h3 class="panel-title">${group.groupName }</h3>
+							</a>
+
+							<div id="collapseOne${no  }" class="panel-collapse collapse"
+								role="tabpanel" aria-labelledby="headingOne">
+								<div class="panel-body">
+									<table class="table table-striped"
+										style="width: 70%; height: 100px; margin: 20px 10px 0 140px; gravity: center; font-size: 16px">
+										<tr>
+											<th>관리자ID</th>
+											<td>${group.managerId }</td>
+										</tr>
+										<tr>
+											<th>모임만료일</th>
+											<td>${group.lastDay }</td>
+										</tr>
+										<tr>
+											<th>지역</th>
+											<td>${group.local }</td>
+										</tr>
+										<tr>
+											<th>인원</th>
+											<td>${fn:length(group.joinPeople) } / ${group.maxPeople }</td>
+										</tr>
+									</table>
+								</div>
+								<div style="margin: 20px 10px 0 10%; gravity: center;">
+									<table>
+										<tr>
+											<th>
+												<h2><strong>소개</strong></h2>
+											</th>
+										</tr>
+										<tr>
+											<td>${group.introduce }</td>
+										</tr>
+									</table>
+								</div>
+								
+								<!-- 내가 속한 모임방의 경우 -->
+								<c:if test="${listOpt eq 4}">
+									<div class="panel">
+										<!-- 모임방 탈퇴 -->
+										<form action="${pageContext.request.contextPath }/group/exit.do" method="get">
+											<button type="submit" id="exitBtn" name="groupId" value="${group.groupId }">
+												탈퇴
+											</button>
+										</form>
+										<!-- /모임방 탈퇴 -->
+										<!-- 모임방 수정 -->
+										<div class="panel">
+											<button name="modifyGroupBtn" data-toggle="modal"
+												data-target="#modifyGroupModal" value="${no }">
+												수정
+											</button>
+										</div>
+										<!-- /모임방 수정 -->
+										<!-- 모임방 삭제 -->
+										<form action="${pageContext.request.contextPath }/group/remove.do" method="get">
+											<button type="submit" id="removeBtn" name="groupId" value="${group.groupId }">
+												삭제
+											</button>
+										</form>
+										<!-- /모임방 삭제 -->
+									</div>
+									
+								</c:if>
+								
+								<c:if test="${listOpt eq 1 || listOpt eq 2 || listopt eq 3}">
+									<!-- 모임방 참여 -->
+									<div class="panel">
+										<form action="${pageContext.request.contextPath }/group/join.do" method="get">
+											<button type="submit" id="joinBtn" name="groupId" value="${group.groupId }">
+												참여
+											</button>
+										</form>
+									</div>
+									<!-- /모임방 참여 -->
+								</c:if>
+							</div>
+						</div>
+				</c:forEach>
+				<!-- 모임방 개설 -->
+				<div class="panel">
+					<a id="registerBtn" data-toggle="modal"
+						data-target="#registerGroupModal">
+						<h1 align="center">
+							<i class="fa fa-plus-circle"></i>
+						</h1>
+					</a>
+				</div>
+				<!-- /모임방 개설 -->
+			</div>
+			<!-- end of accordion -->
 		</div>
+		<!-- /모임방 목록 바디 -->
 	</div>
-	
-<script type="text/javascript">
-	var availableTags = [];
-	$(function() {
-		var autocomplete_text = [ "자동완성기능", "Autocomplete", "개발로짜", "국이" ];
-		$("#searchs").autocomplete({
-			source : autocomplete_text
-		});
-	})
+</div>
+
+<script src="${pageContext.request.contextPath}/resources/vendors/jquery/dist/jquery.min.js"></script>
+<script>
+	$(".groupForm").submit(function() {
+		// 연결고리 값 domain type으로 변경
+		var tags = $(this).find(".tags").val();
+		tags = tags.split(",");
+		$(this).find(".tags").val(tags);
+
+		var introduce = $(this).find("[name='introduce']").val();
+		introduce = introduce.replace(/\n/gi, " ");
+		$(this).find("[name='introduce']").val(introduce);
+	});
 </script>
-</body>
-</html>
+
+<script type="text/javascript">
+	var groups = new Array();
+	<c:forEach items="${groups}" var="group">
+		var group = new Array();
+		group.push("${group.groupId}");
+		group.push("${group.groupName}");
+		group.push("${group.managerId}");
+		group.push("${group.lastDay}");
+		group.push("${group.connChains}");
+		group.push("${group.introduce}");
+		group.push("${group.local}");
+		group.push("${group.joinPeople}");
+		group.push("${group.maxPeople}");
+		groups.push(group);
+	</c:forEach>
+
+	// 초기화
+	$("#registerBtn").click(function() {
+		$(".tags").each(function(){
+			$(this).importTags("");
+		});
+	});
+
+	$("[name=modifyGroupBtn]").click(function() {
+		var index = $(this).val() - 1;
+		$("#modifyGroupModal #groupId").val(coopers[index][0]);
+		$("#modifyGroupModal #groupName").val(coopers[index][1]);
+		$("#modifyGroupModal #managerId").val(coopers[index][2]);
+		$("#modifyGroupModal #lastDay").val(coopers[index][3]);
+		initConn(coopers[index][4]);
+		$("#modifyGroupModal #introduce").val(coopers[index][5]);
+		$("#modifyGroupModal #local").val(coopers[index][6]);
+		$("#modifyGroupModal #joinPeople").val(coopers[index][7]);
+		var joinPeople = cooper[index][7].replace("[","");
+		joinPeople = joinPeople.replace("]","");
+		joinPeople = joinPeople.replace(/ /gi,"");
+		joinPeople = joinPeople.split(",");
+		joinPeople = joinPeople.length;
+		$("#modifyGroupModal #joinPeopleNo").val(joinPeople);
+		$("#modifyGroupModal #maxPeople").val(coopers[index][8]);
+	});
+
+	function initConn(str) {
+		var conn = str;
+		conn = conn.replace("[", "");
+		conn = conn.replace(/ /gi, "");
+		conn = conn.replace("]", "");
+		$(".tags").each(function() {
+			$(this).importTags(conn);
+		});
+	};
+
+</script>

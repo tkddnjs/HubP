@@ -7,7 +7,7 @@
 <head>
 
 <title>도움리스트 목록</title>
-<%@ include file="/views/layout/common.jsp"%>
+<%@ include file="/views/layout/commonCSS.jsp"%>
 
 <style type="text/css">
 body {

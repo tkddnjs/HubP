@@ -68,41 +68,48 @@
 				result = result.replace("[", "");
 				result = result.replace("]", "");
 				result = result.split(',');
-				list(result);
+				list(result, connChains);
+			}
+		});
+
+		//tab 누를때 Controller에서 정보를 가져옴
+		var tabOpt = ${tabOpt};
+		$("[role='presentation']").attr("class", "");
+		$("#profile-tab"+tabOpt).closest("[role='presentation']").attr("class", "active");
+		$(".active.in").attr("class", "tab-pane fade");
+		$("#tab_content"+tabOpt).attr("class", "tab-pane fade active in");
+
+	});
+	
+	function list(array, result){
+		result.length = 0;
+		for (var i=0; i<array.length; i++){
+			result.push(array[i]);
+		}
+	};
+	
+	$(".sendListOption").find("[name='listOpt']").click(function(){
+		var listOpt = $(this).val();
+		var availableTags = [];
+		$.ajax({
+			type : 'POST',
+			url : '${pageContext.request.contextPath}/list/listAutoComplete.do',
+			data : {
+				listOpt : listOpt
+			},
+			success : function(result) {
+				result = result.replace(/ /gi, "");
+				result = result.replace("[", "");
+				result = result.replace("]", "");
+				result = result.split(',');
+				list(result, availableTags);
 			}
 		});
 		
-		//var tabOpt = ${tabOpt};
-		
-		$("#tab_content1").attr("class", "tab-pane fade");
-		$("#tab_content3").attr("class", "tab-pane fade active in");
-		
-		/*			switch(tabOpt){
-		case 1:
-			$("#profile-tab").attr("class", "active");
-			$("#profile-tab").attr("aria-expanded", true);
-			break;
-		case 2:
-			$("#profile-tab2").attr("class", "active");
-			$("#profile-tab2").attr("aria-expanded", true);
-			break;
-		case 3:
-			$("#profile-tab3").attr("class", "active");
-			$("#profile-tab3").attr("aria-expanded", true);
-			break;
-		default:
-			$("#home-tab").attr("class", "active");
-			$("#home-tab").attr("aria-expanded", true);
-			break;
-		};*/
+		$("#searchWord").autocomplete({
+			source : availableTags
+		})
 	});
-	
-	function list(array){
-		connChains.length = 0;
-		for (var i=0; i<array.length; i++){
-			connChains.push(array[i]);
-		}
-	};
 	
 </script>
 <!-- /Custom Script -->

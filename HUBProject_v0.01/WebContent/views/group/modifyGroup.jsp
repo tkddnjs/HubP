@@ -1,144 +1,81 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<!DOCTYPE html>
-<html>
-<head>
-<title>모임방 수정</title>
-<%@ include file="/views/layout/common.jsp"%>
-
-</head>
-<body>
-	<fieldset>
-		<legend>모임방 수정</legend>
-		<div>
-			<form class="form-inline" action="${pageContext.request.contextPath}/group/register.do" method="post">
-				<table>
-					<tr>
-						<th>모임방이름</th>
-						<td><input type="text" name="groupName" value="${group.groupName }"></td>
-					</tr>
-					<tr>
-						<th>연결고리</th>
-						<td>
-							<c:forEach items="${group.connChains }" var="connChain" varStatus="status">
-								<div id="conn${status.count }">
-									${connChain }
-									<input type="hidden" name="connChains" value="${connChain }">
-									<button type="button" name="removeButton">-</button>
-								</div>
-							</c:forEach>
-							<div id="connForm">						
-								<input type="text" id="connChain" name="connChains">
-								<button type="button" id="addButton">+</button>
+<!-- Modal -->
+<div class="modal fade" id="modifyGroupModal" role="dialog">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title">모임방수정</h4>
+			</div>
+   			<div class="modal-body">
+				<form id="modifyGroupForm" action="${pageContext.request.contextPath}/group/modify.do" class="form-horizontal form-label-left groupForm" method="post" enctype="multipart/form-data">
+					<div class="form-group">
+						<label class="control-label col-md-2 col-sm-3 col-xs-12" for="groupName">GroupName <span class="required">*</span></label>
+						<div class="col-md-6 col-sm-6 col-xs-8">
+							<input type="text" id="groupName" name="groupName" required="required" class="form-control col-md-7 col-xs-12">
+						</div>
+					</div>
+					<div class="form-group">
+						<div>
+							<label class="control-label col-md-2 col-sm-3 col-xs-12" for="managerId">ManagerId <span class="required">*</span></label>
+							<div class="col-md-6 col-sm-6 col-xs-8">
+								<input type="text" id="managerId" name="managerId" required="required" class="form-control col-md-7 col-xs-12">
 							</div>
-						</td>
-					</tr>
-					<tr>
-						<th>모임마감일</th>
-						<td><input type="date" name="lastDay" value="${group.lastDay }"></td>
-					</tr>
-					<tr>
-						<th>최대인원</th>
-						<td><input type="number" min="3" max="25" name="maxPeople" value="${group.maxPeople }"></td>
-					</tr>
-					<tr>
-						<th>지역</th>
-						<td><select class="ring" name="local" id="local" >
-								<option value="서울">서울</option>
-								<option value="경기">경기</option>
-								<option value="강원">강원</option>
-								<option value="경북">경북</option>
-								<option value="경남">경남</option>
-								<option value="대전">대전</option>
-								<option value="대구">대구</option>
-								<option value="부산">부산</option>
-								<option value="인천">인천</option>
-								<option value="울산">울산</option>
-								<option value="전북">전북</option>
-								<option value="전남">전남</option>
-								<option value="충북">충북</option>
-								<option value="충남">충남</option>
-						</select></td>
-					</tr>
-					<tr>
-						<th>소개</th>
-						<td><textarea rows="5" style="width: 100%; height: 300px;"
-								name="introduce">${group.introduce }</textarea></td>
-					</tr>
-				</table>
-				
-				<div>
-					<input type="hidden" name="groupId" value="${group.groupId }">
-					<input type="hidden" name="managerId" value="${group.managerId }">
-					<button type="submit">수정</button>
-				</div>
-			</form>
-		</div>
-	</fieldset>
-
-	<script>
-		var availableTags = [];
-		var counter = 0;
-		
-		$(document).ready(function() {
-			$("#local").val('${group.local}');
-			$.ajax({
-				type : 'POST',
-				url : '${pageContext.request.contextPath}/list/listAutoComplete.do',
-				data : {
-					listOpt : 2
-				},
-				success : function(result) {
-					result = result.replace(/ /gi, "");
-					result = result.replace("[", "");
-					result = result.replace("]", "");
-					result = result.split(",");
-					list(result);
-				}
-			});
-
-			$("#connChain").autocomplete({
-				source : availableTags
-			})
-
-						
-			$(":button [name='removeButton']").click(function() {
-				var id = $(this).closest('div').attr('id');
-				$("#"+id).remove();
-			});
-			
-			$("#connForm").on("create", function() {
-				$("#connCahin"+ counter.toString()).autoComplete({
-					appendTo : "#connForm",
-					source : availableTags
-				});
-				$("#removeButton"+ counter.toString()).click(function() {
-					var id = $(this).closest('div').attr('id');
-					$("#" + id).remove();
-				});
-			});
-
-			$("#addButton").click(function() {
-				counter++;
-				$("#connForm")
-				.append('<div id="iconn'+ counter.toString()
-				+ '"><input type="text" id="connChain"'+ counter.toString()
-				+ ' name="connChains" placeholder="연결고리입력" />'
-				+ '<button type="button" id="removeButton"'+ counter.toString()
-				+ '">-</button></div>')
-				.trigger("create");
-			});
-			
-		});
-
-		function list(array) {
-			for (var i = 0; i < array.length; i++) {
-				availableTags.push(array[i]);
-			}
-		};
-		
-	</script>
-
-</body>
-</html>
+						</div>
+					</div>
+					<div class="form-group">
+						<div>
+							<label class="control-label col-md-2 col-sm-3 col-xs-12" for="lastDay">LastDay <span class="required">*</span></label>
+							<div class="col-md-6 col-sm-6 col-xs-8">
+								<input type="date" id="lastDay" name="lastDay" required="required" class="form-control col-md-7 col-xs-12">
+							</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<div>
+							<label class="control-label col-md-2 col-sm-3 col-xs-12" for="local">Local <span class="required">*</span></label>
+							<div class="col-md-6 col-sm-6 col-xs-8">
+								<input type="text" id="local" name="local" required="required" class="form-control col-md-7 col-xs-12">
+							</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<div>
+							<label class="control-label col-md-2 col-sm-3 col-xs-12" for="maxPeople">maxPeople <span class="required">*</span></label>
+							<div class="col-md-6 col-sm-6 col-xs-8">
+								<input type="text" id="maxPeople" name="maxPeople"
+								 required="required" class="form-control col-md-7 col-xs-12">
+								 <span>joinPeple: <input id="joinPeopleNo" disabled="disabled"> </span>
+								 <input type="hidden" id="joinPeople" name="joinPeople">
+							</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="control-label col-md-2 col-sm-3 col-xs-12">ConnChains <span class="required">*</span></label>
+						<div class="col-md-6 col-sm-6 col-xs-8">
+							<input type="text" id="mgtags" name="connChains" class="tags form-control" />
+						</div>
+					</div>
+					<div class="form-group"></div>
+					<div class="form-group">
+						<label class="control-label col-md-2 col-sm-3 col-xs-12" for="introduce">Introduce</label>
+						<div class="col-md-6 col-sm-6 col-xs-8">
+							<textarea class="form-control" rows="3" id="introduce" name="introduce"></textarea>
+						</div>
+					</div>
+					<div class="ln_solid"></div>
+					<div class="form-group">
+						<div class="col-md-6 col-sm-6 col-xs-8 col-md-offset-4 col-sm-offset-4 col-xs-offset-4">
+							<button type="reset" class="btn btn-primary">초기화</button>
+							<input type="hidden" id="groupId" name="groupId">
+							<button type="submit" class="btn btn-success">수정</button>
+						</div>
+					</div>
+				</form>
+			</div>
+  		</div>
+	</div>
+</div>

@@ -15,13 +15,6 @@
 			</h2>
 			<ul class="nav navbar-right panel_toolbox">
 				<li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
-				<li class="dropdown"><a href="#" class="dropdown-toggle"
-					data-toggle="dropdown" role="button" aria-expanded="false"> <i
-						class="fa fa-wrench"></i></a>
-					<ul class="dropdown-menu" role="menu">
-						<li><a href="#">Settings 1</a></li>
-						<li><a href="#">Settings 2</a></li>
-					</ul></li>
 				<li><a class="close-link"><i class="fa fa-close"></i></a></li>
 			</ul>
 			<div class="clearfix"></div>
@@ -58,9 +51,8 @@
 							</a>
 							
 							
-							<div id="collapseOne${no  }"
-								class="panel-collapse collapse" role="tabpanel"
-								aria-labelledby="headingOne">
+							<div id="collapseOne${no  }" class="panel-collapse collapse" 
+							role="tabpanel" aria-labelledby="headingOne">
 								<div class="panel-body">
 									<div>
 										<div align="center"
@@ -146,13 +138,6 @@
 			</h2>
 			<ul class="nav navbar-right panel_toolbox">
 				<li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
-				<li class="dropdown"><a href="#" class="dropdown-toggle"
-					data-toggle="dropdown" role="button" aria-expanded="false"> <i
-						class="fa fa-wrench"></i></a>
-					<ul class="dropdown-menu" role="menu">
-						<li><a href="#">Settings 1</a></li>
-						<li><a href="#">Settings 2</a></li>
-					</ul></li>
 				<li><a class="close-link"><i class="fa fa-close"></i></a></li>
 			</ul>
 			<div class="clearfix"></div>
@@ -168,6 +153,18 @@
 					varStatus="status">
 					<c:if test="${bucketlist.progress == 100 }">
 						<div class="panel">
+						
+							<ul class="nav navbar-right panel_toolbox" style="padding-top: 13px">
+                          		<li><button class="fa fa-edit" value="${status.count }" data-toggle="modal" 
+                          		name="modifyBtn" data-target="#modifyBucketlistModal"
+                          		style="font-size:20px; background:none!important; border:none;"></button>
+                          		</li>
+                          		
+                           		<li><button class="fa fa-trash-o" style="font-size:20px; background:none!important; border:none;" 
+                           		href="${pageContext.request.contextPath}/bucketlist/remove.do?bucketlistId=${bucketlist.bucketlistId } "></button>
+                          		</li>
+                       		</ul>
+						
 							<a class="panel-heading " role="tab" id="headingOne1"
 								data-toggle="collapse" data-parent="#accordion1"
 								href="#collapseTwo${status.count  }" aria-expanded="true"
@@ -244,90 +241,100 @@
 	</div>
 </div>
 
-	<script>
-		$(".bucketlistForm").submit(function(){
-			var tags = $(this).find(".tags").val();
-			tags = tags.split(",");
-			$(this).find(".tags").val(tags);
+<script
+	src="${pageContext.request.contextPath}/resources/vendors/jquery/dist/jquery.min.js"></script>
+<script>
+	$(".bucketlistForm").submit(function() {
+		// 연결고리 값 domain type으로 변경
+		var tags = $(this).find(".tags").val();
+		tags = tags.split(",");
+		$(this).find(".tags").val(tags);
 
-			var star = $(this).find(".changeStar").attr("data-rating");
-			$(this).find("#star").val(star);
+		// star 값 domain type으로 변경
+		var star = $(this).find(".changeStar").attr("data-rating");
+		$(this).find("#star").val(star);
+	});
+</script>
+
+<script>
+	$("#modifyBucketlistForm").submit(function() {
+		// memo의 줄넘김 문자 삭제
+		var memo = $(this).find("[name='memo']").val();
+		memo = memo.replace(/\n/gi, " ");
+		$(this).find("[name='memo']").val(memo);
+	});
+</script>
+
+<script type="text/javascript">
+	var bucketlists = new Array();
+	<c:forEach items="${bucketlists}" var="bucketlist">
+	var bucketlist = new Array();
+	bucketlist.push("${bucketlist.bucketlistId}");
+	bucketlist.push("${bucketlist.title}");
+	bucketlist.push("${bucketlist.connChains}");
+	bucketlist.push("${bucketlist.goal}");
+	bucketlist.push("${bucketlist.star}");
+	bucketlist.push("${bucketlist.progress}");
+	bucketlist.push("${bucketlist.memo}");
+	bucketlist.push("${bucketlist.sos}");
+	bucketlist.push("${bucketlist.lock}");
+	bucketlist.push("${bucketlist.userId}");
+	bucketlists.push(bucketlist);
+	</c:forEach>
+
+	$("#registerBtn").click(function() {
+		$(".tags").each(function() {
+			$(this).importTags("");
 		});
-	</script>
-	
-	<script>
-		$("#modifyBucketlistForm").submit(function(){
-			var memo = $(this).find("[name='memo']").val();
-			memo = memo.replace(/\n/gi, " ");
-			$(this).find("[name='memo']").val(memo);
+		$(".changeStar").starrr();
+		$(".changeStar").starrr('setRating', 0);
+		$(".changeStar").attr("data-rating", 0);
+		$(".changeStar").on('starrr:change', function(e, value) {
+			$(this).attr("data-rating", value);
 		});
-	</script>
-	
-	<script type="text/javascript">
-		var bucketlists = new Array();
-		<c:forEach items="${bucketlists}" var="bucketlist">
-			var bucketlist = new Array();
-			bucketlist.push("${bucketlist.bucketlistId}");
-			bucketlist.push("${bucketlist.title}");
-			bucketlist.push("${bucketlist.connChains}");
-			bucketlist.push("${bucketlist.goal}");
-			bucketlist.push("${bucketlist.star}");
-			bucketlist.push("${bucketlist.progress}");
-			bucketlist.push("${bucketlist.memo}");
-			bucketlist.push("${bucketlist.sos}");
-			bucketlist.push("${bucketlist.lock}");
-			bucketlist.push("${bucketlist.userId}");
-			bucketlists.push(bucketlist);
-		</c:forEach>
-	
-		$("#registerBtn").click(function() {
-			$(".tags").importTags("");
-			$(".changeStar").starrr();
-			$(".changeStar").starrr('setRating', 0);
-			$(".changeStar").attr("data-rating", 0);
-			$(".changeStar").on('starrr:change', function(e, value){
+	});
+
+	$("[name=modifyBtn]").click(
+			function() {
+				var index = $(this).val() - 1;
+				$("#modifyBucketlistModal #bucketlistId").val(
+						bucketlists[index][0]);
+				$("#modifyBucketlistModal #title").val(bucketlists[index][1]);
+				initConn(bucketlists[index][2]);
+				$("#modifyBucketlistModal #goal").val(bucketlists[index][3]);
+				initStar(bucketlists[index][4]);
+				$("#modifyBucketlistModal #progress")
+						.val(bucketlists[index][5]).trigger("change");
+				$("#modifyBucketlistModal #memo").val(bucketlists[index][6]);
+				$("#modifyBucketlistModal #sos").val(bucketlists[index][7]);
+				var lock = bucketlists[index][8];
+				if (lock == 'true') {
+					$('#modifyBucketlistModal #private').attr("checked", true);
+				} else {
+					$("#modifyBucketlistModal #public").attr("checked", true);
+				}
+				$("#modifyBucketlistModal #userId").val(bucketlists[index][9]);
+			});
+
+	function initConn(str) {
+		var conn = str;
+		conn = conn.replace("[", "");
+		conn = conn.replace(/ /gi, "");
+		conn = conn.replace("]", "");
+		$(".tags").each(function() {
+			$(this).importTags(conn);
+		});
+	};
+
+	function initStar(str) {
+		$(".changeStar").each(function() {
+			$(this).starrr();
+			$(this).starrr('setRating', str);
+			$(this).attr("data-rating", str);
+			$(this).on('starrr:change', function(e, value) {
 				$(this).attr("data-rating", value);
 			});
+			$("[name='star']").val(str);
 		});
-
-		$("[name=modifyBtn]").click(function(){
-			var index = $(this).val() - 1;
-			$("#modifyBucketlistModal #bucketlistId").val(bucketlists[index][0]);
-			$("#modifyBucketlistModal #title").val(bucketlists[index][1]);
-			initConn(bucketlists[index][2]);
-			$("#modifyBucketlistModal #goal").val(bucketlists[index][3]);
-			initStar(bucketlists[index][4]);
-			$("#modifyBucketlistModal #progress").val(bucketlists[index][5]).trigger("change");
-	    	$("#modifyBucketlistModal #memo").val(bucketlists[index][6]);
-			$("#modifyBucketlistModal #sos").val(bucketlists[index][7]);
-			var lock = bucketlists[index][8];
-			if(lock == 'true'){
-				$('#modifyBucketlistModal #private').attr("checked", true);
-			} else {
-				$("#modifyBucketlistModal #public").attr("checked", true);
-			}
-	    	$("#modifyBucketlistModal #userId").val(bucketlists[index][9]);
-		});
-
-		function initConn(str){
-			var conn = str;
-			conn = conn.replace("[","");
-			conn = conn.replace(/ /gi,"");
-			conn = conn.replace("]","");
-			$(".tags").each(function(){
-				$(this).importTags(conn);
-			});
-		};
-
-		function initStar(str){
-			$(".changeStar").each(function(){
-				$(this).starrr();
-				$(this).starrr('setRating', str);
-				$(this).attr("data-rating", str);
-				$(this).on('starrr:change', function(e, value){
-					$(this).attr("data-rating", value);
-				});
-				$("[name='star']").val(str);
-			});
-		}
-	</script>
+	}
+</script>
