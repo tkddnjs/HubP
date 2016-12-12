@@ -6,7 +6,7 @@
 <head>
 <title>Welcome HUB : Have U get a BucketList?</title>
 
-<%@ include file="/views/user/registerUserTest.jsp"%>
+<%@ include file="/views/user/registerUser.jsp"%>
 <%@ include file="/views/layout/commonCSS.jsp"%>
 
 <style>
@@ -16,37 +16,36 @@
 </style>
 
 </head>
-<body>
+<body style="background-size:100%; background-image: url(${pageContext.request.contextPath}/resources/img/mainPicture.jpg);">
 
-	<form action="${pageContext.request.contextPath}/user/login.do"
-		method="post">
-		<div class="maincenter" style="margin-top:240px;">
-			<a href=HUBMainTest.jsp>
-			<h1 align="center" style="font-weight:bold; color:#DAE9E4;">
-			HUB : Have U get a BucketList?</h1></a>
-		</div>
-		<br>
-		<table align="center">
-			<tr>
-				<th>ID</th>
-				<td></td>
-				<td><input id="userId" name="userId" class="form-control"
-					type="text" value="" placeholder="ID를 입력해주세요."></td>
-				<td></td>
-				<th>Password</th>
-				<td></td>
-				<td><input id="password" name="pw" class="form-control"
-					type="password" value="" placeholder="비밀번호를 입력해주세요."></td>
-				<td></td>
-				<th><button class="btn btn-xs btn-info btnPlay">로그인</button></th>
-
-				<!-- 				<th><a class="btn btn-xs btn-info btnPlay"
-					href="${pageContext.request.contextPath}/user/register.do">회원가입</a></th> -->
-				<th><button type="button" class="btn btn-xs btn-info btnPlay"
-						data-toggle="modal" data-target="#registerUserModal">회원가입</button></th>
-			</tr>
-
-		</table>
-	</form>
+	<body class="login">
+      <div class="login_wrapper" style="margin:18% 0 0 66%; height:400px; border:2px solid #cf9c36; 
+      color:#cf9c36;  background : rgba(245, 234, 212, 0.3);">
+        <div class="animate form login_form"  style="margin-top:15%;" >
+          <section class="login_content" style="width:250px; float:center; ">
+            <form action="${pageContext.request.contextPath}/user/login.do" method="post">
+              <h1>HUB LogIn</h1>
+              <div >
+                <input id="userId" name="userId" class="form-control"
+					type="text" value="" placeholder="Login ID">
+              </div>
+              <div>
+                <input id="password" name="pw" class="form-control"
+					type="password" value="" placeholder="Password">
+              </div>
+              <div style="margin-left:20px;">
+                <button class="btn btn-default submit">로그인</button>
+                
+                <button type="button" class="btn btn-default submit" 
+						data-toggle="modal" data-target="#registerUserModal">회원가입</button>
+              </div>
+              <div class="clearfix"></div>
+              
+            </form>
+          </section>
+        </div>
+      </div>
+  </body>
+	
 </body>
 </html>
