@@ -71,14 +71,17 @@
 
 	<select id="selectGroupsByUserId" parameterType="String" resultMap="groupMap">
 		<include refid="selectGroup" />
-		WHERE managerId like '%'||#{userId}||'%'
+		<!-- WHERE managerId like '%'||#{userId}||'%' -->
+		WHERE groupId IN (SELECT groupId
+						  FROM userGroup_tb
+						  WHERE userId = #{userId})
 	</select>
 	
 	<select id="selectGroupsByConnChain" parameterType="String" resultMap="groupMap">
 		<include refid="selectGroup"></include>
 		WHERE groupId IN (SELECT groupId
-						 FROM groupConn_tb
-						 WHERE connChain like '%'||#{connChain}||'%')
+						  FROM groupConn_tb
+						  WHERE connChain like '%'||#{connChain}||'%')
 	</select>
 	
 	<select id="selectGroupsByGroupName" parameterType="String" resultMap="groupMap">
@@ -110,8 +113,3 @@
 	</select> -->
 	
 </mapper>
-
-
-
-
-
