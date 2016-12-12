@@ -20,7 +20,7 @@
 	</sql>
 
 	<select id="nextGroupId" resultType="int">
-		SELECT group_seq.nextval as bucketlistId
+		SELECT group_seq.nextval as groupId
 		FROM dual
 	</select>
 
