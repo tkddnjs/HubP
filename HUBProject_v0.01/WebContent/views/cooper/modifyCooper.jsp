@@ -10,7 +10,7 @@
 				<h4 class="modal-title">업체수정</h4>
 			</div>
    			<div class="modal-body">
-				<form id="demo-form2" action="${pageContext.request.contextPath}/user/modify.do" data-parsley-validate class="form-horizontal form-label-left" method="post" enctype="multipart/form-data">
+				<form id="demo-form2" action="${pageContext.request.contextPath}/cooper/modify.do" data-parsley-validate class="form-horizontal form-label-left cooperForm modify" method="post" enctype="multipart/form-data">
 					<div class="form-group">
 						<label class="control-label col-md-2 col-sm-3 col-xs-12" for="coName">CooperName <span class="required">*</span></label>
 						<div class="col-md-2 col-sm-3 col-xs-3">
@@ -49,8 +49,8 @@
 					<div class="form-group">
 						<div class="col-md-6 col-sm-6 col-xs-8 col-md-offset-4 col-sm-offset-4 col-xs-offset-4">
 							<button type="reset" class="btn btn-primary">초기화</button>
-							<input type="hidden" name="coId">
-							<input type="hidden" name="startDay">
+							<input type="hidden" id="coId" name="coId">
+							<input type="hidden" id="startDay" name="startDay">
 							<button type="submit" class="btn btn-success">수정</button>
 						</div>
 					</div>

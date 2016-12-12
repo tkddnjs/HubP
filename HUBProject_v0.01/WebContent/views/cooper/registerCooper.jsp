@@ -10,7 +10,7 @@
 				<h4 class="modal-title">업체등록</h4>
 			</div>
    			<div class="modal-body">
-				<form id="demo-form2" action="${pageContext.request.contextPath}/cooper/register.do" data-parsley-validate class="form-horizontal form-label-left" method="post" enctype="multipart/form-data">
+				<form id="demo-form2" action="${pageContext.request.contextPath}/cooper/register.do" data-parsley-validate class="form-horizontal form-label-left cooperForm" method="post" enctype="multipart/form-data">
 					<div class="form-group">
 						<label class="control-label col-md-2 col-sm-3 col-xs-12" for="coName">CooperName <span class="required">*</span></label>
 						<div class="col-md-2 col-sm-3 col-xs-3">
