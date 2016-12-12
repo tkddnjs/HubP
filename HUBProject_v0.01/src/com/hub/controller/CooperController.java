@@ -48,7 +48,7 @@ public class CooperController {
 	
 	@RequestMapping(value="list.do", method=RequestMethod.GET)
 	public ModelAndView listCooper(int listOpt, String searchWord) {
-		ModelAndView mav = new ModelAndView("cooper/listCooper");
+		ModelAndView mav = new ModelAndView("bucketlist/bucketList");
 		switch(listOpt){
 		case 0: 
 			mav.addObject("coopers", cooperService.findAll());
@@ -57,6 +57,7 @@ public class CooperController {
 			mav.addObject("coopers", cooperService.findCoopersByConnChain(searchWord));
 			break;
 		}
+		mav.addObject("tabOpt", 3);
 		return mav;
 	}
 	

@@ -1,7 +1,5 @@
 package com.hub.controller;
 
-import java.util.List;
-
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,8 +37,16 @@ public class GroupController {
 
 	@RequestMapping(value="join.do", method=RequestMethod.GET)
 	public String joinGroup(HttpSession session, int groupId) {
-		groupService.joinGroup(groupId, (String) session.getAttribute("userId"));
-		return "redirect:/group/detail.do?groupId="+groupId;
+		String userId = (String) session.getAttribute("userId");
+		// 이미 그룹에 참여한 경우
+		for(Group g : groupService.findGroupsByUserId(userId)){
+			if(g.getGroupId() == groupId){
+				// alert창으로 경고 어떻게 해줄 지 고민해보기
+				return "redirect:/group/list.do?listOpt=4";
+			}
+		}
+		groupService.joinGroup(groupId, userId);
+		return "redirect:/group/list.do?listOpt=4";
 	}
 
 	// 문서 수정 필요 => parameter 변경
@@ -75,9 +81,8 @@ public class GroupController {
 
 	@RequestMapping(value="list.do", method=RequestMethod.GET)
 	public ModelAndView listGroup(HttpSession session, int listOpt, String searchWord) {
-		ModelAndView mav = new ModelAndView("group/listGroup");
+		ModelAndView mav = new ModelAndView("bucketlist/bucketList");
 
-		
 		switch (listOpt) {
 		// 전체 모임방 찾기
 		case 0:
@@ -100,6 +105,7 @@ public class GroupController {
 			mav.addObject("groups", groupService.findGroupsByUserId((String) session.getAttribute("userId")));
 			break;
 		}
+		mav.addObject("tabOpt", 4);
 		return mav;
 	}
 	@RequestMapping(value="detail.do", method=RequestMethod.GET)

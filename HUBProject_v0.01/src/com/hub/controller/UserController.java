@@ -74,7 +74,7 @@ public class UserController {
 		if(userId.equals(myId)){
 			mav = new ModelAndView("user/detailUser");
 		} else {
-			mav = new ModelAndView("list/detailUser");
+			mav = new ModelAndView("follow/detailFollow");
 		}
 		mav.addObject("user", userService.findUserByUserId(userId));
 		return mav;

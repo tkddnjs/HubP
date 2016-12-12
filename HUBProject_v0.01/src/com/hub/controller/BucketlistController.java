@@ -73,6 +73,7 @@ public class BucketlistController {
 		ModelAndView mav = new ModelAndView("bucketlist/bucketList");
 		String userId = (String) session.getAttribute("userId");
 		mav.addObject("bucketlists", bucketlistService.findAll(userId));
+		mav.addObject("tabOpt", 1);
 		return mav;
 	}
 }
