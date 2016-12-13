@@ -38,9 +38,10 @@
                           		style="font-size:20px; background:none!important; border:none;"></button>
                           		</li>
                           		
-                           		<li><button class="fa fa-trash-o" style="font-size:20px; background:none!important; border:none;" 
-                           		href="${pageContext.request.contextPath}/bucketlist/remove.do?bucketlistId=${bucketlist.bucketlistId } "></button>
-                          		</li>
+                           		<li><form action="${pageContext.request.contextPath}/bucketlist/remove.do">
+                           			<button class="fa fa-trash-o" style="font-size:20px; background:none!important; border:none;"
+                           			type="submit" name="bucketlistId" value="${bucketlist.bucketlistId }"></button>
+                           		</form></li>
                        		</ul>
 						
 							<a class="panel-heading " role="tab" id="headingOne1"
