@@ -110,7 +110,6 @@
 			source : availableTags
 		})
 	});
-	
 </script>
 <!-- /Custom Script -->
 
