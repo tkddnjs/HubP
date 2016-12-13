@@ -1,6 +1,9 @@
 package com.hub.service.logic;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -40,4 +43,58 @@ public class ListServiceLogic implements ListService {
 	public List<String> findConnChainsByUserId(String userId){
 		return userStore.selectUser(userId).getConnChains();
 	}
+	
+	@Override
+	public List<String> findBucketlistConnChainsByUserId(String userId){
+		Set<String> conns = new HashSet<>();
+		List<String> connChains = new ArrayList<>();
+		
+		for(Bucketlist bucketlist :  bucketlistStore.selectAll(userId)){
+			conns.addAll(bucketlist.getConnChains());
+		}
+		
+		for(String conn : conns){
+			connChains.add(conn);
+		}
+		
+		return connChains;
+	}
+	
+	@Override
+	public List<Bucketlist> findBucketlistsByConnChains(String userId) {
+		List<Bucketlist> bucketlists = new ArrayList<>();
+		for(Bucketlist bucketlist : bucketlistStore.selectBucketlistsByConnChains(findConnChainsByUserId(userId))){
+			if(!bucketlist.getUserId().equals(userId)){
+				bucketlists.add(bucketlist);
+			}
+		}
+		return bucketlists;
+	}
+	
+	@Override
+	public List<User> findUsersByConnChains(String userId) {
+		List<User> users = new ArrayList<>();
+		for(User user : userStore.selectUsersByConnChains(findBucketlistConnChainsByUserId(userId))){
+			if(!user.getUserId().equals(userId)){
+				users.add(user);
+			}
+		}
+		return users;
+	}
+	
+	@Override
+	public List<Bucketlist> findBothLists(String userId){
+		List<Bucketlist> bucketlists = new ArrayList<>();
+		
+		List<User> users = findUsersByConnChains(userId);
+		
+		for(Bucketlist bucketlist : findBucketlistsByConnChains(userId)){
+			for(User user : users){
+				if(user.getUserId().equals(bucketlist.getUserId()))
+					bucketlists.add(bucketlist);
+			}
+		}
+		return bucketlists;
+	}
+
 }

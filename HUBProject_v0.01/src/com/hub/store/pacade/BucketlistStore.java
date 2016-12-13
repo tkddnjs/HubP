@@ -22,4 +22,6 @@ public interface BucketlistStore {
 	List<Bucketlist> selectAll(String userId);
 	Bucketlist selectBucketlistByBucketlistId(int bucketlistId);
 	List<Bucketlist> selectBucketlistsByConnChain(String connChain);
+	
+	List<Bucketlist> selectBucketlistsByConnChains(List<String> connChains);
 }

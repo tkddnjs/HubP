@@ -138,4 +138,18 @@ public class UserStoreLogic implements UserStore {
 			session.close();
 		}
 	}
+
+	@Override
+	public List<User> selectUsersByConnChains(List<String> connChains) {
+		SqlSession session = factory.openSession();
+		
+		try {
+			UserMapper mapper = session.getMapper(UserMapper.class);
+			return mapper.selectUsersByConnChains(connChains);
+		} finally{
+			session.close();
+		}
+	}
+	
+	
 }

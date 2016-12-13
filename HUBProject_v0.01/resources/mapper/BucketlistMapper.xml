@@ -15,7 +15,7 @@
 		<result property="userId" column="userId"/>
 		<collection property="connChains" column="bucketId" ofType="String" select="com.hub.store.mapper.BucketlistMapper.selectConnChainsByBucketlistId" javaType="ArrayList" jdbcType="NUMERIC"/>
 	</resultMap>
-
+	
 	<sql id="selectBucketlist">
 		SELECT bucketId, title, bucketId, goal, progress, star, memo, sos, locker, userId
 		FROM bucketlist_tb
@@ -73,7 +73,16 @@
 		<include refid="selectBucketlist" />
 		WHERE bucketId IN (SELECT bucketId
 							FROM bucketConn_tb
-							WHERE connChain = #{connChain})
+							WHERE connChain LIKE '%'||#{connChain}||'%')
+	</select>
+	
+	<select id="selectBucketlistsByConnChains" resultMap="bucketlistMap">
+		<include refid="selectBucketlist" />
+		WHERE bucketId IN (SELECT bucketId
+							FROM bucketConn_tb
+							WHERE connChain IN <foreach item="connChain" separator="," collection="list" open="(" close=")">
+													#{connChain}
+											    </foreach> )
 	</select>
 	
 	<select id="selectConnChainsByBucketlistId" parameterType="int" resultType="String">

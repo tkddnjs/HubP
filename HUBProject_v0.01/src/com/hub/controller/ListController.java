@@ -3,7 +3,6 @@ package com.hub.controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -24,29 +23,21 @@ public class ListController {
 	private ListService listService;
 
 	@RequestMapping(value = "list.do", method = RequestMethod.GET)
-	public ModelAndView listUser(int listOpt, String searchWord) {
+	public ModelAndView listUser(String userId, int listOpt) {
 		ModelAndView mav = new ModelAndView("bucketlist/bucketList");
 		switch (listOpt) {
-//		페이지만 return
-		case 0:
+		case 1: // 내가 도와줄 수 있는 사용자 목록
+			mav.addObject("bucketlists", listService.findBucketlistsByConnChains(userId));
 			break;
-//		나를 도와줄 수 있는 사용자 목록
-		case 2:
-			mav.addObject("users", listService.findUsersByConnChain(searchWord));
+		case 2: // 나를 도와줄 수 있는 사용자 목록
+			mav.addObject("users", listService.findUsersByConnChains(userId));
 			break;
-//		내가 or 서로 도와줄 수 있는 사용자 목록
-		case 1:
-		case 3:
-			mav.addObject("bucketlists", listService.findBucketlistsByConnChain(searchWord));
+		case 3: // 서로 도와줄 수 있는 사용자 목록
+			mav.addObject("bucketlists", listService.findBothLists(userId));
 			break;
-//		업체 목록
-//		case 4:
-//			mav.addObject("coopers", listService.findCoopersByConnChain(searchWord));
-//			break;
 		}
 		mav.addObject("listOpt", listOpt);
 		mav.addObject("tabOpt", 2);
-		mav.addObject("searchWord", searchWord);
 		return mav;
 	}
 	
@@ -64,7 +55,6 @@ public class ListController {
 			}
 			break;
 		case 2: // 나를
-//		case 4: // 업체
 			for(String str : listService.findConnChains()){
 				availableTags.add(str);
 			}

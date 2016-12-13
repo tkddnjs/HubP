@@ -25,6 +25,8 @@ public interface BucketlistMapper {
 	Bucketlist selectBucketlistByBucketlistId(int bucketlistId);
 	List<Bucketlist> selectBucketlistsByConnChain(String connChain);
 	
+	List<Bucketlist> selectBucketlistsByConnChains(List<String> connChains);
+	
 	// 버킷리스트 domain의 connChains를 set 
 	List<String> selectConnChainsByBucketlistId(int bucketlistId);
 }

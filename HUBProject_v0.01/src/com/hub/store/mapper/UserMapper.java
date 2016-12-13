@@ -23,6 +23,8 @@ public interface UserMapper {
 	User selectUserByUserId(String userId);
 	List<User> selectUsersByConnChain(String connChain);
 	
+	List<User> selectUsersByConnChains(List<String> connChains);
+	
 	// user 객체에 connChains를 set
 	List<String> selectConnChainsByUserId(String userId);
 }
