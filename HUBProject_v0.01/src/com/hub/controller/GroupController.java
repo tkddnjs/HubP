@@ -105,6 +105,7 @@ public class GroupController {
 			mav.addObject("groups", groupService.findGroupsByUserId((String) session.getAttribute("userId")));
 			break;
 		}
+		mav.addObject("listOpt", listOpt);
 		mav.addObject("tabOpt", 4);
 		return mav;
 	}
