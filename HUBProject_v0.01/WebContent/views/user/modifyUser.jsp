@@ -2,11 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<style>
-	.ui-autocomplete{
-		z-index: 99999;
-	}
-</style>
+
 
 <!-- Modal -->
 <div class="modal fade" id="modifyUserModal" role="dialog">

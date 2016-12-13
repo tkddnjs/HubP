@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
+
 <%@ include file="/views/cooper/registerCooper.jsp"%>
 <%@ include file="/views/cooper/modifyCooper.jsp"%>
 
@@ -11,7 +12,7 @@
 		<!-- 업체 목록 헤드 -->
 		<div class="x_title">
 			<h2>
-				<i class="fa fa-bitbucket"></i>업체목록
+				<i class="fa fa-copyright"></i>업체목록
 			</h2>
 			<ul class="nav navbar-right panel_toolbox">
 				<li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>

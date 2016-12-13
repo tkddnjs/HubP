@@ -55,16 +55,15 @@
 											<div role="tabpanel" class="tab-pane fade"
 												id="tab_content1" aria-labelledby="profile-tab1">
 												<%@ include file="/views/bucketlist/listElement.jsp"%>
-
 											</div>
 											<!-- end tab1-->
 
-											<%-- <!-- tab2-->
+											<!-- tab2-->
 											<div role="tabpanel" class="tab-pane fade" id="tab_content2"
 												aria-labelledby="profile-tab2">
 												<%@ include file="/views/list/list.jsp"%>
 											</div>
-											<!-- end tab2--> --%>
+											<!-- end tab2-->
 
 											<!-- tab3-->
 											<div role="tabpanel" class="tab-pane fade" id="tab_content3"

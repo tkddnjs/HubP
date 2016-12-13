@@ -54,25 +54,25 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="control-label col-md-2 col-sm-3 col-xs-12" for="password">Password <span class="required">*</span></label>
+						<label class="control-label col-md-2 col-sm-3 col-xs-12" for="password">비밀번호 <span class="required">*</span></label>
 							<div class="col-md-2 col-sm-3 col-xs-3">
 								<input type="password" id="pw" name="pw" required="required" class="form-control col-md-7 col-xs-12">
 							</div>
 					</div>
 					<div class="form-group">
-						<label class="control-label col-md-2 col-sm-3 col-xs-12" for="password_check">Password Check <span class="required">*</span></label>
+						<label class="control-label col-md-2 col-sm-3 col-xs-12" for="password_check">비밀번호 확인 <span class="required">*</span></label>
 						<div class="col-md-2 col-sm-3 col-xs-3">
 							<input type="password" id="pw_check" class="form-control col-md-7 col-xs-12">
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="control-label col-md-2 col-sm-3 col-xs-12" for="email">Email <span class="required">*</span></label>
+						<label class="control-label col-md-2 col-sm-3 col-xs-12" for="email">이메일<span class="required">*</span></label>
 						<div class="col-md-3 col-sm-4 col-xs-5">
 							<input id="email" class="form-control col-md-7 col-xs-12" type="text" name="email">
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="control-label col-md-2 col-sm-3 col-xs-12">ConnChains <span class="required">*</span></label>
+						<label class="control-label col-md-2 col-sm-3 col-xs-12">연결고리<span class="required">*</span></label>
 						<div class="col-md-6 col-sm-6 col-xs-8">
 							<input id="tags" type="text" name="connChains" class="tags form-control" value="사진, 컴퓨터, etc.." />
 						</div>
@@ -81,12 +81,12 @@
 					<div class="form-group">
 						<label for="picture" class="control-label col-md-2 col-sm-3 col-xs-12">Picture</label>
 						<div class="col-md-6 col-sm-6 col-xs-8">
-							<button type="button" id="pictureBtn" class="btn btn-primary">사진입력</button>
+							<button type="button" id="pictureBtn" class="btn btn-primary">프로필 사진</button>
 							<input type="file" name="image" data-role="magic-overlay" data-target="#pictureBtn" data-edit="insertImage" />
 						</div>
 					</div>  
 					<div class="form-group">
-						<label class="control-label col-md-2 col-sm-3 col-xs-12">Introduce</label>
+						<label class="control-label col-md-2 col-sm-3 col-xs-12">자기소개</label>
 						<div class="col-md-6 col-sm-6 col-xs-8">
 							<textarea class="form-control" rows="3" name="introduce" placeholder='자기 소개 입력'></textarea>
 						</div>
@@ -313,4 +313,118 @@
 	});
 </script>
 <!-- /Autosize -->
+
+
+	<script>
+	$(document).ready(function a(){
+		$("button").click(function () {
+			$('<input type="text" size="10" name="connchain" class="validate"><br>').appendTo("#connForm");
+		});
+	});
+	
+	$(document).ready(function a(){
+		$("#userId").keyup(function() {
+				
+			var userId= $(this).val();
+			$.ajax({
+				type: 'POST', 
+				url: '../checkId.do',
+				data: 
+					{
+						userId: userId
+						//앞의 id: getParameter할 것 / 뒤 id: 위의 var id= 값
+					},
+				success: function(result){
+					if($.trim(result) == "ok"){
+						$("#idCheckResult").html("사용가능한 ID입니다.");
+					}else{
+						$("#idCheckResult").html("사용중인  ID입니다.");
+					}
+				}
+			});
+		});
+		
+		
+		$("#pwCheck").keyup(function() {
+			var pw = $("#pw").val();
+			var pwCheck = $(this).val();
+			
+			if(pw == pwCheck){
+				$("#pwCheckResult").html("일치");
+			} else {
+				$("#pwCheckResult").html("불일치");
+			}
+		});
+		
+		$("#email").keyup(function(){
+       		if($(this).val()&&!$(this).val().match(/.+@.+\.com+/g)){
+       			$("#mailCheckResult").html("메일 형식이 잘못되었습니다.");
+        	}else{
+        		$("#mailCheckResult").remove();
+        	}
+    	});
+	});
+	
+    $("form").submit(function(){
+        //에러 초기화 추가로 붙는 내용 삭제
+        $("p.error").remove();
+        $("dl dd").removeClass("error");
+        
+        //filter메소드를 이용해서 text, textareea 요소들 중에 validate
+        //클래스를 같고 있는 것만 찾는다.
+        $(":text, textarea").filter(".validate").each(function(){
+            
+            //필수 항목 검사
+            //this -> filter로 걸러진 text, textarea 중에 하나를 뜻한다.
+            $(this).filter(".required").each(function(){
+                if($(this).val() == ""){
+                    $(this).before("<p class='error'>필수 항목 입니다.</p>");
+                }
+            });
+            
+            //연락처 검사
+            $(this).filter(".number").each(function(){
+                if(isNaN($(this).val())){
+                    $(this).before("<p class='error'>숫자만 입력 가능합니다.</p>");
+                }
+            });
+            
+         	// 메일 검사
+        	$(this).filter(".mail").each(function(){
+           		if($(this).val()&&!$(this).val().match(/.+@.+\..+/g)){
+                	$(this).before("<p class='error'>메일 형식이 잘못되었습니다.</p>");
+            	}
+        	});
+         
+        	//radio button check
+        	$(":radio").filter(".validate").each(function(){
+           		$(this).filter(".required").each(function(){
+                	if($(":radio[name=" + $(this).attr("name")+"]:checked").length == 0){
+                    	$(this).before("<p class='error'>필수 선택 항목입니다.</p>");
+                	}
+            	});
+        	});
+        
+        
+        	//check box check
+        	$(".checkboxRequired").each(function(){
+            	if($(":checkbox:checked", this).length == 0){
+                	$(this).prepend("<p class='error'>필수 선택 항목입니다.</p>");
+            	}
+        	});
+            
+            
+        
+        	if($("p.error").length> 0){
+            	//에러가 발생한 위치로 스크롤 이동
+            	$("html, body").animate({scrollTop : 
+            	$("p.error.first").offset.top - 40}, "slow");
+            	//에러 항목에 대한 음영 처리
+            	$("p.error").parent().addClass("error");
+            	return false;
+        	}
+		});
+	});
+	 
+    </script>
 

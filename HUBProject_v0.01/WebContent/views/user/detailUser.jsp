@@ -17,18 +17,16 @@
 
 			<%@ include file="/views/header/header.jspf"%>
 			<%@ include file="/views/follow/listFollow.jsp"%>
-
-			<!-- page content -->
-			<div style="padding: 10px 20px 0;" role="main">
-				<div class="">
-					<div class="page-title"></div>
-					<div class="clearfix"></div>
-					<div class="row">
-						<div class="col-md-6 col-sm-12 col-xs-12 col-md-offset-2">
+			
+			
+        <!-- page content -->
+			<div class="right_col" role="main">
+				<div class="" style="margin:50px 0 0 200px; ">
+						<div class="col-md-8 col-sm-8 col-xs-8 col-md-offset-1" >
 							<div class="x_panel">
 								<div class="x_title">
 									<h2>
-										<b>회원상세</b>
+										<b>${user.userId }님의 정보</b>
 									</h2>
 									<div class="clearfix"></div>
 								</div>
@@ -39,7 +37,7 @@
 											<label for="picture"
 												class="control-label col-md-2 col-sm-3 col-xs-12">Picture</label>
 											<div class="col-md-6 col-sm-6 col-xs-8">
-												<img width="40%" height="40%"
+												<img width="100%" 
 													src="${pageContext.request.contextPath}/resources/img/userImg/${user.picture}">
 											</div>
 										</div>
@@ -70,10 +68,10 @@
 										<div class="ln_solid"></div>
 										<div class="form-group">
 											<div
-												class="col-md-6 col-sm-6 col-xs-8 col-md-offset-4 col-sm-offset-4 col-xs-offset-4">
+												class="col-md-6 col-sm-6 col-xs-8 col-md-offset-4 col-sm-offset-1 col-xs-offset-4">
 												<a class="btn btn-primary"
 													href="${pageContext.request.contextPath }/user/remove.do?userId=${user.userId}">탈퇴</a>
-												<button type="button" class="btn btn-success"
+												<button type="button" class="btn btn-success" value="${user.userId}"
 													data-toggle="modal" data-target="#modifyUserModal">수정</button>
 											</div>
 										</div>
@@ -81,19 +79,32 @@
 								</div>
 							</div>
 						</div>
-					</div>
 				</div>
 			</div>
 			<!-- /page content -->
+			
+			<!-- footer content -->
+        <footer>
+          <div class="pull-right">
+            HUB - Have U get a Bucketlist 2016 by <a href="https://.com">For Man</a>
+          </div>
+          <div class="clearfix"></div>
+        </footer>
+        <!-- /footer content -->
+        
+
 		</div>
 	</div>
+	<%@ include file="/views/layout/commonJS.jsp" %>
 
 	<script>
-		var conn = "${user.connChains}";
-		conn = conn.replace(/ /gi, "");
-		conn = conn.replace("[", "");
-		conn = conn.replace("]", "");
-		$("#mutags").importTags(conn);
+	var conn = str;
+	conn = conn.replace("[", "");
+	conn = conn.replace(/ /gi, "");
+	conn = conn.replace("]", "");
+	$(".tags").each(function() {
+		$(this).importTags(conn);
+	});
 	</script>
 
 </body>

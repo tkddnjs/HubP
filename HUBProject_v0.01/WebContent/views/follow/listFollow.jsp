@@ -8,7 +8,6 @@
 
 <title>HUB:Have U get a Bucketlist?</title>
 
-<%-- <%@ include file="/views/layout/commonCSS.jsp" %> --%>
 
 </head>
 
@@ -33,7 +32,8 @@
 
 					<!--도움 대기-->
 					<li><a><i class="fa fa-history"></i>도움대기 <span
-							class="fa fa-chevron-down"></span></a> <!-- <form action="follow/listAll.do" method="post" class="form-inline"> -->
+							class="fa fa-chevron-down"></span></a>
+							 <!-- <form action="follow/listAll.do" method="post" class="form-inline"> -->
 
 						<ul class="nav child_menu">
 							<c:forEach items="${follows }" var="follow" varStatus="status">
@@ -95,11 +95,19 @@
 									<c:forEach items="${follows }" var="follow" varStatus="status">
 										<c:if test="${follow.confirm eq true && follow.relation == 1}">
 											<li class="sub_menu">
-												<form action="user/detail.do" method="post">
+											
+												<form action="${pageContext.request.contextPath}/user/detail.do" method="get">
+													<input type="hidden" name="myId" value="${sessionScope.userId}">
+													<input type="hidden" name="userId" value="${follow.followId }">
+													<button class="btn btn-xs btn-default btn-block" style="border:hidden; 
+													font-size: 15px; background:none !important;" type="submit">${follow.followId }</button>
+												</form>
+											
+												<%-- <form action="user/detail.do" method="post">
 													<a style="font-size: 15px" name="userId"
 														value="${follow.followId }">${follow.followId }</a> <input
 														type="hidden" name="listOpt" value="${follow.relation }">
-												</form>
+												</form> --%>
 											</li>
 										</c:if>
 									</c:forEach>
@@ -116,11 +124,17 @@
 										<c:if test="${follow.confirm eq true && follow.relation == 2}">
 											<!--for-->
 											<li class="sub_menu">
-												<form action="user/detail.do" method="post">
+											
+												<form action="${pageContext.request.contextPath}/user/detail.do" method="get">
+													<input type="hidden" name="myId" value="${sessionScope.userId}">
+													<input type="hidden" name="userId" value="${follow.followId }">
+													<button class="btn btn-xs btn-default btn-block" style="border:hidden; font-size: 15px; background:none !important;" type="submit">${follow.followId }</button>
+												</form>
+												<%-- <form action="user/detail.do" method="post">
 													<a style="font-size: 15px" name="userId"
 														value="${follow.followId }">${follow.followId }</a> <input
 														type="hidden" name="listOpt" value="${follow.relation }">
-												</form>
+												</form> --%>
 											</li>
 										</c:if>
 									</c:forEach>
@@ -138,11 +152,16 @@
 											test="${follow.confirm eq true && follow.relation != 1 && follow.relation != 2}">
 											<!--for-->
 											<li class="sub_menu">
-												<form action="user/detail.do" method="post">
+												<form action="${pageContext.request.contextPath}/user/detail.do" method="get">
+													<input type="hidden" name="myId" value="${sessionScope.userId}">
+													<input type="hidden" name="userId" value="${follow.followId }">
+													<button class="btn btn-xs btn-default btn-block" style="border:hidden; font-size: 15px; background:none !important;" type="submit">${follow.followId }</button>
+												</form>
+												<%-- <form action="user/detail.do" method="post">
 													<a style="font-size: 15px" name="userId"
 														value="${follow.followId }">${follow.followId }</a> <input
 														type="hidden" name="listOpt" value="${follow.relation }">
-												</form>
+												</form> --%>
 											</li>
 										</c:if>
 									</c:forEach>
@@ -152,7 +171,7 @@
 					<!-- end 팔로우-->
 
 					<!--모임방-->
-					<li><a><i class="fa fa-spinner"></i> 모임방 <span
+					<li><a><i class="fa fa-group"></i> 모임방 <span
 							class="fa fa-chevron-down"></span></a>
 						<ul class="nav child_menu">
 							<li><a href="general_elements.html">General Elements</a></li>

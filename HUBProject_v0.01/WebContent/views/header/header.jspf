@@ -30,7 +30,7 @@
 				</ul></li>
 
 			<li role="presentation" class="dropdown">
-			<a href="${pageContext.request.contextPath}/post/list.do?listOpt=0">
+			<a href="${pageContext.request.contextPath}/views/post/listPost.jsp">
 			<i class="fa fa-envelope-o" style="font-size: 18px"></i></a>
 			</li>
 		</ul>
