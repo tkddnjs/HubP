@@ -2,163 +2,96 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<!DOCTYPE html>
-<html>
-<head>
 
-<title>도움리스트 목록</title>
-<%@ include file="/views/layout/commonCSS.jsp"%>
 
-<style type="text/css">
-body {
-	padding: 5px;
-}
+	<div class="col-md-12 col-sm-12 col-xs-12">
 
-h1 {
-	font-weight: bold;
-	color: #A0B0DB;
-	size: 50px;
-}
+		<div class="x_panel">
+			<div class="x_title">
+				<h2>Helper</h2>
+				<ul class="nav navbar-right panel_toolbox">
+					<li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+					</li>
 
-.header {
-	font-size: 15px;
-}
-</style>
-
-</head>
-<body>
-	<div class="header" align="right">
-		<%@ include file="/views/header/header.jspf"%>
-	</div>
-	<div>
-		<%@ include file="/views/menu.jsp"%>
-	</div>
-
-	<br>
-	<div class="input-append pull-right">
-		<form action="${pageContext.request.contextPath}/list/list.do" method="get" class="form-inline"
-			id="form">
-			<table>
-				<tr>
-					<td><select class="ring" name="listOpt" id="listOpt">
-							<option value="1" selected="selected">내가 도움을 줄 수 있는 사용자</option>
-							<option value="2">나를 도와줄 수 있는 사용자</option>
-							<option value="3">서로 도움을 줄 수 있는 사용자</option>
-							<option value="4">업체</option>
-					</select></td>
-					<td id="connForm" width='50'>
-						<input type="text" id="tags" name="searchWord" class="ring"/>
-					</td>
-					<td></td>
-					<td>
-						<button class='btn btn-xs btn-default btn-block' type='submit'>검색</button>
-					</td>
-				</tr>
-			</table>
-		</form>
-	</div>
-
-	<br>
-	<table class="table table-hover table-condensed">
-		<thead style="background: #60d7a9; color: white;">
-			<tr style="align: center; font-size: 14pt;">
-				<c:choose>
-					<c:when test="${listOpt eq 1 or listOpt eq 3}">
-						<th width="50" align="center">NO</th>
-						<th width="300" align="center">사용자ID</th>
-						<th width="400" align="center">버킷리스트이름</th>
-					</c:when>
-					<c:when test="${listOpt eq 2}">
-						<th width="50" align="center">NO</th>
-						<th width="300" align="center">사용자ID</th>
-						<th width="500" align="center">연결고리목록</th>
-					</c:when>
-				</c:choose>
-			</tr>
-		</thead>
-
-		<tbody style="font-size: 14pt;">
-			<c:choose>
-				<c:when test="${listOpt eq 1 or listOpt eq 3}">
-					<c:forEach items="${bucketlists }" var="bucketlist"
-						varStatus="status">
+					<li><a class="close-link"><i class="fa fa-close"></i></a></li>
+				</ul>
+				<div class="clearfix"></div>
+			</div>
+			<div class="x_content">
+				<p class="text-muted font-13 m-b-30">Responsive is an extension
+					for DataTables that resolves that problem by optimising the table's
+					layout for different screen sizes through the dynamic insertion and
+					removal of columns from the table.</p>
+				<table id="datatable-responsive"
+					class="table table-striped table-bordered dt-responsive nowrap"
+					cellspacing="0" width="100%">
+					<thead>
 						<tr>
-							<td>${status.count }</td>
-							<td>
-								<a href="${pageContext.request.contextPath}/user/detail.do"><b>${bucketlist.userId }</b></a>
-									<input type="hidden" name="myId" value="${sessionScope.userId }">
-									<input type="hidden" name="searchWord" value="${searchWord }">
-							</td>
-							<td>
-								<a href="${pageContext.request.contextPath}/bucketlist/detail.do"><b>${bucketlist.title }</b></a>
-									<input type="hidden" name="userId" value="${sessionScope.userId }">
-									<input type="hidden" name="searchWord" value="${searchWord }">
-							</td>
+							<th style="width: 100px; text-align: center;">도움</th>
+							<th style="width: 250px; text-align: center;">ID</th>
+							<th style="width: 900px; text-align: center;">버킷리스트</th>
+							<th style="width: 100px; text-align: center;">연결고리</th>
+							<th style="width: 300px; text-align: center;">SOS</th>
 						</tr>
-					</c:forEach>
-
-				</c:when>
-				<c:when test="${listOpt eq 2}">
-					<c:forEach items="${users }" var="user" varStatus="status">
+					</thead>
+					<tbody>
 						<tr>
-							<td>${status.count }</td>
-							<td>
-								<form action="${pageContext.request.contextPath}/user/detail.do" method="post">
-									<a><b>${user.userId }</b></a>
-									<input type="hidden" name="myId" value="${sessionScope.userId }">
-									<input type="hidden" name="searchWord" value="${searchWord }">
-								</form>
-							</td>
-							<td>${user.connChains }</td>
+							<td>내가</td>
+							<td>rlatkddnjs</td>
+							<td>나이아가라 폭포 가기</td>
+							<td>여행</td>
+							<td>x</td>
 						</tr>
-					</c:forEach>
-				</c:when>
-			</c:choose>
-		</tbody>
-	</table>
-	
-	<script type="text/javascript">
-		var availableTags = [];
-		$(document).ready(function() {
-			if ($("#listOpt").val() != null) {
-				var listOpt = $("#listOpt").val();
-				autoComplete(listOpt);
-			};
+						<tr>
+							<td>나를</td>
+							<td>yhyunsik90</td>
+							<td>포토샾 정복하기</td>
+							<td>포토샾</td>
+							<td>63</td>
+						</tr>
+						<tr>
+							<td>서로</td>
+							<td>minjung Jin</td>
+							<td>내가 쓴 시로 시집 내기</td>
+							<td>문학</td>
+							<td>인쇄업체 소개좀 해주세요</td>
+						</tr>
+						<tr>
+							<td>내가</td>
+							<td>ChoiSY2016</td>
+							<td>컴퓨터조립하는방법 배우기</td>
+							<td>컴퓨터</td>
+							<td>잘 알려주실 분</td>
+						</tr>
+						<tr>
+							<td>나를</td>
+							<td>coffeeLove</td>
+							<td>캘리그래피 배우기</td>
+							<td>캘리그래피</td>
+							<td></td>
+						</tr>
+						<tr>
+							<td>나를</td>
+							<td>Williamson</td>
+							<td>이 교정하기</td>
+							<td>치과</td>
+							<td>61</td>
+						</tr>
+						<tr>
+							<td>내가</td>
+							<td>Chandler</td>
+							<td>레인지로버 뽑기</td>
+							<td>자동차</td>
+							<td>딜러이신분 도와주세요</td>
+						</tr>
 
-			$("#listOpt").change(function() {
-				var listOpt = $(this).val();
-				autoComplete(listOpt);
-			});
-		
-			function list(array) {
-				availableTags.length=0;
-				for (var i = 0; i < array.length; i++) {
-					availableTags.push(array[i]);
-				}
-			};
-		
-			function autoComplete(listOpt){
-				$.ajax({
-					type : 'POST',
-					url : '${pageContext.request.contextPath}/list/listAutoComplete.do',
-					data : {
-						listOpt : listOpt
-					},
-					success : function(result) {
-						result = result.replace(/ /gi, "");
-						result = result.replace('[', '');
-						result = result.replace(']', '');
-						result = result.split(',');
-						list(result);
-					}
-				});
-				$("#tags").autocomplete({
-					source: availableTags
-				});
-			}
-		});
-	</script>
-</body>
+					</tbody>
+				</table>
 
+			</div>
+		</div>
+	</div>
+</div>
+<!-- end tab2-->
 
-</html>
+<script src="${pageContext.request.contextPath}/resources/vendors/jquery/dist/jquery.min.js"></script>
