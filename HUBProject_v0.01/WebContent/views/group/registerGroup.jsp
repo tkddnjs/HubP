@@ -22,7 +22,7 @@
 						<div>
 							<label class="control-label col-md-2 col-sm-3 col-xs-12" for="managerId">ManagerId <span class="required">*</span></label>
 							<div class="col-md-6 col-sm-6 col-xs-8">
-								<input type="text" id="managerId" name="managerId" required="required" class="form-control col-md-7 col-xs-12" value="${sessionscope.userId }">
+								<input type="text" id="managerId" name="managerId" required="required" class="form-control col-md-7 col-xs-12" value="${sessionScope.userId }">
 							</div>
 						</div>
 					</div>
@@ -46,14 +46,14 @@
 						<div>
 							<label class="control-label col-md-2 col-sm-3 col-xs-12" for="maxPeople">maxPeople <span class="required">*</span></label>
 							<div class="col-md-6 col-sm-6 col-xs-8">
-								<input type="text" id="maxPeople" name="maxPeople" required="required" class="form-control col-md-7 col-xs-12">
+								<input type="number" id="maxPeople" name="maxPeople" required="required" class="form-control col-md-7 col-xs-12">
 							</div>
 						</div>
 					</div>
 					<div class="form-group">
 						<label class="control-label col-md-2 col-sm-3 col-xs-12">ConnChains <span class="required">*</span></label>
 						<div class="col-md-6 col-sm-6 col-xs-8">
-							<input type="text" id="mgtags" name="connChains" class="tags form-control" />
+							<input type="text" id="mgtags" name="connChains" required="required" class="tags form-control" />
 						</div>
 					</div>
 					<div class="form-group"></div>

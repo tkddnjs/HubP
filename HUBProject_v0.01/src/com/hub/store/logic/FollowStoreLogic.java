@@ -28,10 +28,9 @@ public class FollowStoreLogic implements FollowStore {
 		Follow temp = new Follow();
 		temp.setFollowId(follow.getUserId());
 		temp.setUserId(follow.getFollowId());
-		
+		System.out.println(follow.getRelation());
 		if(follow.getRelation() != 4){
-			
-			temp.setRelation((3-follow.getRelation())%3);
+			temp.setRelation((3-follow.getRelation()));
 		}else {
 			temp.setRelation(4);
 		}

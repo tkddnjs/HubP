@@ -6,13 +6,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.hub.domain.Follow;
 import com.hub.service.pacade.FollowService;
@@ -35,42 +33,57 @@ public class FollowController {
 //	}
 	
 	@RequestMapping(value="request.do", method=RequestMethod.POST)
-	public void requestFollow(Follow follow){
+	public String requestFollow(Follow follow){
 		follow.setConfirm(true);
 		followService.requestFollow(follow);
+		return "redirect: ../bucketlist/list.do";
 	}
 	
 	@RequestMapping(value="confirm.do", method=RequestMethod.POST)
 	public String confirmFollow(Follow follow){
 		followService.confirmFollow(follow);
-		return "redirect: listAll.do";
+		return "redirect: ../bucketlist/list.do";
 	}
 	
 	@RequestMapping(value="remove.do", method=RequestMethod.POST)
 	public String removeFollow(Follow follow){
 		followService.removeFollow(follow);
-		return "redirect: listAll.do";
+		return "redirect: ../bucketlist/list.do";
 	}
 	
+//	@RequestMapping(value="listAll.do", method=RequestMethod.GET)
+//	public ModelAndView listAllFollows(HttpSession session){
+//		//ModelAndView mav = new ModelAndView("follow/listFollow");
+//		ModelAndView mav = new ModelAndView("bucketlist/bucketList");
+//		String userId = (String)session.getAttribute("userId");
+//		List<Follow> fList = new ArrayList<>();
+//		fList.addAll(followService.findRequestedFollows(userId));
+//		fList.addAll(followService.findAll(userId));
+//		mav.addObject("follows", fList);
+//		mav.addObject("tabOpt", 5);
+//		return mav;
+//	}
+	
 	@RequestMapping(value="listAll.do", method=RequestMethod.GET)
-	public ModelAndView listAllFollows(HttpSession session){
-		//ModelAndView mav = new ModelAndView("follow/listFollow");
-		ModelAndView mav = new ModelAndView("bucketlist/bucketList");
-		String userId = (String)session.getAttribute("userId");
+	public void listAllFollows(HttpServletResponse response, String userId){
 		List<Follow> fList = new ArrayList<>();
 		fList.addAll(followService.findRequestedFollows(userId));
 		fList.addAll(followService.findAll(userId));
-		mav.addObject("follows", fList);
-		return mav;
+		try {
+			PrintWriter out = response.getWriter();
+			out.print(fList);
+			
+		} catch (IOException e) {
+		}
 	}
 	
-	@RequestMapping(value="listRelation.do", method=RequestMethod.POST)
-	public ModelAndView listFollowsByRelation(HttpSession session, int listOpt){
-		ModelAndView mav = new ModelAndView("follow/listFollow");
-		String userId = (String)session.getAttribute("userId");
-		mav.addObject("follows", followService.findFollowsByRelation(userId, listOpt));
-		return mav;
-	}
+//	@RequestMapping(value="listRelation.do", method=RequestMethod.POST)
+//	public ModelAndView listFollowsByRelation(HttpSession session, int listOpt){
+//		ModelAndView mav = new ModelAndView("follow/listFollow");
+//		String userId = (String)session.getAttribute("userId");
+//		mav.addObject("follows", followService.findFollowsByRelation(userId, listOpt));
+//		return mav;
+//	}
 	
 	@RequestMapping(value="autoComplete.do", method=RequestMethod.POST)
 	public void autoCompleteFollows(HttpServletResponse resp, String userId){
@@ -79,7 +92,6 @@ public class FollowController {
 		for(Follow follow : followService.findAll(userId)){
 			followList.add(follow.getFollowId());
 		}
-		
 		try {
 			PrintWriter out = resp.getWriter();
 			out.println(followList);

@@ -27,13 +27,13 @@
 					<div class="form-group">
 						<label class="control-label col-md-2 col-sm-3 col-xs-12">Introduce</label>
 						<div class="col-md-6 col-sm-6 col-xs-8">
-							<textarea name="content" class="form-control" rows="3" placeholder="쪽지내용입력"></textarea>
+							<textarea name="content" required="required" class="form-control" rows="3" placeholder="쪽지내용입력"></textarea>
 						</div>
 					</div>
 					<div class="form-group">
 						<label class="control-label col-md-2 col-sm-3 col-xs-12" for="receiverId">Receiver <span class="required">*</span></label>
 						<div class="col-md-3 col-sm-4 col-xs-5">
-							<input type="text" id="receiverId" name="receiverId" class="form-control col-md-7 col-xs-12">
+							<input type="text" id="receiverId" required="required" name="receiverId" class="form-control col-md-7 col-xs-12">
 						</div>
 					</div>
 					<div class="ln_solid"></div>

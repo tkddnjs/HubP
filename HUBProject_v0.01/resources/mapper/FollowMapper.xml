@@ -33,10 +33,14 @@
 	</update>
 
 
-	<select id="selectAll" parameterType="Follow" resultMap="followMap">
-		SELECT userId, followId, MOD(3-relation, 3) as relation, confirm
+	<select id="selectAll" resultMap="followMap">
+		SELECT userId, followId, relation, confirm
 		FROM follow_tb
-		WHERE userId=#{userId} AND confirm='Y'
+		WHERE userId = #{userId}
+		AND confirm ='Y'
+		AND followId IN (SELECT userId
+						 FROM follow_tb
+						 WHERE followId=#{userId} AND confirm='Y')
 	</select>
 	
 	<select id="selectFollowsRequested" resultMap="followMap">

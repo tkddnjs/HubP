@@ -71,7 +71,6 @@
 
 	<select id="selectGroupsByUserId" parameterType="String" resultMap="groupMap">
 		<include refid="selectGroup" />
-		<!-- WHERE managerId like '%'||#{userId}||'%' -->
 		WHERE groupId IN (SELECT groupId
 						  FROM userGroup_tb
 						  WHERE userId = #{userId})

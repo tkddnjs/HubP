@@ -41,4 +41,11 @@ public class Follow {
 		this.confirm = confirm;
 	}
 
+	@Override
+	public String toString() {
+		return "(" + userId + "/" + followId + "/" + relation + "/" + confirm + ")";
+	}
+	
+	
+
 }

@@ -26,7 +26,7 @@
 					<div class="form-group">
 						<label class="control-label col-md-2 col-sm-3 col-xs-12">ConnChains <span class="required">*</span></label>
 						<div class="col-md-6 col-sm-6 col-xs-8">
-							<input id="rctags" type="text" name="connChains" class="tags form-control" />
+							<input id="rctags" type="text" name="connChains" required="required" class="tags form-control" />
 						</div>
 					</div>
 					<div class="form-group"></div>

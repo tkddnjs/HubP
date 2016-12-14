@@ -22,7 +22,7 @@
 						<label class="control-label col-md-2 col-sm-3 col-xs-12" for="lock">Lock</label>
 						<div class="col-md-6 col-sm-6 col-xs-8">
 							<div style="vertical-align: middle;">
-								<input type="radio" id="public" name="lock" value="${true }"><b>공개</b>
+								<input type="radio" id="public" name="lock" value="${true }" checked="checked"><b>공개</b>
 								<input type="radio" id="private" name="lock" value="${false }"><b>비공개</b>
 							</div>
 						</div>
@@ -43,7 +43,7 @@
 					<div class="form-group">
 						<label class="control-label col-md-2 col-sm-3 col-xs-12">ConnChains <span class="required">*</span></label>
 						<div class="col-md-6 col-sm-6 col-xs-8">
-							<input id="rbtags" type="text" name="connChains" class="tags form-control" />
+							<input id="rbtags" type="text" name="connChains" required="required" class="tags form-control" />
 						</div>
 					</div>
 					<div class="form-group"></div>

@@ -242,8 +242,7 @@
 	</div>
 </div>
 
-<script
-	src="${pageContext.request.contextPath}/resources/vendors/jquery/dist/jquery.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/vendors/jquery/dist/jquery.min.js"></script>
 <script>
 	$(".bucketlistForm").submit(function() {
 		// 연결고리 값 domain type으로 변경
@@ -296,26 +295,25 @@
 	});
 
 	$("[name=modifyBtn]").click(
-			function() {
-				var index = $(this).val() - 1;
-				$("#modifyBucketlistModal #bucketlistId").val(
-						bucketlists[index][0]);
-				$("#modifyBucketlistModal #title").val(bucketlists[index][1]);
-				initConn(bucketlists[index][2]);
-				$("#modifyBucketlistModal #goal").val(bucketlists[index][3]);
-				initStar(bucketlists[index][4]);
-				$("#modifyBucketlistModal #progress")
-						.val(bucketlists[index][5]).trigger("change");
-				$("#modifyBucketlistModal #memo").val(bucketlists[index][6]);
-				$("#modifyBucketlistModal #sos").val(bucketlists[index][7]);
-				var lock = bucketlists[index][8];
-				if (lock == 'true') {
-					$('#modifyBucketlistModal #private').attr("checked", true);
-				} else {
-					$("#modifyBucketlistModal #public").attr("checked", true);
-				}
-				$("#modifyBucketlistModal #userId").val(bucketlists[index][9]);
-			});
+		function() {
+			var index = $(this).val() - 1;
+			$("#modifyBucketlistModal #bucketlistId").val(bucketlists[index][0]);
+			$("#modifyBucketlistModal #title").val(bucketlists[index][1]);
+			initConn(bucketlists[index][2]);
+			$("#modifyBucketlistModal #goal").val(bucketlists[index][3]);
+			initStar(bucketlists[index][4]);
+			$("#modifyBucketlistModal #progress").val(bucketlists[index][5]).trigger("change");
+			$("#modifyBucketlistModal #memo").val(bucketlists[index][6]);
+			$("#modifyBucketlistModal #sos").val(bucketlists[index][7]);
+			var lock = bucketlists[index][8];
+			if (lock == 'true') {
+				$('#modifyBucketlistModal #private').attr("checked", true);
+			} else {
+				$("#modifyBucketlistModal #public").attr("checked", true);
+			}
+			$("#modifyBucketlistModal #userId").val(bucketlists[index][9]);
+		}
+	);
 
 	function initConn(str) {
 		var conn = str;

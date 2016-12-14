@@ -56,6 +56,7 @@
 <!-- Custom Script -->
 <script>
 	var connChains = [];
+	var tabOpt;
 	$(document).ready(function (){
 		$.ajax({
 			type : 'POST',
@@ -71,16 +72,16 @@
 				list(result, connChains);
 			}
 		});
-
+		
 		//tab 누를때 Controller에서 정보를 가져옴
-		var tabOpt = ${tabOpt};
+		tabOpt = ${tabOpt};
 		$("[role='presentation']").attr("class", "");
 		$("#profile-tab"+tabOpt).closest("[role='presentation']").attr("class", "active");
 		$(".active.in").attr("class", "tab-pane fade");
 		$("#tab_content"+tabOpt).attr("class", "tab-pane fade active in");
 
 	});
-	
+
 	function list(array, result){
 		result.length = 0;
 		for (var i=0; i<array.length; i++){
@@ -112,6 +113,62 @@
 	});
 </script>
 <!-- /Custom Script -->
+
+<!-- Validation -->
+<script>
+$("#id").keyup(function() {
+	if($("#id").val().length > 5){
+		var id = $(this).val();
+		
+		$.ajax({
+			type: 'POST',
+			url: 'checkId.do',
+			data:
+				{
+					id: id
+				},
+			success: function(result){
+				if($.trim(result)=="ok"){
+					$("#idCheckResult").html("사용가능한 ID입니다.");
+				} else {
+					$("#idCheckResult").html("사용중인 ID입니다.");
+				}
+			}
+		});
+		
+	}else{
+		$("#idCheckResult").html("ID는 5자 이상입니다.");
+	}
+});
+
+
+	$("form").submit(function(){
+		$("p.error").remove();
+		$("dl dd").removeClass("error");
+
+		$(":text, textarea").filter('[required="required"]').each(function() {
+
+			if ($(this).val() == "") {
+				$(this).before("<p class='error'>필수 항목 입니다.</p>");
+			}
+
+			if(isNaN($(this).filter(":number").val())){
+				$(this).before("<p class='error'>숫자만 입력 가능합니다.</p>");
+			}
+
+			if ($("p.error").length > 0) {
+				//에러가 발생한 위치로 스크롤 이동
+				$("html, body").animate({
+					scrollTop : $("p.error.first").offset.top - 40
+				}, "slow");
+				//에러 항목에 대한 음영 처리
+				$("p.error").parent().addClass("error");
+				return false;
+			}
+		});
+	});
+</script>
+<!-- Validation -->
 
 <!-- Starrr -->
 <script>
@@ -183,7 +240,27 @@
 			keys: true
 		});
 
-		$('#datatable-responsive').DataTable();
+		if(tabOpt == 2){
+			$('#datatable-responsive').DataTable();
+		} else if(tabOpt == 4){
+			$('#groupTable tfoot th').each(function() {
+				var title = $(this).text();
+				if(title == '소개'){
+					$(this).html('<p></p>');
+				} else {
+					$(this).html('<input type="text" placeholder="' + title + ' 검색"/>');
+				}
+			});
+		 	var groupTable = $('#groupTable').DataTable();
+		 	groupTable.columns().every(function (){
+		 		var that = this;
+		 		$('input', this.footer() ).on('keyup change', function() {
+		 			if (that.search() != this.value){
+		 				that.search(this.value).draw();
+		 			}
+		 		});
+		 	});
+		}
 
 		$('#datatable-scroller').DataTable({
 			ajax: "js/datatables/json/scroller-demo.json",
@@ -407,10 +484,18 @@
 
 	$(document).ready(function() {
 		$(".tags").each(function(){
-			$(this).tagsInput({
-				width: 'auto',
-				autocomplete_url: connChains
-			});
+			
+			if($(this).attr('id') == "dgtags"){
+				$("#dgtags").tagsInput({
+					width: 'auto',
+					interactive: false
+				});
+			} else {
+				$(this).tagsInput({
+					width: 'auto',
+					autocomplete_url: connChains
+				});
+			};
 		})
 	});
 	

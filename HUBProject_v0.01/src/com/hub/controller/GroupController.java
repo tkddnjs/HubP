@@ -80,7 +80,7 @@ public class GroupController {
 	}
 
 	@RequestMapping(value="list.do", method=RequestMethod.GET)
-	public ModelAndView listGroup(HttpSession session, int listOpt, String searchWord) {
+	public ModelAndView listGroup(String userId, int listOpt) {
 		ModelAndView mav = new ModelAndView("bucketlist/bucketList");
 
 		switch (listOpt) {
@@ -88,21 +88,9 @@ public class GroupController {
 		case 0:
 			mav.addObject("groups", groupService.findAll());
 			break;
-		// 모임방 이름으로 찾기
-		case 1:
-			mav.addObject("groups", groupService.findGroupsByGroupName(searchWord));
-			break;
-		// 연결고리로 찾기
-		case 2:
-			mav.addObject("groups", groupService.findGroupsByConnChain(searchWord));
-			break;
-		// 지역 이름으로 찾기
-		case 3:
-			mav.addObject("groups", groupService.findGroupsByLocal(searchWord));
-			break;
 		// 내가 속한 모임방 찾기
-		case 4:
-			mav.addObject("groups", groupService.findGroupsByUserId((String) session.getAttribute("userId")));
+		case 1:
+			mav.addObject("groups", groupService.findGroupsByUserId(userId));
 			break;
 		}
 		mav.addObject("listOpt", listOpt);
@@ -121,21 +109,3 @@ public class GroupController {
 		return mav;
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

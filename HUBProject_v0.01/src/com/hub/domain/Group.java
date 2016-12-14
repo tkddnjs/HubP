@@ -16,7 +16,6 @@ public class Group {
 	private String local;
 	private List<String> joinPeople;
 	private int maxPeople;
-
 	
 	public Group() {
 	}

@@ -44,12 +44,10 @@
 					</div>
 					<div class="form-group">
 						<div>
-							<label class="control-label col-md-2 col-sm-3 col-xs-12" for="maxPeople">maxPeople <span class="required">*</span></label>
+							<label class="control-label col-md-2 col-sm-3 col-xs-12" for="maxPeople">
+								maxPeople <span><small>(joinPeople : <label id="joinPeople"></label>)</small></span></label>
 							<div class="col-md-6 col-sm-6 col-xs-8">
-								<input type="text" id="maxPeople" name="maxPeople"
-								 required="required" class="form-control col-md-7 col-xs-12">
-								 <span>joinPeple: <input id="joinPeopleNo" disabled="disabled"> </span>
-								 <input type="hidden" id="joinPeople" name="joinPeople">
+								<input type="text" id="maxPeople" name="maxPeople" required="required" class="form-control col-md-7 col-xs-12">
 							</div>
 						</div>
 					</div>
