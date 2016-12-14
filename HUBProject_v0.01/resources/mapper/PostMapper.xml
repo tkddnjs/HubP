@@ -26,26 +26,31 @@
 		<include refid="selectPost" />
 		where senderId = #{userId}
 		OR receiverId = #{userId}
+		ORDER BY sendTime desc
 	</select>
 
 	<select id="selectPostByPostId" parameterType="int" resultMap="postMap">
 		<include refid="selectPost" />
 		WHERE postId = #{postId}
+		ORDER BY sendTime desc
 	</select>
 
 	<select id="selectPosts" parameterType="Map" resultMap="postMap">
 		<include refid="selectPost" />
 		WHERE senderId = #{userId} AND receiverId = #{followId}
 		OR senderId = #{followId} AND receiverId = #{userId}
+		ORDER BY sendTime desc
 	</select>
 
 	<select id="selectSendPosts" parameterType="String" resultMap="postMap">
 		<include refid="selectPost" />
 		WHERE senderId = #{userId}
+		ORDER BY sendTime desc
 	</select>
 	
 	<select id="selectReceivePosts" parameterType="String" resultMap="postMap">
 		<include refid="selectPost" />
 		WHERE receiverId = #{userId}
+		ORDER BY sendTime desc
 	</select>
 </mapper>
