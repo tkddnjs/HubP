@@ -1,7 +1,6 @@
 package com.hub.controller;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -29,8 +28,6 @@ public class PostController {
 	
 	@RequestMapping(value="send.do", method=RequestMethod.POST)
 	public String sendPost(Post post){
-		Date date = new Date();
-		post.setSendTime(new java.sql.Date(date.getTime()));
 		postService.sendPost(post);
 		return "list.do";
 	}

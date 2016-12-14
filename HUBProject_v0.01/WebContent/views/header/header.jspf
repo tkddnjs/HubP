@@ -18,8 +18,8 @@
 
 
 		<ul class="nav navbar-nav navbar-right" style="font-size: 13px">
-			<li class=""><a href="javascript:;"
-				class="user-profile dropdown-toggle" data-toggle="dropdown"
+			<li class="">
+			<a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown"
 				aria-expanded="false"> ${userId } <span
 					class=" fa fa-angle-down"></span>
 			</a>
@@ -30,7 +30,7 @@
 				</ul></li>
 
 			<li role="presentation" class="dropdown">
-			<a href="${pageContext.request.contextPath}/views/post/listPost.jsp">
+			<a href="${pageContext.request.contextPath}/post/list.do?listOpt=1&userId=${sessionScope.userId}">
 			<i class="fa fa-envelope-o" style="font-size: 18px"></i></a>
 			</li>
 		</ul>

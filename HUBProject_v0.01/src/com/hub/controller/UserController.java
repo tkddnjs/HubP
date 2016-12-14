@@ -17,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.hub.domain.User;
 import com.hub.filemanager.FileManager;
+import com.hub.service.pacade.PostService;
 import com.hub.service.pacade.UserService;
 
 @Controller
@@ -25,6 +26,8 @@ public class UserController {
 
 	@Autowired
 	private UserService userService;
+	@Autowired
+	private PostService postService;
 	
 	private FileManager fileManager = new FileManager();
 	
@@ -55,7 +58,8 @@ public class UserController {
 	@RequestMapping(value="modify.do", method=RequestMethod.POST)
 	public String modifyUser(User user){
 		userService.modifyUser(user);
-		return "redirect: detail.do?userId="+user.getUserId();
+		return "redirect: detail.do?userId="+user.getUserId()+"&myId="+user.getUserId();
+		
 	}
 
 	// 설계 문서 수정 => session 추가
@@ -75,6 +79,7 @@ public class UserController {
 			mav = new ModelAndView("user/detailUser");
 		} else {
 			mav = new ModelAndView("follow/detailFollow");
+			mav.addObject("posts", postService.findPosts(myId, userId));
 		}
 		mav.addObject("user", userService.findUserByUserId(userId));
 		return mav;

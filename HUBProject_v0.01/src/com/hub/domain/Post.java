@@ -1,12 +1,13 @@
 package com.hub.domain;
 
-import java.sql.Date;
+import java.sql.Timestamp;
+
 
 public class Post {
 	private int postId;
 	private String senderId;
 	private String receiverId;
-	private Date sendTime;
+	private Timestamp sendTime;
 	private String content;
 
 	public Post() {
@@ -36,11 +37,15 @@ public class Post {
 		this.receiverId = receiverId;
 	}
 
-	public Date getSendTime() {
+	public Timestamp getSendTime() {
 		return sendTime;
 	}
 
-	public void setSendTime(Date sendTime) {
+	public void setSendTime(Timestamp sendTime) {
+//		String time = "1351504294";
+//		long t = Long.parseLong(time);
+//		sendTime = new Timestamp(t*1000);
+//		String date = new SimpleDateFormat("YYYY-MM-dd hh:mm:ss").format(sendTime);
 		this.sendTime = sendTime;
 	}
 

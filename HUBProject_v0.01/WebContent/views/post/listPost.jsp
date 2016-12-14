@@ -44,23 +44,22 @@
 									<div class="" role="tabpanel" data-example-id="togglable-tabs">
 
 										<!--MENU-->
-										<ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist" style="background-color:#fdae84;">
-											<li role="presentation" class="">
-												<a href="${pageContext.request.contextPath }/bucketlist/list.do" id="profile-tab1">Bucketlist</a></li>
-											<li role="presentation" class="">
-												<a href="${pageContext.request.contextPath }/list/list.do?listOpt=0" id="profile-tab2">Helper </a></li>
-											<li role="presentation" class="">
-												<a href="${pageContext.request.contextPath }/cooper/list.do?listOpt=0" id="profile-tab3">Cooper </a></li>
-											<li role="presentation" class="">
-												<a href="${pageContext.request.contextPath }/group/list.do?listOpt=0" id="profile-tab4">Group </a></li>
+										<ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist"
+											style="background-color: #fdae84;">
+											<li role="presentation" class=""><a
+												href="${pageContext.request.contextPath }/bucketlist/list.do"
+												id="profile-tab1">Bucketlist</a></li>
+											<li role="presentation" class=""><a
+												href="${pageContext.request.contextPath }/list/list.do?listOpt=0"
+												id="profile-tab2">Helper </a></li>
+											<li role="presentation" class=""><a
+												href="${pageContext.request.contextPath }/cooper/list.do?listOpt=0"
+												id="profile-tab3">Cooper </a></li>
+											<li role="presentation" class=""><a
+												href="${pageContext.request.contextPath }/group/list.do?listOpt=0"
+												id="profile-tab4">Group </a></li>
 										</ul>
 										<!--MENU-->
-
-
-
-
-
-
 
 
 										<!--follow detail-->
@@ -69,197 +68,126 @@
 												<div class="col-md-12 col-sm-12 col-xs-12">
 													<div class="x_panel">
 														<div class="x_title">
-															<h2>Post</h2>
+															<h2></h2>
 															<ul class="nav navbar-right panel_toolbox">
 																<li><a class="collapse-link"><i
 																		class="fa fa-chevron-up"></i></a></li>
-
 																<li><a class="close-link"><i
 																		class="fa fa-close"></i></a></li>
 															</ul>
 															<div class="clearfix"></div>
 														</div>
-														<div class="x_content">
-
-
-
-
-
-															<div class="col-md-12 col-sm-12 col-xs-12">
-
+														
+														<div class="x_content" style="margin-top:-48px">
+															<div class="col-md-12 col-sm-12 col-xs-12" >
 																<div class="" role="tabpanel"
 																	data-example-id="togglable-tabs">
 																	<ul id="myTab" class="nav nav-tabs bar_tabs"
 																		role="tablist" style="background-color: #ecc7c0;">
 																		<li role="presentation" class="active"><a
-																			href="#tab" id="home-tab" role="tab"
+																			href="#tapPostAll" id="home-tab" role="tab"
 																			data-toggle="tab" aria-expanded="true">전체쪽지</a></li>
 																		<li role="presentation" class=""><a
-																			href="#content2" role="tab" id="profile-tab"
+																			href="#tabPostSend" role="tab" id="profile-tab"
 																			data-toggle="tab" aria-expanded="false">보낸쪽지</a></li>
 																		<li role="presentation" class=""><a
-																			href="#tab_content3" role="tab" id="profile-tab2"
+																			href="#tabPostRecieve" role="tab" id="profile-tab2"
 																			data-toggle="tab" aria-expanded="false">받은쪽지</a></li>
 																	</ul>
 
 
-																	<div class="x_content">
-																		<p class="text-muted font-13 m-b-30">Responsive is
-																			an extension for DataTables that resolves that
-																			problem by optimising the table's layout for
-																			different screen sizes through the dynamic insertion
-																			and removal of columns from the table.</p>
+																	<div id="myTabContent" class="tab-content">
+																	<!-- 전체쪽지 -->
+																	<div role="tabpanel" class="tab-pane fade in"
+																		id="tapPostAll" aria-labelledby="profile-tab1">
+																	
 																		<table id="datatable-responsive"
 																			class="table table-striped table-bordered dt-responsive nowrap"
 																			cellspacing="0" width="100%">
 																			<thead>
 																				<tr>
 																					<th style="width: 100px;">보낸 사람</th>
+																					<th style="width: 100px;">받는 사람</th>
 																					<th style="width: 500px;">내용</th>
-																					<th style="width: 100px;">보낸 시간</th>
+																					<th style="width: 150px;">보낸 시간</th>
 																					<th style="width: 50px;">삭제</th>
 																				</tr>
 																			</thead>
 																			<tbody>
-																				<tr>
-																					<td>Musimbi</td>
-																					<td>hi</td>
-																					<td>2016-12-12 11:13</td>
-																					<td></td>
-																				</tr>
-																				<tr>
-																					<td>dbsgustlr</td>
-																					<td>Responsive is an extension for DataTables
-																						that resolves that problem by optimising the
-																						table's layout for different screen sizes through
-																						the dynamic insertion and removal of columns from
-																						the table.</td>
-																					<td>2016-12-12 11:14</td>
-																					<td></td>
-																				</tr>
-																				<tr>
-																					<td>Musimbi</td>
-																					<td>Responsive is an extension for DataTables
-																						that resolves that problem by optimising the
-																						table's layout for different screen sizes through
-																						the dynamic insertion and removal of columns from
-																						the table.</td>
-																					<td>2016-12-12 11:15</td>
-																					<td></td>
-																				</tr>
-																				<tr>
-																					<td>dbsgustlr</td>
-																					<td>Responsive is an extension for DataTables
-																						that resolves that problem by optimising the
-																						table's layout for different screen sizes through
-																						the dynamic insertion and removal of columns from
-																						the table.</td>
-																					<td>2016-12-12 11:16</td>
-																					<td></td>
-																				</tr>
-																				<tr>
-																					<td>Musimbi</td>
-																					<td>Responsive is an extension for DataTables
-																						that resolves that problem by optimising the
-																						table's layout for different screen sizes through
-																						the dynamic insertion and removal of columns from
-																						the table.</td>
-																					<td>2016-12-12 11:15</td>
-																					<td></td>
-																				</tr>
-																				<tr>
-																					<td>dbsgustlr</td>
-																					<td>Responsive is an extension for DataTables
-																						that resolves that problem by optimising the
-																						table's layout for different screen sizes through
-																						the dynamic insertion and removal of columns from
-																						the table.</td>
-																					<td>2016-12-12 11:16</td>
-																					<td></td>
-																				</tr>
-																				<tr>
-																					<td>Musimbi</td>
-																					<td>Responsive is an extension for DataTables
-																						that resolves that problem by optimising the
-																						table's layout for different screen sizes through
-																						the dynamic insertion and removal of columns from
-																						the table.</td>
-																					<td>2016-12-12 11:15</td>
-																					<td></td>
-																				</tr>
-																				<tr>
-																					<td>dbsgustlr</td>
-																					<td>Responsive is an extension for DataTables
-																						that resolves that problem by optimising the
-																						table's layout for different screen sizes through
-																						the dynamic insertion and removal of columns from
-																						the table.</td>
-																					<td>2016-12-12 11:16</td>
-																					<td></td>
-																				</tr>
-																				<tr>
-																					<td>Musimbi</td>
-																					<td>Responsive is an extension for DataTables
-																						that resolves that problem by optimising the
-																						table's layout for different screen sizes through
-																						the dynamic insertion and removal of columns from
-																						the table.</td>
-																					<td>2016-12-12 11:15</td>
-																					<td></td>
-																				</tr>
-																				<tr>
-																					<td>dbsgustlr</td>
-																					<td>Responsive is an extension for DataTables
-																						that resolves that problem by optimising the
-																						table's layout for different screen sizes through
-																						the dynamic insertion and removal of columns from
-																						the table.</td>
-																					<td>2016-12-12 11:16</td>
-																					<td></td>
-																				</tr>
-																				<tr>
-																					<td>Musimbi</td>
-																					<td>Responsive is an extension for DataTables
-																						that resolves that problem by optimising the
-																						table's layout for different screen sizes through
-																						the dynamic insertion and removal of columns from
-																						the table.</td>
-																					<td>2016-12-12 11:15</td>
-																					<td></td>
-																				</tr>
-																				<tr>
-																					<td>dbsgustlr</td>
-																					<td>Responsive is an extension for DataTables
-																						that resolves that problem by optimising the
-																						table's layout for different screen sizes through
-																						the dynamic insertion and removal of columns from
-																						the table.</td>
-																					<td>2016-12-12 11:16</td>
-																					<td></td>
-																				</tr>
-																				<tr>
-																					<td>Musimbi</td>
-																					<td>Responsive is an extension for DataTables
-																						that resolves that problem by optimising the
-																						table's layout for different screen sizes through
-																						the dynamic insertion and removal of columns from
-																						the table.</td>
-																					<td>2016-12-12 11:15</td>
-																					<td></td>
-																				</tr>
-																				<tr>
-																					<td>dbsgustlr</td>
-																					<td>Responsive is an extension for DataTables
-																						that resolves that problem by optimising the
-																						table's layout for different screen sizes through
-																						the dynamic insertion and removal of columns from
-																						the table.</td>
-																					<td>2016-12-12 11:16</td>
-																					<td></td>
-																				</tr>
-
+																				<c:forEach items="${posts }" var="post" varStatus="status">
+																					<tr>
+																						<td>${post.senderId }</td>
+																						<td>${post.receiverId }</td>
+																						<td>${post.content }</td>
+																						<td>${post.sendTime }</td>
+																						<td></td>
+																					</tr>
+																				</c:forEach>
 																			</tbody>
 																		</table>
+																	</div>
+																	
+																	<div role="tabpanel" class="tab-pane fade"
+																		id="tabPostSend" aria-labelledby="profile-tab1">
+																	
+																		<table id="datatable-responsive"
+																			class="table table-striped table-bordered dt-responsive nowrap"
+																			cellspacing="0" width="100%">
+																			<thead>
+																				<tr>
+																					<th style="width: 100px;">보낸 사람</th>
+																					<th style="width: 100px;">받는 사람</th>
+																					<th style="width: 500px;">내용</th>
+																					<th style="width: 150px;">보낸 시간</th>
+																					<th style="width: 50px;">삭제</th>
+																				</tr>
+																			</thead>
+																			<tbody>
+																				<c:forEach items="${posts }" var="post" varStatus="status">
+																				<c:if test="${post.senderId eq sessionScope.userId }">
+																					<tr>
+																						<td>${post.senderId }</td>
+																						<td>${post.receiverId }</td>
+																						<td>${post.content }</td>
+																						<td>${post.sendTime }</td>
+																						<td></td>
+																					</tr>
+																				</c:if>
+																				</c:forEach>
+																			</tbody>
+																		</table>
+																	</div>
+																	
+																	<div role="tabpanel" class="tab-pane fade"
+																		id="tabPostRecieve" aria-labelledby="profile-tab1">
+																	
+																		<table id="datatable-responsive"
+																			class="table table-striped table-bordered dt-responsive nowrap"
+																			cellspacing="0" width="100%">
+																			<thead>
+																				<tr>
+																					<th style="width: 100px;">보낸 사람</th>
+																					<th style="width: 100px;">받는 사람</th>
+																					<th style="width: 500px;">내용</th>
+																					<th style="width: 150px;">보낸 시간</th>
+																					<th style="width: 50px;">삭제</th>
+																				</tr>
+																			</thead>
+																			<tbody>
+																				<c:forEach items="${posts }" var="post" varStatus="status">
+																				<c:if test="${post.receiverId eq sessionScope.userId }">
+																					<tr>
+																						<td>${post.senderId }</td>
+																						<td>${post.receiverId }</td>
+																						<td>${post.content }</td>
+																						<td>${post.sendTime }</td>
+																						<td></td>
+																					</tr>
+																					</c:if>
+																				</c:forEach>
+																			</tbody>
+																		</table>
+																	</div>
 
 																	</div>
 																</div>

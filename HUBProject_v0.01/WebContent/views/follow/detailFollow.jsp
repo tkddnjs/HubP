@@ -38,15 +38,20 @@
 									<!--tab-->
 									<div class="" role="tabpanel" data-example-id="togglable-tabs">
 
-										<ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist" style="background-color:#fdae84;">
-											<li role="presentation" class="">
-												<a href="${pageContext.request.contextPath }/bucketlist/list.do" id="profile-tab1">Bucketlist</a></li>
-											<li role="presentation" class="">
-												<a href="${pageContext.request.contextPath }/list/list.do?listOpt=0" id="profile-tab2">Helper </a></li>
-											<li role="presentation" class="">
-												<a href="${pageContext.request.contextPath }/cooper/list.do?listOpt=0" id="profile-tab3">Cooper </a></li>
-											<li role="presentation" class="">
-												<a href="${pageContext.request.contextPath }/group/list.do?listOpt=0" id="profile-tab4">Group </a></li>
+										<ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist"
+											style="background-color: #fdae84;">
+											<li role="presentation" class=""><a
+												href="${pageContext.request.contextPath }/bucketlist/list.do"
+												id="profile-tab1">Bucketlist</a></li>
+											<li role="presentation" class=""><a
+												href="${pageContext.request.contextPath }/list/list.do?listOpt=0"
+												id="profile-tab2">Helper </a></li>
+											<li role="presentation" class=""><a
+												href="${pageContext.request.contextPath }/cooper/list.do?listOpt=0"
+												id="profile-tab3">Cooper </a></li>
+											<li role="presentation" class=""><a
+												href="${pageContext.request.contextPath }/group/list.do?listOpt=0"
+												id="profile-tab4">Group </a></li>
 										</ul>
 
 
@@ -120,301 +125,235 @@
 
 
 																	<div class="x_content">
-																		<p class="text-muted font-13 m-b-30">Responsive is
-																			an extension for DataTables that resolves that
-																			problem by optimising the table's layout for
-																			different screen sizes through the dynamic insertion
-																			and removal of columns from the table.</p>
-																		<table id="datatable-responsive"
-																			class="table table-striped table-bordered dt-responsive nowrap"
-																			cellspacing="0" width="100%">
-																			<thead>
-																				<tr>
-																					<th style="width: 100px; text-align: center;">보낸
-																						사람</th>
-																					<th style="width: 500px; text-align: center;">내용</th>
-																					<th style="width: 100px; text-align: center;">보낸
-																						시간</th>
-																					<th style="width: 50px; text-align: center;">삭제</th>
-																				</tr>
-																			</thead>
-																			<tbody>
-																				<tr>
-																					<td>Musimbi</td>
-																					<td>hi</td>
-																					<td>2016-12-12 11:13</td>
-																					<td></td>
-																				</tr>
-																				<tr>
-																					<td>dbsgustlr</td>
-																					<td>Responsive is an extension for DataTables
-																						that resolves that problem by optimising the
-																						table's layout for different screen sizes through
-																						the dynamic insertion and removal of columns from
-																						the table.</td>
-																					<td>2016-12-12 11:14</td>
-																					<td></td>
-																				</tr>
-																				<tr>
-																					<td>Musimbi</td>
-																					<td>Responsive is an extension for DataTables
-																						that resolves that problem by optimising the
-																						table's layout for different screen sizes through
-																						the dynamic insertion and removal of columns from
-																						the table.</td>
-																					<td>2016-12-12 11:15</td>
-																					<td></td>
-																				</tr>
-																				<tr>
-																					<td>dbsgustlr</td>
-																					<td>Responsive is an extension for DataTables
-																						that resolves that problem by optimising the
-																						table's layout for different screen sizes through
-																						the dynamic insertion and removal of columns from
-																						the table.</td>
-																					<td>2016-12-12 11:16</td>
-																					<td></td>
-																				</tr>
-																				<tr>
-																					<td>Musimbi</td>
-																					<td>Responsive is an extension for DataTables
-																						that resolves that problem by optimising the
-																						table's layout for different screen sizes through
-																						the dynamic insertion and removal of columns from
-																						the table.</td>
-																					<td>2016-12-12 11:15</td>
-																					<td></td>
-																				</tr>
-																				<tr>
-																					<td>dbsgustlr</td>
-																					<td>Responsive is an extension for DataTables
-																						that resolves that problem by optimising the
-																						table's layout for different screen sizes through
-																						the dynamic insertion and removal of columns from
-																						the table.</td>
-																					<td>2016-12-12 11:16</td>
-																					<td></td>
-																				</tr>
-																				<tr>
-																					<td>Musimbi</td>
-																					<td>Responsive is an extension for DataTables
-																						that resolves that problem by optimising the
-																						table's layout for different screen sizes through
-																						the dynamic insertion and removal of columns from
-																						the table.</td>
-																					<td>2016-12-12 11:15</td>
-																					<td></td>
-																				</tr>
-																				<tr>
-																					<td>dbsgustlr</td>
-																					<td>Responsive is an extension for DataTables
-																						that resolves that problem by optimising the
-																						table's layout for different screen sizes through
-																						the dynamic insertion and removal of columns from
-																						the table.</td>
-																					<td>2016-12-12 11:16</td>
-																					<td></td>
-																				</tr>
-																				<tr>
-																					<td>Musimbi</td>
-																					<td>Responsive is an extension for DataTables
-																						that resolves that problem by optimising the
-																						table's layout for different screen sizes through
-																						the dynamic insertion and removal of columns from
-																						the table.</td>
-																					<td>2016-12-12 11:15</td>
-																					<td></td>
-																				</tr>
-																				<tr>
-																					<td>dbsgustlr</td>
-																					<td>Responsive is an extension for DataTables
-																						that resolves that problem by optimising the
-																						table's layout for different screen sizes through
-																						the dynamic insertion and removal of columns from
-																						the table.</td>
-																					<td>2016-12-12 11:16</td>
-																					<td></td>
-																				</tr>
-																				<tr>
-																					<td>Musimbi</td>
-																					<td>Responsive is an extension for DataTables
-																						that resolves that problem by optimising the
-																						table's layout for different screen sizes through
-																						the dynamic insertion and removal of columns from
-																						the table.</td>
-																					<td>2016-12-12 11:15</td>
-																					<td></td>
-																				</tr>
-																				<tr>
-																					<td>dbsgustlr</td>
-																					<td>Responsive is an extension for DataTables
-																						that resolves that problem by optimising the
-																						table's layout for different screen sizes through
-																						the dynamic insertion and removal of columns from
-																						the table.</td>
-																					<td>2016-12-12 11:16</td>
-																					<td></td>
-																				</tr>
-																				<tr>
-																					<td>Musimbi</td>
-																					<td>Responsive is an extension for DataTables
-																						that resolves that problem by optimising the
-																						table's layout for different screen sizes through
-																						the dynamic insertion and removal of columns from
-																						the table.</td>
-																					<td>2016-12-12 11:15</td>
-																					<td></td>
-																				</tr>
-																				<tr>
-																					<td>dbsgustlr</td>
-																					<td>Responsive is an extension for DataTables
-																						that resolves that problem by optimising the
-																						table's layout for different screen sizes through
-																						the dynamic insertion and removal of columns from
-																						the table.</td>
-																					<td>2016-12-12 11:16</td>
-																					<td></td>
-																				</tr>
+																		<div role="tabpanel" class="tab-pane fade in"
+																			id="tapPostAll" aria-labelledby="profile-tab1">
 
-																			</tbody>
-																		</table>
+																			<table id="datatable-responsive"
+																				class="table table-striped table-bordered dt-responsive nowrap"
+																				cellspacing="0" width="100%">
+																				<thead>
+																					<tr>
+																						<th style="width: 100px;">보낸 사람</th>
+																						<th style="width: 100px;">받는 사람</th>
+																						<th style="width: 500px;">내용</th>
+																						<th style="width: 150px;">보낸 시간</th>
+																						<th style="width: 50px;">삭제</th>
+																					</tr>
+																				</thead>
+																				<tbody>
+																					<c:forEach items="${posts }" var="post"
+																						varStatus="status">
+																						<tr>
+																							<td>${post.senderId }</td>
+																							<td>${post.receiverId }</td>
+																							<td>${post.content }</td>
+																							<td>${post.sendTime }</td>
+																							<td></td>
+																						</tr>
+																					</c:forEach>
+																				</tbody>
+																			</table>
+																		</div>
 
+																		<div role="tabpanel" class="tab-pane fade"
+																			id="tabPostSend" aria-labelledby="profile-tab1">
+
+																			<table id="datatable-responsive"
+																				class="table table-striped table-bordered dt-responsive nowrap"
+																				cellspacing="0" width="100%">
+																				<thead>
+																					<tr>
+																						<th style="width: 100px;">보낸 사람</th>
+																						<th style="width: 100px;">받는 사람</th>
+																						<th style="width: 500px;">내용</th>
+																						<th style="width: 150px;">보낸 시간</th>
+																						<th style="width: 50px;">삭제</th>
+																					</tr>
+																				</thead>
+																				<tbody>
+																					<c:forEach items="${posts }" var="post"
+																						varStatus="status">
+																						<c:if
+																							test="${post.senderId eq sessionScope.userId }">
+																							<tr>
+																								<td>${post.senderId }</td>
+																								<td>${post.receiverId }</td>
+																								<td>${post.content }</td>
+																								<td>${post.sendTime }</td>
+																								<td></td>
+																							</tr>
+																						</c:if>
+																					</c:forEach>
+																				</tbody>
+																			</table>
+																		</div>
+
+																		<div role="tabpanel" class="tab-pane fade"
+																			id="tabPostRecieve" aria-labelledby="profile-tab1">
+
+																			<table id="datatable-responsive"
+																				class="table table-striped table-bordered dt-responsive nowrap"
+																				cellspacing="0" width="100%">
+																				<thead>
+																					<tr>
+																						<th style="width: 100px;">보낸 사람</th>
+																						<th style="width: 100px;">받는 사람</th>
+																						<th style="width: 500px;">내용</th>
+																						<th style="width: 150px;">보낸 시간</th>
+																						<th style="width: 50px;">삭제</th>
+																					</tr>
+																				</thead>
+																				<tbody>
+																					<c:forEach items="${posts }" var="post"
+																						varStatus="status">
+																						<c:if
+																							test="${post.receiverId eq sessionScope.userId }">
+																							<tr>
+																								<td>${post.senderId }</td>
+																								<td>${post.receiverId }</td>
+																								<td>${post.content }</td>
+																								<td>${post.sendTime }</td>
+																								<td></td>
+																							</tr>
+																						</c:if>
+																					</c:forEach>
+																				</tbody>
+																			</table>
+																		</div>
 																	</div>
 																</div>
 															</div>
 														</div>
 													</div>
 												</div>
+
 											</div>
 
+
+
+
+
+
+
 										</div>
-
-
-
-
-
-
-
 									</div>
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
+
+				<!-- footer content -->
+				<footer>
+					<div class="pull-right">
+						HUB - Have U get a Bucketlist 2016 by <a href="https://.com">For
+							Man</a>
+					</div>
+					<div class="clearfix"></div>
+				</footer>
+				<!-- /footer content -->
+
+
 			</div>
-
-			<!-- footer content -->
-			<footer>
-				<div class="pull-right">
-					HUB - Have U get a Bucketlist 2016 by <a href="https://.com">For
-						Man</a>
-				</div>
-				<div class="clearfix"></div>
-			</footer>
-			<!-- /footer content -->
-
-
 		</div>
-	</div>
-	<%@ include file="/views/layout/commonJS.jsp"%>
+		<%@ include file="/views/layout/commonJS.jsp"%>
 
-	<script>
-		$(".bucketlistForm").submit(function() {
-			var tags = $(this).find(".tags").val();
-			tags = tags.split(",");
-			$(this).find(".tags").val(tags);
+		<script>
+			$(".bucketlistForm").submit(function() {
+				var tags = $(this).find(".tags").val();
+				tags = tags.split(",");
+				$(this).find(".tags").val(tags);
 
-			var star = $(this).find(".changeStar").attr("data-rating");
-			$(this).find("#star").val(star);
-		});
-	</script>
-
-	<script>
-		$("#modifyBucketlistForm").submit(function() {
-			var memo = $(this).find("[name='memo']").val();
-			memo = memo.replace(/\n/gi, " ");
-			$(this).find("[name='memo']").val(memo);
-		});
-	</script>
-
-	<script type="text/javascript">
-		var bucketlists = new Array();
-		<c:forEach items="${bucketlists}" var="bucketlist">
-		var bucketlist = new Array();
-		bucketlist.push("${bucketlist.bucketlistId}");
-		bucketlist.push("${bucketlist.title}");
-		bucketlist.push("${bucketlist.connChains}");
-		bucketlist.push("${bucketlist.goal}");
-		bucketlist.push("${bucketlist.star}");
-		bucketlist.push("${bucketlist.progress}");
-		bucketlist.push("${bucketlist.memo}");
-		bucketlist.push("${bucketlist.sos}");
-		bucketlist.push("${bucketlist.lock}");
-		bucketlist.push("${bucketlist.userId}");
-		bucketlists.push(bucketlist);
-		</c:forEach>
-
-		$("#registerBtn").click(function() {
-			$(".tags").importTags("");
-			$(".changeStar").starrr();
-			$(".changeStar").starrr('setRating', 0);
-			$(".changeStar").attr("data-rating", 0);
-			$(".changeStar").on('starrr:change', function(e, value) {
-				$(this).attr("data-rating", value);
+				var star = $(this).find(".changeStar").attr("data-rating");
+				$(this).find("#star").val(star);
 			});
-		});
+		</script>
 
-		$("[name=modifyBtn]")
-				.click(
-						function() {
-							var index = $(this).val() - 1;
-							$("#modifyBucketlistModal #bucketlistId").val(
-									bucketlists[index][0]);
-							$("#modifyBucketlistModal #title").val(
-									bucketlists[index][1]);
-							initConn(bucketlists[index][2]);
-							$("#modifyBucketlistModal #goal").val(
-									bucketlists[index][3]);
-							initStar(bucketlists[index][4]);
-							$("#modifyBucketlistModal #progress").val(
-									bucketlists[index][5]).trigger("change");
-							$("#modifyBucketlistModal #memo").val(
-									bucketlists[index][6]);
-							$("#modifyBucketlistModal #sos").val(
-									bucketlists[index][7]);
-							var lock = bucketlists[index][8];
-							if (lock == 'true') {
-								$('#modifyBucketlistModal #private').attr(
-										"checked", true);
-							} else {
-								$("#modifyBucketlistModal #public").attr(
-										"checked", true);
-							}
-							$("#modifyBucketlistModal #userId").val(
-									bucketlists[index][9]);
-						});
-
-		function initConn(str) {
-			var conn = str;
-			conn = conn.replace("[", "");
-			conn = conn.replace(/ /gi, "");
-			conn = conn.replace("]", "");
-			$(".tags").each(function() {
-				$(this).importTags(conn);
+		<script>
+			$("#modifyBucketlistForm").submit(function() {
+				var memo = $(this).find("[name='memo']").val();
+				memo = memo.replace(/\n/gi, " ");
+				$(this).find("[name='memo']").val(memo);
 			});
-		};
+		</script>
 
-		function initStar(str) {
-			$(".changeStar").each(function() {
-				$(this).starrr();
-				$(this).starrr('setRating', str);
-				$(this).attr("data-rating", str);
-				$(this).on('starrr:change', function(e, value) {
+		<script type="text/javascript">
+			var bucketlists = new Array();
+			<c:forEach items="${bucketlists}" var="bucketlist">
+			var bucketlist = new Array();
+			bucketlist.push("${bucketlist.bucketlistId}");
+			bucketlist.push("${bucketlist.title}");
+			bucketlist.push("${bucketlist.connChains}");
+			bucketlist.push("${bucketlist.goal}");
+			bucketlist.push("${bucketlist.star}");
+			bucketlist.push("${bucketlist.progress}");
+			bucketlist.push("${bucketlist.memo}");
+			bucketlist.push("${bucketlist.sos}");
+			bucketlist.push("${bucketlist.lock}");
+			bucketlist.push("${bucketlist.userId}");
+			bucketlists.push(bucketlist);
+			</c:forEach>
+
+			$("#registerBtn").click(function() {
+				$(".tags").importTags("");
+				$(".changeStar").starrr();
+				$(".changeStar").starrr('setRating', 0);
+				$(".changeStar").attr("data-rating", 0);
+				$(".changeStar").on('starrr:change', function(e, value) {
 					$(this).attr("data-rating", value);
 				});
-				$("[name='star']").val(str);
 			});
-		}
-	</script>
+
+			$("[name=modifyBtn]").click(
+					function() {
+						var index = $(this).val() - 1;
+						$("#modifyBucketlistModal #bucketlistId").val(
+								bucketlists[index][0]);
+						$("#modifyBucketlistModal #title").val(
+								bucketlists[index][1]);
+						initConn(bucketlists[index][2]);
+						$("#modifyBucketlistModal #goal").val(
+								bucketlists[index][3]);
+						initStar(bucketlists[index][4]);
+						$("#modifyBucketlistModal #progress").val(
+								bucketlists[index][5]).trigger("change");
+						$("#modifyBucketlistModal #memo").val(
+								bucketlists[index][6]);
+						$("#modifyBucketlistModal #sos").val(
+								bucketlists[index][7]);
+						var lock = bucketlists[index][8];
+						if (lock == 'true') {
+							$('#modifyBucketlistModal #private').attr(
+									"checked", true);
+						} else {
+							$("#modifyBucketlistModal #public").attr("checked",
+									true);
+						}
+						$("#modifyBucketlistModal #userId").val(
+								bucketlists[index][9]);
+					});
+
+			function initConn(str) {
+				var conn = str;
+				conn = conn.replace("[", "");
+				conn = conn.replace(/ /gi, "");
+				conn = conn.replace("]", "");
+				$(".tags").each(function() {
+					$(this).importTags(conn);
+				});
+			};
+
+			function initStar(str) {
+				$(".changeStar").each(function() {
+					$(this).starrr();
+					$(this).starrr('setRating', str);
+					$(this).attr("data-rating", str);
+					$(this).on('starrr:change', function(e, value) {
+						$(this).attr("data-rating", value);
+					});
+					$("[name='star']").val(str);
+				});
+			}
+		</script>
 </body>
 </html>
