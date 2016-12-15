@@ -117,7 +117,7 @@
 	
 	$("[name=detailGroupBtn]").click( function() {
 		var index = $(this).val() - 1;
-		$("#detailGroupModal #groupId").html(groups[index][0]);
+		$("#detailGroupModal #groupId").val(groups[index][0]);
 		$("#detailGroupModal #groupName").html(groups[index][1]);
 		$("#detailGroupModal #managerId").html(groups[index][2]);
 		$("#detailGroupModal #lastDay").html(groups[index][3]);

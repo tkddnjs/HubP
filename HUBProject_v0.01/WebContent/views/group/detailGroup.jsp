@@ -79,13 +79,25 @@
 							<div id="myGroupBtns">
 								<input type="hidden" id="no">
 								<button id="modifyGroupBtn" type="button" data-toggle="modal" data-target="#modifyGroupModal" class="btn btn-default">수정</button>
-								<a href="${pageContext.request.contextPath}/group/remove.do" class="btn btn-primary">해체</a>
+								
+								<form action="${pageContext.request.contextPath}/group/remove.do" method="get">
+									<input type="hidden" id="groupId" name="groupId" value="">
+									<button type="submit" class="btn btn-primary">해체</button>
+								</form>
 							</div>
+							
 							<div id="joinedGroupBtn">
-								<a href="${pageContext.request.contextPath}/group/exit.do" class="btn btn-primary">탈퇴</a>
+								<form action="${pageContext.request.contextPath}/group/exit.do" method="get">
+									<input type="hidden" id="groupId" name="groupId" value="">
+									<button type="submit" class="btn btn-primary">탈퇴</button>
+								</form>
 							</div>
+							
 							<div id="unjoinedGroupBtn">
-								<a href="${pageContext.request.contextPath}/group/join.do" class="btn btn-primary">가입</a>
+								<form action="${pageContext.request.contextPath}/group/join.do" method="get">
+									<input type="hidden" id="groupId" name="groupId" value="">
+									<button type="submit" class="btn btn-primary">가입</button>
+								</form>
 							</div>
 						</div>
 					</div>
