@@ -44,6 +44,11 @@ public class FollowServiceLogic implements FollowService {
 	public List<Follow> findFollowsByRelation(String userId, int relation) {
 		return followStore.selectFollowsByRelation(userId, relation);
 	}
+	
+	@Override
+	public Follow findFollowById(String userId, String followId) {
+		return followStore.selectFollowById(userId, followId);
+	}
 
 	@Override
 	public boolean checkFollowRequested(String userId, String followId){
@@ -59,5 +64,6 @@ public class FollowServiceLogic implements FollowService {
 		}
 		return true;
 	}
+
 
 }

@@ -42,11 +42,11 @@ public class GroupController {
 		for(Group g : groupService.findGroupsByUserId(userId)){
 			if(g.getGroupId() == groupId){
 				// alert창으로 경고 어떻게 해줄 지 고민해보기
-				return "redirect:/group/list.do?listOpt=4";
+				return "redirect:/group/list.do?listOpt=1&userId=" + userId;
 			}
 		}
 		groupService.joinGroup(groupId, userId);
-		return "redirect:/group/list.do?listOpt=4";
+		return "redirect:/group/list.do?listOpt=1&userId=" + userId;
 	}
 
 	// 문서 수정 필요 => parameter 변경
@@ -64,7 +64,7 @@ public class GroupController {
 		
 		groupService.modifyGroup(group);
 		
-		return "redirect:/group/detail.do?groupId="+group.getGroupId();
+		return "redirect:/group/list.do?userId="+ group.getManagerId() + "&listOpt=1";
 	}
 
 	@RequestMapping(value="remove.do", method=RequestMethod.GET)

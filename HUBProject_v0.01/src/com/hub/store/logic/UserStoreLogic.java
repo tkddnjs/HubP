@@ -42,7 +42,7 @@ public class UserStoreLogic implements UserStore {
 	@Override
 	public int insertUserConn(User user) {
 		SqlSession session = factory.openSession();
-		int result = 0;
+		int result = 1;
 		try {
 			UserMapper mapper = session.getMapper(UserMapper.class);
 

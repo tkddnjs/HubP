@@ -31,6 +31,12 @@
 		SET confirm='Y'
 		WHERE userId=#{userId} and followId=#{followId}
 	</update>
+	
+	<select id="findFollowById" resultMap="followMap">
+	SELECT userId, followId, relation, confirm
+	FROM follow_tb
+	WHERE userId = #{userId} AND followId = #{followId}
+	</select>
 
 
 	<select id="selectAll" resultMap="followMap">

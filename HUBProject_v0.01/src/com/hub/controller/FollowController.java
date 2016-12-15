@@ -35,7 +35,10 @@ public class FollowController {
 	@RequestMapping(value="request.do", method=RequestMethod.POST)
 	public String requestFollow(Follow follow){
 		follow.setConfirm(true);
-		followService.requestFollow(follow);
+		int result = followService.requestFollow(follow);
+		if(result==4){
+			return "redirect: ../bucketlist/list.do";
+		}
 		return "redirect: ../bucketlist/list.do";
 	}
 	
@@ -84,6 +87,12 @@ public class FollowController {
 //		mav.addObject("follows", followService.findFollowsByRelation(userId, listOpt));
 //		return mav;
 //	}
+	
+	public Follow findFollowById(String userId, String followId){
+		Follow follow = followService.findFollowById(userId, followId);
+		return follow;
+	}
+	
 	
 	@RequestMapping(value="autoComplete.do", method=RequestMethod.POST)
 	public void autoCompleteFollows(HttpServletResponse resp, String userId){

@@ -55,7 +55,7 @@ public class BucketlistStoreLogic implements BucketlistStore {
 	@Override
 	public int insertBucketlistConn(Bucketlist bucketlist) {
 		SqlSession session = factory.openSession();
-		int result = 0;
+		int result = 1;
 		try {
 			BucketlistMapper mapper = session.getMapper(BucketlistMapper.class);
 			

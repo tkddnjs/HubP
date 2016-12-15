@@ -32,6 +32,7 @@ public class GroupServiceLogic implements GroupService {
 		group.setGroupId(groupStore.nextGroupId());
 		
 		result *= groupStore.insertGroup(group);
+		result *= groupStore.insertUserGroup(group.getGroupId(), group.getManagerId());
 		result *= groupStore.insertGroupConn(group);
 		
 		List<String> sList = new ArrayList<>();
@@ -112,15 +113,15 @@ public class GroupServiceLogic implements GroupService {
 		Group searchManagerId = groupStore.selectGroupByGroupId(groupId);
 		
 		//follow요청 취소
-		if(searchManagerId != null){
-			
-			Follow follow = new Follow();
-			follow.setFollowId(searchManagerId.getManagerId());
-			follow.setUserId(userId);
-			follow.setConfirm(true);
-			follow.setRelation(4);
+		Follow follow = followCont.findFollowById(userId, searchManagerId.getManagerId());
+		System.out.println(follow.getRelation());
+		if(follow.getRelation()==4){
 			followCont.removeFollow(follow);
 		}
+		/*
+		if(searchManagerId != null){
+			
+		}*/
 		
 		return result;
 	}

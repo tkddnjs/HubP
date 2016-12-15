@@ -44,7 +44,10 @@ public class FollowStoreLogic implements FollowStore {
 			} else {
 				session.rollback();
 			}
-		} finally {
+		}catch (Exception e) {
+			return 4;
+		} 
+		finally {
 			session.close();
 		}
 		
@@ -124,6 +127,18 @@ public class FollowStoreLogic implements FollowStore {
 			FollowMapper mapper = session.getMapper(FollowMapper.class);
 			return mapper.selectFollowsByRelation(userId, relation);
 		} finally {
+			session.close();
+		}
+	}
+
+	@Override
+	public Follow selectFollowById(String userId, String followId) {
+		SqlSession session = factory.openSession();
+		
+		try{
+			FollowMapper mapper = session.getMapper(FollowMapper.class);
+			return mapper.selectFollowById(userId, followId );
+		}finally{
 			session.close();
 		}
 	}

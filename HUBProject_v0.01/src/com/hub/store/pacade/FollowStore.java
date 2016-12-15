@@ -15,8 +15,11 @@ public interface FollowStore {
 	// 팔로우 삭제 (팔로우 요청 거절 / 팔로우 삭제)
 	int deleteFollow(Follow follow);
 	
+	Follow selectFollowById(String userId, String followId);
+	
 	// 팔로우 조회
 	List<Follow> selectAll(String userId);
 	List<Follow> selectFollowsRequested(String userId);
 	List<Follow> selectFollowsByRelation(String userId, int relation);
+
 }
