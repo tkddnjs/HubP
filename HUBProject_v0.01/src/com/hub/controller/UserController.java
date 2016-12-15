@@ -85,7 +85,18 @@ public class UserController {
 		return mav;
 	}
 	
-	@RequestMapping(value="check.do", method=RequestMethod.GET)
+	@RequestMapping(value="detail.do", method=RequestMethod.POST)	
+	public void detailUser(String userId, HttpServletResponse response){
+		try {
+			PrintWriter out = response.getWriter();
+			out.print(userService.findUserByUserId(userId));
+			
+		} catch (IOException e) {
+		}
+	}
+	
+	
+	@RequestMapping(value="checkId.do", method=RequestMethod.GET)
 	public void checkId(String userId, HttpServletResponse resp){
 		try {
 			PrintWriter out = resp.getWriter();
@@ -95,7 +106,7 @@ public class UserController {
 				out.println("Duplicated");
 			}
 		} catch (IOException e) {
-			e.printStackTrace();
+			throw new RuntimeException("다시 시도해주세요.");
 		}
 	}
 

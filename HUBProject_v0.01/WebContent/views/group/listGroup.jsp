@@ -117,11 +117,11 @@
 	
 	$("[name=detailGroupBtn]").click( function() {
 		var index = $(this).val() - 1;
-		$("#detailGroupModal #groupId").val(groups[index][0]);
+		$("#detailGroupModal #groupId").html(groups[index][0]);
 		$("#detailGroupModal #groupName").html(groups[index][1]);
 		$("#detailGroupModal #managerId").html(groups[index][2]);
 		$("#detailGroupModal #lastDay").html(groups[index][3]);
-		initConnReadonly(groups[index][4]);
+		initConnReadonly(groups[index][4], $("#dgtags"));
 		$("#detailGroupModal #introduce").html(groups[index][5]);
 		$("#detailGroupModal #local").html(groups[index][6]);
 		$("#detailGroupModal #joinPeople").html(groups[index][7]);
@@ -156,15 +156,4 @@
 		$("#modifyGroupModal #maxPeople").val(groups[index][8]);
 	});
 
-	function initConnReadonly(str) {
-		var conn = str;
-		conn = conn.replace("[", "");
-		conn = conn.replace(/ /gi, "");
-		conn = conn.replace("]", "");
-		$("#dgtags").importTags(conn);
-		$('.tagsinput').find('a').remove();		
-	};
-	
-	
-	
 </script>

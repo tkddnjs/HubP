@@ -60,7 +60,7 @@ public class BucketlistStoreLogic implements BucketlistStore {
 			BucketlistMapper mapper = session.getMapper(BucketlistMapper.class);
 			
 			for(String connChain : bucketlist.getConnChains()){
-				result = mapper.insertBucketlistConn(bucketlist.getBucketlistId(), connChain);
+				result *= mapper.insertBucketlistConn(bucketlist.getBucketlistId(), connChain);
 			}	
 			if(result>0){
 				session.commit();
