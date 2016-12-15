@@ -116,31 +116,35 @@
 
 <!-- Validation -->
 <script>
-$("#id").keyup(function() {
-	if($("#id").val().length > 5){
-		var id = $(this).val();
-		
-		$.ajax({
-			type: 'POST',
-			url: 'checkId.do',
-			data:
-				{
-					id: id
+	$("#id").keyup(function() {
+		if($("#id").val().length > 5){
+			var id = $(this).val();
+			$.ajax({
+				type: 'POST',
+				url: 'checkId.do',
+				data: {
+						id: id
 				},
-			success: function(result){
-				if($.trim(result)=="ok"){
-					$("#idCheckResult").html("사용가능한 ID입니다.");
-				} else {
-					$("#idCheckResult").html("사용중인 ID입니다.");
+				success: function(result){
+					if($.trim(result)=="ok"){
+						$("#idCheckResult").html("사용가능한 ID입니다.");
+					} else {
+						$("#idCheckResult").html("사용중인 ID입니다.");
+					}
 				}
-			}
-		});
-		
-	}else{
-		$("#idCheckResult").html("ID는 5자 이상입니다.");
-	}
-});
-
+			});
+		}else{
+			$("#idCheckResult").html("ID는 5자 이상입니다.");
+		}
+	});
+	
+	$("#pwCheck").keyup(function() {
+		if($("#pwCheck").val() == $("#pw").val()){
+			$("#pwCheckResult").html("일치");
+		}else{
+			$("#pwCheckResult").html("불일치");
+		}
+	});
 
 	$("form").submit(function(){
 		$("p.error").remove();
