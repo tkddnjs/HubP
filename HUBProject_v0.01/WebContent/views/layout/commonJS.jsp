@@ -235,6 +235,8 @@ $("#id").keyup(function() {
 		}();
 
 		$('#datatable').dataTable();
+		$('#datatable1').dataTable();
+		$('#datatable2').dataTable();
 		
 		$('#datatable-keytable').DataTable({
 			keys: true

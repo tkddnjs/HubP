@@ -111,28 +111,28 @@
 																	<div id="myTabContent" class="tab-content">
 																		<!--tab1 -->
 																		<div role="tabpanel" class="tab-pane fade active in"
-																			id="tap_PostAllOne" aria-labelledby="profile-tab1">
+																			id="tab_PostAllOne" aria-labelledby="profile-tab1">
 																			
-																			<table id="datatable-responsive"
+																			<table id="datatable"
 																				class="table table-striped table-bordered dt-responsive nowrap"
 																				cellspacing="0" width="100%">
 																				<thead>
 																					<tr>
-																						<th style="width: 100px;">보낸 사람</th>
-																						<th style="width: 100px;">받는 사람</th>
-																						<th style="width: 500px;">내용</th>
-																						<th style="width: 150px;">보낸 시간</th>
-																						<th style="width: 50px;">삭제</th>
+																						<th style="text-align:center; width:100px;">보낸 사람</th>
+																						<th style="text-align:center; width:100px;">받는 사람</th>
+																						<th style="text-align:center; width:500px;">내용</th>
+																						<th style="text-align:center; width:150px;">보낸 시간</th>
+																						<th style="text-align:center; width:50px;">삭제</th>
 																					</tr>
 																				</thead>
 																				<tbody>
 																					<c:forEach items="${posts }" var="post" varStatus="status">
 																							<tr>
-																								<td>${post.senderId }</td>
-																								<td>${post.receiverId }</td>
-																								<td>${post.content }</td>
-																								<td>${post.sendTime }</td>
-																								<td></td>
+																								<td style="width:100px; text-align:center; ">${post.senderId }</td>
+																								<td style="width:100px; text-align:center; ">${post.receiverId }</td>
+																								<td style="width:500px;">${post.content }</td>
+																								<td style="width:150px; text-align:center; ">${post.sendTime }</td>
+																								<td style="width:50px; text-align:center; "></td>
 																							</tr>
 																					</c:forEach>
 																				</tbody>
@@ -141,29 +141,29 @@
 																		<!--end tab1 -->
 																		
 																		<!--tab2 -->
-																		<div role="tabpanel" class="tab-pane fade "
+																		<div role="tabpanel" class="tab-pane fade"
 																			id="tab_PostSendOne" aria-labelledby="profile-tab1">
-																			<table id="datatable-responsive"
+																			<table id="datatable1"
 																				class="table table-striped table-bordered dt-responsive nowrap"
 																				cellspacing="0" width="100%">
 																				<thead>
 																					<tr>
-																						<th style="width: 100px;">보낸 사람</th>
-																						<th style="width: 100px;">받는 사람</th>
-																						<th style="width: 500px;">내용</th>
-																						<th style="width: 150px;">보낸 시간</th>
-																						<th style="width: 50px;">삭제</th>
+																						<th style="text-align:center; width:100px;">보낸 사람</th>
+																						<th style="text-align:center; width:100px;">받는 사람</th>
+																						<th style="text-align:center; width:500px;">내용</th>
+																						<th style="text-align:center; width:150px;">보낸 시간</th>
+																						<th style="text-align:center; width:50px;">삭제</th>
 																					</tr>
 																				</thead>
 																				<tbody>
 																					<c:forEach items="${posts }" var="post" varStatus="status">
 																						<c:if test="${post.senderId eq userId }">
 																							<tr>
-																								<td>${post.senderId }</td>
-																								<td>${post.receiverId }</td>
-																								<td>${post.content }</td>
-																								<td>${post.sendTime }</td>
-																								<td></td>
+																								<td style="width:100px; text-align:center; ">${post.senderId }</td>
+																								<td style="width:100px; text-align:center; ">${post.receiverId }</td>
+																								<td style="width:500px;">${post.content }</td>
+																								<td style="width:150px; text-align:center; ">${post.sendTime }</td>
+																								<td style="width:50px; text-align:center; "></td>
 																							</tr>
 																						</c:if>
 																					</c:forEach>
@@ -175,16 +175,17 @@
 																		<!--tab3 -->
 																		<div role="tabpanel" class="tab-pane fade"
 																			id="tab_PostRecieveOne" aria-labelledby="profile-tab1">
-																			<table id="datatable-responsive"
+																			
+																			<table id="datatable2"
 																				class="table table-striped table-bordered dt-responsive nowrap"
 																				cellspacing="0" width="100%">
 																				<thead>
 																					<tr>
-																						<th style="width: 100px;">보낸 사람</th>
-																						<th style="width: 100px;">받는 사람</th>
-																						<th style="width: 500px;">내용</th>
-																						<th style="width: 150px;">보낸 시간</th>
-																						<th style="width: 50px;">삭제</th>
+																						<th style="text-align:center; width:100px;">보낸 사람</th>
+																						<th style="text-align:center; width:100px;">받는 사람</th>
+																						<th style="text-align:center; width:500px;">내용</th>
+																						<th style="text-align:center; width:150px;">보낸 시간</th>
+																						<th style="text-align:center; width:50px;">삭제</th>
 																					</tr>
 																				</thead>
 																				<tbody>
@@ -193,11 +194,11 @@
 																						<c:if
 																							test="${post.receiverId eq userId }">
 																							<tr>
-																								<td>${post.senderId }</td>
-																								<td>${post.receiverId }</td>
-																								<td>${post.content }</td>
-																								<td>${post.sendTime }</td>
-																								<td></td>
+																								<td style="width:100px; text-align:center; ">${post.senderId }</td>
+																								<td style="width:100px; text-align:center; ">${post.receiverId }</td>
+																								<td style="width:500px;">${post.content }</td>
+																								<td style="width:150px; text-align:center; ">${post.sendTime }</td>
+																								<td style="width:50px; text-align:center; "></td>
 																							</tr>
 																						</c:if>
 																					</c:forEach>
