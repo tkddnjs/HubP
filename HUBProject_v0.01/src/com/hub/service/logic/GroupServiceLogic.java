@@ -114,14 +114,9 @@ public class GroupServiceLogic implements GroupService {
 		
 		//follow요청 취소
 		Follow follow = followCont.findFollowById(userId, searchManagerId.getManagerId());
-		System.out.println(follow.getRelation());
 		if(follow.getRelation()==4){
 			followCont.removeFollow(follow);
 		}
-		/*
-		if(searchManagerId != null){
-			
-		}*/
 		
 		return result;
 	}
