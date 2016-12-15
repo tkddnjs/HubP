@@ -6,8 +6,8 @@
 <head>
 <title>Welcome HUB : Have U get a BucketList?</title>
 
-<%@ include file="/views/user/registerUser.jsp"%>
 <%@ include file="/views/layout/commonCSS.jsp"%>
+<%@ include file="/views/user/registerUser.jsp"%>
 
 <style>
 .mainBody {
