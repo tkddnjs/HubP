@@ -70,4 +70,11 @@ public class User {
 		this.admin = admin;
 	}
 
+	@Override
+	public String toString() {
+		return "(" + userId + "/ " + pw + "/ " + email + "/ " + connChains + "/ " + picture + "/ " + introduce + "/ " + admin + ")";
+	}
+
+	
+	
 }

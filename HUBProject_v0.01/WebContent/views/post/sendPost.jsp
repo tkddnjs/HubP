@@ -2,8 +2,14 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
+<style>
+	.post{
+		z-index: 99999;
+	}
+</style>
+
 <!-- Modal -->
-<div class="modal fade" id="sendPostModal" role="dialog">
+<div class="modal fade post" id="sendPostModal" role="dialog" data-backdrop="static">
 	<div class="modal-dialog modal-lg">
 		<div class="modal-content">
 			<div class="modal-header">
@@ -33,7 +39,6 @@
 					<div class="ln_solid"></div>
 					<div class="form-group">
 						<div class="col-md-6 col-sm-6 col-xs-8 col-md-offset-4 col-sm-offset-4 col-xs-offset-4">
-							
 							<button type="submit" class="btn btn-success">전송</button>
 						</div>
 					</div>
@@ -43,6 +48,8 @@
 	</div>
 </div>
 
+<script src="${pageContext.request.contextPath}/resources/vendors/jquery/dist/jquery.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js" type="text/javascript"></script>
 <script>
 	var follows = [];
 	var userId = '${sessionScope.userId}';
@@ -58,17 +65,10 @@
 				result = result.replace("[", "");
 				result = result.replace("]", "");
 				result = result.split(',');
-				list(result);
+				list(result, follows);
 			}
 		});
 	});
-	
-	function list(array){
-		follows.length = 0;
-		for (var i=0; i<array.length; i++){
-			follows.push(array[i]);
-		}
-	};
 	
 	$("#receiverId").autocomplete({
 		source : follows

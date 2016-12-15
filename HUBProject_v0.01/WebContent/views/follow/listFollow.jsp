@@ -103,6 +103,10 @@
 			appendFollow($("#receiveHelp"), 2);
 			appendFollow($("#bothHelp"), 3);
 			appendFollow($("#groupFollow"), 4);
+			$(".sendPostBtn").click(function (){
+				var followId = $(this).val();
+				$("#sendPostModal #receiverId").val(followId);
+			});
 		});
 	});
 	
@@ -147,7 +151,7 @@
 			if(follows[i][3] == 'true' && follows[i][2] == opt){
 				selector.append(
 					'<li class="sub_menu">'
-					+'<button id="sendPostBtn" type="button" data-toggle="modal" data-target="#sendPostModal" class="fa fa-envelope-o" value="' + follows[i][1] + '"'
+					+'<button id="sendPostBtn" type="button" data-toggle="modal" data-target="#sendPostModal" class="fa fa-envelope-o sendPostBtn" value="' + follows[i][1] + '"'
 					+'style="border: hidden; background:none !important; width:30px; float:right">'
 					+'</button>'
 					+'	<form action="${pageContext.request.contextPath}/user/detail.do" method="get">'

@@ -2,52 +2,50 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-
 <%@ include file="/views/post/sendPost.jsp"%>
-<!-- modal -->
-<!--profile-->
 
+<!-- Modal -->
 <div class="modal fade" id="detailUserModal" role="dialog">
 	<div class="modal-dialog modal-lg">
-		<div class="modal-content" style="height: 500px; margin-top: 100px;">
-
-			<div align="center" style="height: 50%;">
-				<div style="width: 70%; margin-top: 30px;">
-
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title">회원상세</h4>
+			</div>
+			<div class="modal-body">
+				<div class="form-horizontal form-label-left groupForm">
 					<div id="crop-avatar">
-						<!-- Current avatar -->
-						<img class="img-responsive avatar-view" id="picture"
-							src="${pageContext.request.contextPath}/resources/img/userImg/${user.picture}"
-							alt="Avatar" title="Change the avatar">
+						<img class="img-responsive avatar-view" id="picture" alt="Avatar" title="Change the avatar">
 					</div>
-
-					<h3 class="name" id="userId"></h3>
-					<div style="border: 1px solid #fdae84; width:50%"></div>
-					<div class="flex">
-						<span><h4>연결고리</h4></span>
-						<p class="tags" id="mgtags" name="connChains">${user.connChains }</p>
+					<div class="form-group">
+						<label class="control-label col-md-2 col-sm-3 col-xs-12" for="userId">ID </label>
+						<div class="col-md-6 col-sm-6 col-xs-8">
+							<label class="form-control col-md-7 col-xs-12" id="userId"></label>
+							<input id="followId" type="hidden">
+						</div>
 					</div>
-					<div style="border: 1px solid #fdae84; width:50%"></div>
-					<h4>Introduce</h4>
-					<input id="introduce" value="" readonly></intput>
+					<div class="form-group">
+						<label class="control-label col-md-2 col-sm-3 col-xs-12">연결고리 </label>
+						<div class="col-md-6 col-sm-6 col-xs-8">
+							<label id="dutags" class="tags form-control"></label>
+						</div>
+					</div>
+					<div class="form-group"></div>
+					<div class="form-group">
+						<label class="control-label col-md-2 col-sm-3 col-xs-12" for="introduce">자기소개</label>
+						<div class="col-md-6 col-sm-6 col-xs-8">
+							<label id="introduce" class="form-control"></label>
+						</div>
+					</div>
+					<div class="ln_solid"></div>
+					<div class="form-group" align="right">
+						<button class="btn btn-xs btn-default btn-block" type="button" id="requestButton"
+								style="border: hidden; background: #ecc7c0; font-size: 14px; width: 100px;">팔로우요청</button>
+						<button class="btn btn-xs btn-default btn-block sendPostBtn" type="button" data-toggle="modal" data-target="#sendPostModal"
+								style="border: hidden; background: #ecc7c0; font-size: 14px; width: 100px;">쪽지전송</button>
+					</div>
 				</div>
 			</div>
-
-			<div align="right">
-				<form action="${pageContext.request.contextPath}/follow/request.do" method="post">
-						<button class="btn btn-xs btn-default btn-block" type="submit"
-						style="border:hidden; background:#ecc7c0; font-size:14px; width:100px;">팔로우신청</button>
-						<input type="hidden" name="userId"  value="${sessionScope.userId }">
-						<input type="hidden" name="followId" id="userId" value="${user.userId }">
-						<input type="hidden" name="relation" id="listOpt" value="${listOpt }">
-				</form>
-					<button class="btn btn-xs btn-default btn-block" type="button" data-toggle="modal" data-target="#sendPostModal"
-						style="border:hidden; background:#ecc7c0; font-size:14px; width:100px;">쪽지전송</button>
-				
-			</div>
-			<!--end frofile-->
 		</div>
 	</div>
 </div>
-
-

@@ -111,6 +111,36 @@
 			source : availableTags
 		})
 	});
+	
+	function initConnReadonly(str, selector) {
+		var conn = str;
+		conn = conn.replace("[", "");
+		conn = conn.replace(/ /gi, "");
+		conn = conn.replace("]", "");
+		selector.importTags(conn);
+		$('.tagsinput').find('a').remove();		
+	};
+	
+	
+	$("#requestButton").click(function (){
+		var userId = "${sessionScope.userId}";
+		var followId = $(this).closest(".modal.fade").find("#followId").val();
+		var relation = $(this).val();
+		$.ajax({
+			type : 'POST',
+			url : '${pageContext.request.contextPath}/follow/request.do',
+			data : {
+				userId : userId,
+				followId : followId,
+				relation : relation
+			},
+			success : function(){
+				alert("팔로우를 요쳥했습니다.");
+				$(this).closest(".modal").find(".close").click();
+			}
+		});
+	});
+	
 </script>
 <!-- /Custom Script -->
 
@@ -126,7 +156,7 @@
 						id: id
 				},
 				success: function(result){
-					if($.trim(result)=="ok"){
+					if($.trim(result)=="OK"){
 						$("#idCheckResult").html("사용가능한 ID입니다.");
 					} else {
 						$("#idCheckResult").html("사용중인 ID입니다.");

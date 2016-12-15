@@ -2,17 +2,13 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<!-- detailBucketlist.jsp & detailUser.jsp import-->
 <%@ include file="/views/list/detailUser.jsp"%>
 <%@ include file="/views/list/detailBucketlist.jsp"%>
-
 
 <div class="col-md-12 col-sm-12 col-xs-12">
 	<div class="x_panel">
 		<div class="x_title">
-			<h2>
-				<form action="${pageContext.request.contextPath }/list/list.do"
-					method="get" class="listOpt selector">
+				<form action="${pageContext.request.contextPath }/list/list.do" method="get" class="listOpt selector">
 					<input type="hidden" name="userId" value="${sessionScope.userId }">
 					<button type="submit" name="listOpt" value="1"
 						style="border: hidden; background: #ecc7c0; font-size: 15px; font-weight: 800; width: 80px; height: 30px;">내가</button>
@@ -21,7 +17,6 @@
 					<button type="submit" name="listOpt" value="3"
 						style="border: hidden; background: #ecc7c0; font-size: 15px; font-weight: 800; width: 80px; height: 30px;">서로</button>
 				</form>
-			</h2>
 			<ul class="nav navbar-right panel_toolbox">
 				<li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
 				</li>
@@ -37,18 +32,8 @@
 				: 나를 도울 수 있는 사람들을 보여줍니다</p>
 			<p class="text-muted font-13 m-b-30" style="margin-top: -15px;">'서로'
 				: 서로 돕고 도울 수 있는 사람들을 보여줍니다</p>
-			<%-- <div style="margin-top:-30px;" align="center">
-				<form action="${pageContext.request.contextPath }/list/list.do" method="get" class="listOpt selector">
-					<input type="hidden" name="userId" value="${sessionScope.userId }">
-					<button type="submit" name="listOpt" value="1" style="border:hidden; background:#ecc7c0; font-size:15px; width:80px;">내가</button>
-					<button type="submit" name="listOpt" value="2" style="border:hidden; background:#ecc7c0; font-size:15px; width:80px;">나를</button>
-					<button type="submit" name="listOpt" value="3" style="border:hidden; background:#ecc7c0; font-size:15px; width:80px;">서로</button>
-				</form>
-			</div> --%>
-			<table id="datatable-responsive"
-				class="table table-striped table-bordered dt-responsive nowrap"
-				cellspacing="0" width="100%">
 
+			<table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
 				<c:choose>
 					<c:when test="${listOpt eq 1 || listOpt eq 3}">
 						<thead>
@@ -60,22 +45,17 @@
 							</tr>
 						</thead>
 						<tbody>
-							<c:forEach items="${bucketlists }" var="bucketlist">
+							<c:forEach items="${bucketlists }" var="bucketlist" varStatus="status">
 								<tr>
 									<td style="text-align: center;">
-										<button id="detailUserBtn" value="${bucketlist.userId }"
-											data-toggle="modal" name="detailUserBtn"
-											data-target="#detailUserModal"
+										<button value="${bucketlist.userId }" data-toggle="modal" name="detailUserBtn" data-target="#detailUserModal"
 											style="font-size: 15px; background: none !important; border: none;">${bucketlist.userId }</button>
 									</td>
 
 									<td style="text-align: center;"><a>
-											<button value="${bucketlist.bucketlistId }"
-												data-toggle="modal" name="modifyBtn"
-												data-target="#detailBucketlistModal"
+											<button value="${bucketlist.bucketlistId }" data-toggle="modal" name="detailBucketlistBtn" data-target="#detailBucketlistModal"
 												style="font-size: 15px; background: none !important; border: none;">${bucketlist.title }</button>
 									</a></td>
-
 
 									<td style="text-align: center;">${bucketlist.connChains }</td>
 									<td>${bucketlist.sos }</td>
@@ -93,11 +73,10 @@
 							</tr>
 						</thead>
 						<tbody>
-							<c:forEach items="${users }" var="user">
+							<c:forEach items="${users }" var="user" varStatus="status">
 								<tr>
 									<td style="text-align: center;">
-										<button value="${user.userId }" data-toggle="modal"
-											name="modifyBtn" data-target="#detailBucketlistModal"
+										<button value="${user.userId }" data-toggle="modal" name="detailUserBtn" data-target="#detailUserModal"
 											style="font-size: 15px; background: none !important; border: none;">${user.userId }</button>
 									</td>
 									<td style="text-align: center;">${user.connChains }</td>
@@ -113,52 +92,56 @@
 </div>
 <!-- end tab2-->
 
-
-
+<script src="${pageContext.request.contextPath}/resources/vendors/jquery/dist/jquery.min.js"></script>
 <script type="text/javascript">
-	var bucketlists = new Array();
-	<c:forEach items="${bucketlists}" var="bucketlist">
-	var bucketlist = new Array();
-	bucketlist.push("${bucketlist.bucketlistId}");
-	bucketlist.push("${bucketlist.title}");
-	bucketlist.push("${bucketlist.connChains}");
-	bucketlist.push("${bucketlist.goal}");
-	bucketlist.push("${bucketlist.star}");
-	bucketlist.push("${bucketlist.progress}");
-	bucketlist.push("${bucketlist.memo}");
-	bucketlist.push("${bucketlist.sos}");
-	bucketlist.push("${bucketlist.lock}");
-	bucketlist.push("${bucketlist.userId}");
-	bucketlists.push(bucketlist);
-	</c:forEach>
-
-	var user = new Array();
-	<c:forEach items="${users}" var="user">
-	user.push("${user.userId}");
-	user.push("${user.picture}");
-	user.push("${user.connChains}");
-	user.push("${user.introduce}");
-	users.push(user);
-	</c:forEach>
-
-	var listOpt = $(this).find("[name='listOpt']").val();
-
-	$("#detailUserBtn").click(function() {
-		var index = $(this).val() - 1;
-		$("#detailUserModal #picture").attr('src', '${pageContext.request.contextPath}/resources/img/userImg/${user.picture}');
-		$("#detailUserModal #userId").html(users[index][0]);
-		initConn(users[index][2]);
-		$("#detailUserModal #intoduce").val(users[index][3]);
-		$("#detailUserModal #introduce").val(listOpt);
-	});
-
-	function initConn(str) {
-		var conn = str;
-		conn = conn.replace("[", "");
-		conn = conn.replace(/ /gi, "");
-		conn = conn.replace("]", "");
-		$(".tags").each(function() {
-			$(this).importTags(conn);
+	var listOpt = ${listOpt};
+	$("[name=detailUserBtn]").click(function() {
+		var userId = $(this).val();
+		var user = new Array();
+		function ajaxUser(){
+			return $.ajax({
+				type : 'post',
+				url : '${pageContext.request.contextPath}/user/detail.do',
+				data : {
+					userId : userId
+				},
+				success : function(result){
+					result = result.replace("(", "");
+					result = result.replace(")", "");
+					result = result.replace(/ /gi, "");
+					result = result.split("/");
+					inputUser(result);
+				}
+			});
+		};
+		function inputUser(array){
+			for(var i=0; i<array.length; i++){
+				user.push(array[i]);
+			}
+		}
+		$.when(ajaxUser()).done(function(){
+			$("#detailUserModal #userId").html(user[0]);
+			$("#detailUserModal #followId").val(user[0]);
+			$("#detailUserModal #picture").attr('src', '${pageContext.request.contextPath}/resources/img/userImg/'+user[4]);
+			initConnReadonly(user[3], $("#dutags"));
+			$("#detailUserModal #introduce").html(user[5]);
+			$("#detailUserModal #requestButton").val(listOpt);
+			$("#detailUserModal .sendPostBtn").val(user[0]);
 		});
-	};
+	});
+	
+	$("[name=detailBucketlistBtn]").click(function() {
+		var index;
+		for(var i=0; i<bucketlists.length; i++){
+			if($(this).val() == bucketlists[i][0]){
+				index = i;
+			}
+		}
+		$("#detailBucketlistModal #title").html(bucketlists[index][1]);
+		$("#detailBucketlistModal #userId").html(bucketlists[index][9]);
+		$("#detailBucketlistModal #followId").val(bucketlists[index][9]);
+		initConnReadonly(bucketlists[index][2], $("#dbtags"));
+		$("#detailBucketlistModal #sos").html(bucketlists[index][7]);
+		$("#detailBucketlistModal #requestBtn").val(listOpt);
+	});
 </script>
