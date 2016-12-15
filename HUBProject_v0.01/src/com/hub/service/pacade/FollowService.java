@@ -12,5 +12,5 @@ public interface FollowService {
 	boolean checkFollowRequested(String userId, String followId);
 	List<Follow> findAll(String userId);
 	List<Follow> findRequestedFollows(String userId);
-	List<Follow> findFollowsByRelation(String userId, int relation);
+	Follow findFollowById(String userId, String followId);
 }

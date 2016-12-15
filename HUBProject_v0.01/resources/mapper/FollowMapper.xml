@@ -54,11 +54,9 @@
 		WHERE userId=#{userId} AND confirm='N'
 	</select>
 
-	<select id="selectFollowsByRelation" parameterType="Map"
-		resultMap="followMap">
+	<select id="selectConnectedFollows" resultMap="followMap">
 		<include refid="selectFollow" />
-		WHERE userId=#{userId} AND confirm='Y'
-		AND relation=#{relation}
+		WHERE userId=#{userId}
 	</select>
 
 </mapper>

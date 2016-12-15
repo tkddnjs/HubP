@@ -120,12 +120,12 @@ public class FollowStoreLogic implements FollowStore {
 	}
 	
 	@Override
-	public List<Follow> selectFollowsByRelation(String userId, int relation) {
+	public List<Follow> selectConnectedFollows(String userId) {
 		SqlSession session = factory.openSession();
 
 		try {
 			FollowMapper mapper = session.getMapper(FollowMapper.class);
-			return mapper.selectFollowsByRelation(userId, relation);
+			return mapper.selectConnectedFollows(userId);
 		} finally {
 			session.close();
 		}

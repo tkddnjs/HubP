@@ -118,6 +118,7 @@
 	$("[name=detailGroupBtn]").click( function() {
 		var index = $(this).val() - 1;
 		$("#detailGroupModal #groupId").html(groups[index][0]);
+		$("#detailGroupModal [name='groupId']").val(groups[index][0]);
 		$("#detailGroupModal #groupName").html(groups[index][1]);
 		$("#detailGroupModal #managerId").html(groups[index][2]);
 		$("#detailGroupModal #lastDay").html(groups[index][3]);
@@ -131,12 +132,15 @@
 		if(gListOpt == '0'){ // 모임방에 가입하지 않은 경우
 			$("#myGroupBtns").attr("hidden", true);
 			$("#joinedGroupBtn").attr("hidden", true);
+			$("#unjoinedGroupBtn").attr("hidden", false);
 		} else {
 			if(groups[index][2] == userId){ // 모임방 관리자인 경우
+				$("#myGroupBtns").attr("hidden", false);
 				$("#joinedGroupBtn").attr("hidden", true);
 				$("#unjoinedGroupBtn").attr("hidden", true);
 			} else {	// 모임방에 가입한 경우
 				$("#myGroupBtns").attr("hidden", true);
+				$("#joinedGroupBtn").attr("hidden", false);
 				$("#unjoinedGroupBtn").attr("hidden", true);
 			}
 		}

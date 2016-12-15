@@ -41,7 +41,7 @@
 					</div>
 					<div class="ln_solid"></div>
 					<div class="form-group" align="right">
-						<button class="btn btn-xs btn-default btn-block" id="requestButton" type="button"
+						<button class="btn btn-xs btn-default btn-block requestButton" id="requestButton" type="button"
 								style="border: hidden; background: #ecc7c0; font-size: 14px; width: 100px;">팔로우요청</button>
 					</div>
 				</div>

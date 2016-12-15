@@ -20,6 +20,6 @@ public interface FollowStore {
 	// 팔로우 조회
 	List<Follow> selectAll(String userId);
 	List<Follow> selectFollowsRequested(String userId);
-	List<Follow> selectFollowsByRelation(String userId, int relation);
+	List<Follow> selectConnectedFollows(String userId);
 
 }

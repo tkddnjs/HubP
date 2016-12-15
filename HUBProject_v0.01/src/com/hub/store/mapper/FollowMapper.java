@@ -14,5 +14,5 @@ public interface FollowMapper {
 	Follow selectFollowById(String userId, String followId);
 	List<Follow> selectAll(String userId);
 	List<Follow> selectFollowsRequested(String userId);
-	List<Follow> selectFollowsByRelation(@Param("userId")String userId, @Param("relation")int relation);
+	List<Follow> selectConnectedFollows(String userId);
 }

@@ -14,8 +14,11 @@
 			</div>
 			<div class="modal-body">
 				<div class="form-horizontal form-label-left groupForm">
-					<div id="crop-avatar">
-						<img class="img-responsive avatar-view" id="picture" alt="Avatar" title="Change the avatar">
+					<div class="form-group" id="crop-avatar">
+						<label class="control-label col-md-2 col-sm-3 col-xs-12" for="picture">사진 </label>
+						<div class="col-md-6 col-sm-6 col-xs-8">
+							<img class="img-responsive avatar-view" id="picture" alt="Avatar" title="Change the avatar">
+						</div>
 					</div>
 					<div class="form-group">
 						<label class="control-label col-md-2 col-sm-3 col-xs-12" for="userId">ID </label>
@@ -39,9 +42,9 @@
 					</div>
 					<div class="ln_solid"></div>
 					<div class="form-group" align="right">
-						<button class="btn btn-xs btn-default btn-block" type="button" id="requestButton"
+						<button class="btn btn-xs btn-default requestBtn" type="button"
 								style="border: hidden; background: #ecc7c0; font-size: 14px; width: 100px;">팔로우요청</button>
-						<button class="btn btn-xs btn-default btn-block sendPostBtn" type="button" data-toggle="modal" data-target="#sendPostModal"
+						<button class="btn btn-xs btn-default sendPostBtn" type="button" data-toggle="modal" data-target="#sendPostModal"
 								style="border: hidden; background: #ecc7c0; font-size: 14px; width: 100px;">쪽지전송</button>
 					</div>
 				</div>

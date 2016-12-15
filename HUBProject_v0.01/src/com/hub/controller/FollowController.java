@@ -22,16 +22,6 @@ public class FollowController {
 	@Autowired
 	private FollowService followService;
 	
-//	@RequestMapping(value="request.do", method=RequestMethod.POST)
-//	public String requestFollow(HttpSession session, String followId){
-//		Follow follow = new Follow();
-//		follow.setUserId((String)session.getAttribute("userId"));
-//		follow.setFollowId(followId);
-//		follow.setConfirm(true);
-//		followService.registerFollow(follow);
-//		return "redirect: list/list.do";
-//	}
-	
 	@RequestMapping(value="request.do", method=RequestMethod.POST)
 	public String requestFollow(Follow follow){
 		follow.setConfirm(true);
@@ -54,19 +44,6 @@ public class FollowController {
 		return "redirect: ../bucketlist/list.do";
 	}
 	
-//	@RequestMapping(value="listAll.do", method=RequestMethod.GET)
-//	public ModelAndView listAllFollows(HttpSession session){
-//		//ModelAndView mav = new ModelAndView("follow/listFollow");
-//		ModelAndView mav = new ModelAndView("bucketlist/bucketList");
-//		String userId = (String)session.getAttribute("userId");
-//		List<Follow> fList = new ArrayList<>();
-//		fList.addAll(followService.findRequestedFollows(userId));
-//		fList.addAll(followService.findAll(userId));
-//		mav.addObject("follows", fList);
-//		mav.addObject("tabOpt", 5);
-//		return mav;
-//	}
-	
 	@RequestMapping(value="listAll.do", method=RequestMethod.GET)
 	public void listAllFollows(HttpServletResponse response, String userId){
 		List<Follow> fList = new ArrayList<>();
@@ -79,20 +56,6 @@ public class FollowController {
 		} catch (IOException e) {
 		}
 	}
-	
-//	@RequestMapping(value="listRelation.do", method=RequestMethod.POST)
-//	public ModelAndView listFollowsByRelation(HttpSession session, int listOpt){
-//		ModelAndView mav = new ModelAndView("follow/listFollow");
-//		String userId = (String)session.getAttribute("userId");
-//		mav.addObject("follows", followService.findFollowsByRelation(userId, listOpt));
-//		return mav;
-//	}
-	
-	public Follow findFollowById(String userId, String followId){
-		Follow follow = followService.findFollowById(userId, followId);
-		return follow;
-	}
-	
 	
 	@RequestMapping(value="autoComplete.do", method=RequestMethod.POST)
 	public void autoCompleteFollows(HttpServletResponse resp, String userId){
@@ -107,5 +70,23 @@ public class FollowController {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	@RequestMapping(value="check.do", method=RequestMethod.POST)
+	public void checkFollows(HttpServletResponse resp, String userId, String followId){
+		try {
+			PrintWriter out = resp.getWriter();
+			
+			if(followService.checkFollowRequested(userId, followId)){
+				out.print("available");
+			} else {
+				out.print("already");
+			}
+		} catch (IOException e) {
+		}
+	}
+	
+	public Follow findFollowById(String userId, String followId){
+		return followService.findFollowById(userId, followId);
 	}
 }

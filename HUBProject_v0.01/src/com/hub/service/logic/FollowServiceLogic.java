@@ -41,29 +41,17 @@ public class FollowServiceLogic implements FollowService {
 	}
 	
 	@Override
-	public List<Follow> findFollowsByRelation(String userId, int relation) {
-		return followStore.selectFollowsByRelation(userId, relation);
-	}
-	
-	@Override
 	public Follow findFollowById(String userId, String followId) {
 		return followStore.selectFollowById(userId, followId);
 	}
 
 	@Override
 	public boolean checkFollowRequested(String userId, String followId){
-		for(Follow Follow : followStore.selectFollowsRequested(userId)){
-			if(Follow.getFollowId().equals(followId)){
-				return false;
-			}
-		}
-		for(Follow Follow : followStore.selectAll(userId)){
-			if(Follow.getFollowId().equals(followId)){
+		for(Follow follow : followStore.selectConnectedFollows(userId)){
+			if(follow.getFollowId().equals(followId)){
 				return false;
 			}
 		}
 		return true;
 	}
-
-
 }

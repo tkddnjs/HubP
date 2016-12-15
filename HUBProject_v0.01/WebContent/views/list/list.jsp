@@ -8,6 +8,7 @@
 <div class="col-md-12 col-sm-12 col-xs-12">
 	<div class="x_panel">
 		<div class="x_title">
+			<h2>
 				<form action="${pageContext.request.contextPath }/list/list.do" method="get" class="listOpt selector">
 					<input type="hidden" name="userId" value="${sessionScope.userId }">
 					<button type="submit" name="listOpt" value="1"
@@ -17,6 +18,7 @@
 					<button type="submit" name="listOpt" value="3"
 						style="border: hidden; background: #ecc7c0; font-size: 15px; font-weight: 800; width: 80px; height: 30px;">서로</button>
 				</form>
+			</h2>
 			<ul class="nav navbar-right panel_toolbox">
 				<li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
 				</li>
@@ -114,20 +116,42 @@
 				}
 			});
 		};
+		
+		var temp = '${sessionScope.userId}';
+		function ajaxCheckFollow(){
+			return $.ajax({
+				type : 'post',
+				url : '${pageContext.request.contextPath}/follow/check.do',
+				data : {
+					userId : temp,
+					followId : userId
+				},
+				success : function(result){
+					if($.trim(result)=="available"){
+						$("#detailUserModal .requestBtn").show();
+					} else {
+						$("#detailUserModal .requestBtn").hide();
+					}
+				}
+			});
+		};
+		
 		function inputUser(array){
 			for(var i=0; i<array.length; i++){
 				user.push(array[i]);
 			}
 		}
-		$.when(ajaxUser()).done(function(){
+		
+		$.when(ajaxUser(), ajaxCheckFollow()).done(function(){
 			$("#detailUserModal #userId").html(user[0]);
 			$("#detailUserModal #followId").val(user[0]);
 			$("#detailUserModal #picture").attr('src', '${pageContext.request.contextPath}/resources/img/userImg/'+user[4]);
 			initConnReadonly(user[3], $("#dutags"));
 			$("#detailUserModal #introduce").html(user[5]);
-			$("#detailUserModal #requestButton").val(listOpt);
+			$("#detailUserModal .requestBtn").val(listOpt);
 			$("#detailUserModal .sendPostBtn").val(user[0]);
 		});
+		
 	});
 	
 	$("[name=detailBucketlistBtn]").click(function() {
@@ -142,6 +166,6 @@
 		$("#detailBucketlistModal #followId").val(bucketlists[index][9]);
 		initConnReadonly(bucketlists[index][2], $("#dbtags"));
 		$("#detailBucketlistModal #sos").html(bucketlists[index][7]);
-		$("#detailBucketlistModal #requestBtn").val(listOpt);
+		$("#detailBucketlistModal .requestBtn").val(listOpt);
 	});
 </script>
