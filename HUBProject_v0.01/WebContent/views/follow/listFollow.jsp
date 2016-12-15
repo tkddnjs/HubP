@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
+<%@ include file="/views/post/sendPost.jsp"%>
 <!--follow-->
 <div class="col-md-3 left_col" style="background: #8BCBC8;">
 	<div class="left_col scroll-view" style="background: #8BCBC8;">
@@ -146,16 +147,24 @@
 			if(follows[i][3] == 'true' && follows[i][2] == opt){
 				selector.append(
 					'<li class="sub_menu">'
+					+'<button id="sendPostBtn" type="button" data-toggle="modal" data-target="#sendPostModal" class="fa fa-envelope-o" value="' + follows[i][1] + '"'
+					+'style="border: hidden; background:none !important; width:30px; float:right">'
+					+'</button>'
 					+'	<form action="${pageContext.request.contextPath}/user/detail.do" method="get">'
 					+'		<input type="hidden" name="myId" value="' + userId + '"> '
 					+'		<input type="hidden" name="userId" value="' + follows[i][1] + '">'
 					+'		<button class="btn btn-xs btn-default btn-block" type="submit"'
-					+'		 style="border: hidden; font-size: 15px; background: none !important;">' + follows[i][1] + '</button>'
+					+'		 style="border: hidden; font-size: 15px; background: none !important; width:50px; float:left">' + follows[i][1] + '</button>'
 					+'	</form>'
 					+'</li>'
 				);
 			}
 		}
 	}
+	$("#sendPostBtn").click( function() {
+		var index = $(this).val();
+		$("#sendPostModal #receiverId").val(index);
+	});
+	
 	
 </script>

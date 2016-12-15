@@ -97,8 +97,9 @@
 
 
 																	<div id="myTabContent" class="tab-content">
+																	
 																	<!-- 전체쪽지 -->
-																	<div role="tabpanel" class="tab-pane fade in"
+																	<div role="tabpanel" class="tab-pane fade active in"
 																		id="tapPostAll" aria-labelledby="profile-tab1">
 																	
 																		<table id="datatable-responsive"
@@ -203,17 +204,11 @@
 
 
 									</div>
-
 								</div>
 							</div>
 						</div>
-
 					</div>
-
 				</div>
-
-
-
 			</div>
 			<!-- /page content -->
 

@@ -11,7 +11,16 @@
 	<div class="x_panel">
 		<div class="x_title">
 			<h2>
-				<i class="fa fa-bitbucket"></i>모임방
+				<!-- <i class="fa fa-bitbucket"></i>모임방 -->
+				<form action="${pageContext.request.contextPath }/group/list.do" method="get" class="listOpt selector">
+					<input type="hidden" name="userId" value="${sessionScope.userId }">
+					<button type="submit" name="listOpt" value="0"
+					style="border: hidden; background: #ecc7c0; font-size: 15px; font-weight: 800; width: 100px; height: 30px;">전체목록</button>
+					<button type="submit" name="listOpt" value="1"
+					style="border: hidden; background: #ecc7c0; font-size: 15px; font-weight: 800; width: 100px; height: 30px;">나의모임방</button>
+					<button id="registerBtn" type="button" data-toggle="modal" data-target="#registerGroupModal"
+					style="border: hidden; background: #ecc7c0; font-size: 15px; font-weight: 800; width: 100px; height: 30px;">모임방등록</button>
+				</form>
 			</h2>
 			<ul class="nav navbar-right panel_toolbox">
 				<li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
@@ -23,12 +32,7 @@
 		</div>
 		<div class="x_content">
 			<div>
-				<form action="${pageContext.request.contextPath }/group/list.do" method="get" class="listOpt selector">
-					<input type="hidden" name="userId" value="${sessionScope.userId }">
-					<button type="submit" name="listOpt" value="0">전체목록</button>
-					<button type="submit" name="listOpt" value="1">나의모임방</button>
-					<button id="registerBtn" type="button" data-toggle="modal" data-target="#registerGroupModal">모임방등록</button>
-				</form>
+				
 			</div>
 			<table id="groupTable"
 				class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">

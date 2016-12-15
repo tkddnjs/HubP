@@ -35,7 +35,7 @@
 									<div class="form-horizontal form-label-left">
 										<div class="form-group">
 											<label for="picture"
-												class="control-label col-md-2 col-sm-3 col-xs-12">Picture</label>
+												class="control-label col-md-2 col-sm-3 col-xs-12">프로필사진</label>
 											<div class="col-md-6 col-sm-6 col-xs-8">
 												<img width="100%" 
 													src="${pageContext.request.contextPath}/resources/img/userImg/${user.picture}">
@@ -50,7 +50,7 @@
 											</div>
 										</div>
 										<div class="control-group">
-											<label class="control-label col-md-2 col-sm-3 col-xs-12">ConnChains</label>
+											<label class="control-label col-md-2 col-sm-3 col-xs-12">연결고리</label>
 											<div class="col-md-6 col-sm-6 col-xs-8" id="connForm">
 												<c:forEach items="${user.connChains }" var="connChain">
 													<label class="control-label">${connChain }</label>
@@ -59,7 +59,7 @@
 										</div>
 										<div class="form-group"></div>
 										<div class="form-group">
-											<label class="control-label col-md-2 col-sm-3 col-xs-12">Introduce</label>
+											<label class="control-label col-md-2 col-sm-3 col-xs-12">자기소개</label>
 											<div class="col-md-6 col-sm-6 col-xs-8">
 												<textarea readonly="readonly" class="form-control" rows="3"
 													name="introduce">${user.introduce }</textarea>

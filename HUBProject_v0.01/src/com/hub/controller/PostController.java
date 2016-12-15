@@ -21,15 +21,15 @@ public class PostController {
 	@Autowired
 	private PostService postService;
 	
-	@RequestMapping(value="send.do", method=RequestMethod.GET)
+	/*@RequestMapping(value="send.do", method=RequestMethod.GET)
 	public String sendPost(){
 		return "post/sendPost";
-	}
+	}*/
 	
 	@RequestMapping(value="send.do", method=RequestMethod.POST)
 	public String sendPost(Post post){
 		postService.sendPost(post);
-		return "list.do";
+		return "redirect:/user/detail.do?myId="+ post.getSenderId() + "&userId=" + post.getReceiverId();
 	}
 	
 	@RequestMapping(value="remove.do", method=RequestMethod.POST)

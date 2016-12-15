@@ -13,22 +13,22 @@
    			<div class="modal-body">
 				<form id="modifyBucketlistForm" action="${pageContext.request.contextPath}/bucketlist/modify.do" class="form-horizontal form-label-left bucketlistForm" method="post" enctype="multipart/form-data">
 					<div class="form-group">
-						<label class="control-label col-md-2 col-sm-3 col-xs-12" for="title">Title <span class="required">*</span></label>
+						<label class="control-label col-md-2 col-sm-3 col-xs-12" for="title">제목<span class="required">*</span></label>
 						<div class="col-md-6 col-sm-6 col-xs-8">
 							<input type="text" id="title" name="title" required="required" class="form-control col-md-7 col-xs-12">
 						</div>
 					</div>
 					<div class="form-group">
 						<div>
-							<label class="control-label col-md-2 col-sm-3 col-xs-12" for="goal">Progress <span class="required">*</span></label>
+							<label class="control-label col-md-2 col-sm-3 col-xs-12" for="goal">진행도<span class="required">*</span></label>
 							<div class="col-md-2 col-sm-3 col-xs-3">
 								<input id="progress" name="progress" class="knob" data-width="90" data-height="120" data-angleOffset=90 data-linecap=round
 									data-fgColor="#26B99A" data-displayPrevious=true>
 							</div>
 						</div>
-						<div style="margin-right:40%;">
+						<div style="margin-right:30%;">
 							<div>
-								<label class="control-label col-md-2 col-sm-3 col-xs-12" for="lock">Lock　</label>
+								<label class="control-label col-md-2 col-sm-3 col-xs-12" for="lock">잠금</label>
 								<div class="col-md-3 col-sm-3 col-xs-3">
 									<div style="vertical-align: middle;">
 										<input type="radio" id="public" name="lock" value="${true }"><b>공개</b>
@@ -38,13 +38,13 @@
 								</div>
 							</div>
 							<div>
-								<label class="control-label col-md-2 col-sm-3 col-xs-12" for="goal">Goal <span class="required">*</span></label>
+								<label class="control-label col-md-2 col-sm-3 col-xs-12" for="goal">목표기간<span class="required">*</span></label>
 								<div class="col-md-3 col-sm-3 col-xs-3">
 									<input type="text" id="goal" name="goal" required="required" class="form-control col-md-7 col-xs-12">
 								</div>
 							</div>
 							<div>
-								<label class="control-label col-md-2 col-sm-3 col-xs-12" for="star">Star　</label>
+								<label class="control-label col-md-2 col-sm-3 col-xs-12" for="star">중요도</label>
 								<div class="col-md-3 col-sm-3 col-xs-3">
 									<input type="hidden" id="star" name="star">
 									<div class="starrr changeStar" style="padding-top: 5%;" data-rating="0"></div>
@@ -53,7 +53,7 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="control-label col-md-2 col-sm-3 col-xs-12">ConnChains <span class="required">*</span></label>
+						<label class="control-label col-md-2 col-sm-3 col-xs-12">연결고리<span class="required">*</span></label>
 						<div class="col-md-6 col-sm-6 col-xs-8">
 							<input type="text" id="mbtags" name="connChains" class="tags form-control" />
 						</div>
@@ -66,7 +66,7 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="control-label col-md-2 col-sm-3 col-xs-12" for="memo">Memo</label>
+						<label class="control-label col-md-2 col-sm-3 col-xs-12" for="memo">메모</label>
 						<div class="col-md-6 col-sm-6 col-xs-8">
 							<textarea class="form-control" rows="12" id="memo" name="memo"></textarea>
 						</div>

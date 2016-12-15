@@ -13,7 +13,7 @@
 			<div class="modal-body">
 				<div class="form-horizontal form-label-left groupForm">
 					<div class="form-group">
-						<label class="control-label col-md-2 col-sm-3 col-xs-12" for="groupName">GroupName <span class="required">*</span></label>
+						<label class="control-label col-md-2 col-sm-3 col-xs-12" for="groupName">모임 이름 <span class="required">*</span></label>
 						<div class="col-md-6 col-sm-6 col-xs-8">
 							<!-- <input type="text" readonly="readonly" id="groupName" name="groupName" required="required" class="form-control col-md-7 col-xs-12"> -->
 							<label class="form-control col-md-7 col-xs-12" id="groupName"></label>
@@ -21,7 +21,7 @@
 					</div>
 					<div class="form-group">
 						<div>
-							<label class="control-label col-md-2 col-sm-3 col-xs-12" for="managerId">ManagerId <span class="required">*</span></label>
+							<label class="control-label col-md-2 col-sm-3 col-xs-12" for="managerId">모임 개설자 <span class="required">*</span></label>
 							<div class="col-md-6 col-sm-6 col-xs-8">
 								<!-- <input type="text" readonly="readonly" id="managerId" name="managerId" required="required" class="form-control col-md-7 col-xs-12"> -->
 								<label class="form-control col-md-7 col-xs-12" id="managerId"></label>
@@ -30,7 +30,7 @@
 					</div>
 					<div class="form-group">
 						<div>
-							<label class="control-label col-md-2 col-sm-3 col-xs-12" for="lastDay">LastDay <span class="required">*</span></label>
+							<label class="control-label col-md-2 col-sm-3 col-xs-12" for="lastDay">모집 마감일 <span class="required">*</span></label>
 							<div class="col-md-6 col-sm-6 col-xs-8">
 								<!-- <input type="date" readonly="readonly" id="lastDay" name="lastDay" required="required" class="form-control col-md-7 col-xs-12"> -->
 								<label class="form-control col-md-7 col-xs-12" id="lastDay"></label>
@@ -39,7 +39,7 @@
 					</div>
 					<div class="form-group">
 						<div>
-							<label class="control-label col-md-2 col-sm-3 col-xs-12" for="local">Local <span class="required">*</span></label>
+							<label class="control-label col-md-2 col-sm-3 col-xs-12" for="local">지역 <span class="required">*</span></label>
 							<div class="col-md-6 col-sm-6 col-xs-8">
 								<!-- <input type="text" readonly="readonly" id="local" name="local" required="required" class="form-control col-md-7 col-xs-12"> -->
 								<label class="form-control col-md-7 col-xs-12" id="local"></label>
@@ -48,8 +48,8 @@
 					</div>
 					<div class="form-group">
 						<div>
-							<label class="control-label col-md-2 col-sm-3 col-xs-12" for="maxPeople">maxPeople
-									<span><small>(joinPeople : <label id="joinPeople"></label>)</small></span></label>
+							<label class="control-label col-md-2 col-sm-3 col-xs-12" for="maxPeople">최대인원
+									<span><small>(현재인원 : <label id="joinPeople"></label>)</small></span></label>
 							<div class="col-md-6 col-sm-6 col-xs-8">
 								<!-- <input type="text" readonly="readonly" id="maxPeople" name="maxPeople" required="required" class="form-control col-md-7 col-xs-12"> -->
 								<label class="form-control col-md-7 col-xs-12" id="maxPeople"></label>
@@ -57,7 +57,7 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="control-label col-md-2 col-sm-3 col-xs-12">ConnChains
+						<label class="control-label col-md-2 col-sm-3 col-xs-12">연결고리
 							<span class="required">*</span>
 						</label>
 						<div class="col-md-6 col-sm-6 col-xs-8">
@@ -66,7 +66,7 @@
 					</div>
 					<div class="form-group"></div>
 					<div class="form-group">
-						<label class="control-label col-md-2 col-sm-3 col-xs-12" for="introduce">Introduce</label>
+						<label class="control-label col-md-2 col-sm-3 col-xs-12" for="introduce">모임방 소개</label>
 						<div class="col-md-6 col-sm-6 col-xs-8">
 							<label id="introduce" class="form-control"></label>
 							<!-- <textarea readonly="readonly" class="form-control" rows="3"
@@ -79,7 +79,7 @@
 							<div id="myGroupBtns">
 								<input type="hidden" id="no">
 								<button id="modifyGroupBtn" type="button" data-toggle="modal" data-target="#modifyGroupModal" class="btn btn-default">수정</button>
-								<a href="${pageContext.request.contextPath}/group/remove.do" class="btn btn-primary">삭제</a>
+								<a href="${pageContext.request.contextPath}/group/remove.do" class="btn btn-primary">해체</a>
 							</div>
 							<div id="joinedGroupBtn">
 								<a href="${pageContext.request.contextPath}/group/exit.do" class="btn btn-primary">탈퇴</a>

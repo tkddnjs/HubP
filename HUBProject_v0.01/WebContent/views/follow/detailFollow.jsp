@@ -35,9 +35,9 @@
 							<div class="">
 								<div class="x_content">
 
-									<!--tab-->
+									
 									<div class="" role="tabpanel" data-example-id="togglable-tabs">
-
+										<!--main tab-->
 										<ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist"
 											style="background-color: #fdae84;">
 											<li role="presentation" class=""><a
@@ -53,43 +53,30 @@
 												href="${pageContext.request.contextPath }/group/list.do?listOpt=0"
 												id="profile-tab4">Group </a></li>
 										</ul>
-
-
-
-
+										<!--end main tab-->
 
 										<div>
 											<div class="row">
 												<div class="col-md-12 col-sm-12 col-xs-12">
 													<div class="x_panel">
 														<div class="x_title">
-															<h2>Profile & Post</h2>
+															<h2>${user.userId }님의 프로필 & 주고받은 쪽지</h2>
 															<ul class="nav navbar-right panel_toolbox">
-																<li><a class="collapse-link"><i
-																		class="fa fa-chevron-up"></i></a></li>
-
-																<li><a class="close-link"><i
-																		class="fa fa-close"></i></a></li>
+																<li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
+																<li><a class="close-link"><i class="fa fa-close"></i></a></li>
 															</ul>
 															<div class="clearfix"></div>
 														</div>
+														
 														<div class="x_content">
-
-
-
-
-
 															<!--profile-->
-
 															<div class="col-md-3 col-sm-3 col-xs-12 profile_left">
-
 																<div id="crop-avatar">
-																	<!-- Current avatar -->
+																	<!-- Current Avatar -->
 																	<img class="img-responsive avatar-view"
 																		src="${pageContext.request.contextPath}/resources/img/userImg/${user.picture}"
-																		alt="Avatar" title="Change the avatar">
+																		alt="avatar" title="Change the avatar">
 																</div>
-
 																<h3 class="name">${user.userId }</h3>
 																<div style="border: 1px solid #fdae84"></div>
 																<div class="flex">
@@ -97,37 +84,35 @@
 																	<p>${user.connChains }</p>
 																</div>
 																<div style="border: 1px solid #fdae84"></div>
-																<h4>Introduce</h4>
+																<h4>자기소개</h4>
 																<p>${user.introduce }</p>
-
 															</div>
-
 															<!--end frofile-->
-
-
-
+															
+															<!-- post -->
 															<div class="col-md-9 col-sm-9 col-xs-12">
-
 																<div class="" role="tabpanel"
 																	data-example-id="togglable-tabs">
-																	<ul id="myTab" class="nav nav-tabs bar_tabs"
-																		role="tablist" style="background-color: #ecc7c0;">
-																		<li role="presentation" class="active"><a
-																			href="#tab" id="home-tab" role="tab"
-																			data-toggle="tab" aria-expanded="true">전체쪽지</a></li>
-																		<li role="presentation" class=""><a
-																			href="#content2" role="tab" id="profile-tab"
-																			data-toggle="tab" aria-expanded="false">보낸쪽지</a></li>
-																		<li role="presentation" class=""><a
-																			href="#tab_content3" role="tab" id="profile-tab2"
-																			data-toggle="tab" aria-expanded="false">받은쪽지</a></li>
+																	
+																	<ul id="myTab" class="nav nav-tabs bar_tabs" 
+																	role="tablist" style="background-color: #ecc7c0;">
+																		<li role="presentation" class="active">
+																		<a href="#tab_PostAllOne" id="home-tab" role="tab" 
+																		data-toggle="tab" aria-controls="home" aria-expanded="true">전체쪽지</a></li>
+																		<li role="presentation" class="">
+																		<a href="#tab_PostSendOne" role="tab" id="profile-tab"
+																		data-toggle="tab" aria-controls="profile" aria-expanded="false">보낸쪽지</a></li>
+																		<li role="presentation" class="">
+																		<a href="#tab_PostRecieveOne" role="tab" id="profile-tab2" 
+																		data-toggle="tab" aria-controls="profile" aria-expanded="false">받은쪽지</a></li>
 																	</ul>
-
-
-																	<div class="x_content">
-																		<div role="tabpanel" class="tab-pane fade in"
-																			id="tapPostAll" aria-labelledby="profile-tab1">
-
+																	
+																	<!-- end tab Area -->
+																	<div id="myTabContent" class="tab-content">
+																		<!--tab1 -->
+																		<div role="tabpanel" class="tab-pane fade active in"
+																			id="tap_PostAllOne" aria-labelledby="profile-tab1">
+																			
 																			<table id="datatable-responsive"
 																				class="table table-striped table-bordered dt-responsive nowrap"
 																				cellspacing="0" width="100%">
@@ -141,23 +126,55 @@
 																					</tr>
 																				</thead>
 																				<tbody>
-																					<c:forEach items="${posts }" var="post"
-																						varStatus="status">
-																						<tr>
-																							<td>${post.senderId }</td>
-																							<td>${post.receiverId }</td>
-																							<td>${post.content }</td>
-																							<td>${post.sendTime }</td>
-																							<td></td>
-																						</tr>
+																					<c:forEach items="${posts }" var="post" varStatus="status">
+																							<tr>
+																								<td>${post.senderId }</td>
+																								<td>${post.receiverId }</td>
+																								<td>${post.content }</td>
+																								<td>${post.sendTime }</td>
+																								<td></td>
+																							</tr>
 																					</c:forEach>
 																				</tbody>
 																			</table>
 																		</div>
-
+																		<!--end tab1 -->
+																		
+																		<!--tab2 -->
+																		<div role="tabpanel" class="tab-pane fade "
+																			id="tab_PostSendOne" aria-labelledby="profile-tab1">
+																			<table id="datatable-responsive"
+																				class="table table-striped table-bordered dt-responsive nowrap"
+																				cellspacing="0" width="100%">
+																				<thead>
+																					<tr>
+																						<th style="width: 100px;">보낸 사람</th>
+																						<th style="width: 100px;">받는 사람</th>
+																						<th style="width: 500px;">내용</th>
+																						<th style="width: 150px;">보낸 시간</th>
+																						<th style="width: 50px;">삭제</th>
+																					</tr>
+																				</thead>
+																				<tbody>
+																					<c:forEach items="${posts }" var="post" varStatus="status">
+																						<c:if test="${post.senderId eq userId }">
+																							<tr>
+																								<td>${post.senderId }</td>
+																								<td>${post.receiverId }</td>
+																								<td>${post.content }</td>
+																								<td>${post.sendTime }</td>
+																								<td></td>
+																							</tr>
+																						</c:if>
+																					</c:forEach>
+																				</tbody>
+																			</table>
+																		</div>
+																		<!--end tab2 -->
+																		
+																		<!--tab3 -->
 																		<div role="tabpanel" class="tab-pane fade"
-																			id="tabPostSend" aria-labelledby="profile-tab1">
-
+																			id="tab_PostRecieveOne" aria-labelledby="profile-tab1">
 																			<table id="datatable-responsive"
 																				class="table table-striped table-bordered dt-responsive nowrap"
 																				cellspacing="0" width="100%">
@@ -174,7 +191,7 @@
 																					<c:forEach items="${posts }" var="post"
 																						varStatus="status">
 																						<c:if
-																							test="${post.senderId eq sessionScope.userId }">
+																							test="${post.receiverId eq userId }">
 																							<tr>
 																								<td>${post.senderId }</td>
 																								<td>${post.receiverId }</td>
@@ -187,61 +204,27 @@
 																				</tbody>
 																			</table>
 																		</div>
-
-																		<div role="tabpanel" class="tab-pane fade"
-																			id="tabPostRecieve" aria-labelledby="profile-tab1">
-
-																			<table id="datatable-responsive"
-																				class="table table-striped table-bordered dt-responsive nowrap"
-																				cellspacing="0" width="100%">
-																				<thead>
-																					<tr>
-																						<th style="width: 100px;">보낸 사람</th>
-																						<th style="width: 100px;">받는 사람</th>
-																						<th style="width: 500px;">내용</th>
-																						<th style="width: 150px;">보낸 시간</th>
-																						<th style="width: 50px;">삭제</th>
-																					</tr>
-																				</thead>
-																				<tbody>
-																					<c:forEach items="${posts }" var="post"
-																						varStatus="status">
-																						<c:if
-																							test="${post.receiverId eq sessionScope.userId }">
-																							<tr>
-																								<td>${post.senderId }</td>
-																								<td>${post.receiverId }</td>
-																								<td>${post.content }</td>
-																								<td>${post.sendTime }</td>
-																								<td></td>
-																							</tr>
-																						</c:if>
-																					</c:forEach>
-																				</tbody>
-																			</table>
-																		</div>
+																		<!--end tab3 -->
 																	</div>
+																	<!-- end tab Area -->
+																	
 																</div>
 															</div>
+															<!--end post -->
 														</div>
 													</div>
 												</div>
-
 											</div>
-
-
-
-
-
-
-
 										</div>
+										
+										
 									</div>
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
+				<!-- /page content -->
 
 				<!-- footer content -->
 				<footer>
@@ -256,104 +239,106 @@
 
 			</div>
 		</div>
-		<%@ include file="/views/layout/commonJS.jsp"%>
+	</div>
+	
+	<%@ include file="/views/layout/commonJS.jsp"%>
 
-		<script>
-			$(".bucketlistForm").submit(function() {
-				var tags = $(this).find(".tags").val();
-				tags = tags.split(",");
-				$(this).find(".tags").val(tags);
+	<script>
+		$(".bucketlistForm").submit(function() {
+			var tags = $(this).find(".tags").val();
+			tags = tags.split(",");
+			$(this).find(".tags").val(tags);
 
-				var star = $(this).find(".changeStar").attr("data-rating");
-				$(this).find("#star").val(star);
+			var star = $(this).find(".changeStar").attr("data-rating");
+			$(this).find("#star").val(star);
+		});
+	</script>
+
+	<script>
+		$("#modifyBucketlistForm").submit(function() {
+			var memo = $(this).find("[name='memo']").val();
+			memo = memo.replace(/\n/gi, " ");
+			$(this).find("[name='memo']").val(memo);
+		});
+	</script>
+
+	<script type="text/javascript">
+		var bucketlists = new Array();
+		<c:forEach items="${bucketlists}" var="bucketlist">
+		var bucketlist = new Array();
+		bucketlist.push("${bucketlist.bucketlistId}");
+		bucketlist.push("${bucketlist.title}");
+		bucketlist.push("${bucketlist.connChains}");
+		bucketlist.push("${bucketlist.goal}");
+		bucketlist.push("${bucketlist.star}");
+		bucketlist.push("${bucketlist.progress}");
+		bucketlist.push("${bucketlist.memo}");
+		bucketlist.push("${bucketlist.sos}");
+		bucketlist.push("${bucketlist.lock}");
+		bucketlist.push("${bucketlist.userId}");
+		bucketlists.push(bucketlist);
+		</c:forEach>
+
+		$("#registerBtn").click(function() {
+			$(".tags").importTags("");
+			$(".changeStar").starrr();
+			$(".changeStar").starrr('setRating', 0);
+			$(".changeStar").attr("data-rating", 0);
+			$(".changeStar").on('starrr:change', function(e, value) {
+				$(this).attr("data-rating", value);
 			});
-		</script>
+		});
 
-		<script>
-			$("#modifyBucketlistForm").submit(function() {
-				var memo = $(this).find("[name='memo']").val();
-				memo = memo.replace(/\n/gi, " ");
-				$(this).find("[name='memo']").val(memo);
+		$("[name=modifyBtn]").click(
+				function() {
+					var index = $(this).val() - 1;
+					$("#modifyBucketlistModal #bucketlistId").val(
+							bucketlists[index][0]);
+					$("#modifyBucketlistModal #title").val(
+							bucketlists[index][1]);
+					initConn(bucketlists[index][2]);
+					$("#modifyBucketlistModal #goal").val(
+							bucketlists[index][3]);
+					initStar(bucketlists[index][4]);
+					$("#modifyBucketlistModal #progress").val(
+							bucketlists[index][5]).trigger("change");
+					$("#modifyBucketlistModal #memo").val(
+							bucketlists[index][6]);
+					$("#modifyBucketlistModal #sos").val(
+							bucketlists[index][7]);
+					var lock = bucketlists[index][8];
+					if (lock == 'true') {
+						$('#modifyBucketlistModal #private').attr(
+								"checked", true);
+					} else {
+						$("#modifyBucketlistModal #public").attr("checked",
+								true);
+					}
+					$("#modifyBucketlistModal #userId").val(
+							bucketlists[index][9]);
+				});
+
+		function initConn(str) {
+			var conn = str;
+			conn = conn.replace("[", "");
+			conn = conn.replace(/ /gi, "");
+			conn = conn.replace("]", "");
+			$(".tags").each(function() {
+				$(this).importTags(conn);
 			});
-		</script>
+		};
 
-		<script type="text/javascript">
-			var bucketlists = new Array();
-			<c:forEach items="${bucketlists}" var="bucketlist">
-			var bucketlist = new Array();
-			bucketlist.push("${bucketlist.bucketlistId}");
-			bucketlist.push("${bucketlist.title}");
-			bucketlist.push("${bucketlist.connChains}");
-			bucketlist.push("${bucketlist.goal}");
-			bucketlist.push("${bucketlist.star}");
-			bucketlist.push("${bucketlist.progress}");
-			bucketlist.push("${bucketlist.memo}");
-			bucketlist.push("${bucketlist.sos}");
-			bucketlist.push("${bucketlist.lock}");
-			bucketlist.push("${bucketlist.userId}");
-			bucketlists.push(bucketlist);
-			</c:forEach>
-
-			$("#registerBtn").click(function() {
-				$(".tags").importTags("");
-				$(".changeStar").starrr();
-				$(".changeStar").starrr('setRating', 0);
-				$(".changeStar").attr("data-rating", 0);
-				$(".changeStar").on('starrr:change', function(e, value) {
+		function initStar(str) {
+			$(".changeStar").each(function() {
+				$(this).starrr();
+				$(this).starrr('setRating', str);
+				$(this).attr("data-rating", str);
+				$(this).on('starrr:change', function(e, value) {
 					$(this).attr("data-rating", value);
 				});
+				$("[name='star']").val(str);
 			});
-
-			$("[name=modifyBtn]").click(
-					function() {
-						var index = $(this).val() - 1;
-						$("#modifyBucketlistModal #bucketlistId").val(
-								bucketlists[index][0]);
-						$("#modifyBucketlistModal #title").val(
-								bucketlists[index][1]);
-						initConn(bucketlists[index][2]);
-						$("#modifyBucketlistModal #goal").val(
-								bucketlists[index][3]);
-						initStar(bucketlists[index][4]);
-						$("#modifyBucketlistModal #progress").val(
-								bucketlists[index][5]).trigger("change");
-						$("#modifyBucketlistModal #memo").val(
-								bucketlists[index][6]);
-						$("#modifyBucketlistModal #sos").val(
-								bucketlists[index][7]);
-						var lock = bucketlists[index][8];
-						if (lock == 'true') {
-							$('#modifyBucketlistModal #private').attr(
-									"checked", true);
-						} else {
-							$("#modifyBucketlistModal #public").attr("checked",
-									true);
-						}
-						$("#modifyBucketlistModal #userId").val(
-								bucketlists[index][9]);
-					});
-
-			function initConn(str) {
-				var conn = str;
-				conn = conn.replace("[", "");
-				conn = conn.replace(/ /gi, "");
-				conn = conn.replace("]", "");
-				$(".tags").each(function() {
-					$(this).importTags(conn);
-				});
-			};
-
-			function initStar(str) {
-				$(".changeStar").each(function() {
-					$(this).starrr();
-					$(this).starrr('setRating', str);
-					$(this).attr("data-rating", str);
-					$(this).on('starrr:change', function(e, value) {
-						$(this).attr("data-rating", value);
-					});
-					$("[name='star']").val(str);
-				});
-			}
-		</script>
+		}
+	</script>
 </body>
 </html>

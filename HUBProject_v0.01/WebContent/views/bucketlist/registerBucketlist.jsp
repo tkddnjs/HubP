@@ -13,13 +13,13 @@
    			<div class="modal-body">
 				<form id="registerBucketlistForm" action="${pageContext.request.contextPath}/bucketlist/register.do" class="form-horizontal form-label-left bucketlistForm" method="post" enctype="multipart/form-data">
 					<div class="form-group">
-						<label class="control-label col-md-2 col-sm-3 col-xs-12" for="title">Title <span class="required">*</span></label>
+						<label class="control-label col-md-2 col-sm-3 col-xs-12" for="title">제목<span class="required">*</span></label>
 						<div class="col-md-2 col-sm-3 col-xs-3">
 							<input type="text" id="title" name="title" required="required" class="form-control col-md-7 col-xs-12">
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="control-label col-md-2 col-sm-3 col-xs-12" for="lock">Lock</label>
+						<label class="control-label col-md-2 col-sm-3 col-xs-12" for="lock">잠금</label>
 						<div class="col-md-6 col-sm-6 col-xs-8">
 							<div style="vertical-align: middle;">
 								<input type="radio" id="public" name="lock" value="${true }" checked="checked"><b>공개</b>
@@ -28,20 +28,20 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="control-label col-md-2 col-sm-3 col-xs-12" for="goal">Goal <span class="required">*</span></label>
-							<div class="col-md-2 col-sm-3 col-xs-3">
-								<input type="text" id="goal" name="goal" placeholder="목표기간을 입력하세요(ex. 올해안에, 3년안에...)" required="required" class="form-control col-md-7 col-xs-12">
+						<label class="control-label col-md-2 col-sm-3 col-xs-12" for="goal">목표기간<span class="required">*</span></label>
+							<div class="col-md-6 col-sm-6 col-xs-8">
+								<input type="text" id="goal" name="goal" placeholder="ex)올해안에, 3년안에..." required="required" class="form-control col-md-7 col-xs-12">
 							</div>
 					</div>
 					<div class="form-group">
-						<label class="control-label col-md-2 col-sm-3 col-xs-12" for="star">Star　</label>
+						<label class="control-label col-md-2 col-sm-3 col-xs-12" for="star">중요도</label>
 						<div class="col-md-3 col-sm-3 col-xs-3">
 							<input type="hidden" id="star" name="star">
 							<div class="starrr changeStar" style="padding-top: 5%;" data-rating="0"></div>
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="control-label col-md-2 col-sm-3 col-xs-12">ConnChains <span class="required">*</span></label>
+						<label class="control-label col-md-2 col-sm-3 col-xs-12">연결고리<span class="required">*</span></label>
 						<div class="col-md-6 col-sm-6 col-xs-8">
 							<input id="rbtags" type="text" name="connChains" required="required" class="tags form-control" />
 						</div>

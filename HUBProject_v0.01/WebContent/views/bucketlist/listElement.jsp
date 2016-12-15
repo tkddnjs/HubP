@@ -99,7 +99,7 @@
 										</tr>
 										<tr>
 											<th><h2>
-													<strong>MEMO</strong>
+													<strong>메모</strong>
 												</h2></th>
 										</tr>
 										<tr>

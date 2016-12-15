@@ -21,13 +21,13 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="control-label col-md-2 col-sm-3 col-xs-12" for="pw">PW <span class="required">*</span></label>
+						<label class="control-label col-md-2 col-sm-3 col-xs-12" for="pw">비밀번호 <span class="required">*</span></label>
 							<div class="col-md-2 col-sm-3 col-xs-3">
 								<input type="password" id="pw" name="pw" required="required" class="form-control col-md-7 col-xs-12">
 							</div>
 					</div>
 					<div class="form-group">
-						<label class="control-label col-md-2 col-sm-3 col-xs-12" for="pwCheck">PW Check <span class="required">*</span></label>
+						<label class="control-label col-md-2 col-sm-3 col-xs-12" for="pwCheck">비밀번호 확인<span class="required">*</span></label>
 							<div class="col-md-2 col-sm-3 col-xs-3">
 								<input type="password" id="pwCheck" name="pwCheck" required="required" class="form-control col-md-7 col-xs-12">
 							</div>
@@ -39,7 +39,7 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="control-label col-md-2 col-sm-3 col-xs-12">ConnChains <span class="required">*</span></label>
+						<label class="control-label col-md-2 col-sm-3 col-xs-12">연결고리 <span class="required">*</span></label>
 						<div class="col-md-6 col-sm-6 col-xs-8">
 							<input id="mutags" type="text" name="connChains" class="tags form-control" />
 						</div>
@@ -48,13 +48,13 @@
 					<div class="form-group">
 						<label class="control-label col-md-2 col-sm-3 col-xs-12" for="picture">Picture</label>
 						<div class="col-md-6 col-sm-6 col-xs-8">
-							<button type="button" id="pictureBtn" class="btn btn-primary">사진입력</button>
+							<button type="button" id="pictureBtn" class="btn btn-primary">프로필사진</button>
 							<input type="file" name="image" data-role="magic-overlay" data-target="#pictureBtn" data-edit="insertImage"/>
 							<img width="10%" height="10%" src="${pageContext.request.contextPath}/resources/img/userImg/${user.picture}">
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="control-label col-md-2 col-sm-3 col-xs-12" for="introduce">Introduce</label>
+						<label class="control-label col-md-2 col-sm-3 col-xs-12" for="introduce">자기소개</label>
 						<div class="col-md-6 col-sm-6 col-xs-8">
 							<textarea class="form-control" rows="3" name="introduce">${user.introduce }</textarea>
 						</div>

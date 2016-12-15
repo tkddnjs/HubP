@@ -2,41 +2,6 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<!-- Meta, title, CSS, favicons, etc. -->
-<meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-
-<!-- Bootstrap -->
-<link href="${pageContext.request.contextPath}/resources/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
-<!-- Font Awesome -->
-<link href="${pageContext.request.contextPath}/resources/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
-<!-- NProgress -->
-<link href="${pageContext.request.contextPath}/resources/vendors/nprogress/nprogress.css" rel="stylesheet">
-<!-- iCheck -->
-<link href="${pageContext.request.contextPath}/resources/vendors/iCheck/skins/flat/green.css" rel="stylesheet">
-<!-- bootstrap-wysiwyg -->
-<link href="${pageContext.request.contextPath}/resources/vendors/google-code-prettify/bin/prettify.min.css" rel="stylesheet">
-<!-- Select2 -->
-<link href="${pageContext.request.contextPath}/resources/vendors/select2/dist/css/select2.min.css" rel="stylesheet">
-<!-- Switchery -->
-<link href="${pageContext.request.contextPath}/resources/vendors/switchery/dist/switchery.min.css" rel="stylesheet">
-<!-- starrr -->
-<link href="${pageContext.request.contextPath}/resources/vendors/starrr/dist/starrr.css" rel="stylesheet">
-<!-- bootstrap-daterangepicker -->
-<link href="${pageContext.request.contextPath}/resources/vendors/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
-<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-
-<!-- Custom Theme Style -->
-<link href="${pageContext.request.contextPath}/resources/css/custom.min.css" rel="stylesheet">
-
-<style>
-	.ui-autocomplete{
-		z-index: 99999;
-	}
-</style>
-
 <!-- Modal -->
 <div class="modal fade" id="registerUserModal" role="dialog">
 	<div class="modal-dialog modal-lg">
@@ -66,7 +31,7 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="control-label col-md-2 col-sm-3 col-xs-12" for="email">이메일<span class="required">*</span></label>
+						<label class="control-label col-md-2 col-sm-3 col-xs-12" for="email">Email<span class="required">*</span></label>
 						<div class="col-md-3 col-sm-4 col-xs-5">
 							<input id="email" class="form-control col-md-7 col-xs-12" type="text" name="email">
 						</div>
@@ -79,7 +44,7 @@
 					</div>
 					<div class="form-group"></div>
 					<div class="form-group">
-						<label for="picture" class="control-label col-md-2 col-sm-3 col-xs-12">Picture</label>
+						<label for="picture" class="control-label col-md-2 col-sm-3 col-xs-12">프로필 사진</label>
 						<div class="col-md-6 col-sm-6 col-xs-8">
 							<button type="button" id="pictureBtn" class="btn btn-primary">프로필 사진</button>
 							<input type="file" name="image" data-role="magic-overlay" data-target="#pictureBtn" data-edit="insertImage" />
