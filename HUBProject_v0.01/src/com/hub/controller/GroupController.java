@@ -75,6 +75,7 @@ public class GroupController {
 
 	@RequestMapping(value="exit.do", method=RequestMethod.GET)
 	public String exitGroup(HttpSession session, int groupId) {
+		
 		groupService.exitGroup(groupId, (String) session.getAttribute("userId"));
 		return "redirect:/group/list.do?listOpt=0";
 	}

@@ -27,9 +27,9 @@ public class FollowController {
 		follow.setConfirm(true);
 		int result = followService.requestFollow(follow);
 		if(result==4){
-			return "redirect: ../bucketlist/list.do";
+			return "redirect: /list/list.do?listOpt=" + follow.getRelation() + "&userId=" + follow.getUserId();
 		}
-		return "redirect: ../bucketlist/list.do";
+		return "redirect: /list/list.do?listOpt=" + follow.getRelation() + "&userId=" + follow.getUserId();
 	}
 	
 	@RequestMapping(value="confirm.do", method=RequestMethod.POST)
