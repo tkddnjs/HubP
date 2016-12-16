@@ -42,8 +42,13 @@
 					</div>
 					<div class="ln_solid"></div>
 					<div class="form-group" align="right">
-						<button class="btn btn-xs btn-default requestBtn" type="button"
-								style="border: hidden; background: #ecc7c0; font-size: 14px; width: 100px;">팔로우요청</button>
+						<form action="${pageContext.request.contextPath}/follow/request.do" method="post">
+							<input type="hidden" id="userId" name="userId">
+							<input type="hidden" id="followId" name="followId">
+							<input type="hidden" id="relation" name="relation">
+							<button class="btn btn-xs btn-default requestBtn" type="submit"
+									style="border: hidden; background: #ecc7c0; font-size: 14px; width: 100px;">팔로우요청</button>
+						</form>
 						<button class="btn btn-xs btn-default sendPostBtn" type="button" data-toggle="modal" data-target="#sendPostModal"
 								style="border: hidden; background: #ecc7c0; font-size: 14px; width: 100px;">쪽지전송</button>
 					</div>

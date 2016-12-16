@@ -17,6 +17,7 @@
 						<div class="col-md-2 col-sm-3 col-xs-3">
 							<input type="text" id="userId" name="userId" required="required" class="form-control col-md-7 col-xs-12">
 						</div>
+						<span id="idCheckResult"></span>
 					</div>
 					<div class="form-group">
 						<label class="control-label col-md-2 col-sm-3 col-xs-12" for="password">비밀번호 <span class="required">*</span></label>
@@ -29,12 +30,14 @@
 						<div class="col-md-2 col-sm-3 col-xs-3">
 							<input type="password" id="pw_check" class="form-control col-md-7 col-xs-12">
 						</div>
+						<span id="pwCheckResult"></span>
 					</div>
 					<div class="form-group">
 						<label class="control-label col-md-2 col-sm-3 col-xs-12" for="email">Email<span class="required">*</span></label>
 						<div class="col-md-3 col-sm-4 col-xs-5">
 							<input id="email" class="form-control col-md-7 col-xs-12" type="text" name="email">
 						</div>
+						<span id="mailCheckResult"></span>
 					</div>
 					<div class="form-group">
 						<label class="control-label col-md-2 col-sm-3 col-xs-12">연결고리<span class="required">*</span></label>
@@ -293,14 +296,14 @@
 			var userId= $(this).val();
 			$.ajax({
 				type: 'POST', 
-				url: '../checkId.do',
+				url: '${pageContext.request.contextPath}/user/checkId.do',
 				data: 
 					{
 						userId: userId
 						//앞의 id: getParameter할 것 / 뒤 id: 위의 var id= 값
 					},
 				success: function(result){
-					if($.trim(result) == "ok"){
+					if($.trim(result) == "Ok"){
 						$("#idCheckResult").html("사용가능한 ID입니다.");
 					}else{
 						$("#idCheckResult").html("사용중인  ID입니다.");
