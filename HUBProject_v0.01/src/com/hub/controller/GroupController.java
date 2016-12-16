@@ -1,13 +1,20 @@
 package com.hub.controller;
 
+
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.context.request.SessionScope;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.hub.domain.Follow;
 import com.hub.domain.Group;
 import com.hub.service.pacade.GroupService;
 
@@ -17,6 +24,9 @@ public class GroupController {
 
 	@Autowired
 	private GroupService groupService;
+	@Autowired
+	private FollowController followContoller;
+	
 
 	@RequestMapping(value="register.do", method=RequestMethod.GET)
 	public ModelAndView registerGroup(HttpSession session) {
@@ -36,17 +46,24 @@ public class GroupController {
 	}
 
 	@RequestMapping(value="join.do", method=RequestMethod.GET)
-	public String joinGroup(HttpSession session, int groupId) {
+	public String joinGroup(HttpSession session, int groupId, int maxPeople, int joinPeople) {
+		
 		String userId = (String) session.getAttribute("userId");
-		// 이미 그룹에 참여한 경우
-		for(Group g : groupService.findGroupsByUserId(userId)){
-			if(g.getGroupId() == groupId){
-				// alert창으로 경고 어떻게 해줄 지 고민해보기
-				return "redirect:/group/list.do?listOpt=1&userId=" + userId;
+		System.out.println(maxPeople);
+		System.out.println(joinPeople);
+		if(maxPeople==joinPeople){
+			return "redirect:/group/list.do?listOpt=0";
+		}else{
+			// 이미 그룹에 참여한 경우
+			for(Group g : groupService.findGroupsByUserId(userId)){
+				if(g.getGroupId() == groupId){
+					// alert창으로 경고 어떻게 해줄 지 고민해보기
+					return "redirect:/group/list.do?listOpt=1&userId=" + userId;
+				}
 			}
+			groupService.joinGroup(groupId, userId);
+			return "redirect:/group/list.do?listOpt=1&userId=" + userId;
 		}
-		groupService.joinGroup(groupId, userId);
-		return "redirect:/group/list.do?listOpt=1&userId=" + userId;
 	}
 
 	// 문서 수정 필요 => parameter 변경
@@ -68,7 +85,16 @@ public class GroupController {
 	}
 
 	@RequestMapping(value="remove.do", method=RequestMethod.GET)
-	public String removeGroup(int groupId) {
+	public String removeGroup(HttpSession session, int groupId) {
+		String userId = (String)session.getAttribute("userId");
+		List<String> list = groupService.findJoinUsersByGroupId(groupId);
+		list.remove(userId);
+		for(String followId :list){
+			Follow follow = followContoller.findFollowById(userId, followId);
+			if(follow.getRelation()==4){
+				followContoller.removeFollow(follow);
+			}
+		}
 		groupService.removeGroup(groupId);
 		return "redirect:/group/list.do?listOpt=0";
 	}
@@ -81,13 +107,14 @@ public class GroupController {
 	}
 
 	@RequestMapping(value="list.do", method=RequestMethod.GET)
-	public ModelAndView listGroup(String userId, int listOpt) {
+	public ModelAndView listGroup(HttpSession httpSession, int listOpt) {
 		ModelAndView mav = new ModelAndView("bucketlist/bucketList");
-
+		String userId = (String)httpSession.getAttribute("userId");
+		
 		switch (listOpt) {
 		// 전체 모임방 찾기
 		case 0:
-			mav.addObject("groups", groupService.findAll());
+			mav.addObject("groups", groupService.findAll(userId));
 			break;
 		// 내가 속한 모임방 찾기
 		case 1:
@@ -98,7 +125,8 @@ public class GroupController {
 		mav.addObject("tabOpt", 4);
 		return mav;
 	}
-	@RequestMapping(value="detail.do", method=RequestMethod.GET)
+	
+	/*@RequestMapping(value="detail.do", method=RequestMethod.GET)
 	public ModelAndView detailGroup(int groupId) {
 		ModelAndView mav = new ModelAndView("group/detailGroup");
 		
@@ -108,5 +136,5 @@ public class GroupController {
 		mav.addObject("totalJoinUsers", group.getJoinPeople().size());
 		
 		return mav;
-	}
+	}*/
 }

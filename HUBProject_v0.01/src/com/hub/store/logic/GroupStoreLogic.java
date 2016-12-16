@@ -167,11 +167,11 @@ public class GroupStoreLogic implements GroupStore {
 	}
 
 	@Override
-	public List<Group> selectAll() {
+	public List<Group> selectAll(String userId) {
 		SqlSession session = factory.openSession();
 		try {
 			GroupMapper mapper = session.getMapper(GroupMapper.class);
-			return mapper.selectAll();
+			return mapper.selectAll(userId);
 		} finally {
 			session.close();
 		}
@@ -209,6 +209,9 @@ public class GroupStoreLogic implements GroupStore {
 		}
 	}
 
+
+
+	/*
 	@Override
 	public List<Group> selectGroupsByConnChain(String connChain) {
 		SqlSession session = factory.openSession();
@@ -241,6 +244,7 @@ public class GroupStoreLogic implements GroupStore {
 			session.close();
 		}
 	}
+	*/
 
 	@Override
 	public List<String> selectConnChainByGroupId(int groupId) {
@@ -258,5 +262,22 @@ public class GroupStoreLogic implements GroupStore {
 		
 		return null;
 	}
+
+	@Override
+	public List<String> selectJoinUsersByGroupId(int groupId) {
+		SqlSession session = factory.openSession();
+		List<String> list = new ArrayList<>();
+		
+		GroupMapper mapper = session.getMapper(GroupMapper.class);
+		list = mapper.selectJoinUsersByGroupId(groupId);
+		
+		if(list != null){
+			session.close();
+			return list;
+		}
+		return null;
+	}
+	
+	
 
 }

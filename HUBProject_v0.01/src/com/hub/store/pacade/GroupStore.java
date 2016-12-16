@@ -25,12 +25,16 @@ public interface GroupStore {
 	int deleteUserGroup(int groupId, String userId);
 	
 	// 모임방 조회
-	List<Group> selectAll();
+	List<Group> selectAll(String userId);
 	Group selectGroupByGroupId(int groupId);
 	List<Group> selectGroupsByUserId(String userId);
+	List<String> selectJoinUsersByGroupId(int groupId);
+	
+	/* 삭제
 	List<Group> selectGroupsByConnChain(String connChain);
 	List<Group> selectGroupsByGroupName(String groupName);
 	List<Group> selectGroupsByLocal(String local);
+	*/
 	
 	//groupConnChain
 	List<String>selectConnChainByGroupId(int groupId);

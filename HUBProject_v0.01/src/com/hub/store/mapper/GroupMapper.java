@@ -16,13 +16,13 @@ public interface GroupMapper {
 	int deleteGroup(int groupId);
 	int deleteGroupConn(int groupId);
 	int deleteUserGroup(@Param("groupId")int groupId, @Param("userId")String userId);
-	List<Group> selectAll();
+	List<Group> selectAll(String userId);
 	Group selectGroupByGroupId(int groupId);
 	List<Group> selectGroupsByUserId(String userId);
-	List<Group> selectGroupsByConnChain(String connChain);
+	/*List<Group> selectGroupsByConnChain(String connChain);
 	List<Group> selectGroupsByGroupName(String groupName);
 	List<Group> selectGroupsByLocal(String local);
-	
+	*/
 	List<String> selectConnChainsByGroupId(int groupId);
 	List<String> selectJoinUsersByGroupId(int groupId);
 	

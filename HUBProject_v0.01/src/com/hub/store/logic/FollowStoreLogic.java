@@ -136,12 +136,6 @@ public class FollowStoreLogic implements FollowStore {
 		
 		try{
 			FollowMapper mapper = session.getMapper(FollowMapper.class);
-			System.out.println("followStoreLogic");
-			System.out.println(userId);
-			System.out.println(followId);
-			System.out.println(mapper.selectFollowById(userId, followId).getUserId());
-			System.out.println(mapper.selectFollowById(userId, followId).getFollowId());
-			System.out.println(mapper.selectFollowById(userId, followId).getRelation());
 			return mapper.selectFollowById(userId, followId);
 		}finally{
 			session.close();

@@ -11,10 +11,11 @@ public interface GroupService {
 	int modifyGroup(Group group);
 	int removeGroup(int groupId);
 	int exitGroup(int groupId, String userId);
-	List<Group> findAll();
+	List<Group> findAll(String userId);
 	Group findGroupByGroupId(int groupId);
 	List<Group> findGroupsByUserId(String userId);
-	List<Group> findGroupsByConnChain(String connChain);
-	List<Group> findGroupsByGroupName(String groupName);
-	List<Group> findGroupsByLocal(String local);
+	List<String> findJoinUsersByGroupId(int groupId);
+	//List<Group> findGroupsByConnChain(String connChain);
+	//List<Group> findGroupsByGroupName(String groupName);
+	//List<Group> findGroupsByLocal(String local);
 }

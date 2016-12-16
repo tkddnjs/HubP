@@ -60,8 +60,9 @@
 		WHERE userId=#{userId} AND groupId=#{groupId}
 	</delete>
 		
-	<select id="selectAll" resultMap="groupMap">
+	<select id="selectAll" parameterType="String" resultMap="groupMap">
 		<include refid="selectGroup" />
+		where managerId != #{userId}
 	</select>
 
 	<select id="selectGroupByGroupId" parameterType="int" resultMap="groupMap">
@@ -76,7 +77,7 @@
 						  WHERE userId = #{userId})
 	</select>
 	
-	<select id="selectGroupsByConnChain" parameterType="String" resultMap="groupMap">
+	<!-- <select id="selectGroupsByConnChain" parameterType="String" resultMap="groupMap">
 		<include refid="selectGroup"></include>
 		WHERE groupId IN (SELECT groupId
 						  FROM groupConn_tb
@@ -91,7 +92,7 @@
 	<select id="selectGroupsByLocal" parameterType="String" resultMap="groupMap">
 		<include refid="selectGroup" />
 		WHERE local like '%'||#{local}||'%'
-	</select>
+	</select> -->
 	
 	<select id="selectConnChainsByGroupId" parameterType="int" resultType="String">
 		SELECT connChain
