@@ -2,7 +2,6 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-
 <%@ include file="/views/cooper/registerCooper.jsp"%>
 <%@ include file="/views/cooper/modifyCooper.jsp"%>
 
@@ -23,27 +22,48 @@
 		<!-- /업체 목록 헤드 -->
 
 		<!-- 업체 목록 바디 -->
-		<div class="x_content">
-			<div class="accordion" id="accordion1" role="tablist"
-				aria-multiselectable="true">
-				<!--1st item-->
-				<c:forEach items="${coopers }" var="cooper" varStatus="status">
-					<c:set var="no" value="${status.count  }"></c:set>
+		<!----------- Image accordion slider only css ------------>
+		<c:if test="${!sessionScope.isAdmin }">
+			<table id="datatable3" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
+				<thead>
+					<tr>
+						<th style="width: 800px; text-align: center;">업체</th>
+						<th hidden="true"></th>
+					</tr>
+				</thead>
+				<tbody>
+					<c:forEach items="${coopers }" var="cooper" varStatus="status">
+						<tr>
+							<td style="text-align: left;">
+								<a href="http://${cooper.coBanner }">
+									<img src="${pageContext.request.contextPath}/resources/img/cooperImg/${cooper.image }" width="100%" height="100px"/>
+								</a>
+							</td>
+							<td hidden="true">${cooper.connChains }</td>
+						</tr>
+					</c:forEach>
+				</tbody>
+			</table>
+		</c:if>
+		<c:if test="${sessionScope.isAdmin}">
+			<div class="x_content">
+				<div class="accordion" id="accordion1" role="tablist" aria-multiselectable="true">
+					<!--1st item-->
+					<c:forEach items="${coopers }" var="cooper" varStatus="status">
+						<c:set var="no" value="${status.count  }"></c:set>
 						<div class="panel">
-							<c:if test="${sessionScope.isAdmin}">
-								<ul class="nav navbar-right panel_toolbox"
-									style="padding-top: 13px">
-									<li><button class="fa fa-edit" value="${no }" data-toggle="modal" name="modifyCooperBtn" data-target="#modifyCooperModal"
-											style="font-size: 20px; background: none !important; border: none;"></button>
-									</li>
-									<li>
-										<form action="${pageContext.request.contextPath}/cooper/remove.do" method="GET">
-											<button class="fa fa-trash-o" style="font-size: 20px; background: none !important; border: none;"
-													name="cooperId" value="${cooper.coId }" type="submit"></button>
-										</form>
-									</li>
+							<ul class="nav navbar-right panel_toolbox" style="padding-top: 13px">
+								<li>
+									<button class="fa fa-edit" value="${no }" data-toggle="modal" name="modifyCooperBtn" data-target="#modifyCooperModal"
+										style="font-size: 20px; background: none !important; border: none;"></button>
+								</li>
+								<li>
+									<form action="${pageContext.request.contextPath}/cooper/remove.do" method="GET">
+										<button class="fa fa-trash-o" style="font-size: 20px; background: none !important; border: none;"
+												name="cooperId" value="${cooper.coId }" type="submit"></button>
+									</form>
+								</li>
 							</ul>
-							</c:if>
 							<a class="panel-heading " role="tab" id="headingOne1"
 								data-toggle="collapse" data-parent="#accordion1"
 								href="#collapseOne${no  }" aria-expanded="true"
@@ -72,10 +92,8 @@
 								</div>
 							</div>
 						</div>
-				</c:forEach>
-
-				<!-- 업체 등록 -->
-				<c:if test="${sessionScope.isAdmin}">
+					</c:forEach>
+					<!-- 업체 등록 -->
 					<div class="panel">
 						<a id="registerCooperBtn" data-toggle="modal" data-target="#registerCooperModal">
 							<h1 align="center">
@@ -83,11 +101,10 @@
 							</h1>
 						</a>
 					</div>
-				</c:if>
-				<!-- /업체 등록 -->
-				
+					<!-- /업체 등록 -->
 			</div>
 		</div>
+		</c:if>
 		<!-- 업체 목록  바디 -->
 	</div>
 	<!-- 업체 목록 -->
@@ -103,12 +120,6 @@
 		$(this).find(".tags").val(tags);
 	});
 
-//	$(".cooperForm.modify").submit(function() {
-//		// memo의 줄넘김 문자 삭제
-//		var  = $(this).find("[name='memo']").val();
-//		memo = memo.replace(/\n/gi, " ");
-//		$(this).find("[name='memo']").val(memo);
-//	});
 </script>
 <!-- /업체 데이터 send -->
 
@@ -123,6 +134,7 @@
 		cooper.push("${cooper.lastDay }");
 		cooper.push("${cooper.connChains }");
 		cooper.push("${cooper.coBanner }");
+		cooper.push("${cooper.image }");
 		coopers.push(cooper);
 	</c:forEach>
 	
@@ -140,7 +152,7 @@
 		$("#modifyCooperModal #lastDay").val(coopers[index][3]);
 		initConn(coopers[index][4]);
 		$("#modifyCooperModal #coBanner").val(coopers[index][5]);
+		$("#modifyCooperModal #cmb_image").attr('src', '${pageContext.request.contextPath}/resources/img/cooperImg/'+coopers[index][6]);
 	});
-	
 </script>
 <!-- /업체 데이터 receive -->

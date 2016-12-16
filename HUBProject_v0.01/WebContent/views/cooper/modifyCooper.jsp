@@ -1,6 +1,36 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" isErrorPage="true" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
+<style>
+.img-cooper img {
+	whdth: 100%;
+	height: 300px;
+}
+.image {
+    width: auto; height: auto;
+    max-width: 100px;
+    max-height: 100px;
+}
+.cursor {
+	cursor: pointer;
+}
+.insert {
+	margin-right: 0;
+	margin-left: 0;
+}
+.insert-image{
+	display: inline-block;
+	margin-left: 3em;
+}
+.img-cooper {
+	margin-right: 0;
+	margin-left: 0;
+}
+.form-group {
+	width: 80%;
+}
+</style>
+
 <!-- Modal -->
 <div class="modal fade" id="modifyCooperModal" role="dialog">
 	<div class="modal-dialog modal-lg">
@@ -11,6 +41,14 @@
 			</div>
    			<div class="modal-body">
 				<form id="demo-form2" action="${pageContext.request.contextPath}/cooper/modify.do" data-parsley-validate class="form-horizontal form-label-left cooperForm modify" method="post" enctype="multipart/form-data">
+					<div class="img-cooper cooper cursor" align="center" style="width: 50%">
+			    		<span>사진 업로드
+			    		<button type="button" id="removeBtn" style="display: none;">X</button>
+			    		<i class="fa fa-plus-circle addImageBtn"></i>
+			    		</span>
+			        	<input class="image" type="file" name="cmb_file" id="cmb_file" accept="image/*" capture="camera" style="display: none;" />
+			        	<img id="cmb_image" style="width:100%; height:300px;max-width:100%;border:1px solid #000;" src="${pageContext.request.contextPath}/resources/img/cooperImg/default.png">
+			    	</div>
 					<div class="form-group">
 						<label class="control-label col-md-2 col-sm-3 col-xs-12" for="coName">CooperName <span class="required">*</span></label>
 						<div class="col-md-2 col-sm-3 col-xs-3">
@@ -59,3 +97,38 @@
   		</div>
 	</div>
 </div>
+
+<script type="text/javascript">
+
+var defaultImgURL = '${pageContext.request.contextPath}/resources/img/cooperImg/default.png';
+
+/* 이미지 업로드 미리보기 */
+	function getThumbnailPrivew(html, $target) {
+    if (html.files && html.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+            $target.attr('src', e.target.result);
+            $('#removeBtn').show();
+        }
+        reader.readAsDataURL(html.files[0]);
+    }
+}
+
+$('#cmb_image').on('click', function() {
+	$('#cmb_file').click();
+});
+
+$('.addImageBtn').on('click', function() {
+	$('#cmb_file').click();
+});
+
+$('#cmb_file').on('change', function(e) {
+	getThumbnailPrivew(this, $('#cmb_image'));
+});
+                            
+$('#removeBtn').on('click', function() {
+	$('#cmb_image').attr('src', defaultImgURL);
+	
+	$(this).hide();
+});	
+</script>
