@@ -32,7 +32,7 @@
 		WHERE userId=#{userId} and followId=#{followId}
 	</update>
 	
-	<select id="selectFollowById" parameterType="Map" resultMap="followMap">
+	<select id="selectFollowById" parameterType="map" resultMap="followMap">
 	SELECT userId, followId, relation, confirm
 	FROM follow_tb
 	WHERE userId = #{userId} AND followId = #{followId}
