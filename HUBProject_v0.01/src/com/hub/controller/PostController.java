@@ -33,12 +33,15 @@ public class PostController {
 	}
 	
 	@RequestMapping(value="remove.do", method=RequestMethod.POST)
-	public String removePost(@RequestParam("checks")String[] checks, int listOpt, String followId){
-		System.out.println(checks);
-//		for(int i : checks){
-//			postService.removePost(i);
-//		}
-		return "redirect: list.do?listOpt="+listOpt+"&followId="+followId+"";
+	public String removePost(int[] checks, int listOpt, String followId, String userId){
+		for(int i : checks){
+			postService.removePost(i);
+		}
+		if(followId == null){
+			return "redirect: list.do?listOpt="+listOpt;
+		} else {
+			return "redirect: ../user/detail.do?myId="+userId+"&userId="+followId;
+		}
 	}
 	
 	@RequestMapping(value="list.do", method=RequestMethod.GET)

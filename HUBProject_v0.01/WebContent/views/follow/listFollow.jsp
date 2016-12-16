@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <%@ include file="/views/post/sendPost.jsp"%>
+
 <!--follow-->
 <div class="col-md-3 left_col" style="background: #8BCBC8;">
 	<div class="left_col scroll-view" style="background: #8BCBC8;">
@@ -106,6 +107,7 @@
 			$(".sendPostBtn").click(function (){
 				var followId = $(this).val();
 				$("#sendPostModal #receiverId").val(followId);
+				$("#sendPostModal #sendPostBtn").val(followId);
 			});
 		});
 	});
@@ -165,13 +167,4 @@
 			}
 		}
 	}
-	
-	$(".sendPostBtn").click( function() {
-		var followId = $(this).val();
-		$("#sendPostModal #receiverId").val(followId);
-		$("#sendPostModal #sendPostBtn").val(followId);
-		
-	});
-	
-	
 </script>

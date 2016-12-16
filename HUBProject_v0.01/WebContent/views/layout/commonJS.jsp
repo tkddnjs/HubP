@@ -120,7 +120,7 @@
 		conn = conn.replace(/ /gi, "");
 		conn = conn.replace("]", "");
 		selector.importTags(conn);
-		$('.tagsinput').find('a').remove();		
+		$('.tagsinput').find('a').remove();
 	};
 	
 	
@@ -138,16 +138,19 @@
 			},
 			success : function(){
 				alert("팔로우를 요쳥했습니다.");
-				$(this).closest(".modal").find(".close").click();
 			}
 		});
 	});
 	
-	$("#removePostBtn").click(function (){
-		if($(this).closest("form").attr("id") == "removePostLP"){
-			$(this).closest("form").find("[name='listOpt']").val(0);
+	$('[name="checks"]').click(function(){
+		$(this).attr("checked", "checked");
+	});
+	
+	$("#removePost").closest("form").submit(function (){
+		if($(this).id = "removePostInLP"){
+			$(this).find('[name="listOpt"]').val(1);
 		} else {
-			$(this).closest("form").find("[name='listOpt']").val(1);
+			$(this).find('[name="listOpt"]').val(0);
 		}
 	});
 	
@@ -196,9 +199,9 @@
 				$(this).before("<p class='error'>필수 항목 입니다.</p>");
 			}
 
-			if(isNaN($(this).filter(":number").val())){
-				$(this).before("<p class='error'>숫자만 입력 가능합니다.</p>");
-			}
+//			if(isNaN($(this).filter(":number").val())){
+//				$(this).before("<p class='error'>숫자만 입력 가능합니다.</p>");
+//			}
 
 			if ($("p.error").length > 0) {
 				//에러가 발생한 위치로 스크롤 이동
@@ -279,9 +282,14 @@
 		}();
 
 		$('#datatable').dataTable();
-		$('#datatable1').dataTable();
-		$('#datatable2').dataTable();
-		$('#datatable3').dataTable();
+		
+		$('.followPostTable').each(function(){
+			$(this).dataTable()
+		});
+			
+		$('.listPostTable').each(function(){
+			$(this).dataTable()
+		});
 		
 		$('#datatable-keytable').DataTable({
 			keys: true

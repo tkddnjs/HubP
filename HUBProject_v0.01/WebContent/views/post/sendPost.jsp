@@ -16,6 +16,7 @@
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
 				<h4 class="modal-title">쪽지전송</h4>
 			</div>
+			
 			<div class="modal-body">
 			<div class="form-horizontal form-label-left bucketlistForm">
 				<div class="form-group">
@@ -60,20 +61,21 @@
 
 <script>
 	$("#sendPostBtn").click(function() {
-		var userId = '${sessionScope.userId}';
-		var followId = $(this).val();
+		var senderId = '${sessionScope.userId}';
+		var receiverId = $(this).val();
 		var content = $(this).closest("#sendPostModal").find('[name="content"]').val();
 		$.ajax({
 			type : 'POST',
 			url : '${pageContext.request.contextPath}/post/send.do',
 			data : {
-				userId : userId,
-				followId : followId,
+				senderId : senderId,
+				receiverId : receiverId,
 				content : content
 			},
 			success : function() {
 				alert("메세지를 전송했습니다.");
 			}
 		});
+		$(this).closest("#sendPostModal").find(".close").click();
 	});
 </script>
