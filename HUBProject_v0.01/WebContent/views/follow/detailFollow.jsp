@@ -34,7 +34,7 @@
 						<h4>자기소개</h4>
 						<p>${user.introduce }</p>
 						<div style="border: 1px solid #fdae84; margin-bottom: 10px"></div>
-						<form action="${pageContext.request.contextPath }/follow/remove.do">
+						<form action="${pageContext.request.contextPath }/follow/remove.do" method="post">
 							<input type="hidden" name="userId" value="${sessionScope.userId }">
 							<button class="btn btn-xs btn-danger" type="submit" name="followId" value="${user.userId }">Unfollow</button>
 						</form>
@@ -60,6 +60,7 @@
 
 							<!-- end tab Area -->
 							<div id="myTabContent" class="tab-content">
+								<form action="${pageContext.request.contextPath }/post/remove.do" method="post" id="removePostInDF">
 								<!--tab1 -->
 								<div role="tabpanel" class="tab-pane fade active in"
 									id="tab_PostAllOne" aria-labelledby="profile-tab1">
@@ -107,7 +108,7 @@
 										</thead>
 										<tbody>
 											<c:forEach items="${posts }" var="post" varStatus="status">
-												<c:if test="${post.senderId eq userId }">
+												<c:if test="${post.senderId eq user.userId }">
 													<tr>
 														<td style="width: 100px; text-align: center;">${post.senderId }</td>
 														<td style="width: 100px; text-align: center;">${post.receiverId }</td>
@@ -140,7 +141,7 @@
 										</thead>
 										<tbody>
 											<c:forEach items="${posts }" var="post" varStatus="status">
-												<c:if test="${post.receiverId eq userId }">
+												<c:if test="${post.receiverId eq user.userId }">
 													<tr>
 														<td style="width: 100px; text-align: center;">${post.senderId }</td>
 														<td style="width: 100px; text-align: center;">${post.receiverId }</td>
@@ -154,6 +155,9 @@
 									</table>
 								</div>
 								<!--end tab3 -->
+									<input type="hidden" name="followId" value="${user.userId }">
+									<input type="hidden" name="listOpt">
+								</form>
 							</div>
 							<!-- end tab Area -->
 

@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.hub.domain.Post;
@@ -32,11 +33,12 @@ public class PostController {
 	}
 	
 	@RequestMapping(value="remove.do", method=RequestMethod.POST)
-	public String removePost(int[] checks){
-		for(int i : checks){
-			postService.removePost(i);
-		}
-		return "list.do";
+	public String removePost(@RequestParam("checks")String[] checks, int listOpt, String followId){
+		System.out.println(checks);
+//		for(int i : checks){
+//			postService.removePost(i);
+//		}
+		return "redirect: list.do?listOpt="+listOpt+"&followId="+followId+"";
 	}
 	
 	@RequestMapping(value="list.do", method=RequestMethod.GET)

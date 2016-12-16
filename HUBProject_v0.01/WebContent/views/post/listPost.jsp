@@ -18,110 +18,117 @@
 		<div class="x_content" style="margin-top: -48px">
 			<div class="col-md-12 col-sm-12 col-xs-12">
 				<div class="" role="tabpanel" data-example-id="togglable-tabs">
-					<ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist"
-						style="background-color: #ecc7c0;">
-						<li role="presentation" class="active"><a href="#tapPostAll"
-							id="home-tab" role="tab" data-toggle="tab" aria-expanded="true">전체쪽지</a></li>
-						<li role="presentation" class=""><a href="#tabPostSend"
-							role="tab" id="profile-tab" data-toggle="tab"
-							aria-expanded="false">보낸쪽지</a></li>
-						<li role="presentation" class=""><a href="#tabPostRecieve"
-							role="tab" id="profile-tab2" data-toggle="tab"
-							aria-expanded="false">받은쪽지</a></li>
+					<ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist" style="background-color: #ecc7c0;">
+						<li role="presentation" class="active">
+							<a href="#tapPostAll" id="home-tab" role="tab" data-toggle="tab" aria-expanded="true">전체쪽지</a>
+						</li>
+						<li role="presentation" class="">
+							<a href="#tabPostSend" role="tab" id="profile-tab" data-toggle="tab" aria-expanded="false">보낸쪽지</a>
+						</li>
+						<li role="presentation" class="">
+							<a href="#tabPostRecieve" role="tab" id="profile-tab2" data-toggle="tab" aria-expanded="false">받은쪽지</a>
+						</li>
 					</ul>
 					<div id="myTabContent" class="tab-content">
 						<!-- 전체쪽지 -->
-						<div role="tabpanel" class="tab-pane fade active in"
-							id="tapPostAll" aria-labelledby="profile-tab1">
-
-							<table id="datatable"
-								class="table table-striped table-bordered dt-responsive nowrap"
-								cellspacing="0" width="100%">
-								<thead>
-									<tr>
-										<th style="text-align: center; width: 100px;">보낸 사람</th>
-										<th style="text-align: center; width: 100px;">받는 사람</th>
-										<th style="text-align: center; width: 500px;">내용</th>
-										<th style="text-align: center; width: 150px;">보낸 시간</th>
-										<th style="text-align: center; width: 50px;">삭제</th>
-									</tr>
-								</thead>
-								<tbody>
-									<c:forEach items="${posts }" var="post" varStatus="status">
+						<form action="${pageContext.request.contextPath }/post/remove.do" method="post" id="removePostInLP">
+							<button style="float: right;" class="btn btn-xs btn-default" type="submit" id="removePost">삭제</button>
+							<div role="tabpanel" class="tab-pane fade active in"
+								id="tapPostAll" aria-labelledby="profile-tab1">
+								<table id="datatable"
+									class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
+									<thead>
 										<tr>
-											<td style="width: 100px; text-align: center;">${post.senderId }</td>
-											<td style="width: 100px; text-align: center;">${post.receiverId }</td>
-											<td style="width: 500px;">${post.content }</td>
-											<td style="width: 150px; text-align: center;">${post.sendTime }</td>
-											<td style="width: 50px; text-align: center;"></td>
+											<th style="text-align: center; width: 100px;">보낸 사람</th>
+											<th style="text-align: center; width: 100px;">받는 사람</th>
+											<th style="text-align: center; width: 500px;">내용</th>
+											<th style="text-align: center; width: 150px;">보낸 시간</th>
+											<th style="text-align: center; width: 50px;">삭제</th>
 										</tr>
-									</c:forEach>
-								</tbody>
-							</table>
-						</div>
-
-						<div role="tabpanel" class="tab-pane fade" id="tabPostSend"
-							aria-labelledby="profile-tab1">
-
-							<table id="datatable1"
-								class="table table-striped table-bordered dt-responsive nowrap"
-								cellspacing="0" width="100%">
-								<thead>
-									<tr>
-										<th style="text-align: center; width: 100px;">보낸 사람</th>
-										<th style="text-align: center; width: 100px;">받는 사람</th>
-										<th style="text-align: center; width: 500px;">내용</th>
-										<th style="text-align: center; width: 150px;">보낸 시간</th>
-										<th style="text-align: center; width: 50px;">삭제</th>
-									</tr>
-								</thead>
-								<tbody>
-									<c:forEach items="${posts }" var="post" varStatus="status">
-										<c:if test="${post.senderId eq sessionScope.userId }">
+									</thead>
+									<tbody>
+										<c:forEach items="${posts }" var="post" varStatus="status">
 											<tr>
 												<td style="width: 100px; text-align: center;">${post.senderId }</td>
 												<td style="width: 100px; text-align: center;">${post.receiverId }</td>
 												<td style="width: 500px;">${post.content }</td>
 												<td style="width: 150px; text-align: center;">${post.sendTime }</td>
-												<td style="width: 50px; text-align: center;"></td>
+												<td style="width: 50px; text-align: center;">
+													<input type="checkbox" name="checks" value="${post.postId }">
+												</td>
 											</tr>
-										</c:if>
-									</c:forEach>
-								</tbody>
-							</table>
-						</div>
+										</c:forEach>
+									</tbody>
+								</table>
+							</div>
 
-						<div role="tabpanel" class="tab-pane fade" id="tabPostRecieve"
-							aria-labelledby="profile-tab1">
+							<div role="tabpanel" class="tab-pane fade" id="tabPostSend"
+								aria-labelledby="profile-tab1">
 
-							<table id="datatable2"
-								class="table table-striped table-bordered dt-responsive nowrap"
-								cellspacing="0" width="100%">
-								<thead>
-									<tr>
-										<th style="text-align: center; width: 100px;">보낸 사람</th>
-										<th style="text-align: center; width: 100px;">받는 사람</th>
-										<th style="text-align: center; width: 500px;">내용</th>
-										<th style="text-align: center; width: 150px;">보낸 시간</th>
-										<th style="text-align: center; width: 50px;">삭제</th>
-									</tr>
-								</thead>
-								<tbody>
-									<c:forEach items="${posts }" var="post" varStatus="status">
-										<c:if test="${post.receiverId eq sessionScope.userId }">
-											<tr>
-												<td style="width: 100px; text-align: center;">${post.senderId }</td>
-												<td style="width: 100px; text-align: center;">${post.receiverId }</td>
-												<td style="width: 500px;">${post.content }</td>
-												<td style="width: 150px; text-align: center;">${post.sendTime }</td>
-												<td style="width: 50px; text-align: center;"></td>
-											</tr>
-										</c:if>
-									</c:forEach>
-								</tbody>
-							</table>
-						</div>
+								<table id="datatable1"
+									class="table table-striped table-bordered dt-responsive nowrap"
+									cellspacing="0" width="100%">
+									<thead>
+										<tr>
+											<th style="text-align: center; width: 100px;">보낸 사람</th>
+											<th style="text-align: center; width: 100px;">받는 사람</th>
+											<th style="text-align: center; width: 500px;">내용</th>
+											<th style="text-align: center; width: 150px;">보낸 시간</th>
+											<th style="text-align: center; width: 50px;">삭제</th>
+										</tr>
+									</thead>
+									<tbody>
+										<c:forEach items="${posts }" var="post" varStatus="status">
+											<c:if test="${post.senderId eq sessionScope.userId }">
+												<tr>
+													<td style="width: 100px; text-align: center;">${post.senderId }</td>
+													<td style="width: 100px; text-align: center;">${post.receiverId }</td>
+													<td style="width: 500px;">${post.content }</td>
+													<td style="width: 150px; text-align: center;">${post.sendTime }</td>
+													<td style="width: 50px; text-align: center;">
+														<input type="checkbox" name="checks" value="${post.postId }">
+													</td>
+												</tr>
+											</c:if>
+										</c:forEach>
+									</tbody>
+								</table>
+							</div>
 
+							<div role="tabpanel" class="tab-pane fade" id="tabPostRecieve"
+								aria-labelledby="profile-tab1">
+
+								<table id="datatable2"
+									class="table table-striped table-bordered dt-responsive nowrap"
+									cellspacing="0" width="100%">
+									<thead>
+										<tr>
+											<th style="text-align: center; width: 100px;">보낸 사람</th>
+											<th style="text-align: center; width: 100px;">받는 사람</th>
+											<th style="text-align: center; width: 500px;">내용</th>
+											<th style="text-align: center; width: 150px;">보낸 시간</th>
+											<th style="text-align: center; width: 50px;">삭제</th>
+										</tr>
+									</thead>
+									<tbody>
+										<c:forEach items="${posts }" var="post" varStatus="status">
+											<c:if test="${post.receiverId eq sessionScope.userId }">
+												<tr>
+													<td style="width: 100px; text-align: center;">${post.senderId }</td>
+													<td style="width: 100px; text-align: center;">${post.receiverId }</td>
+													<td style="width: 500px;">${post.content }</td>
+													<td style="width: 150px; text-align: center;">${post.sendTime }</td>
+													<td style="width: 50px; text-align: center;">
+														<input type="checkbox" name="checks" value="${post.postId }">
+													</td>
+												</tr>
+											</c:if>
+										</c:forEach>
+									</tbody>
+								</table>
+							</div>
+							<input type="hidden" name="listOpt">
+						</form>
 					</div>
 				</div>
 			</div>

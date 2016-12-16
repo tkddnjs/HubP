@@ -143,6 +143,14 @@
 		});
 	});
 	
+	$("#removePostBtn").click(function (){
+		if($(this).closest("form").attr("id") == "removePostLP"){
+			$(this).closest("form").find("[name='listOpt']").val(0);
+		} else {
+			$(this).closest("form").find("[name='listOpt']").val(1);
+		}
+	});
+	
 </script>
 <!-- /Custom Script -->
 
