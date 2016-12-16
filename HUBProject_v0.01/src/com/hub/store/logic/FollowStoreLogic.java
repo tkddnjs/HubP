@@ -28,7 +28,6 @@ public class FollowStoreLogic implements FollowStore {
 		Follow temp = new Follow();
 		temp.setFollowId(follow.getUserId());
 		temp.setUserId(follow.getFollowId());
-		System.out.println(follow.getRelation());
 		if(follow.getRelation() != 4){
 			temp.setRelation((3-follow.getRelation()));
 		}else {
@@ -137,7 +136,13 @@ public class FollowStoreLogic implements FollowStore {
 		
 		try{
 			FollowMapper mapper = session.getMapper(FollowMapper.class);
-			return mapper.selectFollowById(userId, followId );
+			System.out.println("followStoreLogic");
+			System.out.println(userId);
+			System.out.println(followId);
+			System.out.println(mapper.selectFollowById(userId, followId).getUserId());
+			System.out.println(mapper.selectFollowById(userId, followId).getFollowId());
+			System.out.println(mapper.selectFollowById(userId, followId).getRelation());
+			return mapper.selectFollowById(userId, followId);
 		}finally{
 			session.close();
 		}
