@@ -16,8 +16,10 @@
 					<input type="hidden" name="userId" value="${sessionScope.userId }">
 					<button type="submit" name="listOpt" value="0"
 					style="border: hidden; background: #ecc7c0; font-size: 15px; font-weight: 800; width: 100px; height: 30px;">전체목록</button>
+					
 					<button type="submit" name="listOpt" value="1"
 					style="border: hidden; background: #ecc7c0; font-size: 15px; font-weight: 800; width: 100px; height: 30px;">나의모임방</button>
+					
 					<button id="registerBtn" type="button" data-toggle="modal" data-target="#registerGroupModal"
 					style="border: hidden; background: #ecc7c0; font-size: 15px; font-weight: 800; width: 100px; height: 30px;">모임방등록</button>
 				</form>
@@ -38,18 +40,20 @@
 				class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
 				<thead>
 					<tr>
-						<th style="width: 250px; text-align: center;">지역</th>
-						<th style="width: 600px; text-align: center;">모임방이름</th>
+						<th style="width: 100px; text-align: center;">지역</th>
+						<th style="width: 550px; text-align: center;">모임방이름</th>
+						<th style="width: 150px; text-align: center;">개설자</th>
 						<th style="width: 400px; text-align: center;">연결고리</th>
-						<th style="width: 400px; text-align: center;">소개</th>
+						<th style="width: 600px; text-align: center;">소개</th>
 					</tr>
 				</thead>
 				<tfoot>
 					<tr>
-						<th style="width: 250px;">지역</th>
-						<th style="width: 600px;">모임방이름</th>
+						<th style="width: 100px;">지역</th>
+						<th style="width: 550px;">모임방이름</th>
+						<th style="width: 150px;">개설자</th>
 						<th style="width: 400px;">연결고리</th>
-						<th style="width: 400px;">소개</th>
+						<th style="width: 600px;">소개</th>
 					</tr>
 				</tfoot>
 				<tbody>
@@ -61,6 +65,7 @@
 								<button style="border: 0; background: transparent;" type="button" name="detailGroupBtn" value="${no }"
 										data-toggle="modal" data-target="#detailGroupModal">${group.groupName }</button>
 							</td>
+							<td style="text-align: center;">${group.managerId }</td>
 							<td style="text-align: center;">${group.connChains }</td>
 							<td>${group.introduce }</td>
 						</tr>
@@ -126,8 +131,11 @@
 		$("#detailGroupModal #introduce").html(groups[index][5]);
 		$("#detailGroupModal #local").html(groups[index][6]);
 		$("#detailGroupModal #joinPeople").html(groups[index][7]);
+		$("#detailGroupModal [name='joinPeople']").val(groups[index][7]);
 		$("#detailGroupModal #maxPeople").html(groups[index][8]);
+		$("#detailGroupModal [name='maxPeople']").val(groups[index][8]);
 		$("#detailGroupModal #no").val(index);
+		
 		
 		if(gListOpt == '0'){ // 모임방에 가입하지 않은 경우
 			$("#myGroupBtns").attr("hidden", true);

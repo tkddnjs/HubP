@@ -88,6 +88,8 @@
 							<div id="unjoinedGroupBtn">
 								<form action="${pageContext.request.contextPath}/group/join.do" method="get">
 									<input type="hidden" name="groupId" value="">
+									<input type="hidden" name="maxPeople" value="">
+									<input type="hidden" name="joinPeople" value="">
 									<button type="submit" class="btn btn-primary">가입</button>
 								</form>
 							</div>

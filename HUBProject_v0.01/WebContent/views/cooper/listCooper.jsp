@@ -60,7 +60,7 @@
 								<li>
 									<form action="${pageContext.request.contextPath}/cooper/remove.do" method="GET">
 										<button class="fa fa-trash-o" style="font-size: 20px; background: none !important; border: none;"
-												name="cooperId" value="${cooper.coId }" type="submit"></button>
+												name="coId" value="${cooper.coId }" type="submit"></button>
 									</form>
 								</li>
 							</ul>
