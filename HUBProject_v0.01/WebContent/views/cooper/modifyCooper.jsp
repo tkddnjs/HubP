@@ -88,7 +88,7 @@
 						<div class="col-md-6 col-sm-6 col-xs-8 col-md-offset-4 col-sm-offset-4 col-xs-offset-4">
 							<button type="reset" class="btn btn-primary">초기화</button>
 							<input type="hidden" id="coId" name="coId">
-							<input type="hidden" id="startDay" name="startDay">
+							<input type="hidden" id="changed" name="changed">
 							<button type="submit" class="btn btn-success">수정</button>
 						</div>
 					</div>
@@ -101,7 +101,7 @@
 <script type="text/javascript">
 
 var defaultImgURL = '${pageContext.request.contextPath}/resources/img/cooperImg/default.png';
-
+var changed='no';
 /* 이미지 업로드 미리보기 */
 	function getThumbnailPrivew(html, $target) {
     if (html.files && html.files[0]) {
@@ -123,12 +123,19 @@ $('.addImageBtn').on('click', function() {
 });
 
 $('#cmb_file').on('change', function(e) {
+	changed='yes';
 	getThumbnailPrivew(this, $('#cmb_image'));
 });
                             
 $('#removeBtn').on('click', function() {
 	$('#cmb_image').attr('src', defaultImgURL);
-	
 	$(this).hide();
 });	
+
+$("#modifyCooperForm").submit(function() {
+	var tags = $("#mctags").val();
+	tags = tags.split(",");
+	$("#mctags").val(tags);
+	$(this).find("#changed").val(changed);
+});
 </script>

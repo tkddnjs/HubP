@@ -1,6 +1,5 @@
 package com.hub.filemanager;
 
-import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.BufferedInputStream;
 import java.io.File;
@@ -19,8 +18,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 public class FileManager {
 
-	private static final int IMG_WIDTH = 128;
-	private static final int IMG_HEIGHT = 128;
+//	private static final int IMG_WIDTH = 128;
+//	private static final int IMG_HEIGHT = 128;
 
 	public String registerImage(String saveDir, MultipartFile image){
 		OutputStream out = null;
@@ -32,6 +31,7 @@ public class FileManager {
 		// input image의 파일 형식
 		int length = originalName.length();
 		String fileType = originalName.substring(length-3, length);
+		String fileNameHead = originalName.substring(0, 4);
 		
 		// 현재시간 -> 스트링
 		DateFormat dataFormat = new SimpleDateFormat("yyyyMMddHHmmss");
@@ -39,7 +39,7 @@ public class FileManager {
 		
 		// 업로드할 파일 이름 생성
 		StringBuilder fileName = new StringBuilder();
-		fileName.append(originalName.substring(0, length-4));
+		fileName.append(fileNameHead);
 		fileName.append(dataFormat.format(date));
 		fileName.append("." + fileType);
 		
@@ -68,10 +68,7 @@ public class FileManager {
 		return fileName.toString();
 	}
 	
-	
-	
 	public void resizeFile(String filePath, String fileType) {
-		
 		try {
 			File file = new File(filePath);
 			BufferedImage originalImage = ImageIO.read(file);

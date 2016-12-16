@@ -29,7 +29,7 @@
 	
 	<update id="updateUser" parameterType="User">
 		UPDATE User_tb 
-		SET pw = #{pw }, email = #{email }, introduce = #{introduce }
+		SET pw=#{pw }, email=#{email }, introduce=#{introduce }, picture=#{picture }
 		WHERE userId=#{userId}
 	</update>
 

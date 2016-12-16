@@ -29,10 +29,14 @@ public class CooperController {
 
 	@RequestMapping(value="register.do", method=RequestMethod.POST)
 	public String registerCooper(Cooper cooper, HttpServletRequest req
-			, @RequestParam("cma_file") MultipartFile image) {
-		
-		String filePath = req.getServletContext().getRealPath("resources/img/cooperImg");
-		String fileName = fileManager.registerImage(filePath, image);
+			, @RequestParam("cma_file") MultipartFile image, String changed) {
+		String fileName;
+		if(changed.equals("no")){
+			fileName = "default.png";
+		} else {
+			String filePath = req.getServletContext().getRealPath("resources/img/cooperImg");
+			fileName = fileManager.registerImage(filePath, image);
+		}
 		cooper.setImage(fileName);
 		cooperService.registerCooper(cooper);
 		return "redirect: list.do?listOpt=0";
@@ -47,9 +51,14 @@ public class CooperController {
 
 	@RequestMapping(value="modify.do", method=RequestMethod.POST)
 	public String modifyCooper(Cooper cooper, HttpServletRequest req
-			, @RequestParam("cmb_file") MultipartFile image) {
-		String filePath = req.getServletContext().getRealPath("resources/img/cooperImg");
-		String fileName = fileManager.registerImage(filePath, image);
+			, @RequestParam("cmb_file") MultipartFile image, String changed) {
+		String fileName;
+		if(changed.equals("no")){
+			fileName = "default.png";
+		} else {
+			String filePath = req.getServletContext().getRealPath("resources/img/cooperImg");
+			fileName = fileManager.registerImage(filePath, image);
+		}
 		cooper.setImage(fileName);
 		cooperService.modifyCooper(cooper);
 		return "redirect: list.do?listOpt=0";

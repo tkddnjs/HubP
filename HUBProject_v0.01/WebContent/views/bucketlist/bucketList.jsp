@@ -92,6 +92,13 @@
 												<%@ include file="/views/post/listPost.jsp"%>
 											</div>
 											<!-- end tab6-->
+											
+											<!-- tab7-->
+											<div role="tabpanel" class="tab-pane fade" id="tab_content7"
+												aria-labelledby="profile-tab7">
+												<%@ include file="/views/user/detailUser.jsp"%>
+											</div>
+											<!-- end tab7-->
 										</div>
 									</div>
 								</div>

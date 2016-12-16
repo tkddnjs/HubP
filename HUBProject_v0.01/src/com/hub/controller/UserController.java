@@ -39,10 +39,14 @@ public class UserController {
 	// parameter 추가
 	@RequestMapping(value="register.do", method=RequestMethod.POST)
 	public String registerUser(User user, HttpServletRequest req
-								, @RequestParam("image") MultipartFile image){
-		
-		String filePath = req.getServletContext().getRealPath("resources/img/userImg");
-		String fileName = fileManager.registerImage(filePath, image);
+								, @RequestParam("image") MultipartFile image, String changed){
+		String fileName;
+		if(changed.equals("no")){
+			fileName = "default.png";
+		} else {
+			String filePath = req.getServletContext().getRealPath("resources/img/userImg");
+			fileName = fileManager.registerImage(filePath, image);
+		}
 		user.setPicture(fileName);
 		userService.registerUser(user);
 		return "HUBMain";
@@ -56,10 +60,18 @@ public class UserController {
 	}
 	
 	@RequestMapping(value="modify.do", method=RequestMethod.POST)
-	public String modifyUser(User user){
-		userService.modifyUser(user);
+	public String modifyUser(User user, HttpServletRequest req
+							, @RequestParam("image") MultipartFile image, String changed){
+		String fileName;
+		if(changed.equals("no")){
+			fileName = userService.findUserByUserId(user.getUserId()).getPicture();
+		} else {
+			String filePath = req.getServletContext().getRealPath("resources/img/userImg");
+			fileName = fileManager.registerImage(filePath, image);
+		}
+		user.setPicture(fileName);
+		//userService.modifyUser(user);
 		return "redirect: detail.do?userId="+user.getUserId()+"&myId="+user.getUserId();
-		
 	}
 
 	// 설계 문서 수정 => session 추가
@@ -73,12 +85,10 @@ public class UserController {
 	// parameter 변경 (String userId => HttpSession session, String userId)
 	@RequestMapping(value="detail.do", method=RequestMethod.GET)	
 	public ModelAndView detailUser(String myId, String userId){
-		ModelAndView mav = null;
-		
+		ModelAndView mav = new ModelAndView("bucketlist/bucketList");
 		if(userId.equals(myId)){
-			mav = new ModelAndView("user/detailUser");
+			mav.addObject("tabOpt", 7);
 		} else {
-			mav = new ModelAndView("bucketlist/bucketList");
 			mav.addObject("posts", postService.findPosts(myId, userId));
 			mav.addObject("tabOpt", 5);
 		}
@@ -95,7 +105,6 @@ public class UserController {
 		} catch (IOException e) {
 		}
 	}
-	
 	
 	@RequestMapping(value="checkId.do", method=RequestMethod.GET)
 	public void checkId(String userId, HttpServletResponse resp){

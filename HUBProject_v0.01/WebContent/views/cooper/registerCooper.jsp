@@ -78,6 +78,7 @@
 					<div class="ln_solid"></div>
 					<div class="form-group">
 						<div class="col-md-6 col-sm-6 col-xs-8 col-md-offset-4 col-sm-offset-4 col-xs-offset-4">
+							<input type="hidden" id="changed" name="changed">
 							<button type="reset" class="btn btn-primary">초기화</button>
 							<button type="submit" class="btn btn-success">등록</button>
 						</div>
@@ -91,7 +92,7 @@
 <script type="text/javascript">
 
 var defaultImgURL = '${pageContext.request.contextPath}/resources/img/cooperImg/default.png';
-
+var changed='no';
 /* 이미지 업로드 미리보기 */
 	function getThumbnailPrivew(html, $target) {
     if (html.files && html.files[0]) {
@@ -113,22 +114,20 @@ $('#addImageBtn').on('click', function() {
 });
 
 $('#cma_file').on('change', function(e) {
+	changed='yes';
 	getThumbnailPrivew(this, $('#cma_image'));
 });
                             
 $('#removeBtn').on('click', function() {
 	$('#cma_image').attr('src', defaultImgURL);
-	
 	$(this).hide();
 });
 
-/* 
- * img 태그 엑박 방지
- $().ready(function(){
-	$('img).each(function(n){
-		$(this).error(function(){
-			$(this).attr('src', defaultImgURL);
-			});
-		});
-});*/
+$("#registerCooperForm").submit(function() {
+	var tags = $("#rctags").val();
+	tags = tags.split(",");
+	$("#rctags").val(tags);
+	$(this).find("#changed").val(changed);
+});
+
 </script>

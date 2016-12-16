@@ -315,16 +315,6 @@
 		}
 	);
 
-	function initConn(str) {
-		var conn = str;
-		conn = conn.replace("[", "");
-		conn = conn.replace(/ /gi, "");
-		conn = conn.replace("]", "");
-		$(".tags").each(function() {
-			$(this).importTags(conn);
-		});
-	};
-
 	function initStar(str) {
 		$(".changeStar").each(function() {
 			$(this).starrr();
