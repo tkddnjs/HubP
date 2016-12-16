@@ -75,17 +75,17 @@ public class FileManager {
 		try {
 			File file = new File(filePath);
 			BufferedImage originalImage = ImageIO.read(file);
-			int type = originalImage.getType() == 0 ? BufferedImage.TYPE_INT_ARGB : originalImage.getType();
-			BufferedImage resizeImage = resizeImage(originalImage, type);
+			//int type = originalImage.getType() == 0 ? BufferedImage.TYPE_INT_ARGB : originalImage.getType();
+			//BufferedImage resizeImage = resizeImage(originalImage, type);
 			switch(fileType){
 				case "jpg": 
-					ImageIO.write(resizeImage, "jpg", new File(filePath));
+					ImageIO.write(originalImage, "jpg", new File(filePath));
 					break;
 				case "png":
-					ImageIO.write(resizeImage, "png", new File(filePath));
+					ImageIO.write(originalImage, "png", new File(filePath));
 					break;
 				case "gif":
-					ImageIO.write(resizeImage, "gif", new File(filePath));
+					ImageIO.write(originalImage, "gif", new File(filePath));
 					break;
 			}
 		} catch (IOException e) {
@@ -93,12 +93,12 @@ public class FileManager {
 		}
 	}
 
-	private BufferedImage resizeImage(BufferedImage originalImage, int type) {
-		BufferedImage resizedImage = new BufferedImage(IMG_WIDTH, IMG_HEIGHT, type);
-		Graphics2D g = resizedImage.createGraphics();
-		g.drawImage(originalImage, 0, 0, IMG_WIDTH, IMG_HEIGHT, null);
-		g.dispose();
-		
-		return resizedImage;
-	}
+//	private BufferedImage resizeImage(BufferedImage originalImage, int type) {
+//		BufferedImage resizedImage = new BufferedImage(IMG_WIDTH, IMG_HEIGHT, type);
+//		Graphics2D g = resizedImage.createGraphics();
+//		g.drawImage(originalImage, 0, 0, IMG_WIDTH, IMG_HEIGHT, null);
+//		g.dispose();
+//		
+//		return resizedImage;
+//	}
 }

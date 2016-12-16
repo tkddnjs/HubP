@@ -31,7 +31,7 @@
 
 <!-- Custom Theme Style -->
 <link href="${pageContext.request.contextPath}/resources/css/custom.css" rel="stylesheet">
-
+<link href="${pageContext.request.contextPath}/resources/css/ImageAccordionSlider.css" rel="stylesheet">
 <style>
 	.ui-autocomplete{
 		z-index: 99999;

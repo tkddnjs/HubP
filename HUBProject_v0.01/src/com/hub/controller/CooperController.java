@@ -1,12 +1,17 @@
 package com.hub.controller;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.hub.domain.Cooper;
+import com.hub.filemanager.FileManager;
 import com.hub.service.pacade.CooperService;
 
 @Controller
@@ -15,14 +20,20 @@ public class CooperController {
 
 	@Autowired
 	private CooperService cooperService;
-
+	private FileManager fileManager = new FileManager();
+	
 	@RequestMapping(value="register.do", method=RequestMethod.GET)
 	public String registerCooper() {
 		return "cooper/registerCooper";
 	}
 
 	@RequestMapping(value="register.do", method=RequestMethod.POST)
-	public String registerCooper(Cooper cooper) {
+	public String registerCooper(Cooper cooper, HttpServletRequest req
+			, @RequestParam("cma_file") MultipartFile image) {
+		
+		String filePath = req.getServletContext().getRealPath("resources/img/cooperImg");
+		String fileName = fileManager.registerImage(filePath, image);
+		cooper.setImage(fileName);
 		cooperService.registerCooper(cooper);
 		return "redirect: list.do?listOpt=0";
 	}
@@ -35,7 +46,11 @@ public class CooperController {
 	}
 
 	@RequestMapping(value="modify.do", method=RequestMethod.POST)
-	public String modifyCooper(Cooper cooper) {
+	public String modifyCooper(Cooper cooper, HttpServletRequest req
+			, @RequestParam("cmb_file") MultipartFile image) {
+		String filePath = req.getServletContext().getRealPath("resources/img/cooperImg");
+		String fileName = fileManager.registerImage(filePath, image);
+		cooper.setImage(fileName);
 		cooperService.modifyCooper(cooper);
 		return "redirect: list.do?listOpt=0";
 	}

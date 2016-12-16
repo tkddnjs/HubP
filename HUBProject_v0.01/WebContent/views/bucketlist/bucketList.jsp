@@ -78,6 +78,20 @@
 												<%@ include file="/views/group/listGroup.jsp"%>
 											</div>
 											<!-- end tab4-->
+											
+											<!-- tab5-->
+											<div role="tabpanel" class="tab-pane fade" id="tab_content5"
+												aria-labelledby="profile-tab5">
+												<%@ include file="/views/follow/detailFollow.jsp"%>
+											</div>
+											<!-- end tab5-->
+											
+											<!-- tab6-->
+											<div role="tabpanel" class="tab-pane fade" id="tab_content6"
+												aria-labelledby="profile-tab6">
+												<%@ include file="/views/post/listPost.jsp"%>
+											</div>
+											<!-- end tab6-->
 										</div>
 									</div>
 								</div>

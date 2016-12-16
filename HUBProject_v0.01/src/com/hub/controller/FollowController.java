@@ -23,13 +23,9 @@ public class FollowController {
 	private FollowService followService;
 	
 	@RequestMapping(value="request.do", method=RequestMethod.POST)
-	public String requestFollow(Follow follow){
+	public void requestFollow(Follow follow){
 		follow.setConfirm(true);
-		int result = followService.requestFollow(follow);
-		if(result==4){
-			return "redirect: /list/list.do?listOpt=" + follow.getRelation() + "&userId=" + follow.getUserId();
-		}
-		return "redirect: /list/list.do?listOpt=" + follow.getRelation() + "&userId=" + follow.getUserId();
+		followService.requestFollow(follow);
 	}
 	
 	@RequestMapping(value="confirm.do", method=RequestMethod.POST)

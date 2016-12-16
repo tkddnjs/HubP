@@ -27,9 +27,8 @@ public class PostController {
 	}*/
 	
 	@RequestMapping(value="send.do", method=RequestMethod.POST)
-	public String sendPost(Post post){
+	public void sendPost(Post post){
 		postService.sendPost(post);
-		return "redirect:/user/detail.do?myId="+ post.getSenderId() + "&userId=" + post.getReceiverId();
 	}
 	
 	@RequestMapping(value="remove.do", method=RequestMethod.POST)
@@ -42,7 +41,7 @@ public class PostController {
 	
 	@RequestMapping(value="list.do", method=RequestMethod.GET)
 	public ModelAndView listPost(HttpSession session, int listOpt, String followId){
-		ModelAndView mav = new ModelAndView("post/listPost");
+		ModelAndView mav = new ModelAndView("bucketlist/bucketList");
 		String userId = (String) session.getAttribute("userId");
 		List<Post> posts = new ArrayList<>();
 		switch(listOpt){
@@ -52,14 +51,9 @@ public class PostController {
 		case 2:
 			posts = postService.findPosts(userId, followId);
 			break;
-		case 3:
-			posts = postService.findReceivePosts(userId);
-			break;
-		case 4:
-			posts = postService.findSendPosts(userId);
-			break;
 		}
 		mav.addObject("posts", posts);
+		mav.addObject("tabOpt", 6);
 		return mav;
 	}
 	

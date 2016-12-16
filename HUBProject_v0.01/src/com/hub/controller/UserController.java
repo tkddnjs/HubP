@@ -78,8 +78,9 @@ public class UserController {
 		if(userId.equals(myId)){
 			mav = new ModelAndView("user/detailUser");
 		} else {
-			mav = new ModelAndView("follow/detailFollow");
+			mav = new ModelAndView("bucketlist/bucketList");
 			mav.addObject("posts", postService.findPosts(myId, userId));
+			mav.addObject("tabOpt", 5);
 		}
 		mav.addObject("user", userService.findUserByUserId(userId));
 		return mav;

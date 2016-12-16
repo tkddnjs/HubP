@@ -75,10 +75,12 @@
 		
 		//tab 누를때 Controller에서 정보를 가져옴
 		tabOpt = ${tabOpt};
-		$("[role='presentation']").attr("class", "");
-		$("#profile-tab"+tabOpt).closest("[role='presentation']").attr("class", "active");
-		$(".active.in").attr("class", "tab-pane fade");
-		$("#tab_content"+tabOpt).attr("class", "tab-pane fade active in");
+		if(tabOpt < 5){
+			$("[role='presentation']").attr("class", "");
+			$("#profile-tab"+tabOpt).closest("[role='presentation']").attr("class", "active");
+		}
+		$(".active.in.main").attr("class", "tab-pane fade");
+		$("#tab_content"+tabOpt).attr("class", "tab-pane fade active in main");
 
 	});
 
@@ -271,6 +273,7 @@
 		$('#datatable').dataTable();
 		$('#datatable1').dataTable();
 		$('#datatable2').dataTable();
+		$('#datatable3').dataTable();
 		
 		$('#datatable-keytable').DataTable({
 			keys: true

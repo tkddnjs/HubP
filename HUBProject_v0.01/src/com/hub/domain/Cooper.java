@@ -12,7 +12,8 @@ public class Cooper {
 	private Date lastDay;
 	private List<String> connChains;
 	private String coBanner;
-
+	private String image;
+	
 	public Cooper() {
 	}
 
@@ -69,5 +70,13 @@ public class Cooper {
 
 	public void setConnChains(List<String> connChains) {
 		this.connChains = connChains;
+	}
+	
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
 	}
 }

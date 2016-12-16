@@ -8,6 +8,7 @@
 		<result property="startDay" column="startDay"/>
 		<result property="lastDay" column="lastDay"/>
 		<result property="coBanner" column="banner"/>
+		<result property="image" column="image"/>
 		<collection property="connChains" column="coId" ofType="String" select="com.hub.store.mapper.CooperMapper.selectConnChainsByCoId" javaType="ArrayList" jdbcType="NUMERIC"/>
 	</resultMap>
 
@@ -17,14 +18,14 @@
 	</select>
 
 	<sql id="selectCooper">
-		SELECT coId, coName, banner, startDay, lastDay
+		SELECT coId, coName, banner, startDay, lastDay, image
 		FROM cooper_tb
 	</sql>
 
 	<insert id="insertCooper" parameterType="Cooper">
 		INSERT
-		INTO cooper_tb(coId, coName, banner, startDay, lastDay)
-		VALUES(#{coId}, #{coName}, #{coBanner}, sysdate, #{lastDay})
+		INTO cooper_tb(coId, coName, banner, startDay, lastDay, image)
+		VALUES(#{coId}, #{coName}, #{coBanner}, sysdate, #{lastDay}, #{image})
 	</insert>
 
 	<insert id="insertCooperConn" parameterType="Map">
@@ -35,8 +36,8 @@
 
 	<update id="updateCooper" parameterType="Cooper">
 		UPDATE cooper_tb
-		SET coName = #{coName}, banner = #{coBanner}, lastDay = #{lastDay}
-		WHERE coId = #{coId}
+		SET coName=#{coName}, banner=#{coBanner}, lastDay=#{lastDay}, image=#{image}
+		WHERE coId=#{coId}
 	</update>
 
 	<delete id="deleteCooper" parameterType="int">
