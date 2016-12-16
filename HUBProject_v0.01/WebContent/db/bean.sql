@@ -1778,4 +1778,6 @@ insert into follow_tb values('ksw006', 'ksw030', 2, 'N');
 insert into follow_tb values('ksw030', 'ksw007', 2, 'Y');
 insert into follow_tb values('ksw007', 'ksw030', 1, 'N');
 
+insert into cooper_tb values(cooper_seq.nextVal, 'kosta', 'www.naver.com', sysdate, '2018-10-27', 'default.png');
+
 COMMIT;
