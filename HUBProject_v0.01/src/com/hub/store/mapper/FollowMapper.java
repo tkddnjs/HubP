@@ -11,7 +11,7 @@ public interface FollowMapper {
 	int insertFollow(Follow follow);
 	int updateFollow(Follow follow);
 	int deleteFollow(Follow follow);
-	Follow selectFollowById(String userId, String followId);
+	Follow selectFollowById(@Param("userId")String userId, @Param("followId")String followId);
 	List<Follow> selectAll(String userId);
 	List<Follow> selectFollowsRequested(String userId);
 	List<Follow> selectConnectedFollows(String userId);
