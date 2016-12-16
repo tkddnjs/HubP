@@ -74,6 +74,7 @@
 		});
 		
 		//tab 누를때 Controller에서 정보를 가져옴
+		
 		tabOpt = ${tabOpt};
 		if(tabOpt < 5){
 			$("[role='presentation']").attr("class", "");
@@ -124,7 +125,7 @@
 	};
 	
 	
-	$("#requestButton").click(function (){
+	$(".requestButton").click(function (){
 		var userId = "${sessionScope.userId}";
 		var followId = $(this).closest(".modal.fade").find("#followId").val();
 		var relation = $(this).val();
@@ -153,6 +154,16 @@
 			$(this).find('[name="listOpt"]').val(0);
 		}
 	});
+	
+	function initConn(str) {
+		var conn = str;
+		conn = conn.replace("[", "");
+		conn = conn.replace(/ /gi, "");
+		conn = conn.replace("]", "");
+		$(".tags").each(function() {
+			$(this).importTags(conn);
+		});
+	};
 	
 </script>
 <!-- /Custom Script -->
@@ -539,7 +550,6 @@
 
 	$(document).ready(function() {
 		$(".tags").each(function(){
-			
 			if($(this).attr('id') == "dgtags"){
 				$("#dgtags").tagsInput({
 					width: 'auto',
