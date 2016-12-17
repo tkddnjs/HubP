@@ -126,8 +126,8 @@ public class GroupServiceLogic implements GroupService {
 	}
 
 	@Override
-	public List<Group> findAll() {
-		return groupStore.selectAll();
+	public List<Group> findAll(String userId) {
+		return groupStore.selectAll(userId);
 	}
 
 	@Override
@@ -141,18 +141,8 @@ public class GroupServiceLogic implements GroupService {
 	}
 
 	@Override
-	public List<Group> findGroupsByConnChain(String connChain) {
-		return groupStore.selectGroupsByConnChain(connChain);
-	}
-
-	@Override
-	public List<Group> findGroupsByGroupName(String groupName) {
-		return groupStore.selectGroupsByGroupName(groupName);
-	}
-
-	@Override
-	public List<Group> findGroupsByLocal(String local) {
-		return groupStore.selectGroupsByLocal(local);
+	public List<String> findJoinUsersByGroupId(int groupId) {
+		return groupStore.selectJoinUsersByGroupId(groupId);
 	}
 
 }
