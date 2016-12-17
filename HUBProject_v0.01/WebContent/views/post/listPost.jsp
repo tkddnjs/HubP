@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
+
 <div class="col-xs-12">
 	<!-- 쪽지 목록 -->
 	<div class="x_panel">
@@ -31,6 +32,7 @@
 						</li>
 					</ul>
 					<form action="${pageContext.request.contextPath }/post/remove.do" method="post" id="removePostInLP">
+						<button style="float: left;" class="btn btn-xs btn-info sendPostBtnLP" type="button" data-toggle="modal" data-target="#sendPostModal">쪽지전송</button>
 						<button style="float: right;" class="btn btn-xs btn-default" type="submit" id="removePost">삭제</button>
 						<div id="myTabContent" class="tab-content">
 							<!-- 전체쪽지 -->

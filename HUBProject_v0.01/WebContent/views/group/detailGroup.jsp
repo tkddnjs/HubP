@@ -74,7 +74,7 @@
 								<form action="${pageContext.request.contextPath}/group/remove.do" method="get">
 									<input type="hidden" name="groupId" value="">
 									<button id="modifyGroupBtn" type="button" data-toggle="modal" data-target="#modifyGroupModal" class="btn btn-default">수정</button>
-									<button type="submit" class="btn btn-primary">해체</button>
+									<button type="button" data-toggle="modal" data-target="#deleteGroupModal" class="btn btn-primary" >해체</button>
 								</form>
 							</div>
 							
@@ -98,5 +98,24 @@
 				</div>
 			</div>
 		</div>
+	</div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="deleteGroupModal" role="dialog" style="margin-top: 10%;">
+	<div class="modal-dialog modal-sm">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title">모임방해체</h4>
+			</div>
+   			<div class="modal-body" style="text-align: center;">
+				<form action="${pageContext.request.contextPath}/group/remove.do" id="removeGroupForm" method="get">
+					<h4>해체하시겠습니까?</h4><br>
+					<button type="submit" class="btn btn-success" name="groupId">확인</button>
+					<button type="button" class="btn btn-primary">취소</button>
+				</form>
+			</div>
+  		</div>
 	</div>
 </div>

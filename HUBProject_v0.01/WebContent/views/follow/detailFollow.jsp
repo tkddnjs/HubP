@@ -62,6 +62,7 @@
 							</ul>
 
 							<form action="${pageContext.request.contextPath }/post/remove.do" method="post" id="removePostInDF">
+								<button style="float: left;" class="btn btn-xs btn-info sendPostBtn" value="${user.userId }" type="button" data-toggle="modal" data-target="#sendPostModal">쪽지전송</button>
 								<button style="float: right;" class="btn btn-xs btn-default" type="submit" id="removePost">삭제</button>
 								<!-- end tab Area -->
 								<div id="myTabContent" class="tab-content">

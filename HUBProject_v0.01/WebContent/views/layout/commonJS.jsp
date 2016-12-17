@@ -455,6 +455,14 @@
 		$(this).find("#changed").val(changed);
 	});
 	
+	$('#registerCooperModal .btn-primary').on('click', function() {
+		$(this).closest(".modal.fade").find(".close").click();
+	});
+
+	$('#modifyCooperModal .btn-primary').on('click', function() {
+		$(this).closest(".modal.fade").find(".close").click();
+	});
+	
 	//$('#cma_image').on('click', function() {
 	//	$('#cma_file').click();
 	//});
@@ -485,6 +493,7 @@
 			appendFollow($("#receiveHelp"), 2);
 			appendFollow($("#bothHelp"), 3);
 			appendFollow($("#groupFollow"), 4);
+			
 			$(".sendPostBtn").click(function (){
 				var followId = $(this).val();
 				$("#sendPostModal #receiverId").val(followId);
@@ -530,7 +539,9 @@
 		var gListOpt = '${listOpt}';
 		var index = $(this).val() - 1;
 		$("#detailGroupModal #groupId").html(groups[index][0]);
-		$("#detailGroupModal [name='groupId']").val(groups[index][0]);
+		$("#detailGroupModal [name='groupId']").each(function(){
+			$(this).val(groups[index][0]);
+		})
 		$("#detailGroupModal #groupName").html(groups[index][1]);
 		$("#detailGroupModal #managerId").html(groups[index][2]);
 		$("#detailGroupModal #lastDay").html(groups[index][3]);
@@ -580,12 +591,18 @@
 		tags = tags.split(",");
 		$(this).find(".tags").val(tags);
 	});
+	
 	$("#modifyGroupForm").submit(function() {
 		// memo의 줄넘김 문자 삭제
 		var introduce = $(this).find("[name='introduce']").val();
 		introduce = introduce.replace(/\n/gi, " ");
 		$(this).find("[name='introduce']").val(introduce);
 	});
+	
+	$('#deleteGroupModal .btn-primary').on('click', function() {
+		$(this).closest(".modal.fade").find(".close").click();
+	});
+	
 </script>
 <!-- /Group Script -->
 
@@ -630,6 +647,10 @@
 
 <!-- Post Script -->
 <script>
+	$(".sendPostBtnLP").click(function (){
+		$("#sendPostModal #receiverId").removeAttr("readonly");
+	});
+
 	$("#sendPostBtn").click(function() {
 		var senderId = '${sessionScope.userId}';
 		var receiverId = $(this).val();
@@ -637,7 +658,6 @@
 		$.when(ajaxPost(senderId, receiverId, content)).done(function(){
 			$("#sendPostModal").find(".close").click();	
 		})
-		
 	});
 
 	$('[name="checks"]').click(function(){
@@ -831,6 +851,10 @@
 		}();
 
 		$('#datatable').dataTable();
+
+		$('.cooperTable').each(function(){
+			$(this).dataTable()
+		});
 		
 		$('.followPostTable').each(function(){
 			$(this).dataTable()

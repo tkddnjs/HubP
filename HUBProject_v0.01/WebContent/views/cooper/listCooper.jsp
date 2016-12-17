@@ -24,7 +24,7 @@
 		<!-- 업체 목록 바디 -->
 		<!----------- Image accordion slider only css ------------>
 		<c:if test="${!sessionScope.isAdmin }">
-			<table id="datatable3" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
+			<table id="cooperTable1" class="table table-striped table-bordered dt-responsive nowrap cooperTable" cellspacing="0" width="100%">
 				<thead>
 					<tr>
 						<th style="width: 800px; text-align: center;">업체</th>
@@ -46,54 +46,42 @@
 			</table>
 		</c:if>
 		<c:if test="${sessionScope.isAdmin}">
-			<div class="x_content">
-				<div class="accordion" id="accordion1" role="tablist" aria-multiselectable="true">
-					<!--1st item-->
+			<table id="cooperTable2" class="table table-striped table-bordered dt-responsive nowrap cooperTable" cellspacing="0" width="100%">
+				<thead>
+					<tr>
+						<th style="width: 50px; text-align: center;">업체이름</th>
+						<th style="width: 80px; text-align: center;">등록일자</th>
+						<th style="width: 80px; text-align: center;">만료일자</th>
+						<th style="width: 100px; text-align: center;">연결고리</th>
+						<th style="width: 100px; text-align: center;">업체url</th>
+						<th style="width: 400px; text-align: center;">배너이미지</th>
+						<th style="width: 50px; text-align: center;"></th>
+					</tr>
+				</thead>
+				<tbody>
 					<c:forEach items="${coopers }" var="cooper" varStatus="status">
-						<c:set var="no" value="${status.count  }"></c:set>
-						<div class="panel">
-							<ul class="nav navbar-right panel_toolbox" style="padding-top: 13px">
-								<li>
-									<button class="fa fa-edit" value="${no }" data-toggle="modal" name="modifyCooperBtn" data-target="#modifyCooperModal"
+						<tr>
+							<td style="text-align: center; vertical-align: middle;">${cooper.coName }</td>
+							<td style="text-align: center; vertical-align: middle;">${cooper.startDay }</td>
+							<td style="text-align: center; vertical-align: middle;">${cooper.lastDay }</td>
+							<td style="text-align: center; vertical-align: middle;">${cooper.connChains }</td>
+							<td style="text-align: center; vertical-align: middle;">${cooper.coBanner }</td>
+							<td style="text-align: left;">
+								<img src="${pageContext.request.contextPath}/resources/img/cooperImg/${cooper.image }" width="100%" height="100px"/>
+							</td>
+							<td style="text-align: center; vertical-align: middle;">
+								<form action="${pageContext.request.contextPath}/cooper/remove.do" method="GET">
+									<button class="fa fa-edit" type="button" value="${status.count }" data-toggle="modal" name="modifyCooperBtn" data-target="#modifyCooperModal"
 										style="font-size: 20px; background: none !important; border: none;"></button>
-								</li>
-								<li>
-									<form action="${pageContext.request.contextPath}/cooper/remove.do" method="GET">
-										<button class="fa fa-trash-o" style="font-size: 20px; background: none !important; border: none;"
-												name="coId" value="${cooper.coId }" type="submit"></button>
-									</form>
-								</li>
-							</ul>
-							<a class="panel-heading " role="tab" id="headingOne1"
-								data-toggle="collapse" data-parent="#accordion1"
-								href="#collapseOne${no  }" aria-expanded="true"
-								aria-controls="collapseOne">
-								<h3 class="panel-title">${cooper.coName }</h3>
-							</a>
-							<div id="collapseOne${no  }"
-								class="panel-collapse collapse" role="tabpanel"
-								aria-labelledby="headingOne">
-								<div class="panel-body">
-									<table class="table table-striped"
-										style="width: 70%; height: 100px; margin: 20px 10px 0 140px; gravity: center; font-size: 16px">
-										<tr>
-											<th>등록일자</th>
-											<td>${cooper.startDay }</td>
-										</tr>
-										<tr>
-											<th>만료일자</th>
-											<td>${cooper.lastDay }</td>
-										</tr>
-										<tr>
-											<th>업체배너</th>
-											<td><a>${cooper.coBanner }</a></td>
-										</tr>
-									</table>
-								</div>
-							</div>
-						</div>
+									<button class="fa fa-trash-o" style="font-size: 20px; background: none !important; border: none;"
+											name="coId" value="${cooper.coId }" type="submit"></button>
+								</form>
+							</td>
+						</tr>
 					</c:forEach>
-					<!-- 업체 등록 -->
+				</tbody>
+			</table>
+			<!-- 업체 등록 -->
 					<div class="panel">
 						<a id="registerCooperBtn" data-toggle="modal" data-target="#registerCooperModal">
 							<h1 align="center">
@@ -101,9 +89,8 @@
 							</h1>
 						</a>
 					</div>
-					<!-- /업체 등록 -->
-			</div>
-		</div>
+			<!-- /업체 등록 -->
+		
 		</c:if>
 		<!-- 업체 목록  바디 -->
 	</div>
