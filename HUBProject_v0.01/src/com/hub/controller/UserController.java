@@ -70,7 +70,7 @@ public class UserController {
 			fileName = fileManager.registerImage(filePath, image);
 		}
 		user.setPicture(fileName);
-		//userService.modifyUser(user);
+		userService.modifyUser(user);
 		return "redirect: detail.do?userId="+user.getUserId()+"&myId="+user.getUserId();
 	}
 
@@ -106,7 +106,7 @@ public class UserController {
 		}
 	}
 	
-	@RequestMapping(value="checkId.do", method=RequestMethod.GET)
+	@RequestMapping(value="checkId.do", method=RequestMethod.POST)
 	public void checkId(String userId, HttpServletResponse resp){
 		try {
 			PrintWriter out = resp.getWriter();

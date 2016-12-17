@@ -103,25 +103,15 @@
 	}
 
 	$(document).ready(function() {
-		$(".tags").each(function(){
-			
-			if($(this).attr('id') == "dgtags"){
-				$("#dgtags").tagsInput({
-					width: 'auto',
-					interactive: false
-				});
-			} else {
-				$(this).tagsInput({
-					width: 'auto',
-					autocomplete_url: connChains
-				});
-			};
-		})
+		$(".tags").tagsInput({
+			width: 'auto',
+			autocomplete_url: connChains
+		});
 	});
 	
 </script>
-
 <!-- /jQuery Tags Input -->
+
 <script type="text/javascript">
 	var defaultImgURL = '${pageContext.request.contextPath}/resources/img/userImg/default.png';
 	var changed="no"
@@ -162,6 +152,81 @@
 		$(this).find("#changed").val(changed);
 	});
 </script>
+
+<!-- Validation -->
+<script>
+	$("#userId").keyup(function() {
+		var id = $(this).val();
+		if($(this).val().length >= 5){
+			$.ajax({
+				type: 'POST',
+				url: '${pageContext.request.contextPath}/user/checkId.do',
+				data: {
+						userId: id
+				},
+				success: function(result){
+					if($.trim(result)=="OK"){
+						$("#idCheckResult").html("사용가능합니다.")
+						$("#idCheckResult").attr('style', 'color: blue;');
+					} else {
+						$("#idCheckResult").html("중복된 ID입니다.")
+						$("#idCheckResult").attr('style', 'color: red;');
+					}
+				}
+			});
+		}else{
+			$("#idCheckResult").html("ID는 5자 이상입니다.")
+			$("#idCheckResult").attr('style', 'color: red;');
+		}
+	});
 	
+	$("#pwCheck").keyup(function() {
+		if($(this).val() == $("#pw").val()){
+			$("#pwCheckResult").html("비밀번호가 일치합니다.");
+			$("#pwCheckResult").attr('style', 'color: blue;');
+		}else{
+			$("#pwCheckResult").html("비밀번호가 일치하지 않습니다.");
+			$("#pwCheckResult").attr('style', 'color: red;');
+		}
+	});
+	
+	$("#email").keyup(function() {
+		if(!$(this).val().match(/.+@.+\.+/g)){
+            $("#emailCheckResult").html("잘못된 형식입니다. (옳은 예 : example@domain.com)");
+            $("#emailCheckResult").attr('style', 'color:red');
+        } else {
+        	$("#emailCheckResult").html("올바른 형식입니다.");
+            $("#emailCheckResult").attr('style', 'color:blue');
+        }
+	});
+
+	$("form").submit(function(){
+		$("p.error").remove();
+		$("dl dd").removeClass("error");
+
+		$(":text, textarea").filter('[required="required"]').each(function() {
+
+			if ($(this).val() == "") {
+				$(this).before("<p class='error'>필수 항목 입니다.</p>");
+			}
+
+//			if(isNaN($(this).filter(":number").val())){
+//				$(this).before("<p class='error'>숫자만 입력 가능합니다.</p>");
+//			}
+
+			if ($("p.error").length > 0) {
+				//에러가 발생한 위치로 스크롤 이동
+				$("html, body").animate({
+					scrollTop : $("p.error.first").offset.top - 40
+				}, "slow");
+				//에러 항목에 대한 음영 처리
+				$("p.error").parent().addClass("error");
+				return false;
+			}
+		});
+	});
+</script>
+<!-- Validation -->
+
 </body>
 </html>

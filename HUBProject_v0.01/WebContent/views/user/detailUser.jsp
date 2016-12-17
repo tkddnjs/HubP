@@ -51,25 +51,33 @@
 				<div class="form-group">
 					<div
 						class="col-md-6 col-sm-6 col-xs-8 col-md-offset-4 col-sm-offset-1 col-xs-offset-4">
-						<a class="btn btn-primary"
-							href="${pageContext.request.contextPath }/user/remove.do?userId=${user.userId}">탈퇴</a>
 						<button type="button" id="modifyUserBtn" class="btn btn-success"
 							value="${user.userId}" data-toggle="modal"
 							data-target="#modifyUserModal">수정</button>
+						<button type="button" id="deleteUserBtn" class="btn btn-primary"
+								data-toggle="modal" data-target="#deleteUserModal">탈퇴</button>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 </div>
-<script
-	src="${pageContext.request.contextPath}/resources/vendors/jquery/dist/jquery.min.js"></script>
-<script>
-	$("#modifyUserBtn").click(function() {
-		var conn = "${user.connChains }";
-		conn = conn.replace("[", "");
-		conn = conn.replace(/ /gi, "");
-		conn = conn.replace("]", "");
-		$("#mutags").importTags(conn);
-	});
-</script>
+
+<!-- Modal -->
+<div class="modal fade" id="deleteUserModal" role="dialog" style="margin-top: 20%;">
+	<div class="modal-dialog modal-sm">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title">회원탈퇴</h4>
+			</div>
+   			<div class="modal-body" style="text-align: center;">
+				<form action="${pageContext.request.contextPath}/user/remove.do" id="deleteUserForm" method="get">
+					<h4>탈퇴하시겠습니까?</h4><br>
+					<button type="submit" class="btn btn-success" name="userId" value="${user.userId }">탈퇴</button>
+					<button type="button" class="btn btn-primary">취소</button>
+				</form>
+			</div>
+  		</div>
+	</div>
+</div>

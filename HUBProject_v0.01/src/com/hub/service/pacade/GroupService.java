@@ -15,7 +15,4 @@ public interface GroupService {
 	Group findGroupByGroupId(int groupId);
 	List<Group> findGroupsByUserId(String userId);
 	List<String> findJoinUsersByGroupId(int groupId);
-	//List<Group> findGroupsByConnChain(String connChain);
-	//List<Group> findGroupsByGroupName(String groupName);
-	//List<Group> findGroupsByLocal(String local);
 }

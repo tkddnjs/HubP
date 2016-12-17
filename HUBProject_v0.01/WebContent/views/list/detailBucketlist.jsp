@@ -40,8 +40,10 @@
 					</div>
 					<div class="ln_solid"></div>
 					<div class="form-group" align="right">
-						<button class="btn btn-xs btn-default btn-block requestButton" id="requestButton" type="button"
+						<button class="btn btn-xs btn-default btn-block requestButton" type="button"
 								style="border: hidden; background: #ecc7c0; font-size: 14px; width: 100px;">팔로우요청</button>
+						<button class="btn btn-xs btn-default sendPostBtn" type="button" data-toggle="modal" data-target="#sendPostModal"
+								style="border: hidden; background: #ecc7c0; font-size: 14px; width: 100px;">쪽지전송</button>
 					</div>
 				</div>
 			</div>

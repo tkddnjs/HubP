@@ -54,9 +54,252 @@
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js" type="text/javascript"></script>
 
 <!-- Custom Script -->
+
+<!-- Init Script -->
 <script>
+	var defaultImgURL = '${pageContext.request.contextPath}/resources/img/cooperImg/default.png';
+	var defaultUserImgURL = '${pageContext.request.contextPath}/resources/img/userImg/default.png';
+	var changed='no';
+	var userId = '${sessionScope.userId}';
+	
 	var connChains = [];
 	var tabOpt;
+
+	var user = new Array();
+	var bucketlists = new Array();
+	var coopers = new Array();
+	var follows = new Array();
+	var groups = new Array();
+	
+	<c:forEach items="${bucketlists}" var="bucketlist">
+		var bucketlist = new Array();
+		bucketlist.push("${bucketlist.bucketlistId}");
+		bucketlist.push("${bucketlist.title}");
+		bucketlist.push("${bucketlist.connChains}");
+		bucketlist.push("${bucketlist.goal}");
+		bucketlist.push("${bucketlist.star}");
+		bucketlist.push("${bucketlist.progress}");
+		bucketlist.push("${bucketlist.memo}");
+		bucketlist.push("${bucketlist.sos}");
+		bucketlist.push("${bucketlist.lock}");
+		bucketlist.push("${bucketlist.userId}");
+		bucketlists.push(bucketlist);
+	</c:forEach>
+	
+	<c:forEach items="${coopers }" var="cooper">
+		var cooper = new Array();
+		cooper.push("${cooper.coId }");
+		cooper.push("${cooper.coName }");
+		cooper.push("${cooper.startDay }");
+		cooper.push("${cooper.lastDay }");
+		cooper.push("${cooper.connChains }");
+		cooper.push("${cooper.coBanner }");
+		cooper.push("${cooper.image }");
+		coopers.push(cooper);
+	</c:forEach>
+
+	<c:forEach items="${groups}" var="group">
+		var group = new Array();
+		group.push("${group.groupId}");
+		group.push("${group.groupName}");
+		group.push("${group.managerId}");
+		group.push("${group.lastDay}");
+		group.push("${group.connChains}");
+		group.push("${group.introduce}");
+		group.push("${group.local}");
+		group.push("${fn:length(group.joinPeople)}");
+		group.push("${group.maxPeople}");
+		groups.push(group);
+	</c:forEach>
+</script>
+<!-- /Init Script -->
+
+<!-- Function Script -->
+<script>
+	function list(array, result){
+		result.length = 0;
+		for (var i=0; i<array.length; i++){
+			result.push(array[i]);
+		}
+	};
+	
+	function initConn(str) {
+		var conn = str;
+		conn = conn.replace("[", "");
+		conn = conn.replace(/ /gi, "");
+		conn = conn.replace("]", "");
+		$(".tags").each(function() {
+			$(this).importTags(conn);
+		});
+	};
+	
+	function initConnReadonly(str, selector) {
+		var conn = str;
+		conn = conn.replace("[", "");
+		conn = conn.replace(/ /gi, "");
+		conn = conn.replace("]", "");
+		selector.importTags(conn);
+		$('.tagsinput').find('a').remove();
+	};
+	
+	function initStar(str) {
+		if(str != $(".changeStar").attr('data-rating')){
+			$(".changeStar").starrr('setRating', str);
+		}
+		$(".changeStar").attr("data-rating", str);
+		$(".changeStar").on('starrr:change', function(e, value) {
+			$(".changeStar").attr("data-rating", value);
+		});
+		$("[name='star']").val(str);
+	};
+	
+	// 이미지 미리보기
+	function getThumbnailPrivew(html, $target) {
+	    if (html.files && html.files[0]) {
+	        var reader = new FileReader();
+	        reader.onload = function (e) {
+	            $target.attr('src', e.target.result);
+	            $('#removeBtn').show();
+	        }
+	        reader.readAsDataURL(html.files[0]);
+	    }
+	};
+	function ajaxFollow() {
+		return $.ajax({
+			type : 'GET',
+			url : '${pageContext.request.contextPath}/follow/listAll.do',
+			data : {
+				userId : userId
+			},
+			success : function(result) {
+				result = result.replace(/ /gi, "");
+				result = result.replace("[", "");
+				result = result.replace("]", "");
+				result = result.split(',');
+				listFollow(result);
+			}
+		});
+	}
+	
+	function listFollow(array) {
+		for (var i = 0; i < array.length; i++) {
+			array[i] = array[i].replace("(", "");
+			array[i] = array[i].replace(")", "");
+			array[i] = array[i].split("/");
+			follows.push(array[i]);
+		};
+	};
+	
+	function appendConfirm(selector){
+		for(var i = 0; i < follows.length; i++){
+			if(follows[i][3] == 'false'){
+				selector.append(
+					'<li class="sub_menu" style="height: 70px;">'
+					+'<form action="${pageContext.request.contextPath}/user/detail.do" method="get">'
+					+	'<input type="hidden" name="myId" value="' + follows[i] + '">'
+					+	'<input type="hidden" name="userId" value="' + follows[i][1] + '">'
+					+	'<button class="btn btn-xs btn-default btn-block" type="submit"'
+					+	'style="border: hidden; font-size: 15px; background: none !important;">' + follows[i][1] + '</button>'
+					+'</form>'
+					+'<form action="${pageContext.request.contextPath}/follow/confirm.do" method="post" style="display: block; float: left; width: 60px;">'
+					+		'<input type="hidden" name="followId" value="' + follows[i][1] + '">'
+					+		'<input type="hidden" name="userId" value="' + follows[i][0] + '">'
+					+		'<button type="submit" class="fa fa-plus-square" style="width: 60px; font-size: 16px; background: none !important; border: none;">수락</button>'
+					+'</form>'
+					+'<form action="${pageContext.request.contextPath}/follow/remove.do" method="post" style="display: block; margin-right: 50px; float: right; width: 60px;">'
+					+		'<input type="hidden" name="followId" value="' + follows[i][1] + '">'
+					+		'<input type="hidden" name="userId" value="' + follows[i][0] + '">'
+					+		'<button type="submit" class="fa fa-minus-square" style="width: 60px; font-size: 16px; background: none !important; border: none;">거절</button>'
+					+'</form>'
+					+'</li>'
+				);
+			};
+		};
+	};
+
+	function appendFollow(selector, opt){
+		for(var i=0; i<follows.length; i++){
+			if(follows[i][3] == 'true' && follows[i][2] == opt){
+				selector.append(
+					'<li class="sub_menu">'
+					+'<button type="button" data-toggle="modal" data-target="#sendPostModal" class="fa fa-envelope-o sendPostBtn" value="' + follows[i][1] + '"'
+					+'style="border: hidden; background:none !important; width:30px; float:right">'
+					+'</button>'
+					+'	<form action="${pageContext.request.contextPath}/user/detail.do" method="get">'
+					+'		<input type="hidden" name="myId" value="' + userId + '"> '
+					+'		<input type="hidden" name="userId" value="' + follows[i][1] + '">'
+					+'		<button class="btn btn-xs btn-default btn-block" type="submit"'
+					+'		 style="border: hidden; font-size: 15px; background: none !important; width:50px; float:left">' + follows[i][1] + '</button>'
+					+'	</form>'
+					+'</li>'
+				);
+			}
+		}
+	}
+	
+	function ajaxUser(userId, user){
+		return $.ajax({
+			type : 'post',
+			url : '${pageContext.request.contextPath}/user/detail.do',
+			data : {
+				userId : userId
+			},
+			success : function(result){
+				result = result.replace("(", "");
+				result = result.replace(")", "");
+				result = result.replace(/ /gi, "");
+				result = result.split("/");
+				inputUser(result, user);
+			}
+		});
+	};
+	
+	function ajaxCheckFollow(userId){
+		var temp = '${sessionScope.userId}';
+		return $.ajax({
+			type : 'post',
+			url : '${pageContext.request.contextPath}/follow/check.do',
+			data : {
+				userId : temp,
+				followId : userId
+			},
+			success : function(result){
+				if($.trim(result)=="available"){
+					$(".requestButton").show();
+					$(".sendPostBtn").hide();
+				} else {
+					$(".requestButton").hide();
+					$(".sendPostBtn").show();
+				}
+			}
+		});
+	};
+	
+	function inputUser(array, user){
+		for(var i=0; i<array.length; i++){
+			user.push(array[i]);
+		}
+	}
+	
+	function ajaxPost(senderId, receiverId, content){
+		return $.ajax({
+			type : 'POST',
+			url : '${pageContext.request.contextPath}/post/send.do',
+			data : {
+				senderId : senderId,
+				receiverId : receiverId,
+				content : content
+			},
+			success : function() {
+				alert("메세지를 전송했습니다.");
+			}
+		});
+	}
+</script>
+<!-- /Function Script -->
+
+<!-- Common Script -->
+<script>
 	$(document).ready(function (){
 		$.ajax({
 			type : 'POST',
@@ -72,9 +315,7 @@
 				list(result, connChains);
 			}
 		});
-		
 		//tab 누를때 Controller에서 정보를 가져옴
-		
 		tabOpt = ${tabOpt};
 		if(tabOpt < 5){
 			$("[role='presentation']").attr("class", "");
@@ -82,77 +323,327 @@
 		}
 		$(".active.in.main").attr("class", "tab-pane fade");
 		$("#tab_content"+tabOpt).attr("class", "tab-pane fade active in main");
+	});
+</script>
+<!-- /Common Script -->
+
+<!-- Bucketlist Script -->
+<script>
+	// register Modal로 연결될 때 이벤트
+	$("#registerBtn").click(function() {
+		$(".tags").each(function() {
+			$(this).importTags("");
+		});
+		$(".changeStar").starrr();
+		$(".changeStar").starrr('setRating', 0);
+		$(".changeStar").attr("data-rating", 0);
+		$(".changeStar").on('starrr:change', function(e, value) {
+			$(this).attr("data-rating", value);
+		});
+	});
+
+	// modify Modal로 연결될 때 이벤트
+	$("[name=modifyBtn]").click(function() {
+		var index = $(this).val() - 1;
+		$("#modifyBucketlistModal #bucketlistId").val(bucketlists[index][0]);
+		$("#modifyBucketlistModal #title").val(bucketlists[index][1]);
+		initConn(bucketlists[index][2]);
+		$("#modifyBucketlistModal #goal").val(bucketlists[index][3]);
+		initStar(bucketlists[index][4]);
+		$("#modifyBucketlistModal #progress").val(bucketlists[index][5]).trigger("change");
+		$("#modifyBucketlistModal #memo").val(bucketlists[index][6]);
+		$("#modifyBucketlistModal #sos").val(bucketlists[index][7]);
+		var lock = bucketlists[index][8];
+		if (lock == 'true') {
+			$('#modifyBucketlistModal #private').attr("checked", true);
+		} else {
+			$("#modifyBucketlistModal #public").attr("checked", true);
+		}
+		$("#modifyBucketlistModal #userId").val(bucketlists[index][9]);
+	});
+	
+	$("[name=removeBucketlistBtn]").each(function(){
+		$(this).click(function() {
+			alert($(this).val());
+			var bucketlistId = $(this).val();
+			$("#removeBucketlistModal [name=bucketlistId]").val(bucketlistId);
+		});	
+	});
+
+	$(".bucketlistForm").submit(function() {
+		
+		$(this).filter(".tags").each(function(){
+			var tags = $(this).val();
+			tags = tags.split(",");
+			$(this).val(tags);	
+		})
+		;
+		// 연결고리 값 domain type으로 변경
+		//var tags = $(this).find("#mbtags").val();
+		//tags = tags.split(",");
+		//$(this).find("#mbtags").val(tags);
+
+		// star 값 domain type으로 변경
+		var star = $(this).find(".changeStar").attr("data-rating");
+		$(this).find("#star").val(star);
+
+		// memo의 줄넘김 문자 삭제
+		var memo = $(this).find("[name='memo']").val();
+		memo = memo.replace(/\n/gi, " ");
+		$(this).find("[name='memo']").val(memo);
+	});
+	
+	$('#registerBucketlistModal .btn-primary').on('click', function() {
+		$(this).closest(".modal.fade").find(".close").click();
+	});
+	
+	$('#modifyBucketlistModal .btn-primary').on('click', function() {
+		$(this).closest(".modal.fade").find(".close").click();
+	});
+	
+	$('#removeBucketlistModal .btn-primary').on('click', function() {
+		$(this).closest(".modal.fade").find(".close").click();
+	});
+</script>
+<!-- /Bucketlist Script -->
+
+<!-- Cooper Script -->
+<script>
+	$("#registerCooperBtn").click(function(){
+		$(".tags").each(function(){
+			$(this).importTags("");
+		});
+	});
+	
+	$("[name=modifyCooperBtn]").click(function() {
+		var index = $(this).val() - 1;
+		$("#modifyCooperModal #coId").val(coopers[index][0]);
+		$("#modifyCooperModal #coName").val(coopers[index][1]);
+		$("#modifyCooperModal #startDay").val(coopers[index][2]);
+		$("#modifyCooperModal #lastDay").val(coopers[index][3]);
+		initConn(coopers[index][4]);
+		$("#modifyCooperModal #coBanner").val(coopers[index][5]);
+		$("#modifyCooperModal #cmb_image").attr('src', '${pageContext.request.contextPath}/resources/img/cooperImg/'+coopers[index][6]);
+		$("#modifyCooperModal #removeBtn").show();
+	});
+	
+	$(".cooperFile").each(function(){
+		var that = $(this);
+		$(this).next().on('click', function(){
+			that.click();
+		})
+	});
+
+	$(".cooperFile").each(function(){
+		$(this).on('change', function() {
+			changed='yes';
+			getThumbnailPrivew(this, $('.cooperImage'));
+		});
+	});
+	
+	$('.removeImageBtn').each(function(){
+		$(this).on('click', function() {
+			$(this).closest(".cursor").find("img").attr('src', defaultImgURL);
+			$(this).hide();
+		});
+	});
+
+	$(".cooperForm").submit(function() {
+		var tags = $(this).find(".tags").val();
+		tags = tags.split(",");
+		$(this).find(".tags").val(tags);
+		$(this).find("#changed").val(changed);
+	});
+	
+	//$('#cma_image').on('click', function() {
+	//	$('#cma_file').click();
+	//});
+	//$('#cma_file').on('change', function(e) {
+	//	changed='yes';
+	//	getThumbnailPrivew(this, $('#cma_image'));
+	//});
+	//$('#removeBtn').on('click', function() {
+	//	$('#cmb_image').attr('src', defaultImgURL);
+	//	$(this).hide();
+	//});	
+	//$("#modifyCooperForm").submit(function() {
+	//	var tags = $("#mctags").val();
+	//	tags = tags.split(",");
+	//	$("#mctags").val(tags);
+	//	$(this).find("#changed").val(changed);
+	//});
+</script>
+
+<!-- /Cooper Script -->
+
+<!-- Follow Script -->
+<script>
+	$(document).ready(function() {
+		$.when(ajaxFollow()).done(function(){
+			appendConfirm($("#requestedFollow"));
+			appendFollow($("#giveHelp"), 1);
+			appendFollow($("#receiveHelp"), 2);
+			appendFollow($("#bothHelp"), 3);
+			appendFollow($("#groupFollow"), 4);
+			$(".sendPostBtn").click(function (){
+				var followId = $(this).val();
+				$("#sendPostModal #receiverId").val(followId);
+				$("#sendPostModal #sendPostBtn").val(followId);
+			});
+		});
+		
+		$(".requestButton").click(function (){
+			var reqBtn = $(this);
+			var modal = reqBtn.closest(".modal.fade");
+			var userId = "${sessionScope.userId}";
+			var followId = modal.find("#followId").val();
+			var relation = reqBtn.val();
+			$.ajax({
+				type : 'POST',
+				url : '${pageContext.request.contextPath}/follow/request.do',
+				data : {
+					userId : userId,
+					followId : followId,
+					relation : relation
+				},
+				success : function(result){
+					if(result=="ok"){
+						alert("팔로우를 요쳥했습니다.");
+						modal.find(".close").click();
+					}
+				}
+			});
+		});
+	});
+</script>
+<!-- /Follow Script -->
+
+<!-- Group Script -->
+<script>
+	$("#registerBtn").click(function() {
+		$(".tags").each(function() {
+			$(this).importTags("");
+		});
+	});
+	
+	$("[name=detailGroupBtn]").click( function() {
+		var gListOpt = '${listOpt}';
+		var index = $(this).val() - 1;
+		$("#detailGroupModal #groupId").html(groups[index][0]);
+		$("#detailGroupModal [name='groupId']").val(groups[index][0]);
+		$("#detailGroupModal #groupName").html(groups[index][1]);
+		$("#detailGroupModal #managerId").html(groups[index][2]);
+		$("#detailGroupModal #lastDay").html(groups[index][3]);
+		initConnReadonly(groups[index][4], $("#dgtags"));
+		$("#detailGroupModal #introduce").html(groups[index][5]);
+		$("#detailGroupModal #local").html(groups[index][6]);
+		$("#detailGroupModal #joinPeople").html(groups[index][7]);
+		$("#detailGroupModal [name='joinPeople']").val(groups[index][7]);
+		$("#detailGroupModal #maxPeople").html(groups[index][8]);
+		$("#detailGroupModal [name='maxPeople']").val(groups[index][8]);
+		$("#detailGroupModal #no").val(index);
+		
+		if(gListOpt == '0'){ // 모임방에 가입하지 않은 경우
+			$("#myGroupBtns").attr("hidden", true);
+			$("#joinedGroupBtn").attr("hidden", true);
+			$("#unjoinedGroupBtn").attr("hidden", false);
+		} else {
+			if(groups[index][2] == userId){ // 모임방 관리자인 경우
+				$("#myGroupBtns").attr("hidden", false);
+				$("#joinedGroupBtn").attr("hidden", true);
+				$("#unjoinedGroupBtn").attr("hidden", true);
+			} else {	// 모임방에 가입한 경우
+				$("#myGroupBtns").attr("hidden", true);
+				$("#joinedGroupBtn").attr("hidden", false);
+				$("#unjoinedGroupBtn").attr("hidden", true);
+			}
+		}
+	});
+
+	$("#modifyGroupBtn").click( function() {
+		$("#detailGroupModal .close").click();
+		var index = $("#no").val();
+		$("#modifyGroupModal #groupId").val(groups[index][0]);
+		$("#modifyGroupModal #groupName").val(groups[index][1]);
+		$("#modifyGroupModal #managerId").val(groups[index][2]);
+		$("#modifyGroupModal #lastDay").val(groups[index][3]);
+		initConn(groups[index][4]);
+		$("#modifyGroupModal #introduce").val(groups[index][5]);
+		$("#modifyGroupModal #local").val(groups[index][6]);
+		$("#modifyGroupModal #joinPeople").html(groups[index][7]);
+		$("#modifyGroupModal #maxPeople").val(groups[index][8]);
+	});
+
+	$(".groupForm").submit(function() {
+		// 연결고리 값 domain type으로 변경
+		var tags = $(this).find(".tags").val();
+		tags = tags.split(",");
+		$(this).find(".tags").val(tags);
+	});
+	$("#modifyGroupForm").submit(function() {
+		// memo의 줄넘김 문자 삭제
+		var introduce = $(this).find("[name='introduce']").val();
+		introduce = introduce.replace(/\n/gi, " ");
+		$(this).find("[name='introduce']").val(introduce);
+	});
+</script>
+<!-- /Group Script -->
+
+<!-- List Script -->
+<script type="text/javascript">
+	$("[name=detailUserBtn]").click(function() {
+		var listOpt = ${listOpt};
+		
+		var userId = $(this).val();
+		$.when(ajaxUser(userId, user), ajaxCheckFollow(userId)).done(function(){
+			$("#detailUserModal #userId").html(user[0]);
+			$("#detailUserModal #followId").val(user[0]);
+			$("#detailUserModal #picture").attr('src', '${pageContext.request.contextPath}/resources/img/userImg/'+user[4]);
+			initConnReadonly(user[3], $("#dutags"));
+			$("#detailUserModal #introduce").html(user[5]);
+			$("#detailUserModal .requestButton").val(listOpt);
+			$("#detailUserModal .sendPostBtn").val(userId);
+		});
+	});
+	
+	$("[name=detailBucketlistBtn]").click(function() {
+		var index;
+		var listOpt = ${listOpt};
+		for(var i=0; i<bucketlists.length; i++){
+			if($(this).val() == bucketlists[i][0]){
+				index = i;
+				break;
+			}
+		}
+		$.when(ajaxCheckFollow(bucketlists[index][9])).done(function(){
+			$("#detailBucketlistModal #title").html(bucketlists[index][1]);
+			$("#detailBucketlistModal #userId").html(bucketlists[index][9]);
+			$("#detailBucketlistModal #followId").val(bucketlists[index][9]);
+			initConnReadonly(bucketlists[index][2], $("#dbtags"));
+			$("#detailBucketlistModal #sos").html(bucketlists[index][7]);
+			$("#detailBucketlistModal .requestButton").val(listOpt);
+			$("#detailBucketlistModal .sendPostBtn").val(bucketlists[index][9]);
+		});
+	});
+</script>
+<!-- /List Script -->
+
+<!-- Post Script -->
+<script>
+	$("#sendPostBtn").click(function() {
+		var senderId = '${sessionScope.userId}';
+		var receiverId = $(this).val();
+		var content = $("#sendPostModal").find('[name="content"]').val();
+		$.when(ajaxPost(senderId, receiverId, content)).done(function(){
+			$("#sendPostModal").find(".close").click();	
+		})
 		
 	});
 
-	function list(array, result){
-		result.length = 0;
-		for (var i=0; i<array.length; i++){
-			result.push(array[i]);
-		}
-	};
-	
-	$(".sendListOption").find("[name='listOpt']").click(function(){
-		var listOpt = $(this).val();
-		var availableTags = [];
-		$.ajax({
-			type : 'POST',
-			url : '${pageContext.request.contextPath}/list/listAutoComplete.do',
-			data : {
-				listOpt : listOpt
-			},
-			success : function(result) {
-				result = result.replace(/ /gi, "");
-				result = result.replace("[", "");
-				result = result.replace("]", "");
-				result = result.split(',');
-				list(result, availableTags);
-			}
-		});
-		
-		$("#searchWord").autocomplete({
-			source : availableTags
-		})
-	});
-	
-	function initConnReadonly(str, selector) {
-		var conn = str;
-		conn = conn.replace("[", "");
-		conn = conn.replace(/ /gi, "");
-		conn = conn.replace("]", "");
-		selector.importTags(conn);
-		$('.tagsinput').find('a').remove();
-	};
-	
-	$(".requestButton").click(function (){
-		var reqBtn = $(this);
-		var modal = reqBtn.closest(".modal.fade");
-		var userId = "${sessionScope.userId}";
-		var followId = modal.find("#followId").val();
-		var relation = reqBtn.val();
-		$.ajax({
-			type : 'POST',
-			url : '${pageContext.request.contextPath}/follow/request.do',
-			data : {
-				userId : userId,
-				followId : followId,
-				relation : relation
-			},
-			success : function(result){
-				if(result=="ok"){
-					alert("팔로우를 요쳥했습니다.");
-					modal.find(".close").click();
-				}
-			}
-		});
-	});
-	
-	
-	
 	$('[name="checks"]').click(function(){
 		$(this).attr("checked", "checked");
 	});
-	
+
 	$("#removePost").closest("form").submit(function (){
 		if($(this).id = "removePostInLP"){
 			$(this).find('[name="listOpt"]').val(1);
@@ -160,28 +651,69 @@
 			$(this).find('[name="listOpt"]').val(0);
 		}
 	});
+</script>
+<!-- /Post Script -->
+
+<!-- User Script -->
+<script>
+	$('#user_image').on('click', function() {
+		$('#user_file').click();
+	});
+
+	$('#addImageBtn').on('click', function() {
+		$('#user_file').click();
+	});
+
+	$('#user_file').on('change', function(e) {
+		changed = 'yes';
+		getThumbnailPrivew(this, $('#user_image'));
+	});
+                            
+	$('#registerUserModal .removeBtn').on('click', function() {
+		$('#user_image').attr('src', defaultUserImgURL);
+		$(this).hide();
+	});
 	
-	function initConn(str) {
-		var conn = str;
+	$("#modifyUserBtn").click(function() {
+		var conn = "${user.connChains }";
 		conn = conn.replace("[", "");
 		conn = conn.replace(/ /gi, "");
 		conn = conn.replace("]", "");
-		$(".tags").each(function() {
-			$(this).importTags(conn);
-		});
-	};
+		$("#mutags").importTags(conn);
+	});
 	
+	$("#modifyUserForm").submit(function() {
+		var tags = $("#mutags").val();
+		tags = tags.split(",");
+		$("#mutags").val(tags);
+		$(this).find("#changed").val(changed);
+	});
+	
+	$('#modifyUserModal .btn-success').on('click', function() {
+		alert("수정되었습니다.");
+	});
+	
+	$('#modifyUserModal .btn-primary').on('click', function() {
+		$(this).closest(".modal.fade").find(".close").click();
+	});
+	
+	$('#delelteUserModal .btn-primary').on('click', function() {
+		$(this).closest(".modal.fade").find(".close").click();
+	});
 </script>
+<!-- /User Script -->
+
+
 <!-- /Custom Script -->
 
 <!-- Validation -->
 <script>
-	$("#id").keyup(function() {
-		if($("#id").val().length > 5){
-			var id = $(this).val();
+	$("#userId").keyup(function() {
+		var id = $(this).val();
+		if($(this).val().length > 5){
 			$.ajax({
 				type: 'POST',
-				url: 'checkId.do',
+				url: '${pageContext.request.contextPath}/user/checkId.do',
 				data: {
 						id: id
 				},

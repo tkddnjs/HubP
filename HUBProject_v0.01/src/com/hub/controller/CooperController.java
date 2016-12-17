@@ -54,7 +54,7 @@ public class CooperController {
 			, @RequestParam("cmb_file") MultipartFile image, String changed) {
 		String fileName;
 		if(changed.equals("no")){
-			fileName = "default.png";
+			fileName = cooperService.findCooperByCoId(cooper.getCoId()).getImage();
 		} else {
 			String filePath = req.getServletContext().getRealPath("resources/img/cooperImg");
 			fileName = fileManager.registerImage(filePath, image);

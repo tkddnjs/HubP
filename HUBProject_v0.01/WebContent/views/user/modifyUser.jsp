@@ -44,7 +44,8 @@
 				<h4 class="modal-title">회원수정</h4>
 			</div>
    			<div class="modal-body">
-				<form id="modifyUserForm" action="${pageContext.request.contextPath}/user/modify.do" data-parsley-validate class="form-horizontal form-label-left" method="post" enctype="multipart/form-data">
+				<form id="modifyUserForm" action="${pageContext.request.contextPath}/user/modify.do" style="width:120%"
+					  class="form-horizontal form-label-left" method="post" enctype="multipart/form-data">
 					<div class="form-group">
 						<div class="img-cooper cooper cursor" style="width: 50%; float:right;">
 							<label for="user_file"
@@ -102,12 +103,12 @@
 							</div>
 						</div>
 					</div>
-					<div class="ln_solid"></div>
+					<div class="ln_solid" style="width: 80%"></div>
 					<div class="form-group">
 						<div class="col-md-7 col-sm-6 col-xs-8 col-md-offset-3 col-sm-offset-3 col-xs-offset-3" align="center">
 							<input type="hidden" id="changed" name="changed">
-							<button type="reset" class="btn btn-primary">Cancel</button>
-							<button type="submit" class="btn btn-success">Submit</button>
+							<button type="submit" class="btn btn-success">수정</button>
+							<button type="button" class="btn btn-primary">취소</button>
 						</div>
 					</div>
 				</form>
@@ -115,46 +116,3 @@
   		</div>
 	</div>
 </div>
-<script src="${pageContext.request.contextPath}/resources/vendors/jquery/dist/jquery.min.js"></script>
-<!-- /jQuery Tags Input -->
-<script type="text/javascript">
-	var defaultImgURL = '${pageContext.request.contextPath}/resources/img/userImg/default.png';
-	var changed = 'no';
-	/* 이미지 업로드 미리보기 */
-	function getThumbnailPrivew(html, $target) {
-		if (html.files && html.files[0]) {
-			var reader = new FileReader();
-			reader.onload = function (e) {
-				$target.attr('src', e.target.result);
-				$('#removeBtn').show();
-			}
-        	reader.readAsDataURL(html.files[0]);
-    	}
-	}
-
-	$('#user_image').on('click', function() {
-		$('#user_file').click();
-	});
-
-	$('#addImageBtn').on('click', function() {
-		$('#user_file').click();
-	});
-
-	$('#user_file').on('change', function(e) {
-		changed = 'yes';
-		getThumbnailPrivew(this, $('#user_image'));
-	});
-                            
-	$('#registerUserModal .removeBtn').on('click', function() {
-		$('#user_image').attr('src', defaultImgURL);
-		$(this).hide();
-	});
-	
-	$("#modifyUserForm").submit(function() {
-		var tags = $("#mutags").val();
-		tags = tags.split(",");
-		$("#mutags").val(tags);
-		alert(changed);
-		$(this).find("#changed").val(changed);
-	});
-</script>

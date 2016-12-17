@@ -43,11 +43,10 @@
 				<form id="demo-form2" action="${pageContext.request.contextPath}/cooper/register.do" data-parsley-validate class="form-horizontal form-label-left cooperForm" method="post" enctype="multipart/form-data">
 					<div class="img-cooper cooper cursor" align="center" style="width: 50%">
 			    		<span>사진 업로드
-			    		<button type="button" id="removeBtn" style="display: none;">X</button>
-			    		<i class="fa fa-plus-circle" id="addImageBtn"></i>
+			    		<button type="button" class="removeImageBtn" id="removeBtn" style="display: none;">X</button>
 			    		</span>
-			        	<input class="image" type="file" name="cma_file" id="cma_file" accept="image/*" capture="camera" style="display: none;" />
-			        	<img id="cma_image" style="width:100%; height:300px;max-width:100%;border:1px solid #000;" src="${pageContext.request.contextPath}/resources/img/cooperImg/default.png">
+			        	<input class="image cooperFile" type="file" name="cma_file" id="cma_file" accept="image/*" capture="camera" style="display: none;" />
+			        	<img id="cma_image" class="cooperImage" style="width:100%; height:300px;max-width:100%;border:1px solid #000;" src="${pageContext.request.contextPath}/resources/img/cooperImg/default.png">
 			    	</div>
 			    	<br><br>
 					<div class="form-group">
@@ -88,46 +87,3 @@
   		</div>
 	</div>
 </div>
-
-<script type="text/javascript">
-
-var defaultImgURL = '${pageContext.request.contextPath}/resources/img/cooperImg/default.png';
-var changed='no';
-/* 이미지 업로드 미리보기 */
-	function getThumbnailPrivew(html, $target) {
-    if (html.files && html.files[0]) {
-        var reader = new FileReader();
-        reader.onload = function (e) {
-            $target.attr('src', e.target.result);
-            $('#removeBtn').show();
-        }
-        reader.readAsDataURL(html.files[0]);
-    }
-}
-
-$('#cma_image').on('click', function() {
-	$('#cma_file').click();
-});
-
-$('#addImageBtn').on('click', function() {
-	$('#cma_file').click();
-});
-
-$('#cma_file').on('change', function(e) {
-	changed='yes';
-	getThumbnailPrivew(this, $('#cma_image'));
-});
-                            
-$('#removeBtn').on('click', function() {
-	$('#cma_image').attr('src', defaultImgURL);
-	$(this).hide();
-});
-
-$("#registerCooperForm").submit(function() {
-	var tags = $("#rctags").val();
-	tags = tags.split(",");
-	$("#rctags").val(tags);
-	$(this).find("#changed").val(changed);
-});
-
-</script>

@@ -74,10 +74,10 @@
 					<div class="ln_solid"></div>
 					<div class="form-group">
 						<div class="col-md-6 col-sm-6 col-xs-8 col-md-offset-4 col-sm-offset-4 col-xs-offset-4">
-							<button type="reset" class="btn btn-primary">초기화</button>
 							<input type="hidden" id="userId" name="userId">
 							<input type="hidden" id="bucketlistId" name="bucketlistId">
 							<button type="submit" class="btn btn-success">수정</button>
+							<button type="button" class="btn btn-primary">취소</button>
 						</div>
 					</div>
 				</form>

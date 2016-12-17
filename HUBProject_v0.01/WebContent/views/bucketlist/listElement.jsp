@@ -38,10 +38,15 @@
                           		style="font-size:20px; background:none!important; border:none;"></button>
                           		</li>
                           		
-                           		<li><form action="${pageContext.request.contextPath}/bucketlist/remove.do">
+                          		<li><button class="fa fa-trash-o" value="${bucketlist.bucketlistId }" data-toggle="modal" 
+                           			name="removeBucketlistBtn" data-target="#removeBucketlistModal"
+                           			style="font-size:20px; background:none!important; border:none;"></button>
+                          		</li>
+                          		
+                           		<!-- <li><form action="${pageContext.request.contextPath}/bucketlist/remove.do">
                            			<button class="fa fa-trash-o" style="font-size:20px; background:none!important; border:none;"
                            			type="submit" name="bucketlistId" value="${bucketlist.bucketlistId }"></button>
-                           		</form></li>
+                           		</form></li> -->
                        		</ul>
 						
 							<a class="panel-heading " role="tab" id="headingOne1"
@@ -157,13 +162,14 @@
 						
 							<ul class="nav navbar-right panel_toolbox" style="padding-top: 13px">
                           		<li><button class="fa fa-edit" value="${status.count }" data-toggle="modal" 
-                          		name="modifyBtn" data-target="#modifyBucketlistModal"
-                          		style="font-size:20px; background:none!important; border:none;"></button>
+                          			name="modifyBtn" data-target="#modifyBucketlistModal"
+                          			style="font-size:20px; background:none!important; border:none;"></button>
                           		</li>
                           		
-                           		<li><a><button class="fa fa-trash-o" style="font-size:20px; background:none!important; border:none;" 
-                           		href="${pageContext.request.contextPath}/bucketlist/remove.do?bucketlistId=${bucketlist.bucketlistId } "></button>
-                          		</a></li>
+                           		<li><button class="fa fa-trash-o" value="${bucketlist.bucketlistId }" data-toggle="modal" 
+                           			name="removeBucketlistBtn" data-target="#removeBucketlistModal"
+                           			style="font-size:20px; background:none!important; border:none;"></button>
+                          		</li>
                        		</ul>
 						
 							<a class="panel-heading " role="tab" id="headingOne1"
@@ -215,17 +221,13 @@
 								<div>
 									<table>
 										<tr>
-											<th><p>
-													<strong>SOS</strong>
-												</p></th>
+											<th><p><strong>SOS</strong></p></th>
 										</tr>
 										<tr>
 											<td>${bucketlist.sos }</td>
 										</tr>
 										<tr>
-											<th><p>
-													<strong>MEMO</strong>
-												</p></th>
+											<th><p><strong>MEMO</strong></p></th>
 										</tr>
 										<tr>
 											<td>${bucketlist.memo }</td>
@@ -242,87 +244,21 @@
 	</div>
 </div>
 
-<script src="${pageContext.request.contextPath}/resources/vendors/jquery/dist/jquery.min.js"></script>
-<script>
-	$(".bucketlistForm").submit(function() {
-		// 연결고리 값 domain type으로 변경
-		var tags = $(this).find(".tags").val();
-		tags = tags.split(",");
-		$(this).find(".tags").val(tags);
-
-		// star 값 domain type으로 변경
-		var star = $(this).find(".changeStar").attr("data-rating");
-		$(this).find("#star").val(star);
-	});
-</script>
-
-<script>
-	$("#modifyBucketlistForm").submit(function() {
-		// memo의 줄넘김 문자 삭제
-		var memo = $(this).find("[name='memo']").val();
-		memo = memo.replace(/\n/gi, " ");
-		$(this).find("[name='memo']").val(memo);
-	});
-</script>
-
-<script type="text/javascript">
-	var bucketlists = new Array();
-	<c:forEach items="${bucketlists}" var="bucketlist">
-	var bucketlist = new Array();
-	bucketlist.push("${bucketlist.bucketlistId}");
-	bucketlist.push("${bucketlist.title}");
-	bucketlist.push("${bucketlist.connChains}");
-	bucketlist.push("${bucketlist.goal}");
-	bucketlist.push("${bucketlist.star}");
-	bucketlist.push("${bucketlist.progress}");
-	bucketlist.push("${bucketlist.memo}");
-	bucketlist.push("${bucketlist.sos}");
-	bucketlist.push("${bucketlist.lock}");
-	bucketlist.push("${bucketlist.userId}");
-	bucketlists.push(bucketlist);
-	</c:forEach>
-
-	$("#registerBtn").click(function() {
-		$(".tags").each(function() {
-			$(this).importTags("");
-		});
-		$(".changeStar").starrr();
-		$(".changeStar").starrr('setRating', 0);
-		$(".changeStar").attr("data-rating", 0);
-		$(".changeStar").on('starrr:change', function(e, value) {
-			$(this).attr("data-rating", value);
-		});
-	});
-
-	$("[name=modifyBtn]").click(
-		function() {
-			var index = $(this).val() - 1;
-			$("#modifyBucketlistModal #bucketlistId").val(bucketlists[index][0]);
-			$("#modifyBucketlistModal #title").val(bucketlists[index][1]);
-			initConn(bucketlists[index][2]);
-			$("#modifyBucketlistModal #goal").val(bucketlists[index][3]);
-			initStar(bucketlists[index][4]);
-			$("#modifyBucketlistModal #progress").val(bucketlists[index][5]).trigger("change");
-			$("#modifyBucketlistModal #memo").val(bucketlists[index][6]);
-			$("#modifyBucketlistModal #sos").val(bucketlists[index][7]);
-			var lock = bucketlists[index][8];
-			if (lock == 'true') {
-				$('#modifyBucketlistModal #private').attr("checked", true);
-			} else {
-				$("#modifyBucketlistModal #public").attr("checked", true);
-			}
-			$("#modifyBucketlistModal #userId").val(bucketlists[index][9]);
-		}
-	);
-
-	function initStar(str) {
-			if(str != $(".changeStar").attr('data-rating')){
-				$(".changeStar").starrr('setRating', str);
-			}
-			$(".changeStar").attr("data-rating", str);
-			$(".changeStar").on('starrr:change', function(e, value) {
-				$(".changeStar").attr("data-rating", value);
-			});
-			$("[name='star']").val(str);
-	}
-</script>
+<!-- Modal -->
+<div class="modal fade" id="removeBucketlistModal" role="dialog" style="margin-top: 20%;">
+	<div class="modal-dialog modal-sm">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title">버킷리스트삭제</h4>
+			</div>
+   			<div class="modal-body" style="text-align: center;">
+				<form action="${pageContext.request.contextPath}/bucketlist/remove.do" id="removeBucketlistForm" method="get">
+					<h4>삭제하시겠습니까?</h4><br>
+					<button type="submit" class="btn btn-success" name="bucketlistId">삭제</button>
+					<button type="button" class="btn btn-primary">취소</button>
+				</form>
+			</div>
+  		</div>
+	</div>
+</div>

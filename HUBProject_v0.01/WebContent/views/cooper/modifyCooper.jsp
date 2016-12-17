@@ -43,11 +43,10 @@
 				<form id="demo-form2" action="${pageContext.request.contextPath}/cooper/modify.do" data-parsley-validate class="form-horizontal form-label-left cooperForm modify" method="post" enctype="multipart/form-data">
 					<div class="img-cooper cooper cursor" align="center" style="width: 50%">
 			    		<span>사진 업로드
-			    		<button type="button" id="removeBtn" style="display: none;">X</button>
-			    		<i class="fa fa-plus-circle addImageBtn"></i>
+			    		<button type="button" class="removeImageBtn" id="removeBtn" style="display: none;">X</button>
 			    		</span>
-			        	<input class="image" type="file" name="cmb_file" id="cmb_file" accept="image/*" capture="camera" style="display: none;" />
-			        	<img id="cmb_image" style="width:100%; height:300px;max-width:100%;border:1px solid #000;" src="${pageContext.request.contextPath}/resources/img/cooperImg/default.png">
+			        	<input class="image cooperFile" type="file" name="cmb_file" id="cmb_file" accept="image/*" capture="camera" style="display: none;" />
+			        	<img id="cmb_image" class="cooperImage" style="width:100%; height:300px;max-width:100%;border:1px solid #000;" src="${pageContext.request.contextPath}/resources/img/cooperImg/default.png">
 			    	</div>
 					<div class="form-group">
 						<label class="control-label col-md-2 col-sm-3 col-xs-12" for="coName">CooperName <span class="required">*</span></label>
@@ -97,45 +96,3 @@
   		</div>
 	</div>
 </div>
-
-<script type="text/javascript">
-
-var defaultImgURL = '${pageContext.request.contextPath}/resources/img/cooperImg/default.png';
-var changed='no';
-/* 이미지 업로드 미리보기 */
-	function getThumbnailPrivew(html, $target) {
-    if (html.files && html.files[0]) {
-        var reader = new FileReader();
-        reader.onload = function (e) {
-            $target.attr('src', e.target.result);
-            $('#removeBtn').show();
-        }
-        reader.readAsDataURL(html.files[0]);
-    }
-}
-
-$('#cmb_image').on('click', function() {
-	$('#cmb_file').click();
-});
-
-$('.addImageBtn').on('click', function() {
-	$('#cmb_file').click();
-});
-
-$('#cmb_file').on('change', function(e) {
-	changed='yes';
-	getThumbnailPrivew(this, $('#cmb_image'));
-});
-                            
-$('#removeBtn').on('click', function() {
-	$('#cmb_image').attr('src', defaultImgURL);
-	$(this).hide();
-});	
-
-$("#modifyCooperForm").submit(function() {
-	var tags = $("#mctags").val();
-	tags = tags.split(",");
-	$("#mctags").val(tags);
-	$(this).find("#changed").val(changed);
-});
-</script>

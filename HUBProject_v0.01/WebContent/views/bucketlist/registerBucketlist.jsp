@@ -53,12 +53,18 @@
 							<textarea class="form-control" rows="3" name="sos" placeholder='도움 받고 싶은 부분을 입력하세요'></textarea>
 						</div>
 					</div>
+					<div class="form-group">
+						<label class="control-label col-md-2 col-sm-3 col-xs-12" for="memo">메모</label>
+						<div class="col-md-6 col-sm-6 col-xs-8">
+							<textarea class="form-control" rows="12" id="memo" name="memo"></textarea>
+						</div>
+					</div>
 					<div class="ln_solid"></div>
 					<div class="form-group">
 						<div class="col-md-6 col-sm-6 col-xs-8 col-md-offset-4 col-sm-offset-4 col-xs-offset-4">
-							<button type="reset" class="btn btn-primary">초기화</button>
 							<input type="hidden" name="userId" value="${sessionScope.userId }">
 							<button type="submit" class="btn btn-success">등록</button>
+							<button type="button" class="btn btn-primary">취소</button>
 						</div>
 					</div>
 				</form>

@@ -27,8 +27,8 @@
 	</insert> -->
 	
 	<insert id="insertBucketlist" parameterType="Bucketlist">
-		INSERT INTO bucketlist_tb(bucketId, title, goal, star, progress, sos, locker, userId)
-		VALUES (#{bucketlistId}, #{title}, #{goal}, #{star}, #{progress}, #{sos}, 'N', #{userId})
+		INSERT INTO bucketlist_tb(bucketId, title, goal, star, progress, sos, memo, locker, userId)
+		VALUES (#{bucketlistId}, #{title}, #{goal}, #{star}, #{progress}, #{sos}, #{memo}, #{lock, typeHandler=BooleanToYnHandler}, #{userId})
 	</insert>
 	
 	<insert id="insertBucketlistConn" parameterType="Map">
@@ -38,10 +38,10 @@
 
 	<update id="updateBucketlist" parameterType="Bucketlist">
 		UPDATE bucketlist_tb
-		SET title = #{title}, goal = #{goal}, star = #{star}, progress = #{progress}, memo = #{memo}, sos = #{sos},  userId = #{userId} 
+		SET title=#{title}, goal=#{goal}, star=#{star}, progress=#{progress}, memo=#{memo}, sos=#{sos}, locker=#{lock,typeHandler=BooleanToYnHandler} 
 		WHERE bucketId=#{bucketlistId}
 	</update>
-	<!-- locker = #{lock,typeHandler=BooleanToYnHandler}, -->
+	
 
 	<delete id="deleteBucketlist" parameterType="int">
 		DELETE bucketlist_tb 
@@ -74,6 +74,7 @@
 		WHERE bucketId IN (SELECT bucketId
 							FROM bucketConn_tb
 							WHERE connChain LIKE '%'||#{connChain}||'%')
+		AND locker = 'Y'
 	</select>
 	
 	<select id="selectBucketlistsByConnChains" resultMap="bucketlistMap">
@@ -83,6 +84,7 @@
 							WHERE connChain IN <foreach item="connChain" separator="," collection="list" open="(" close=")">
 													#{connChain}
 											    </foreach> )
+		AND locker = 'Y'
 	</select>
 	
 	<select id="selectConnChainsByBucketlistId" parameterType="int" resultType="String">

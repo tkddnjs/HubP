@@ -58,13 +58,16 @@
 							</div>
 						</div>
 						<div class="form-group">
-							<div style="height: 40px;">
-								<label class="control-label col-md-2 col-sm-3 col-xs-3" for="userId">ID <span class="required">*</span></label>
+							<div style="height: 55px;">
+								<label class="control-label col-md-2 col-sm-3 col-xs-3" for="userId">
+									ID <span class="required">*</span>
+								</label>
 								<div class="col-md-4 col-sm-3 col-xs-3">
 									<input type="text" id="userId" name="userId" required="required" class="form-control col-md-7 col-xs-12">
+									<span><small id="idCheckResult"></small></span>
 								</div>
 							</div>
-							<div style="height: 40px;">
+							<div style="height: 55px;">
 								<label class="control-label col-md-2 col-sm-3 col-xs-3"
 									for="password">비밀번호 <span class="required">*</span></label>
 								<div class="col-md-4 col-sm-3 col-xs-3">
@@ -72,20 +75,20 @@
 										class="form-control col-md-7 col-xs-12">
 								</div>
 							</div>
-							<div style="height: 40px;">
+							<div style="height: 55px;">
 								<label class="control-label col-md-2 col-sm-3 col-xs-3"
 									for="password_check">비밀번호 확인 <span class="required">*</span></label>
 								<div class="col-md-4 col-sm-3 col-xs-3">
-									<input type="password" id="pw_check"
-										class="form-control col-md-7 col-xs-12">
+									<input type="password" id="pwCheck" class="form-control col-md-7 col-xs-12">
+									<span><small id="pwCheckResult"></small></span>
 								</div>
 							</div>
-							<div style="height: 40px;">
+							<div style="height: 55px;">
 								<label class="control-label col-md-2 col-sm-3 col-xs-3"
 									for="email">Email<span class="required">*</span></label>
 								<div class="col-md-4 col-sm-4 col-xs-5">
-									<input id="email" class="form-control col-md-7 col-xs-12"
-										type="text" name="email">
+									<input id="email" class="form-control col-md-7 col-xs-12" type="text" name="email">
+									<span><small id="emailCheckResult"></small></span>
 								</div>
 							</div>
 							<div style="height: 105px;">
