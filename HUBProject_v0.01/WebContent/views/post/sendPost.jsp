@@ -55,34 +55,3 @@
 		</div>
 	</div>
 </div>
-
-<script src="${pageContext.request.contextPath}/resources/vendors/jquery/dist/jquery.min.js"></script>
-
-<script>
-	$("#sendPostBtn").click(function() {
-		alert(1);
-		var senderId = '${sessionScope.userId}';
-		var receiverId = $(this).val();
-		var content = $("#sendPostModal").find('[name="content"]').val();
-		
-		function ajaxPost(){
-			return $.ajax({
-				type : 'POST',
-				url : '${pageContext.request.contextPath}/post/send.do',
-				data : {
-					senderId : senderId,
-					receiverId : receiverId,
-					content : content
-				},
-				success : function() {
-					alert("메세지를 전송했습니다.");
-				}
-			});
-		}
-		
-		$.when(ajaxPost()).done(function(){
-			$("#sendPostModal").find(".close").click();	
-		})
-		
-	});
-</script>
