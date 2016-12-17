@@ -113,14 +113,9 @@ public class GroupServiceLogic implements GroupService {
 		
 		//follow요청 취소
 		Follow follow = followStore.selectFollowById(userId, searchManagerId.getManagerId());
-		System.out.println(follow.getRelation());
 		if(follow.getRelation()==4){
 			followStore.deleteFollow(follow);
 		}
-		/*
-		if(searchManagerId != null){
-			
-		}*/
 		
 		return result;
 	}
@@ -130,7 +125,7 @@ public class GroupServiceLogic implements GroupService {
 		return groupStore.selectAll(userId);
 	}
 
-	@Override
+	/*@Override
 	public Group findGroupByGroupId(int groupId) {
 		return groupStore.selectGroupByGroupId(groupId);
 	}
@@ -143,6 +138,6 @@ public class GroupServiceLogic implements GroupService {
 	@Override
 	public List<String> findJoinUsersByGroupId(int groupId) {
 		return groupStore.selectJoinUsersByGroupId(groupId);
-	}
+	}*/
 
 }
