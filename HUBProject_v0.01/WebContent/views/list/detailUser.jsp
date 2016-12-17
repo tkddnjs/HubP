@@ -2,8 +2,6 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<%@ include file="/views/post/sendPost.jsp"%>
-
 <!-- Modal -->
 <div class="modal fade" id="detailUserModal" role="dialog">
 	<div class="modal-dialog modal-lg">

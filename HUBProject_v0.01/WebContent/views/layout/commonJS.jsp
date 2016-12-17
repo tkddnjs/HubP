@@ -82,7 +82,7 @@
 		}
 		$(".active.in.main").attr("class", "tab-pane fade");
 		$("#tab_content"+tabOpt).attr("class", "tab-pane fade active in main");
-
+		
 	});
 
 	function list(array, result){
@@ -124,11 +124,12 @@
 		$('.tagsinput').find('a').remove();
 	};
 	
-	
 	$(".requestButton").click(function (){
+		var reqBtn = $(this);
+		var modal = reqBtn.closest(".modal.fade");
 		var userId = "${sessionScope.userId}";
-		var followId = $(this).closest(".modal.fade").find("#followId").val();
-		var relation = $(this).val();
+		var followId = modal.find("#followId").val();
+		var relation = reqBtn.val();
 		$.ajax({
 			type : 'POST',
 			url : '${pageContext.request.contextPath}/follow/request.do',
@@ -137,11 +138,16 @@
 				followId : followId,
 				relation : relation
 			},
-			success : function(){
-				alert("팔로우를 요쳥했습니다.");
+			success : function(result){
+				if(result=="ok"){
+					alert("팔로우를 요쳥했습니다.");
+					modal.find(".close").click();
+				}
 			}
 		});
 	});
+	
+	
 	
 	$('[name="checks"]').click(function(){
 		$(this).attr("checked", "checked");

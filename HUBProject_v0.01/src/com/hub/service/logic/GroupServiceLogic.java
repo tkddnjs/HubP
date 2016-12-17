@@ -6,11 +6,11 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.hub.controller.FollowController;
 import com.hub.domain.Follow;
 import com.hub.domain.Group;
 import com.hub.service.pacade.GroupService;
 import com.hub.store.pacade.ConnChainStore;
+import com.hub.store.pacade.FollowStore;
 import com.hub.store.pacade.GroupStore;
 
 @Service
@@ -20,10 +20,9 @@ public class GroupServiceLogic implements GroupService {
 	private GroupStore groupStore;
 	@Autowired
 	private ConnChainStore connChainStore;
-	
 	//모임방 개설자에게 팔로우 요청을 위함
 	@Autowired
-	private FollowController followCont;
+	private FollowStore followStore;
 	
 	@Override
 	public int registerGroup(Group group) {
@@ -95,7 +94,7 @@ public class GroupServiceLogic implements GroupService {
 			follow.setUserId(userId);
 			follow.setConfirm(true);
 			follow.setRelation(4); //follow와의 관계 (1: 내가 , 2:너를, 3:서로, 4:모임)
-			followCont.requestFollow(follow);			
+			followStore.insertFollow(follow);			
 		}
 		
 		return result;
@@ -113,17 +112,22 @@ public class GroupServiceLogic implements GroupService {
 		Group searchManagerId = groupStore.selectGroupByGroupId(groupId);
 		
 		//follow요청 취소
-		Follow follow = followCont.findFollowById(userId, searchManagerId.getManagerId());
+		Follow follow = followStore.selectFollowById(userId, searchManagerId.getManagerId());
+		System.out.println(follow.getRelation());
 		if(follow.getRelation()==4){
-			followCont.removeFollow(follow);
+			followStore.deleteFollow(follow);
 		}
+		/*
+		if(searchManagerId != null){
+			
+		}*/
 		
 		return result;
 	}
 
 	@Override
-	public List<Group> findAll(String userId) {
-		return groupStore.selectAll(userId);
+	public List<Group> findAll() {
+		return groupStore.selectAll();
 	}
 
 	@Override
@@ -137,11 +141,6 @@ public class GroupServiceLogic implements GroupService {
 	}
 
 	@Override
-	public List<String> findJoinUsersByGroupId(int groupId) {
-		return groupStore.selectJoinUsersByGroupId(groupId);
-	}
-
-	/*@Override
 	public List<Group> findGroupsByConnChain(String connChain) {
 		return groupStore.selectGroupsByConnChain(connChain);
 	}
@@ -154,6 +153,6 @@ public class GroupServiceLogic implements GroupService {
 	@Override
 	public List<Group> findGroupsByLocal(String local) {
 		return groupStore.selectGroupsByLocal(local);
-	}*/
+	}
 
 }

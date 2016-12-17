@@ -316,14 +316,13 @@
 	);
 
 	function initStar(str) {
-		$(".changeStar").each(function() {
-			$(this).starrr();
-			$(this).starrr('setRating', str);
-			$(this).attr("data-rating", str);
-			$(this).on('starrr:change', function(e, value) {
-				$(this).attr("data-rating", value);
+			if(str != $(".changeStar").attr('data-rating')){
+				$(".changeStar").starrr('setRating', str);
+			}
+			$(".changeStar").attr("data-rating", str);
+			$(".changeStar").on('starrr:change', function(e, value) {
+				$(".changeStar").attr("data-rating", value);
 			});
 			$("[name='star']").val(str);
-		});
 	}
 </script>

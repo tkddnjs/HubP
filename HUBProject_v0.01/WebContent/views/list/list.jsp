@@ -97,6 +97,7 @@
 <script src="${pageContext.request.contextPath}/resources/vendors/jquery/dist/jquery.min.js"></script>
 <script type="text/javascript">
 	var listOpt = ${listOpt};
+	
 	$("[name=detailUserBtn]").click(function() {
 		var userId = $(this).val();
 		var user = new Array();
@@ -128,9 +129,9 @@
 				},
 				success : function(result){
 					if($.trim(result)=="available"){
-						$("#detailUserModal .requestBtn").show();
+						$("#detailUserModal .requestButton").show();
 					} else {
-						$("#detailUserModal .requestBtn").hide();
+						$("#detailUserModal .requestButton").hide();
 					}
 				}
 			});
@@ -145,12 +146,10 @@
 		$.when(ajaxUser(), ajaxCheckFollow()).done(function(){
 			$("#detailUserModal #userId").html(user[0]);
 			$("#detailUserModal #followId").val(user[0]);
-			$("#detailUserModal #userId").val('${sessionScope.userId}');
 			$("#detailUserModal #picture").attr('src', '${pageContext.request.contextPath}/resources/img/userImg/'+user[4]);
 			initConnReadonly(user[3], $("#dutags"));
 			$("#detailUserModal #introduce").html(user[5]);
-			$("#detailUserModal .requestBtn").val(listOpt);
-			$("#detailUserModal #relation").val(listOpt);
+			$("#detailUserModal .requestButton").val(listOpt);
 			$("#detailUserModal .sendPostBtn").val(user[0]);
 		});
 		
@@ -168,6 +167,7 @@
 		$("#detailBucketlistModal #followId").val(bucketlists[index][9]);
 		initConnReadonly(bucketlists[index][2], $("#dbtags"));
 		$("#detailBucketlistModal #sos").html(bucketlists[index][7]);
-		$("#detailBucketlistModal .requestBtn").val(listOpt);
+		$("#detailBucketlistModal .requestButton").val(listOpt);
+		$("#detailBucketlistModal .sendPostBtn").val(user[0]);
 	});
 </script>

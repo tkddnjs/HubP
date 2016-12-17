@@ -23,9 +23,16 @@ public class FollowController {
 	private FollowService followService;
 	
 	@RequestMapping(value="request.do", method=RequestMethod.POST)
-	public void requestFollow(Follow follow){
+	public void requestFollow(Follow follow, HttpServletResponse resp){
 		follow.setConfirm(true);
 		followService.requestFollow(follow);
+		
+		try {
+			PrintWriter out = resp.getWriter();
+			out.print("ok");
+		} catch (IOException e) {
+		}
+	
 	}
 	
 	@RequestMapping(value="confirm.do", method=RequestMethod.POST)
