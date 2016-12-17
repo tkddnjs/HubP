@@ -49,8 +49,6 @@ public class GroupController {
 	public String joinGroup(HttpSession session, int groupId, int maxPeople, int joinPeople) {
 		
 		String userId = (String) session.getAttribute("userId");
-		System.out.println(maxPeople);
-		System.out.println(joinPeople);
 		if(maxPeople==joinPeople){
 			return "redirect:/group/list.do?listOpt=0";
 		}else{
