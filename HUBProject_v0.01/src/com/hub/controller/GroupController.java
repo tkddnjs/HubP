@@ -70,16 +70,13 @@ public class GroupController {
 		ModelAndView mav = new ModelAndView("group/modifyGroup");
 		mav.addObject("corrector", (String) session.getAttribute("userId"));
 		mav.addObject("group", groupService.findGroupByGroupId(groupId));
-		
 		return mav;
 	}
 
 	@RequestMapping(value="modify.do", method=RequestMethod.POST)
 	public String modifyGroup(Group group) {
-		
 		groupService.modifyGroup(group);
-		
-		return "redirect:/group/list.do?userId="+ group.getManagerId() + "&listOpt=1";
+		return "redirect:/group/list.do?userId="+ group.getManagerId() + "&listOpt=1&modifyGroup=ok";
 	}
 
 	@RequestMapping(value="remove.do", method=RequestMethod.GET)
@@ -99,16 +96,14 @@ public class GroupController {
 
 	@RequestMapping(value="exit.do", method=RequestMethod.GET)
 	public String exitGroup(HttpSession session, int groupId) {
-		
 		groupService.exitGroup(groupId, (String) session.getAttribute("userId"));
 		return "redirect:/group/list.do?listOpt=0";
 	}
 
 	@RequestMapping(value="list.do", method=RequestMethod.GET)
-	public ModelAndView listGroup(HttpSession httpSession, int listOpt) {
+	public ModelAndView listGroup(HttpSession httpSession, int listOpt, String modifyGroup) {
 		ModelAndView mav = new ModelAndView("bucketlist/bucketList");
 		String userId = (String)httpSession.getAttribute("userId");
-		
 		switch (listOpt) {
 		// 전체 모임방 찾기
 		case 0:
@@ -120,6 +115,7 @@ public class GroupController {
 			break;
 		}
 		mav.addObject("listOpt", listOpt);
+		mav.addObject("modifyGroup", modifyGroup);
 		mav.addObject("tabOpt", 4);
 		return mav;
 	}

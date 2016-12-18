@@ -61,7 +61,7 @@ public class CooperController {
 		}
 		cooper.setImage(fileName);
 		cooperService.modifyCooper(cooper);
-		return "redirect: list.do?listOpt=0";
+		return "redirect: list.do?listOpt=0&modifyCooper=ok";
 	}
 
 	@RequestMapping(value="remove.do", method=RequestMethod.GET)
@@ -71,17 +71,15 @@ public class CooperController {
 	}
 	
 	@RequestMapping(value="list.do", method=RequestMethod.GET)
-	public ModelAndView listCooper(int listOpt, String searchWord) {
+	public ModelAndView listCooper(int listOpt, String modifyCooper) {
 		ModelAndView mav = new ModelAndView("bucketlist/bucketList");
 		switch(listOpt){
 		case 0: 
 			mav.addObject("coopers", cooperService.findAll());
 			break;
-		case 1:
-			mav.addObject("coopers", cooperService.findCoopersByConnChain(searchWord));
-			break;
 		}
 		mav.addObject("tabOpt", 3);
+		mav.addObject("modifyCooper", modifyCooper);
 		return mav;
 	}
 	

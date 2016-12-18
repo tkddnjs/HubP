@@ -42,7 +42,7 @@ public class BucketlistController {
 	@RequestMapping(value="modify.do", method=RequestMethod.POST)
 	public String modifyBucketlist(Bucketlist bucketlist){
 		bucketlistService.modifyBucketlist(bucketlist);
-		return "redirect: list.do";
+		return "redirect: list.do?modifyBucketlist=ok";
 	}
 	
 	@RequestMapping(value="remove.do", method=RequestMethod.GET)
@@ -55,24 +55,22 @@ public class BucketlistController {
 	@RequestMapping(value="detail.do", method=RequestMethod.GET)
 	public ModelAndView detailBucketlist(String userId, int bucketlistId){
 		ModelAndView mav = null;
-		
 		Bucketlist bucketlist = bucketlistService.findBucketlistByBucketlistId(bucketlistId);
-		
 		if(bucketlist.getUserId().equals(userId)){
 			mav = new ModelAndView("bucketlist/detailBucketlist");
 		} else {
 			mav = new ModelAndView("list/detailBucketlist");
 		}
-
 		mav.addObject("bucketlist", bucketlist);
 		return mav;
 	}
 	
 	@RequestMapping(value="list.do", method=RequestMethod.GET)
-	public ModelAndView listBucketlist(HttpSession session){
+	public ModelAndView listBucketlist(HttpSession session, String modifyBucketlist){
 		ModelAndView mav = new ModelAndView("bucketlist/bucketList");
 		String userId = (String) session.getAttribute("userId");
 		mav.addObject("bucketlists", bucketlistService.findAll(userId));
+		mav.addObject("modifyBucketlist", modifyBucketlist);
 		mav.addObject("tabOpt", 1);
 		return mav;
 	}

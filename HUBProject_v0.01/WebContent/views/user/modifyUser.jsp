@@ -53,7 +53,7 @@
 							<label class="control-label col-md-2 col-sm-3 col-xs-3"
 								for="password_check">비밀번호 확인 <span>*</span></label>
 							<div class="col-md-4 col-sm-3 col-xs-3">
-								<input type="password" id="pw_check"
+								<input type="password" id="pwCheck"
 									class="form-control col-md-7 col-xs-12">
 							</div>
 							<p id="pwCheckResult"></p>

@@ -71,7 +71,7 @@ public class UserController {
 		}
 		user.setPicture(fileName);
 		userService.modifyUser(user);
-		return "redirect: detail.do?userId="+user.getUserId()+"&myId="+user.getUserId();
+		return "redirect: detail.do?userId="+user.getUserId()+"&myId="+user.getUserId()+"&modifyUser=ok";
 	}
 
 	// 설계 문서 수정 => session 추가
@@ -84,7 +84,7 @@ public class UserController {
 
 	// parameter 변경 (String userId => HttpSession session, String userId)
 	@RequestMapping(value="detail.do", method=RequestMethod.GET)	
-	public ModelAndView detailUser(String myId, String userId){
+	public ModelAndView detailUser(String myId, String userId, String modifyUser){
 		ModelAndView mav = new ModelAndView("bucketlist/bucketList");
 		if(userId.equals(myId)){
 			mav.addObject("tabOpt", 7);
@@ -93,7 +93,7 @@ public class UserController {
 			mav.addObject("tabOpt", 5);
 		}
 		mav.addObject("user", userService.findUserByUserId(userId));
-		mav.addObject("modifyUser", "ok");
+		mav.addObject("modifyUser", modifyUser);
 		return mav;
 	}
 	

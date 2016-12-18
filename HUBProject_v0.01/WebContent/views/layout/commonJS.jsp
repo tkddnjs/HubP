@@ -482,6 +482,12 @@
 		$(this).closest(".modal.fade").find(".close").click();
 	});
 	
+	$(document).ready(function(){
+		var modifyCooper = "${modifyCooper}";
+		if(modifyCooper == "ok"){
+			alert("수정되었습니다.");
+		}
+	});
 </script>
 
 <!-- /Cooper Script -->
@@ -619,6 +625,12 @@
 		$(this).closest(".modal.fade").find(".close").click();
 	});
 	
+	$(document).ready(function(){
+		var modifyGroup = "${modifyGroup}";
+		if(modifyGroup == "ok"){
+			alert("수정되었습니다.");
+		}
+	});
 </script>
 <!-- /Group Script -->
 
