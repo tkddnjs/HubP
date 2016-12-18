@@ -41,7 +41,7 @@
 										<ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist" style="background-color:#fdae84;">
 											<li role="presentation" class="">
 												<a href="${pageContext.request.contextPath }/bucketlist/list.do" id="profile-tab1">Bucketlist</a></li>
-											<li role="presentation" class="">
+											<li role="presentation" class="helperPicker">
 												<a href='${pageContext.request.contextPath }/list/list.do?listOpt=1&userId=${sessionScope.userId}' id="profile-tab2">Helper </a></li>
 											<li role="presentation" class="">
 												<a href="${pageContext.request.contextPath }/cooper/list.do?listOpt=0" id="profile-tab3">Cooper </a></li>

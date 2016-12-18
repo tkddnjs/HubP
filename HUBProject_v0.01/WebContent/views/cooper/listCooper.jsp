@@ -34,9 +34,9 @@
 				<tbody>
 					<c:forEach items="${coopers }" var="cooper" varStatus="status">
 						<tr>
-							<td style="text-align: left;">
+							<td style="text-align: center;">
 								<a href="http://${cooper.coBanner }">
-									<img src="${pageContext.request.contextPath}/resources/img/cooperImg/${cooper.image }" width="100%" height="100px"/>
+									<img src="${pageContext.request.contextPath}/resources/img/cooperImg/${cooper.image }" width="60%" height="100px"/>
 								</a>
 							</td>
 							<td hidden="true">${cooper.connChains }</td>
