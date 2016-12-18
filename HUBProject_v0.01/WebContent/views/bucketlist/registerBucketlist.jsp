@@ -13,10 +13,11 @@
    			<div class="modal-body">
 				<form id="registerBucketlistForm" action="${pageContext.request.contextPath}/bucketlist/register.do" class="form-horizontal form-label-left bucketlistForm" method="post" enctype="multipart/form-data">
 					<div class="form-group">
-						<label class="control-label col-md-2 col-sm-3 col-xs-12" for="title">제목<span class="required">*</span></label>
+						<label class="control-label col-md-2 col-sm-3 col-xs-12" for="title">제목<span>*</span></label>
 						<div class="col-md-2 col-sm-3 col-xs-3">
-							<input type="text" id="title" name="title" required="required" class="form-control col-md-7 col-xs-12">
+							<input type="text" id="title" name="title" class="form-control col-md-7 col-xs-12">
 						</div>
+						<p title="titleCheckResult"></p>
 					</div>
 					<div class="form-group">
 						<label class="control-label col-md-2 col-sm-3 col-xs-12" for="lock">잠금</label>
@@ -28,9 +29,10 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="control-label col-md-2 col-sm-3 col-xs-12" for="goal">목표기간<span class="required">*</span></label>
+						<label class="control-label col-md-2 col-sm-3 col-xs-12" for="goal">목표기간<span>*</span></label>
 							<div class="col-md-6 col-sm-6 col-xs-8">
-								<input type="text" id="goal" name="goal" placeholder="ex)올해안에, 3년안에..." required="required" class="form-control col-md-7 col-xs-12">
+								<input type="text" id="goal" name="goal" placeholder="ex)올해안에, 3년안에..." class="form-control col-md-7 col-xs-12">
+								<p title="goalCheckResult"></p>
 							</div>
 					</div>
 					<div class="form-group">
@@ -41,10 +43,11 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="control-label col-md-2 col-sm-3 col-xs-12">연결고리<span class="required">*</span></label>
+						<label class="control-label col-md-2 col-sm-3 col-xs-12">연결고리<span>*</span></label>
 						<div class="col-md-6 col-sm-6 col-xs-8">
-							<input id="rbtags" type="text" name="connChains" required="required" class="tags form-control" />
+							<input id="rbtags" type="text" name="connChains" class="tags form-control" />
 						</div>
+						<p title="connChainResult"></p>
 					</div>
 					<div class="form-group"></div>
 					<div class="form-group">

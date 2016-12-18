@@ -13,14 +13,15 @@
    			<div class="modal-body">
 				<form id="modifyBucketlistForm" action="${pageContext.request.contextPath}/bucketlist/modify.do" class="form-horizontal form-label-left bucketlistForm" method="post" enctype="multipart/form-data">
 					<div class="form-group">
-						<label class="control-label col-md-2 col-sm-3 col-xs-12" for="title">제목<span class="required">*</span></label>
+						<label class="control-label col-md-2 col-sm-3 col-xs-12" for="title">제목<span>*</span></label>
 						<div class="col-md-6 col-sm-6 col-xs-8">
-							<input type="text" id="title" name="title" required="required" class="form-control col-md-7 col-xs-12">
+							<input type="text" id="title" name="title" class="form-control col-md-7 col-xs-12">
 						</div>
+						<p title="titleCheckResult"></p>
 					</div>
 					<div class="form-group">
 						<div>
-							<label class="control-label col-md-2 col-sm-3 col-xs-12" for="goal">진행도<span class="required">*</span></label>
+							<label class="control-label col-md-2 col-sm-3 col-xs-12" for="progress">진행도<span>*</span></label>
 							<div class="col-md-2 col-sm-3 col-xs-3">
 								<input id="progress" name="progress" class="knob" data-width="90" data-height="120" data-angleOffset=90 data-linecap=round
 									data-fgColor="#26B99A" data-displayPrevious=true>
@@ -38,9 +39,10 @@
 								</div>
 							</div>
 							<div>
-								<label class="control-label col-md-2 col-sm-3 col-xs-12" for="goal">목표기간<span class="required">*</span></label>
+								<label class="control-label col-md-2 col-sm-3 col-xs-12" for="goal">목표기간<span>*</span></label>
 								<div class="col-md-3 col-sm-3 col-xs-3">
-									<input type="text" id="goal" name="goal" required="required" class="form-control col-md-7 col-xs-12">
+									<input type="text" id="goal" name="goal" class="form-control col-md-7 col-xs-12">
+									<p title="goalCheckResult"></p>
 								</div>
 							</div>
 							<div>
@@ -53,10 +55,11 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="control-label col-md-2 col-sm-3 col-xs-12">연결고리<span class="required">*</span></label>
+						<label class="control-label col-md-2 col-sm-3 col-xs-12">연결고리<span>*</span></label>
 						<div class="col-md-6 col-sm-6 col-xs-8">
 							<input type="text" id="mbtags" name="connChains" class="tags form-control" />
 						</div>
+						<p title="connChainResult"></p>
 					</div>
 					<div class="form-group"></div>
 					<div class="form-group">

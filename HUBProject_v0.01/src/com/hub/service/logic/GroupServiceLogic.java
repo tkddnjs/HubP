@@ -125,7 +125,7 @@ public class GroupServiceLogic implements GroupService {
 		return groupStore.selectAll(userId);
 	}
 
-	/*@Override
+	@Override
 	public Group findGroupByGroupId(int groupId) {
 		return groupStore.selectGroupByGroupId(groupId);
 	}
@@ -138,6 +138,6 @@ public class GroupServiceLogic implements GroupService {
 	@Override
 	public List<String> findJoinUsersByGroupId(int groupId) {
 		return groupStore.selectJoinUsersByGroupId(groupId);
-	}*/
+	}
 
 }

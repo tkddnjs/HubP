@@ -93,6 +93,7 @@ public class UserController {
 			mav.addObject("tabOpt", 5);
 		}
 		mav.addObject("user", userService.findUserByUserId(userId));
+		mav.addObject("modifyUser", "ok");
 		return mav;
 	}
 	

@@ -33,8 +33,7 @@
 							type="password" value="" placeholder="Password">
 					</div>
 					<div style="margin-left: 20px;">
-						<button class="btn btn-default submit">로그인</button>
-
+						<button type="submit" class="btn btn-default submit">로그인</button>
 						<button type="button" class="btn btn-default submit"
 							data-toggle="modal" data-target="#registerUserModal">회원가입</button>
 					</div>
@@ -43,20 +42,15 @@
 			</section>
 		</div>
 	</div>
-<!-- jQuery -->
+	
 <script src="${pageContext.request.contextPath}/resources/vendors/jquery/dist/jquery.min.js"></script>
-<!-- Bootstrap -->
 <script src="${pageContext.request.contextPath}/resources/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
-<!-- bootstrap-daterangepicker -->
 <script src="${pageContext.request.contextPath}/resources/vendors/moment/min/moment.min.js"></script>
 <script src="${pageContext.request.contextPath}/resources/vendors/bootstrap-daterangepicker/daterangepicker.js"></script>
-<!-- bootstrap-wysiwyg -->
 <script src="${pageContext.request.contextPath}/resources/vendors/bootstrap-wysiwyg/js/bootstrap-wysiwyg.min.js"></script>
 <script src="${pageContext.request.contextPath}/resources/vendors/jquery.hotkeys/jquery.hotkeys.js"></script>
 <script src="${pageContext.request.contextPath}/resources/vendors/google-code-prettify/src/prettify.js"></script>
-<!-- jQuery Tags Input -->
 <script src="${pageContext.request.contextPath}/resources/vendors/jquery.tagsinput/src/jquery.tagsinput.js"></script>
-<!-- Custom Theme Scripts -->
 <script src="${pageContext.request.contextPath}/resources/js/custom.min.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js" type="text/javascript"></script>	
 
@@ -151,6 +145,13 @@
 		$("#rutags").val(tags);
 		$(this).find("#changed").val(changed);
 	});
+	
+	$('#registerUserModal .btn-primary').on('click', function() {
+		$("[id$=Result]").each(function(){
+			$(this).html("");
+		});
+		$(this).closest(".modal.fade").find(".close").click();
+	});
 </script>
 
 <!-- Validation -->
@@ -180,6 +181,10 @@
 		}
 	});
 	
+	$("#pw").keyup(function() {
+		$("#pwResult").html("");
+	});
+	
 	$("#pwCheck").keyup(function() {
 		if($(this).val() == $("#pw").val()){
 			$("#pwCheckResult").html("비밀번호가 일치합니다.");
@@ -192,38 +197,53 @@
 	
 	$("#email").keyup(function() {
 		if(!$(this).val().match(/.+@.+\.+/g)){
-            $("#emailCheckResult").html("잘못된 형식입니다. (옳은 예 : example@domain.com)");
+            $("#emailCheckResult").html("잘못된 형식입니다. (예)example@domain.com");
             $("#emailCheckResult").attr('style', 'color:red');
         } else {
         	$("#emailCheckResult").html("올바른 형식입니다.");
             $("#emailCheckResult").attr('style', 'color:blue');
         }
 	});
+	
+	$("#rutags").closest("div").click(function() {
+		$("#connChainResult").html("");
+	});
+	
+	$("#registerUserForm").submit(function(){
+		var error = 0;
+		if($("#registerUserForm #userId").val()==""){
+			$("#registerUserForm #idCheckResult").html("필수입력사항입니다.")
+			$("#registerUserForm #idCheckResult").attr('style', 'color: red;');
+			error += 1;
+		}
+		
+		if($("#registerUserForm #pw").val()==""){
+			$("#registerUserForm #pwResult").html("필수입력사항입니다.");
+			$("#registerUserForm #pwResult").attr('style', 'color: red;');
+			error += 1;
+		}
+		
+		if($("#registerUserForm #pwCheck").val()==""){
+			$("#registerUserForm #pwCheckResult").html("필수입력사항입니다.");
+			$("#registerUserForm #pwCheckResult").attr('style', 'color: red;');
+			error += 1;
+		}
+		
+		if($("#registerUserForm #email").val()==""){
+			$("#registerUserForm #emailCheckResult").html("필수입력사항입니다.");
+            $("#registerUserForm #emailCheckResult").attr('style', 'color:red');
+            error += 1;
+		}
+		
+		if($("#registerUserForm #rutags").val()==""){
+			$("#registerUserForm #connChainResult").html("필수입력사항입니다.");
+            $("#registerUserForm #connChainResult").attr('style', 'color:red');
+            error += 1;
+		}
 
-	$("form").submit(function(){
-		$("p.error").remove();
-		$("dl dd").removeClass("error");
-
-		$(":text, textarea").filter('[required="required"]').each(function() {
-
-			if ($(this).val() == "") {
-				$(this).before("<p class='error'>필수 항목 입니다.</p>");
-			}
-
-//			if(isNaN($(this).filter(":number").val())){
-//				$(this).before("<p class='error'>숫자만 입력 가능합니다.</p>");
-//			}
-
-			if ($("p.error").length > 0) {
-				//에러가 발생한 위치로 스크롤 이동
-				$("html, body").animate({
-					scrollTop : $("p.error.first").offset.top - 40
-				}, "slow");
-				//에러 항목에 대한 음영 처리
-				$("p.error").parent().addClass("error");
-				return false;
-			}
-		});
+		if (error > 0) {
+			return false;
+		}
 	});
 </script>
 <!-- Validation -->

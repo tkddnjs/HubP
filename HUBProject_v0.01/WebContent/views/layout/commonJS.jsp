@@ -394,16 +394,29 @@
 	});
 	
 	$('#registerBucketlistModal .btn-primary').on('click', function() {
+		$("[title$=Result]").each(function(){
+			$(this).html("");
+		});
 		$(this).closest(".modal.fade").find(".close").click();
 	});
 	
 	$('#modifyBucketlistModal .btn-primary').on('click', function() {
+		$("[title$=Result]").each(function(){
+			$(this).html("");
+		});
 		$(this).closest(".modal.fade").find(".close").click();
 	});
 	
 	$('#removeBucketlistModal .btn-primary').on('click', function() {
 		$(this).closest(".modal.fade").find(".close").click();
 	});
+	
+	$(document).ready(function(){
+		var modifyBucketlist = "${modifyBucketlist}";
+		if(modifyBucketlist == "ok"){
+			alert("수정되었습니다.");
+		}
+	})
 </script>
 <!-- /Bucketlist Script -->
 
@@ -456,30 +469,19 @@
 	});
 	
 	$('#registerCooperModal .btn-primary').on('click', function() {
+		$("[title$=Result]").each(function(){
+			$(this).html("");
+		});
 		$(this).closest(".modal.fade").find(".close").click();
 	});
 
 	$('#modifyCooperModal .btn-primary').on('click', function() {
+		$("[title$=Result]").each(function(){
+			$(this).html("");
+		});
 		$(this).closest(".modal.fade").find(".close").click();
 	});
 	
-	//$('#cma_image').on('click', function() {
-	//	$('#cma_file').click();
-	//});
-	//$('#cma_file').on('change', function(e) {
-	//	changed='yes';
-	//	getThumbnailPrivew(this, $('#cma_image'));
-	//});
-	//$('#removeBtn').on('click', function() {
-	//	$('#cmb_image').attr('src', defaultImgURL);
-	//	$(this).hide();
-	//});	
-	//$("#modifyCooperForm").submit(function() {
-	//	var tags = $("#mctags").val();
-	//	tags = tags.split(",");
-	//	$("#mctags").val(tags);
-	//	$(this).find("#changed").val(changed);
-	//});
 </script>
 
 <!-- /Cooper Script -->
@@ -603,6 +605,20 @@
 		$(this).closest(".modal.fade").find(".close").click();
 	});
 	
+	$('#registerGroupModal .btn-primary').on('click', function() {
+		$("[title$=Result]").each(function(){
+			$(this).html("");
+		});
+		$(this).closest(".modal.fade").find(".close").click();
+	});
+
+	$('#modifyGroupModal .btn-primary').on('click', function() {
+		$("[title$=Result]").each(function(){
+			$(this).html("");
+		});
+		$(this).closest(".modal.fade").find(".close").click();
+	});
+	
 </script>
 <!-- /Group Script -->
 
@@ -709,17 +725,23 @@
 		$(this).find("#changed").val(changed);
 	});
 	
-	$('#modifyUserModal .btn-success').on('click', function() {
-		alert("수정되었습니다.");
-	});
-	
-	$('#modifyUserModal .btn-primary').on('click', function() {
-		$(this).closest(".modal.fade").find(".close").click();
-	});
-	
 	$('#delelteUserModal .btn-primary').on('click', function() {
 		$(this).closest(".modal.fade").find(".close").click();
 	});
+	
+	$('#modifyUserModal .btn-primary').on('click', function() {
+		$("[id$=Result]").each(function(){
+			$(this).html("");
+		});
+		$(this).closest(".modal.fade").find(".close").click();
+	});
+	
+	$(document).ready(function(){
+		var modifyUser = "${modifyUser}";
+		if(modifyUser == "ok"){
+			alert("수정되었습니다.");
+		}
+	})
 </script>
 <!-- /User Script -->
 
@@ -728,57 +750,146 @@
 
 <!-- Validation -->
 <script>
-	$("#userId").keyup(function() {
-		var id = $(this).val();
-		if($(this).val().length > 5){
-			$.ajax({
-				type: 'POST',
-				url: '${pageContext.request.contextPath}/user/checkId.do',
-				data: {
-						id: id
-				},
-				success: function(result){
-					if($.trim(result)=="OK"){
-						$("#idCheckResult").html("사용가능한 ID입니다.");
-					} else {
-						$("#idCheckResult").html("사용중인 ID입니다.");
-					}
-				}
-			});
+	$("#pw").keyup(function() {
+		$("#pwResult").html("");
+	});
+
+	$("#pwCheck").keyup(function() {
+		if($(this).val() == $("#pw").val()){
+			$("#pwCheckResult").html("비밀번호가 일치합니다.");
+			$("#pwCheckResult").attr('style', 'color: blue;');
 		}else{
-			$("#idCheckResult").html("ID는 5자 이상입니다.");
+			$("#pwCheckResult").html("비밀번호가 일치하지 않습니다.");
+			$("#pwCheckResult").attr('style', 'color: red;');
+		}
+	});
+
+	$("#email").keyup(function() {
+		if(!$(this).val().match(/.+@.+\.+/g)){
+			$("#emailCheckResult").html("잘못된 형식입니다. (예)example@domain.com");
+			$("#emailCheckResult").attr('style', 'color:red');
+		} else {
+			$("#emailCheckResult").html("올바른 형식입니다.");
+			$("#emailCheckResult").attr('style', 'color:blue');
+		}
+	});
+
+	$("#rutags").closest("div").click(function() {
+		$("#connChainResult").html("");
+	});
+
+	$("#modifyUserForm").submit(function(){
+		var error = 0;
+		if($("#modifyUserForm #pw").val()==""){
+			$("#modifyUserForm #pwResult").html("필수입력사항입니다.");
+			$("#modifyUserForm #pwResult").attr('style', 'color: red;');
+			error += 1;
+		}
+		if($("#modifyUserForm #pwCheck").val()==""){
+			$("#modifyUserForm #pwCheckResult").html("필수입력사항입니다.");
+			$("#modifyUserForm #pwCheckResult").attr('style', 'color: red;');
+			error += 1;
+		}
+		if($("#modifyUserForm #email").val()==""){
+			$("#modifyUserForm #emailCheckResult").html("필수입력사항입니다.");
+			$("#modifyUserForm #emailCheckResult").attr('style', 'color:red');
+			error += 1;
+		}
+		if($("#modifyUserForm #rutags").val()==""){
+			$("#modifyUserForm #connChainResult").html("필수입력사항입니다.");
+    	    $("#modifyUserForm #connChainResult").attr('style', 'color:red');
+    	    error += 1;
+		}
+		if (error > 0) {
+			return false;
 		}
 	});
 	
-	$("#pwCheck").keyup(function() {
-		if($("#pwCheck").val() == $("#pw").val()){
-			$("#pwCheckResult").html("일치");
-		}else{
-			$("#pwCheckResult").html("불일치");
-		}
-	});
-
-	$("form").submit(function(){
-		$("p.error").remove();
-		$("dl dd").removeClass("error");
-
-		$(":text, textarea").filter('[required="required"]').each(function() {
-
-			if ($(this).val() == "") {
-				$(this).before("<p class='error'>필수 항목 입니다.</p>");
+	$(".bucketlistForm").each(function(){
+		$(this).submit(function(){
+			var error = 0;
+			$(this).find("[title=connChainResult]").html("");
+			if($(this).find("[name=title]").val()==""){
+				$(this).find("[title=titleCheckResult]").html("필수입력사항입니다.");
+				$(this).find("[title=titleCheckResult]").attr('style', 'color:red');
+				error += 1;
 			}
-
-//			if(isNaN($(this).filter(":number").val())){
-//				$(this).before("<p class='error'>숫자만 입력 가능합니다.</p>");
-//			}
-
-			if ($("p.error").length > 0) {
-				//에러가 발생한 위치로 스크롤 이동
-				$("html, body").animate({
-					scrollTop : $("p.error.first").offset.top - 40
-				}, "slow");
-				//에러 항목에 대한 음영 처리
-				$("p.error").parent().addClass("error");
+			if($(this).find("[name=goal]").val()==""){
+				$(this).find("[title=goalCheckResult]").html("필수입력사항입니다.");
+				$(this).find("[title=goalCheckResult]").attr('style', 'color:red');
+				error += 1;
+			}
+			if($("[name=connChains]").val()==""){
+				$(this).find("[title=connChainResult]").html("필수입력사항입니다.");
+				$(this).find("[title=connChainResult]").attr('style', 'color:red');
+    		    error += 1;
+			}
+			if (error > 0) {
+				return false;
+			}
+		});
+	});
+	
+	$(".cooperForm").each(function(){
+		$(this).submit(function(){
+			var error = 0;
+			$(this).find("[title=connChainResult]").html("");
+			if($(this).find("[name=coName]").val()==""){
+				$(this).find("[title=coNameCheckResult]").html("필수입력사항입니다.");
+				$(this).find("[title=coNameCheckResult]").attr('style', 'color:red');
+				error += 1;
+			}
+			if($(this).find("[name=lastDay]").val()==""){
+				$(this).find("[title=lastDayCheckResult]").html("필수입력사항입니다.");
+				$(this).find("[title=lastDayCheckResult]").attr('style', 'color:red');
+				error += 1;
+			}
+			if($(this).find("[name=connChains]").val()==""){
+				$(this).find("[title=connChainResult]").html("필수입력사항입니다.");
+				$(this).find("[title=connChainResult]").attr('style', 'color:red');
+    		    error += 1;
+			}
+			if($(this).find("[name=coBanner]").val()==""){
+				$(this).find("[title=coBannerResult]").html("필수입력사항입니다.");
+				$(this).find("[title=coBannerResult]").attr('style', 'color:red');
+    		    error += 1;
+			}
+			if (error > 0) {
+				return false;
+			}
+		});
+	});
+	
+	$(".groupForm").each(function(){
+		$(this).submit(function(){
+			var error = 0;
+			$(this).find("[title=connChainResult]").html("");
+			if($(this).find("[name=groupName]").val()==""){
+				$(this).find("[title=groupNameResult]").html("필수입력사항입니다.");
+				$(this).find("[title=groupNameResult]").attr('style', 'color:red');
+				error += 1;
+			}
+			if($(this).find("[name=lastDay]").val()==""){
+				$(this).find("[title=lastDayResult]").html("필수입력사항입니다.");
+				$(this).find("[title=lastDayResult]").attr('style', 'color:red');
+				error += 1;
+			}
+			if($(this).find("[name=local]").val()==""){
+				$(this).find("[title=localResult]").html("필수입력사항입니다.");
+				$(this).find("[title=localResult]").attr('style', 'color:red');
+    		    error += 1;
+			}
+			if($(this).find("[name=maxPeople]").val()==""){
+				$(this).find("[title=maxPeopleResult]").html("필수입력사항입니다.");
+				$(this).find("[title=maxPeopleResult]").attr('style', 'color:red');
+    		    error += 1;
+			}
+			if($(this).find("[name=connChains]").val()==""){
+				$(this).find("[title=connChainResult]").html("필수입력사항입니다.");
+				$(this).find("[title=connChainResult]").attr('style', 'color:red');
+    		    error += 1;
+			}
+			if (error > 0) {
 				return false;
 			}
 		});
