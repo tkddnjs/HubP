@@ -26,17 +26,16 @@ public class GroupController {
 	private GroupService groupService;
 	@Autowired
 	private FollowController followContoller;
-	
 
-	@RequestMapping(value="register.do", method=RequestMethod.GET)
-	public ModelAndView registerGroup(HttpSession session) {
-		
-		ModelAndView mav = new ModelAndView("group/registerGroup");
-
-		mav.addObject("userId", (String) session.getAttribute("userId"));	
-		
-		return mav;
-	}
+//	@RequestMapping(value="register.do", method=RequestMethod.GET)
+//	public ModelAndView registerGroup(HttpSession session) {
+//		
+//		ModelAndView mav = new ModelAndView("group/registerGroup");
+//
+//		mav.addObject("userId", (String) session.getAttribute("userId"));	
+//		
+//		return mav;
+//	}
 
 	@RequestMapping(value="register.do", method=RequestMethod.POST)
 	public String registerGroup(Group group) {
@@ -64,14 +63,14 @@ public class GroupController {
 		}
 	}
 
-	// 문서 수정 필요 => parameter 변경
-	@RequestMapping(value="modify.do", method=RequestMethod.GET)
-	public ModelAndView modifyGroup(HttpSession session, int groupId) {
-		ModelAndView mav = new ModelAndView("group/modifyGroup");
-		mav.addObject("corrector", (String) session.getAttribute("userId"));
-		mav.addObject("group", groupService.findGroupByGroupId(groupId));
-		return mav;
-	}
+//	// 문서 수정 필요 => parameter 변경
+//	@RequestMapping(value="modify.do", method=RequestMethod.GET)
+//	public ModelAndView modifyGroup(HttpSession session, int groupId) {
+//		ModelAndView mav = new ModelAndView("group/modifyGroup");
+//		mav.addObject("corrector", (String) session.getAttribute("userId"));
+//		mav.addObject("group", groupService.findGroupByGroupId(groupId));
+//		return mav;
+//	}
 
 	@RequestMapping(value="modify.do", method=RequestMethod.POST)
 	public String modifyGroup(Group group) {
@@ -101,9 +100,9 @@ public class GroupController {
 	}
 
 	@RequestMapping(value="list.do", method=RequestMethod.GET)
-	public ModelAndView listGroup(HttpSession httpSession, int listOpt, String modifyGroup) {
+	public ModelAndView listGroup(HttpSession session, int listOpt, String modifyGroup) {
 		ModelAndView mav = new ModelAndView("bucketlist/bucketList");
-		String userId = (String)httpSession.getAttribute("userId");
+		String userId = (String)session.getAttribute("userId");
 		switch (listOpt) {
 		// 전체 모임방 찾기
 		case 0:

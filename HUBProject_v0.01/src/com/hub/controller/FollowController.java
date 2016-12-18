@@ -31,7 +31,6 @@ public class FollowController {
 			out.print("ok");
 		} catch (IOException e) {
 		}
-	
 	}
 	
 	@RequestMapping(value="confirm.do", method=RequestMethod.POST)
@@ -47,32 +46,32 @@ public class FollowController {
 	}
 	
 	@RequestMapping(value="listAll.do", method=RequestMethod.GET)
-	public void listAllFollows(HttpServletResponse response, String userId){
+	public void listAllFollows(HttpServletResponse resp, String userId){
 		List<Follow> fList = new ArrayList<>();
 		fList.addAll(followService.findRequestedFollows(userId));
 		fList.addAll(followService.findAll(userId));
 		try {
-			PrintWriter out = response.getWriter();
+			PrintWriter out = resp.getWriter();
 			out.print(fList);
 			
 		} catch (IOException e) {
 		}
 	}
 	
-	@RequestMapping(value="autoComplete.do", method=RequestMethod.POST)
-	public void autoCompleteFollows(HttpServletResponse resp, String userId){
-		List<String> followList = new ArrayList<>();
-		
-		for(Follow follow : followService.findAll(userId)){
-			followList.add(follow.getFollowId());
-		}
-		try {
-			PrintWriter out = resp.getWriter();
-			out.println(followList);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
+//	@RequestMapping(value="autoComplete.do", method=RequestMethod.POST)
+//	public void autoCompleteFollows(HttpServletResponse resp, String userId){
+//		List<String> followList = new ArrayList<>();
+//		
+//		for(Follow follow : followService.findAll(userId)){
+//			followList.add(follow.getFollowId());
+//		}
+//		try {
+//			PrintWriter out = resp.getWriter();
+//			out.println(followList);
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
+//	}
 	
 	@RequestMapping(value="check.do", method=RequestMethod.POST)
 	public void checkFollows(HttpServletResponse resp, String userId, String followId){

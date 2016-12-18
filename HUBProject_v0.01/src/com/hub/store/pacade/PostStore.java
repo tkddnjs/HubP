@@ -16,6 +16,6 @@ public interface PostStore {
 	List<Post> selectAll(String userId);
 	Post selectPostByPostId(int postId);
 	List<Post> selectPosts(String userId, String followId);
-	List<Post> selectSendPosts(String userId);
-	List<Post> selectReceivePosts(String userId);
+	//List<Post> selectSendPosts(String userId);
+	//List<Post> selectReceivePosts(String userId);
 }

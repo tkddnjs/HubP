@@ -19,7 +19,7 @@ public interface UserStore {
 
 	// user 조회
 	User selectUser(String userId);
-	List<User> selectUsersByConnChain(String connChain);
+	//List<User> selectUsersByConnChain(String connChain);
 	
 	List<User> selectUsersByConnChains(List<String> connChains);
 }

@@ -19,12 +19,12 @@ public class BucketlistController {
 	@Autowired
 	private BucketlistService bucketlistService;
 	
-	@RequestMapping(value="register.do", method=RequestMethod.GET)
-	public ModelAndView registerBucketlist(String userId){
-		ModelAndView mav = new ModelAndView("bucketlist/registerBucketlist");
-		mav.addObject("userId", userId);
-		return mav;
-	}
+//	@RequestMapping(value="register.do", method=RequestMethod.GET)
+//	public ModelAndView registerBucketlist(String userId){
+//		ModelAndView mav = new ModelAndView("bucketlist/registerBucketlist");
+//		mav.addObject("userId", userId);
+//		return mav;
+//	}
 	
 	@RequestMapping(value="register.do", method=RequestMethod.POST)
 	public String registerBucketlist(Bucketlist bucketlist){
@@ -32,12 +32,12 @@ public class BucketlistController {
 		return "redirect: list.do";
 	}
 	
-	@RequestMapping(value="modify.do", method=RequestMethod.GET)
-	public ModelAndView modifyBucketlist(int bucketlistId){
-		ModelAndView mav = new ModelAndView("bucketlist/modifyBucketlist");
-		mav.addObject("bucketlist", bucketlistService.findBucketlistByBucketlistId(bucketlistId));
-		return mav;
-	}
+//	@RequestMapping(value="modify.do", method=RequestMethod.GET)
+//	public ModelAndView modifyBucketlist(int bucketlistId){
+//		ModelAndView mav = new ModelAndView("bucketlist/modifyBucketlist");
+//		mav.addObject("bucketlist", bucketlistService.findBucketlistByBucketlistId(bucketlistId));
+//		return mav;
+//	}
 	
 	@RequestMapping(value="modify.do", method=RequestMethod.POST)
 	public String modifyBucketlist(Bucketlist bucketlist){

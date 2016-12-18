@@ -7,10 +7,10 @@ import com.hub.domain.User;
 
 public interface ListService {
 
-	List<User> findUsersByConnChain(String connChain);
+//	List<User> findUsersByConnChain(String connChain);
 	List<User> findUsersByConnChains(String userId);
 	
-	List<Bucketlist> findBucketlistsByConnChain(String connChain);
+//	List<Bucketlist> findBucketlistsByConnChain(String connChain);
 	List<Bucketlist> findBucketlistsByConnChains(String userId);
 	
 	List<String> findConnChains();

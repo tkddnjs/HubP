@@ -11,6 +11,6 @@ public interface PostService {
 	List<Post> findAll(String userId);
 	Post findPostByPostId(int postId);
 	List<Post> findPosts(String userId, String followId);
-	List<Post> findSendPosts(String userId);
-	List<Post> findReceivePosts(String userId);
+//	List<Post> findSendPosts(String userId);
+//	List<Post> findReceivePosts(String userId);
 }

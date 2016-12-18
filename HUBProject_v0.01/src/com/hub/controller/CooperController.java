@@ -22,10 +22,10 @@ public class CooperController {
 	private CooperService cooperService;
 	private FileManager fileManager = new FileManager();
 	
-	@RequestMapping(value="register.do", method=RequestMethod.GET)
-	public String registerCooper() {
-		return "cooper/registerCooper";
-	}
+//	@RequestMapping(value="register.do", method=RequestMethod.GET)
+//	public String registerCooper() {
+//		return "cooper/registerCooper";
+//	}
 
 	@RequestMapping(value="register.do", method=RequestMethod.POST)
 	public String registerCooper(Cooper cooper, HttpServletRequest req
@@ -42,12 +42,12 @@ public class CooperController {
 		return "redirect: list.do?listOpt=0";
 	}
 
-	@RequestMapping(value="modify.do", method=RequestMethod.GET)
-	public ModelAndView modifyCooper(int coId) {
-		ModelAndView mav = new ModelAndView("cooper/modifyCooper");
-		mav.addObject("cooper", cooperService.findCooperByCoId(coId));
-		return mav;
-	}
+//	@RequestMapping(value="modify.do", method=RequestMethod.GET)
+//	public ModelAndView modifyCooper(int coId) {
+//		ModelAndView mav = new ModelAndView("cooper/modifyCooper");
+//		mav.addObject("cooper", cooperService.findCooperByCoId(coId));
+//		return mav;
+//	}
 
 	@RequestMapping(value="modify.do", method=RequestMethod.POST)
 	public String modifyCooper(Cooper cooper, HttpServletRequest req
@@ -83,10 +83,10 @@ public class CooperController {
 		return mav;
 	}
 	
-	@RequestMapping(value="detail.do", method=RequestMethod.GET)
-	public ModelAndView detailCooper(int coId) {
-		ModelAndView mav = new ModelAndView("cooper/detailCooper");
-		mav.addObject("cooper", cooperService.findCooperByCoId(coId));
-		return mav;
-	}
+//	@RequestMapping(value="detail.do", method=RequestMethod.GET)
+//	public ModelAndView detailCooper(int coId) {
+//		ModelAndView mav = new ModelAndView("cooper/detailCooper");
+//		mav.addObject("cooper", cooperService.findCooperByCoId(coId));
+//		return mav;
+//	}
 }

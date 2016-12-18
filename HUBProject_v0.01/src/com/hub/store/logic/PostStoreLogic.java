@@ -93,25 +93,25 @@ public class PostStoreLogic implements PostStore {
 		}
 	}
 
-	@Override
-	public List<Post> selectSendPosts(String userId) {
-		SqlSession session = factory.openSession();
-		try {
-			PostMapper mapper = session.getMapper(PostMapper.class);
-			return mapper.selectSendPosts(userId);
-		} finally {
-			session.close();
-		}
-	}
-
-	@Override
-	public List<Post> selectReceivePosts(String userId) {
-		SqlSession session = factory.openSession();
-		try {
-			PostMapper mapper = session.getMapper(PostMapper.class);
-			return mapper.selectReceivePosts(userId);
-		} finally {
-			session.close();
-		}
-	}
+//	@Override
+//	public List<Post> selectSendPosts(String userId) {
+//		SqlSession session = factory.openSession();
+//		try {
+//			PostMapper mapper = session.getMapper(PostMapper.class);
+//			return mapper.selectSendPosts(userId);
+//		} finally {
+//			session.close();
+//		}
+//	}
+//
+//	@Override
+//	public List<Post> selectReceivePosts(String userId) {
+//		SqlSession session = factory.openSession();
+//		try {
+//			PostMapper mapper = session.getMapper(PostMapper.class);
+//			return mapper.selectReceivePosts(userId);
+//		} finally {
+//			session.close();
+//		}
+//	}
 }

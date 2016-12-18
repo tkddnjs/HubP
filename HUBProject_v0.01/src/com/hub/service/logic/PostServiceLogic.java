@@ -40,15 +40,15 @@ public class PostServiceLogic implements PostService {
 		return postStore.selectPosts(userId, followId);
 	}
 
-	@Override
-	public List<Post> findSendPosts(String userId) {
-		return postStore.selectSendPosts(userId);
-	}
-
-	@Override
-	public List<Post> findReceivePosts(String userId) {
-		return postStore.selectReceivePosts(userId);
-	}
+//	@Override
+//	public List<Post> findSendPosts(String userId) {
+//		return postStore.selectSendPosts(userId);
+//	}
+//
+//	@Override
+//	public List<Post> findReceivePosts(String userId) {
+//		return postStore.selectReceivePosts(userId);
+//	}
 
 
 }

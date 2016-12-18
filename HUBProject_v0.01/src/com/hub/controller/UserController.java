@@ -31,10 +31,10 @@ public class UserController {
 	
 	private FileManager fileManager = new FileManager();
 	
-	@RequestMapping(value="register.do", method=RequestMethod.GET)
-	public String registerUser(){
-		return "user/registerUser";
-	}
+//	@RequestMapping(value="register.do", method=RequestMethod.GET)
+//	public String registerUser(){
+//		return "user/registerUser";
+//	}
 	
 	// parameter 추가
 	@RequestMapping(value="register.do", method=RequestMethod.POST)
@@ -52,12 +52,12 @@ public class UserController {
 		return "HUBMain";
 	}
 	
-	@RequestMapping(value="modify.do", method=RequestMethod.GET)
-	public ModelAndView modifyUser(String userId){
-		ModelAndView mav = new ModelAndView("user/modifyUser");
-		mav.addObject("user", userService.findUserByUserId(userId));
-		return mav;
-	}
+//	@RequestMapping(value="modify.do", method=RequestMethod.GET)
+//	public ModelAndView modifyUser(String userId){
+//		ModelAndView mav = new ModelAndView("user/modifyUser");
+//		mav.addObject("user", userService.findUserByUserId(userId));
+//		return mav;
+//	}
 	
 	@RequestMapping(value="modify.do", method=RequestMethod.POST)
 	public String modifyUser(User user, HttpServletRequest req

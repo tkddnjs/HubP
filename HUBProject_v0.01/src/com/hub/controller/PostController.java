@@ -71,10 +71,10 @@ public class PostController {
 		return mav;
 	}
 	
-	public ModelAndView detailPost(int postId){
-		ModelAndView mav = new ModelAndView("post/detail");
-		Post post = postService.findPostByPostId(postId);
-		mav.addObject("post", post);
-		return mav;
-	}
+//	public ModelAndView detailPost(int postId){
+//		ModelAndView mav = new ModelAndView("post/detail");
+//		Post post = postService.findPostByPostId(postId);
+//		mav.addObject("post", post);
+//		return mav;
+//	}
 }

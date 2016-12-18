@@ -128,16 +128,16 @@ public class UserStoreLogic implements UserStore {
 		return user;
 	}
 
-	@Override
-	public List<User> selectUsersByConnChain(String connChain) {
-		SqlSession session = factory.openSession();
-		try {
-			UserMapper mapper = session.getMapper(UserMapper.class);
-			return mapper.selectUsersByConnChain(connChain);
-		} finally {
-			session.close();
-		}
-	}
+//	@Override
+//	public List<User> selectUsersByConnChain(String connChain) {
+//		SqlSession session = factory.openSession();
+//		try {
+//			UserMapper mapper = session.getMapper(UserMapper.class);
+//			return mapper.selectUsersByConnChain(connChain);
+//		} finally {
+//			session.close();
+//		}
+//	}
 
 	@Override
 	public List<User> selectUsersByConnChains(List<String> connChains) {
