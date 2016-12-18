@@ -685,7 +685,8 @@
 		var content = $("#sendPostModal").find('[name="content"]').val();
 		$.when(ajaxPost(senderId, receiverId, content)).done(function(){
 			$("#sendPostModal").find(".close").click();	
-		})
+			location.reload();
+		});
 	});
 
 	$('[name="checks"]').click(function(){

@@ -26,7 +26,6 @@ public class FollowController {
 	public void requestFollow(Follow follow, HttpServletResponse resp){
 		follow.setConfirm(true);
 		followService.requestFollow(follow);
-		
 		try {
 			PrintWriter out = resp.getWriter();
 			out.print("ok");

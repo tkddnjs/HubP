@@ -1,8 +1,11 @@
 package com.hub.controller;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,8 +31,14 @@ public class PostController {
 	}*/
 	
 	@RequestMapping(value="send.do", method=RequestMethod.POST)
-	public void sendPost(Post post){
+	public void sendPost(Post post, HttpServletResponse resp){
 		postService.sendPost(post);
+		
+		try {
+			PrintWriter out = resp.getWriter();
+			out.print("ok");
+		} catch (IOException e) {
+		}
 	}
 	
 	@RequestMapping(value="remove.do", method=RequestMethod.POST)
