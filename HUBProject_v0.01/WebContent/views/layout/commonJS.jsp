@@ -501,12 +501,14 @@
 			appendFollow($("#receiveHelp"), 2);
 			appendFollow($("#bothHelp"), 3);
 			appendFollow($("#groupFollow"), 4);
-			
+			location.reload();
 			$(".sendPostBtn").click(function (){
 				var followId = $(this).val();
 				$("#sendPostModal #receiverId").val(followId);
 				$("#sendPostModal #sendPostBtn").val(followId);
 			});
+			
+			
 		});
 		
 		$(".requestButton").click(function (){
